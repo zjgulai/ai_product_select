@@ -1,523 +1,420 @@
-import { useState, useRef, useCallback, useMemo } from 'react';
-import Breadcrumb from '@/components/shared/Breadcrumb';
-import { LC } from '@/lib/lute-colors';
+import { useState, useCallback, useRef } from 'react';
+import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
+import Breadcrumb from '@/components/shared/Breadcrumb';
+import { Skeleton } from '@/components/ui/skeleton';
+import { LC } from '@/lib/lute-colors';
+import { read as xlsxRead, utils as xlsxUtils } from 'xlsx';
 import {
-  Upload, Download, Trash2, Search, Database, CheckCircle2, AlertCircle,
-  FolderOpen, FileSpreadsheet, ChevronDown, ChevronUp, Table2, X, Loader2,
-  Save, Package, FileText, Search as SearchIcon, TrendingUp
+  Upload, Database, Activity, CheckCircle, XCircle,
+  AlertCircle, RefreshCw, Settings, Layers, ChevronRight, ChevronDown,
 } from 'lucide-react';
 
-// ===== Types =====
-type ToastType = { message: string; type: 'success' | 'error' };
+const DATA_SOURCES = [
+  { dataKey: 'ods_tiktok_products',  label: 'TikTok 商品',  layer: 'ODS', icon: '📦', targetTable: 'ods_tiktok_products' },
+  { dataKey: 'ods_tiktok_creators',  label: 'TikTok 达人',  layer: 'ODS', icon: '👤', targetTable: 'ods_tiktok_creators' },
+  { dataKey: 'ods_tiktok_shops',     label: 'TikTok 小店',  layer: 'ODS', icon: '🏪', targetTable: 'ods_tiktok_shops' },
+  { dataKey: 'ods_tiktok_videos',    label: 'TikTok 视频',  layer: 'ODS', icon: '🎬', targetTable: 'ods_tiktok_videos' },
+  { dataKey: 'ods_tiktok_lives',     label: 'TikTok 直播',  layer: 'ODS', icon: '📡', targetTable: 'ods_tiktok_lives' },
+  { dataKey: 'ods_amazon_products',  label: 'Amazon 商品',  layer: 'ODS', icon: '📋', targetTable: 'ods_amazon_products' },
+  { dataKey: 'ods_amazon_keywords',  label: 'Amazon 关键词',layer: 'ODS', icon: '🔑', targetTable: 'ods_amazon_keywords' },
+  { dataKey: 'ods_amazon_reviews',   label: 'Amazon 评论',  layer: 'ODS', icon: '💬', targetTable: 'ods_amazon_reviews' },
+];
 
-// ===== Icon Map for pages =====
-const PAGE_ICONS: Record<string, any> = {
-  tiktok: TrendingUp, amazon: SearchIcon, report: FileText,
-};
+type TabKey = 'sources' | 'logs' | 'quality' | 'settings';
+type ParsedData = { headers: string[]; rows: Record<string, unknown>[]; total: number };
 
-const PAGE_LABELS: Record<string, string> = {
-  tiktok: 'TikTok趋势', amazon: 'Amazon趋势', report: '报告分析',
-};
-
-// ===== Toast =====
-function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) {
-  setTimeout(onClose, 3000);
-  return (
-    <div className="fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg text-white text-sm animate-fadeIn"
-      style={{ background: type === 'success' ? LC.success : LC.danger }}>
-      {type === 'success' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-      {message}
-      <button onClick={onClose}><X size={14} /></button>
-    </div>
-  );
+function StatusBadge({ status }: { status: string }) {
+  const m: Record<string, [string, string, string]> = {
+    success: [LC.successLight, LC.success, '成功'],
+    partial: [LC.warningLight, LC.warning, '部分成功'],
+    failed:  [LC.dangerLight,  LC.danger,  '失败'],
+    running: [`${LC.primary}15`, LC.primary, '处理中'],
+    pending: [LC.bgWarm, LC.textMuted, '等待中'],
+  };
+  const [bg, color, label] = m[status] ?? m.pending;
+  return <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: bg, color }}>{label}</span>;
 }
 
-// ===== Template Selector =====
-function TemplateSelector({
-  selectedKey, onSelect, templates, activeKeys
-}: {
-  selectedKey: string; onSelect: (k: string) => void;
-  templates: any[]; activeKeys: string[];
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [filter, setFilter] = useState('');
-
-  const selected = templates.find(t => t.dataKey === selectedKey);
-  const filtered = templates.filter(t =>
-    t.name.includes(filter) || t.dataKey.includes(filter) || t.page.includes(filter)
-  );
-
-  const grouped = useMemo(() => {
-    const g: Record<string, any[]> = {};
-    for (const t of filtered) {
-      if (!g[t.page]) g[t.page] = [];
-      g[t.page].push(t);
-    }
-    return g;
-  }, [filtered]);
-
-  return (
-    <div className="relative">
-      <label className="block text-xs font-medium mb-1.5 text-lc-text-secondary">
-        选择数据模板 <span className="text-[#C84040]">*</span>
-      </label>
-      <button
-        className="w-full h-10 px-3 rounded-lg border text-left text-sm flex items-center justify-between transition-all focus:outline-none focus:ring-1"
-        style={{ borderColor: LC.border, color: selectedKey ? LC.text : LC.textMuted, background: LC.textInverse }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span className="flex items-center gap-2 truncate">
-          {selected ? (
-            <>
-              <Database size={14} className="text-lc-primary" />
-              {selected.name}
-              {activeKeys.includes(selected.dataKey) && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium" style={{ background: LC.successLight, color: LC.success }}>已入库</span>
-              )}
-            </>
-          ) : '请选择数据模板...'}
-        </span>
-        {isOpen ? <ChevronUp size={14} className="text-lc-text-muted" /> : <ChevronDown size={14} className="text-lc-text-muted" />}
-      </button>
-
-      {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 rounded-lg shadow-lg border bg-white z-30 max-h-80 overflow-auto border-lc-border">
-          <div className="p-2 border-b sticky top-0 bg-white border-lc-border">
-            <div className="relative">
-              <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-lc-text-muted" />
-              <input
-                type="text" placeholder="搜索模板..."
-                className="w-full h-8 pl-7 pr-2 rounded border text-xs focus:outline-none focus:ring-1 focus:ring-lc-primary border-lc-border"
-                value={filter} onChange={e => setFilter(e.target.value)}
-                autoFocus
-              />
-            </div>
-          </div>
-          {Object.entries(grouped).map(([page, items]) => {
-            const Icon = PAGE_ICONS[page] || Package;
-            return (
-              <div key={page}>
-                <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider flex items-center gap-1"
-                  style={{ color: LC.textMuted, background: '#FAF8F6' }}>
-                  <Icon size={10} /> {PAGE_LABELS[page] || page}
-                </div>
-                {items.map(t => (
-                  <button key={t.dataKey}
-                    className="w-full px-3 py-2 text-left text-xs hover:bg-lc-primary-light transition-colors flex items-center gap-2"
-                    onClick={() => { onSelect(t.dataKey); setIsOpen(false); }}
-                  >
-                    <Table2 size={12} style={{ color: activeKeys.includes(t.dataKey) ? LC.success : 'LC.textMuted' }} />
-                    <span style={{ color: selectedKey === t.dataKey ? LC.primary : LC.text, fontWeight: selectedKey === t.dataKey ? 600 : 400 }}>
-                      {t.name}
-                    </span>
-                    {activeKeys.includes(t.dataKey) && (
-                      <CheckCircle2 size={12} className="ml-auto text-lc-success" />
-                    )}
-                  </button>
-                ))}
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
+function LayerBadge({ layer }: { layer: string }) {
+  const colors: Record<string, string> = { ODS: '#6366F1', DWD: '#0891B2', DWS: '#059669', ADS: '#D97706' };
+  const c = colors[layer] ?? LC.primary;
+  return <span className="text-[9px] px-1.5 py-0.5 rounded font-bold tracking-wider" style={{ background: `${c}15`, color: c }}>{layer}</span>;
 }
 
-// ===== Upload Zone =====
-function UploadZone({ onFile, disabled }: { onFile: (f: File) => void; disabled: boolean }) {
-  const [isDragging, setIsDragging] = useState(false);
-  const ref = useRef<HTMLInputElement>(null);
-
-  const handle = useCallback((file: File) => {
-    if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls') || file.name.endsWith('.csv')) {
-      onFile(file);
-    }
-  }, [onFile]);
-
-  return (
-    <div
-      className={`border-2 border-dashed rounded-xl p-6 text-center transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-      style={isDragging ? { borderColor: LC.primary, background: LC.primaryLight } : { borderColor: LC.border }}
-      onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
-      onDragLeave={() => setIsDragging(false)}
-      onDrop={e => { e.preventDefault(); setIsDragging(false); handle(e.dataTransfer.files[0]); }}
-      onClick={() => !disabled && ref.current?.click()}
-    >
-      <input ref={ref} type="file" accept=".xlsx,.xls,.csv" className="hidden"
-        onChange={e => { const f = e.target.files?.[0]; if (f) handle(f); }} disabled={disabled} />
-      <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 bg-lc-primary-light">
-        <Upload size={20} className="text-lc-primary" />
-      </div>
-      <p className="text-xs font-medium text-lc-text-primary">点击或拖拽 Excel 文件</p>
-      <p className="text-[10px] mt-0.5 text-lc-text-muted">.xlsx / .xls / .csv</p>
-    </div>
-  );
-}
-
-// ===== Preview Table =====
-function PreviewTable({ records, columns }: { records: any[]; columns: { key: string; label: string }[] }) {
-  const [page, setPage] = useState(1);
-  const pageSize = 10;
-  const totalPages = Math.ceil(records.length / pageSize);
-  const rows = records.slice((page - 1) * pageSize, page * pageSize);
-
-  const displayCols = columns.length > 0 ? columns : Object.keys(records[0] || {}).map(k => ({ key: k, label: k }));
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-2">
-        <p className="text-xs font-medium text-lc-text-secondary">
-          预览数据 <span className="font-mono-num text-lc-primary">{records.length}</span> 行
-        </p>
-        <p className="text-[10px] text-lc-text-muted">仅显示前 100 列</p>
-      </div>
-      <div className="rounded-lg border overflow-auto max-h-64 border-lc-border">
-        <table className="w-full text-[10px]">
-          <thead>
-            <tr style={{ background: '#FAF8F6' }}>
-              {displayCols.slice(0, 100).map(c => (
-                <th key={c.key} className="text-left py-2 px-2 font-semibold whitespace-nowrap" style={{ color: LC.textSecondary, borderBottom: `1px solid ${LC.border}` }}>
-                  {c.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={i} className="border-b hover:bg-[#FAF8F6] transition-colors border-lc-border-light">
-                {displayCols.slice(0, 100).map(c => (
-                  <td key={c.key} className="py-1.5 px-2 whitespace-nowrap max-w-[200px] truncate text-lc-text-primary">
-                    {String(r[c.key] ?? '')}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-1 mt-2">
-          <button className="w-6 h-6 rounded flex items-center justify-center text-[10px]" style={{ color: page <= 1 ? 'LC.textMuted' : LC.textSecondary }}
-            onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page <= 1}>&lt;</button>
-          <span className="text-[10px] font-mono-num text-lc-text-secondary">{page}/{totalPages}</span>
-          <button className="w-6 h-6 rounded flex items-center justify-center text-[10px]" style={{ color: page >= totalPages ? 'LC.textMuted' : LC.textSecondary }}
-            onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page >= totalPages}>&gt;</button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ===== Main Page =====
 export default function DataManager() {
-  const [selectedTemplateKey, setSelectedTemplateKey] = useState('');
-  const [parsedRecords, setParsedRecords] = useState<any[] | null>(null);
-  const [uploading, setUploading] = useState(false);
-  const [toast, setToast] = useState<ToastType | null>(null);
-  const [activeTab, setActiveTab] = useState<'upload' | 'manage'>('upload');
-  const [deletingKey, setDeletingKey] = useState<string | null>(null);
+  const [tab, setTab] = useState<TabKey>('sources');
+  const [src, setSrc] = useState<typeof DATA_SOURCES[0] | null>(null);
+  const [snapshotDate, setSnapshotDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [parsed, setParsed] = useState<ParsedData | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [dryResult, setDryResult] = useState<{ totalRows: number; failedRows: number; errorSummary: { row: number; field: string; message: string }[] } | null>(null);
+  const [toast, setToast] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  const utils = trpc.useUtils();
+  const { data: odsStatus, isLoading: odsLoading, isError: odsErr, refetch: refetchOds } = trpc.dataManager.ods.latestDates.useQuery(undefined, { staleTime: 30_000 });
+  const { data: logs, isLoading: logsLoading, isError: logsErr, refetch: refetchLogs } = trpc.dataManager.import.logs.useQuery({ limit: 30 }, { staleTime: 10_000 });
+  const { data: stats } = trpc.dataManager.import.stats.useQuery(undefined, { staleTime: 30_000 });
+  const ingest = trpc.dataManager.import.ingest.useMutation({ onSuccess: () => { void refetchOds(); void refetchLogs(); } });
 
-  // tRPC queries
-  const { data: templatesData } = trpc.dataManager.template.list.useQuery();
-  const { data: activeKeysData } = trpc.dataManager.dynamic.getActiveKeys.useQuery();
-  const { data: fileListData } = trpc.dataManager.file.list.useQuery({ status: 'active' });
+  const flash = useCallback((msg: string) => { setToast(msg); setTimeout(() => setToast(''), 2500); }, []);
 
-  const templates = templatesData ?? [];
-  const activeKeys = activeKeysData ?? [];
-  const selectedTemplate = templates.find(t => t.dataKey === selectedTemplateKey);
+  const parseFile = useCallback((file: File) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const data = new Uint8Array(e.target!.result as ArrayBuffer);
+      const wb = xlsxRead(data, { type: 'array' });
+      const raw = xlsxUtils.sheet_to_json<Record<string, unknown>>(wb.Sheets[wb.SheetNames[0]], { defval: '' });
+      if (!raw.length) { flash('文件为空'); return; }
+      setParsed({ headers: Object.keys(raw[0]), rows: raw, total: raw.length });
+      setDryResult(null);
+    };
+    reader.readAsArrayBuffer(file);
+  }, [flash]);
 
-  // tRPC mutations
-  const bulkInsertMutation = trpc.dataManager.dynamic.bulkInsert.useMutation({
-    onSuccess: (data) => {
-      setToast({ message: `成功入库 ${data.inserted} 条数据到「${selectedTemplate?.name}」`, type: 'success' });
-      setParsedRecords(null);
-      utils.dataManager.dynamic.getActiveKeys.invalidate();
-      utils.dataManager.file.list.invalidate();
-    },
-    onError: () => {
-      setToast({ message: '入库失败', type: 'error' });
-    },
-  });
+  const dryRun = useCallback(async () => {
+    if (!src || !parsed) return;
+    const r = await ingest.mutateAsync({ dataKey: src.dataKey, snapshotDate, records: parsed.rows, dryRun: true });
+    setDryResult(r as typeof dryResult);
+  }, [src, parsed, snapshotDate, ingest]);
 
-  const deleteMutation = trpc.dataManager.dynamic.deleteByKey.useMutation({
-    onSuccess: () => {
-      utils.dataManager.dynamic.getActiveKeys.invalidate();
-      setDeletingKey(null);
-      setToast({ message: '数据已删除', type: 'success' });
-    },
-  });
-
-  // Parse file locally for preview
-  const handleFile = useCallback(async (file: File) => {
-    if (!selectedTemplateKey) { setToast({ message: '请先选择数据模板', type: 'error' }); return; }
-    setUploading(true);
+  const doImport = useCallback(async () => {
+    if (!src || !parsed) return;
+    setImporting(true);
     try {
-      const XLSX = await import('xlsx');
-      const buf = await file.arrayBuffer();
-      const wb = XLSX.read(buf, { type: 'array' });
-      if (wb.SheetNames.length > 0) {
-        const sheet = wb.Sheets[wb.SheetNames[0]];
-        const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' }) as any[][];
-        if (json.length > 1) {
-          const headers = json[0].map(h => String(h ?? '').trim());
-          const records: any[] = [];
-          for (let i = 1; i < json.length; i++) {
-            const row: Record<string, any> = {};
-            headers.forEach((h, j) => {
-              const v = json[i][j];
-              if (typeof v === 'number') row[h] = v;
-              else if (!isNaN(Number(v)) && v !== '') row[h] = Number(v);
-              else if (v === 'true' || v === 'TRUE') row[h] = true;
-              else if (v === 'false' || v === 'FALSE') row[h] = false;
-              else row[h] = v ?? '';
-            });
-            records.push(row);
-          }
-          setParsedRecords(records);
-        }
-      }
-    } catch (e) {
-      setToast({ message: '文件解析失败', type: 'error' });
-    } finally {
-      setUploading(false);
-    }
-  }, [selectedTemplateKey]);
+      const r = await ingest.mutateAsync({ dataKey: src.dataKey, snapshotDate, records: parsed.rows, dryRun: false });
+      flash(`导入完成：${r.successRows} 条成功${r.failedRows > 0 ? `，${r.failedRows} 失败` : ''}`);
+      setParsed(null); setDryResult(null); setSrc(null);
+    } finally { setImporting(false); }
+  }, [src, parsed, snapshotDate, ingest, flash]);
 
-  // Store parsed records to DB via tRPC
-  const handleUploadToDb = useCallback(() => {
-    if (!selectedTemplateKey || !parsedRecords || parsedRecords.length === 0) return;
-    bulkInsertMutation.mutate({ dataKey: selectedTemplateKey, records: parsedRecords });
-  }, [selectedTemplateKey, parsedRecords, bulkInsertMutation]);
-
-  // Delete data by key
+  const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
+    { key: 'sources',  label: '数据源',   icon: <Database size={14} /> },
+    { key: 'logs',     label: '导入记录', icon: <Activity size={14} /> },
+    { key: 'quality',  label: '数据质量', icon: <Layers size={14} /> },
+    { key: 'settings', label: '模板配置', icon: <Settings size={14} /> },
+  ];
 
   return (
-    <div className="p-6 space-y-5">
-      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+    <div className="animate-fadeIn">
+      <Breadcrumb items={['数据管理中心']} />
+      {toast && (
+        <div className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg text-white text-xs font-medium shadow-lg" style={{ background: LC.primary }}>{toast}</div>
+      )}
 
-      <Breadcrumb items={['数据管理']} />
-
-      {/* Header */}
-      <div>
-        <h1 className="text-lg font-bold text-lc-text-primary">数据管理</h1>
-        <p className="text-xs mt-0.5 text-lc-text-muted">
-          上传 Excel 数据到各页面模块。已入库 <span className="font-mono-num font-semibold text-lc-primary">{activeKeys.length}</span> 个数据集
-        </p>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex gap-1 rounded-lg p-1" style={{ background: '#FAF8F6' }}>
-        {[
-          { key: 'upload' as const, label: '数据上传', icon: Upload },
-          { key: 'manage' as const, label: '数据管理', icon: Database },
-        ].map(tab => (
-          <button key={tab.key}
-            className="flex-1 h-8 rounded-md text-xs font-medium flex items-center justify-center gap-1.5 transition-all"
-            style={{
-              background: activeTab === tab.key ? LC.textInverse : 'transparent',
-              color: activeTab === tab.key ? LC.primary : LC.textSecondary,
-              boxShadow: activeTab === tab.key ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-            }}
-            onClick={() => setActiveTab(tab.key)}
-          >
-            <tab.icon size={13} /> {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* === Upload Tab === */}
-      {activeTab === 'upload' && (
-        <div className="space-y-4">
-          {/* Step 1: Select Template */}
-          <div className="rounded-xl ring-1 ring-lc-border bg-white p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white bg-lc-primary">1</div>
-              <h3 className="text-xs font-semibold text-lc-text-primary">选择数据模板</h3>
+      <div className="bg-white rounded-lg shadow-lc ring-1 ring-lc-border/60 mb-4 p-4">
+        <div className="grid grid-cols-4 gap-3">
+          {([
+            ['已配置数据源', DATA_SOURCES.length, Database, LC.primary],
+            ['导入总次数', stats?.total ?? 0, Activity, LC.teal],
+            ['成功次数', stats?.success ?? 0, CheckCircle, LC.success],
+            ['累计导入行数', (stats?.totalRows ?? 0).toLocaleString(), Layers, LC.warning],
+          ] as const).map(([label, value, Icon, color]) => (
+            <div key={label} className="rounded-lg p-3 bg-lc-bg-warm">
+              <div className="flex items-center gap-1.5 mb-1">
+                <Icon size={12} style={{ color }} />
+                <span className="text-[10px] font-medium text-lc-text-muted">{label}</span>
+              </div>
+              <div className="text-lg font-bold font-mono-num" style={{ color }}>{value}</div>
             </div>
-            <TemplateSelector
-              selectedKey={selectedTemplateKey}
-              onSelect={setSelectedTemplateKey}
-              templates={templates}
-              activeKeys={activeKeys}
-            />
-            {selectedTemplate && (
-              <div className="mt-2 p-2.5 rounded-lg" style={{ background: '#FAF8F6' }}>
-                <p className="text-[10px] text-lc-text-muted">{selectedTemplate.description}</p>
-                <div className="flex flex-wrap gap-1 mt-1.5">
-                  {selectedTemplate.columns.map((c: any) => (
-                    <span key={c.key} className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: LC.primaryLight, color: LC.primary }}>
-                      {c.label}
-                    </span>
-                  ))}
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-lc ring-1 ring-lc-border/60">
+        <div className="flex gap-6 border-b border-lc-border px-4 pt-3">
+          {TABS.map(t => (
+            <button key={t.key} onClick={() => setTab(t.key)}
+              className="flex items-center gap-1.5 pb-2.5 text-xs font-medium transition-all border-b-2"
+              style={tab === t.key ? { color: LC.primary, borderColor: LC.primary } : { color: LC.textMuted, borderColor: 'transparent' }}>
+              {t.icon}{t.label}
+            </button>
+          ))}
+        </div>
+
+        {tab === 'sources' && (
+          <div className="p-4">
+            {!src ? (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-semibold text-lc-primary">选择数据源开始导入</h3>
+                  <span className="text-[10px] text-lc-text-muted">支持 .xlsx .xls .csv</span>
                 </div>
+                <div className="grid grid-cols-4 gap-3">
+                  {DATA_SOURCES.map(s => {
+                    const st = odsStatus?.[s.targetTable];
+                    return (
+                      <button key={s.dataKey} onClick={() => setSrc(s)}
+                        className="text-left rounded-lg p-3 border transition-all hover:shadow-lc-hover hover:-translate-y-0.5 ring-1"
+                        style={{ borderColor: LC.border, background: LC.bgWarm }}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-base">{s.icon}</span>
+                          <LayerBadge layer={s.layer} />
+                        </div>
+                        <div className="text-xs font-semibold text-lc-text-primary mb-1">{s.label}</div>
+                        {odsLoading ? <Skeleton className="h-3 w-20" /> : (
+                          <div className="text-[10px] text-lc-text-muted">
+                            {st?.latestDate ? `最新: ${st.latestDate} · ${(st.rowCount ?? 0).toLocaleString()}行` : '暂无数据'}
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <button onClick={() => { setSrc(null); setParsed(null); setDryResult(null); }}
+                    className="flex items-center gap-1 text-xs text-lc-text-muted hover:text-lc-primary transition-colors">
+                    <ChevronRight size={12} className="rotate-180" /> 返回
+                  </button>
+                  <span className="text-sm font-semibold text-lc-primary">{src.icon} {src.label}</span>
+                  <LayerBadge layer={src.layer} />
+                </div>
+
+                <div className="mb-4 flex items-center gap-3">
+                  <label className="text-xs font-medium text-lc-text-secondary">快照日期</label>
+                  <input type="date" value={snapshotDate} onChange={e => setSnapshotDate(e.target.value)}
+                    className="h-8 border rounded px-2 text-xs focus:outline-none focus:ring-1" style={{ borderColor: LC.border }} />
+                </div>
+
+                {!parsed ? (
+                  <div className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:border-lc-primary"
+                    style={{ borderColor: LC.border }}
+                    onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) parseFile(f); }}
+                    onDragOver={e => e.preventDefault()}
+                    onClick={() => fileRef.current?.click()}>
+                    <Upload size={32} className="mx-auto mb-3 text-lc-border" />
+                    <p className="text-sm font-medium text-lc-text-muted">拖放文件到此处，或点击选择</p>
+                    <p className="text-[11px] mt-1 text-lc-border-strong">支持 .xlsx .xls .csv</p>
+                    <input ref={fileRef} type="file" accept=".xlsx,.xls,.csv" className="hidden"
+                      onChange={e => e.target.files?.[0] && parseFile(e.target.files[0])} />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="flex items-center justify-between mb-3 p-3 rounded-lg bg-lc-bg-warm">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle size={16} className="text-lc-success" />
+                        <div>
+                          <div className="text-xs font-semibold text-lc-text-primary">已解析 {parsed.total.toLocaleString()} 行</div>
+                          <div className="text-[10px] text-lc-text-muted mt-0.5">
+                            字段: {parsed.headers.slice(0, 6).join(', ')}{parsed.headers.length > 6 ? ` +${parsed.headers.length - 6}` : ''}
+                          </div>
+                        </div>
+                      </div>
+                      <button onClick={() => { setParsed(null); setDryResult(null); }}
+                        className="text-[10px] text-lc-text-muted hover:text-lc-danger transition-colors">重新选择</button>
+                    </div>
+
+                    <div className="overflow-x-auto border rounded-lg mb-4" style={{ borderColor: LC.border }}>
+                      <table className="w-full text-xs">
+                        <thead>
+                          <tr className="bg-lc-bg-warm">
+                            {parsed.headers.slice(0, 8).map(h => (
+                              <th key={h} className="py-2 px-3 text-left text-lc-text-secondary font-medium whitespace-nowrap">{h}</th>
+                            ))}
+                            {parsed.headers.length > 8 && <th className="py-2 px-3 text-lc-text-muted">+{parsed.headers.length - 8}列</th>}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {parsed.rows.slice(0, 5).map((row, i) => (
+                            <tr key={i} className="border-t hover:bg-lc-bg-warm transition-colors" style={{ borderColor: LC.border }}>
+                              {parsed.headers.slice(0, 8).map(h => (
+                                <td key={h} className="py-2 px-3 text-lc-text-primary whitespace-nowrap max-w-[120px] truncate">{String(row[h] ?? '')}</td>
+                              ))}
+                              {parsed.headers.length > 8 && <td className="py-2 px-3 text-lc-text-muted">...</td>}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      {parsed.total > 5 && (
+                        <div className="px-3 py-2 text-[10px] text-lc-text-muted border-t" style={{ borderColor: LC.border }}>
+                          仅展示前 5 行，共 {parsed.total.toLocaleString()} 行
+                        </div>
+                      )}
+                    </div>
+
+                    {dryResult && (
+                      <div className="mb-4 p-3 rounded-lg border"
+                        style={{ borderColor: dryResult.failedRows > 0 ? LC.warning : LC.success, background: dryResult.failedRows > 0 ? LC.warningLight : LC.successLight }}>
+                        <div className="flex items-center gap-2 mb-2">
+                          {dryResult.failedRows > 0
+                            ? <AlertCircle size={14} style={{ color: LC.warning }} />
+                            : <CheckCircle size={14} style={{ color: LC.success }} />}
+                          <span className="text-xs font-semibold" style={{ color: dryResult.failedRows > 0 ? LC.warning : LC.success }}>
+                            预检：{dryResult.totalRows} 行，{dryResult.failedRows} 行有问题
+                          </span>
+                        </div>
+                        {dryResult.errorSummary.slice(0, 5).map((e, i) => (
+                          <div key={i} className="text-[10px] text-lc-text-secondary ml-5">第 {e.row} 行 · {e.field}：{e.message}</div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-3">
+                      <button onClick={dryRun} disabled={importing}
+                        className="h-9 px-5 text-xs font-medium rounded-lg border transition-all flex items-center gap-1.5"
+                        style={{ borderColor: LC.primary, color: LC.primary }}>
+                        <CheckCircle size={13} /> 预检（不写入）
+                      </button>
+                      <button onClick={doImport} disabled={importing}
+                        className="h-9 px-6 text-white text-xs font-medium rounded-lg transition-all hover:brightness-110 disabled:opacity-50 flex items-center gap-1.5"
+                        style={{ background: LC.primary }}>
+                        {importing ? <><RefreshCw size={13} className="animate-spin" /> 导入中...</> : <><Upload size={13} /> 确认导入 {parsed.total.toLocaleString()} 行</>}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
+        )}
 
-          {/* Step 2: Upload File */}
-          {selectedTemplateKey && (
-            <div className="rounded-xl ring-1 ring-lc-border bg-white p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white bg-lc-primary">2</div>
-                <h3 className="text-xs font-semibold text-lc-text-primary">上传 Excel 文件</h3>
-                {parsedRecords && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ background: LC.successLight, color: LC.success }}>
-                    已解析 {parsedRecords.length} 行
-                  </span>
-                )}
-              </div>
-
-              {!parsedRecords ? (
-                <UploadZone onFile={handleFile} disabled={uploading} />
-              ) : (
-                <PreviewTable
-                  records={parsedRecords}
-                  columns={selectedTemplate?.columns?.map((c: any) => ({ key: c.key, label: c.label })) ?? []}
-                />
-              )}
+        {tab === 'logs' && (
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-lc-primary">最近导入记录</h3>
+              <button onClick={() => void refetchLogs()} className="flex items-center gap-1 text-xs text-lc-primary">
+                <RefreshCw size={12} /> 刷新
+              </button>
             </div>
-          )}
-
-          {/* Step 3: Confirm Import */}
-          {parsedRecords && parsedRecords.length > 0 && (
-            <div className="rounded-xl ring-1 ring-lc-border bg-white p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white bg-lc-primary">3</div>
-                <h3 className="text-xs font-semibold text-lc-text-primary">确认入库</h3>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-lc-text-secondary">
-                  将 <span className="font-mono-num font-semibold text-lc-primary">{parsedRecords.length}</span> 条数据写入 <span className="font-medium text-lc-text-primary">「{selectedTemplate?.name}」</span>
-                  {activeKeys.includes(selectedTemplateKey) && <span className="text-[#C84040] ml-1">（将覆盖已有数据）</span>}
-                </p>
-                <div className="flex gap-2">
-                  <button
-                    className="h-8 px-4 rounded-lg text-xs font-medium border transition-colors"
-                    style={{ borderColor: LC.border, color: LC.textSecondary }}
-                    onClick={() => setParsedRecords(null)}
-                  >
-                    取消
-                  </button>
-                  <button
-                    className="h-8 px-4 rounded-lg text-xs font-medium text-white flex items-center gap-1.5 transition-colors disabled:opacity-50 bg-lc-primary"
-                    onClick={handleUploadToDb}
-                    disabled={uploading}
-                  >
-                    {uploading ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />}
-                    确认入库
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* === Manage Tab === */}
-      {activeTab === 'manage' && (
-        <div className="space-y-4">
-          {/* Active datasets grouped by page */}
-          {(['tiktok', 'amazon', 'report'] as const).map(page => {
-            const pageTemplates = templates.filter(t => t.page === page && activeKeys.includes(t.dataKey));
-            if (pageTemplates.length === 0) return null;
-            const Icon = PAGE_ICONS[page] || Package;
-            return (
-              <div key={page} className="rounded-xl ring-1 ring-lc-border bg-white overflow-hidden">
-                <div className="px-4 py-3 flex items-center gap-2 border-b" style={{ borderColor: LC.border, background: '#FAF8F6' }}>
-                  <Icon size={14} className="text-lc-primary" />
-                  <span className="text-xs font-semibold text-lc-text-primary">{PAGE_LABELS[page]}</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: LC.primaryLight, color: LC.primary }}>{pageTemplates.length}</span>
-                </div>
-                <table className="w-full text-xs">
-                  <tbody>
-                    {pageTemplates.map(t => (
-                      <tr key={t.dataKey} className="border-b hover:bg-[#FAF8F6] transition-colors border-lc-border-light">
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-2">
-                            <Table2 size={14} style={{ color: 'LC.textMuted' }} />
-                            <div>
-                              <p className="font-medium text-[12px] text-lc-text-primary">{t.name}</p>
-                              <p className="text-[10px] text-lc-text-muted">key: {t.dataKey}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="py-3 px-3">
-                          <div className="flex flex-wrap gap-1 max-w-[300px]">
-                            {t.columns.slice(0, 5).map((c: any) => (
-                              <span key={c.key} className="text-[9px] px-1 py-0.5 rounded" style={{ background: LC.border, color: LC.textSecondary }}>{c.label}</span>
-                            ))}
-                            {t.columns.length > 5 && <span className="text-[9px] text-lc-text-muted">+{t.columns.length - 5}</span>}
-                          </div>
-                        </td>
-                        <td className="py-3 px-3 text-center">
-                          <div className="flex items-center justify-center gap-1">
-                            <a href={`/api/export/${t.dataKey}`} target="_blank"
-                              className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-lc-primary-light text-lc-primary" title="导出">
-                              <Download size={13} />
-                            </a>
-                            <button
-                              className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-lc-danger/10 text-lc-danger"
-                              onClick={() => { setDeletingKey(t.dataKey); deleteMutation.mutate({ dataKey: t.dataKey }); }}
-                              title="删除数据"
-                              disabled={deletingKey === t.dataKey}
-                            >
-                              {deletingKey === t.dataKey ? <Loader2 size={13} className="animate-spin" /> : <Trash2 size={13} />}
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
+            {logsErr ? <ErrorState /> : logsLoading ? (
+              <div className="space-y-2">{Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}</div>
+            ) : (
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="bg-lc-bg-warm">
+                    {['数据源', '目标层/表', '状态', '总行数', '成功', '失败', '时间', '耗时'].map(h => (
+                      <th key={h} className="py-2.5 px-3 text-left text-lc-text-secondary font-semibold">{h}</th>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-          })}
-
-          {activeKeys.length === 0 && (
-            <div className="rounded-xl ring-1 ring-lc-border bg-white p-12 text-center">
-              <FolderOpen size={40} className="mx-auto mb-3" style={{ color: 'LC.textMuted' }} />
-              <p className="text-sm text-lc-text-muted">暂无已入库数据</p>
-              <p className="text-[11px] mt-1" style={{ color: 'LC.textMuted' }}>切换到「数据上传」标签开始导入</p>
-            </div>
-          )}
-
-          {/* Uploaded Files */}
-          {fileListData && fileListData.files.length > 0 && (
-            <div className="rounded-xl ring-1 ring-lc-border bg-white overflow-hidden">
-              <div className="px-4 py-3 border-b flex items-center justify-between" style={{ borderColor: LC.border, background: '#FAF8F6' }}>
-                <span className="text-xs font-semibold text-lc-text-primary">上传记录</span>
-                <span className="text-[10px] text-lc-text-muted">{fileListData.files.length} 个文件</span>
-              </div>
-              <table className="w-full text-[10px]">
+                  </tr>
+                </thead>
                 <tbody>
-                  {fileListData.files.map(f => (
-                    <tr key={f.id} className="border-b hover:bg-[#FAF8F6] transition-colors border-lc-border-light">
-                      <td className="py-2.5 px-4">
-                        <div className="flex items-center gap-2">
-                          <FileSpreadsheet size={12} className="text-lc-success" />
-                          <span className="font-medium text-lc-text-primary" title={f.originalName}>
-                            {f.originalName.length > 35 ? f.originalName.slice(0, 35) + '...' : f.originalName}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="py-2.5 px-3 font-mono-num text-lc-text-secondary">
-                        {(f.rowCount ?? 0).toLocaleString()} 行
-                      </td>
-                      <td className="py-2.5 px-3 text-lc-text-muted">
-                        {new Date(f.uploadedAt).toLocaleDateString('zh-CN')}
-                      </td>
-                    </tr>
-                  ))}
+                  {(logs ?? []).map(log => {
+                    const s = DATA_SOURCES.find(x => x.dataKey === log.dataKey);
+                    const dur = log.completedAt
+                      ? Math.round((new Date(log.completedAt).getTime() - new Date(log.triggeredAt).getTime()) / 1000)
+                      : null;
+                    return (
+                      <tr key={log.id} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
+                        <td className="py-2.5 px-3 font-medium text-lc-text-primary">{s?.icon} {s?.label ?? log.dataKey}</td>
+                        <td className="py-2.5 px-3">
+                          <div className="flex items-center gap-1">
+                            <LayerBadge layer={(log.targetLayer ?? 'custom').toUpperCase()} />
+                            <span className="text-lc-text-muted">{log.targetTable ?? '-'}</span>
+                          </div>
+                        </td>
+                        <td className="py-2.5 px-3"><StatusBadge status={log.status} /></td>
+                        <td className="py-2.5 px-3 font-mono-num text-lc-text-primary">{(log.totalRows ?? 0).toLocaleString()}</td>
+                        <td className="py-2.5 px-3 font-mono-num text-lc-success">{(log.successRows ?? 0).toLocaleString()}</td>
+                        <td className="py-2.5 px-3 font-mono-num" style={{ color: (log.failedRows ?? 0) > 0 ? LC.danger : LC.textMuted }}>{log.failedRows ?? 0}</td>
+                        <td className="py-2.5 px-3 text-lc-text-muted">
+                          {new Date(log.triggeredAt).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono-num text-lc-text-muted">{dur != null ? `${dur}s` : '-'}</td>
+                      </tr>
+                    );
+                  })}
+                  {!(logs ?? []).length && (
+                    <tr><td colSpan={8} className="py-10 text-center text-xs text-lc-text-muted">暂无导入记录</td></tr>
+                  )}
                 </tbody>
               </table>
+            )}
+          </div>
+        )}
+
+        {tab === 'quality' && (
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-lc-primary">ODS 层数据质量</h3>
+              <button onClick={() => void refetchOds()} className="flex items-center gap-1 text-xs text-lc-primary">
+                <RefreshCw size={12} /> 刷新
+              </button>
             </div>
-          )}
-        </div>
-      )}
+            {odsErr ? <ErrorState /> : odsLoading ? (
+              <div className="grid grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}</div>
+            ) : (
+              <div className="grid grid-cols-4 gap-3">
+                {DATA_SOURCES.map(s => {
+                  const st = odsStatus?.[s.targetTable];
+                  const hasData = (st?.rowCount ?? 0) > 0;
+                  const isStale = st?.latestDate
+                    ? new Date().getTime() - new Date(st.latestDate).getTime() > 2 * 86400_000
+                    : false;
+                  return (
+                    <div key={s.dataKey} className="rounded-lg p-3 border ring-1"
+                      style={{ borderColor: hasData && !isStale ? LC.success : isStale ? LC.warning : LC.border, background: LC.bgWarm }}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <span>{s.icon}</span>
+                          <span className="text-xs font-semibold text-lc-text-primary">{s.label}</span>
+                        </div>
+                        {hasData ? isStale ? <AlertCircle size={13} style={{ color: LC.warning }} /> : <CheckCircle size={13} style={{ color: LC.success }} /> : <XCircle size={13} style={{ color: LC.border }} />}
+                      </div>
+                      <div className="space-y-1 text-[10px]">
+                        <div className="flex justify-between">
+                          <span className="text-lc-text-muted">总记录</span>
+                          <span className="font-mono-num font-semibold text-lc-text-primary">{(st?.rowCount ?? 0).toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-lc-text-muted">最新快照</span>
+                          <span className="font-mono-num" style={{ color: isStale ? LC.warning : LC.textSecondary }}>{st?.latestDate ?? '无'}</span>
+                        </div>
+                        {isStale && hasData && <div style={{ color: LC.warning }}>⚠️ 超过 2 天未更新</div>}
+                        {!hasData && <div className="text-lc-text-muted">待导入</div>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            <div className="mt-6 p-4 rounded-lg border" style={{ borderColor: LC.border, background: LC.bgWarm }}>
+              <h4 className="text-xs font-semibold text-lc-text-primary mb-3 flex items-center gap-1.5">
+                <ChevronDown size={12} /> 数仓分层说明
+              </h4>
+              <div className="grid grid-cols-4 gap-3 text-[10px]">
+                {([
+                  ['ODS', '#6366F1', '原始数据层 — 直接落库，保留原始字段，含 snapshot_date'],
+                  ['DWD', '#0891B2', '标准化明细层 — 类型统一、字段规范、去重'],
+                  ['DWS', '#059669', '汇总层 — 按概念/品类聚合，SHI/CVI 计算数据源'],
+                  ['ADS', '#D97706', '应用层 — 直接服务前端 API，按场景预聚合'],
+                ] as const).map(([l, c, d]) => (
+                  <div key={l} className="rounded p-2" style={{ background: `${c}08`, border: `1px solid ${c}20` }}>
+                    <div className="font-bold mb-1" style={{ color: c }}>{l}</div>
+                    <div className="text-lc-text-muted leading-relaxed">{d}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab === 'settings' && (
+          <div className="p-4">
+            <h3 className="text-sm font-semibold text-lc-primary mb-4">数据源模板配置</h3>
+            <div className="space-y-3">
+              {DATA_SOURCES.map(s => (
+                <div key={s.dataKey} className="rounded-lg border p-3 ring-1 ring-lc-border/40">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span>{s.icon}</span>
+                    <span className="text-xs font-semibold text-lc-text-primary">{s.label}</span>
+                    <LayerBadge layer={s.layer} />
+                    <code className="text-[9px] px-1.5 py-0.5 rounded font-mono bg-lc-bg-warm text-lc-text-muted">→ {s.targetTable}</code>
+                  </div>
+                  <p className="text-[10px] text-lc-text-muted">
+                    支持别名字段映射（如 "月销量" / monthly_sales / monthlySales 均可识别）。上传 Excel 列名无需严格匹配。
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 p-3 rounded-lg text-[10px] text-lc-text-muted" style={{ background: LC.bgWarm }}>
+              <strong className="text-lc-text-secondary">自定义字段映射</strong>（即将上线）：配置字段别名规则、数据校验范围、必填字段标记。
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

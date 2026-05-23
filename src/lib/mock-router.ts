@@ -258,8 +258,17 @@ const mockHandlers: Record<string, (input: Input) => unknown> = {
   // ─── DataManager (空实现，GitHub Pages 无上传功能) ────────────
   "dataManager.template.list": () => [],
   "dataManager.template.getByKey": () => null,
+  "dataManager.template.upsert": () => ({ success: true }),
   "dataManager.dynamic.queryByKey": () => [],
   "dataManager.dynamic.getActiveKeys": () => [],
+  "dataManager.dynamic.bulkInsert": () => ({ success: true, inserted: 0 }),
+  "dataManager.dynamic.deleteByKey": () => ({ success: true }),
+  "dataManager.import.ingest": () => ({ dryRun: false, importId: 0, totalRows: 0, successRows: 0, failedRows: 0, errorSummary: [] }),
+  "dataManager.import.logs": () => [],
+  "dataManager.import.stats": () => ({ total: 0, success: 0, failed: 0, totalRows: 0 }),
+  "dataManager.ods.latestDates": () => ({}),
+  "dataManager.file.list": () => ({ files: [], total: 0 }),
+  "dataManager.file.stats": () => ({ totalFiles: 0, activeFiles: 0, totalSize: 0, totalRows: 0 }),
 };
 
 /**

@@ -121,10 +121,10 @@ export default function LeftSidebar() {
         </button>
         <div className="rounded-md p-2.5 space-y-1" style={{ background: 'rgba(255,255,255,0.04)' }}>
           <div className="flex items-center gap-1.5">
-            <span className="text-white/60 text-[10px] font-medium">13680382537</span>
+            <span className="text-white/60 text-[10px] font-medium">lute_user_001</span>
             <span className="text-[8px] px-1.5 py-0.5 rounded-sm font-bold tracking-wider" style={{ background: neonBg, color: neonText }}>高级版</span>
           </div>
-          <div className="text-white/25 text-[9px]">2026-04-22 套餐到期</div>
+          <div className="text-white/25 text-[9px]">2027-12-31 套餐到期</div>
         </div>
       </div>
     </aside>

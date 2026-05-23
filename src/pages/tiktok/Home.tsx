@@ -125,7 +125,7 @@ export default function TikTokHome() {
                     </td>
                     <td className="py-2">
                       <div className="flex items-center gap-2">
-                        <img src={PRODUCT_IMAGES[(item.rank - 1) % PRODUCT_IMAGES.length]} alt="" className="w-8 h-8 rounded object-cover ring-1 ring-lc-border" />
+                        <img src={PRODUCT_IMAGES[(item.rank - 1) % PRODUCT_IMAGES.length]} alt="" className="w-8 h-8 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs truncate max-w-[160px] text-lc-text-primary" title={item.name}>{item.name}</div>
                           <div className="text-[10px] text-lc-text-muted">{item.category}</div>
@@ -176,7 +176,7 @@ export default function TikTokHome() {
                     </td>
                     <td className="py-2">
                       <div className="flex items-center gap-2">
-                        <img src={AVATAR_IMAGES[(item.rank - 1) % AVATAR_IMAGES.length]} alt="" className="w-7 h-7 rounded-full object-cover ring-1 ring-lc-border" />
+                        <img src={AVATAR_IMAGES[(item.rank - 1) % AVATAR_IMAGES.length]} alt="" className="w-7 h-7 rounded-full object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                         <span className="text-xs text-lc-text-primary">{item.username}</span>
                       </div>
                     </td>
@@ -221,7 +221,7 @@ export default function TikTokHome() {
                     </td>
                     <td className="py-2">
                       <div className="flex items-center gap-2">
-                        <img src="/assets/shops/s1.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border" />
+                        <img src="/assets/shops/s1.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs text-lc-text-primary">{item.name}</div>
                           <div className="text-[10px] text-lc-text-muted">{item.country}</div>
@@ -308,7 +308,7 @@ export default function TikTokHome() {
               <div key={item.rank} className="flex items-center gap-3 py-2 border-b last:border-0 border-lc-border-light">
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${item.rank <= 3 ? 'text-white' : 'text-lc-text-muted'}`}
                   style={item.rank <= 3 ? { background: item.rank === 1 ? LC.gold : item.rank === 2 ? '#D6D3D0' : '#D4A080' } : { background: LC.border }}>{item.rank}</span>
-                <img src="/assets/products/p1.jpg" alt="" className="w-9 h-7 rounded object-cover ring-1 ring-lc-border" />
+                <img src="/assets/products/p1.jpg" alt="" className="w-9 h-7 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 <div className="flex-1 min-w-0"><div className="text-xs truncate text-lc-text-primary">{item.title}</div></div>
                 <div className="text-xs font-semibold font-mono-num shrink-0 text-lc-text-primary">{item.viewers}</div>
               </div>

@@ -139,7 +139,7 @@ export default function TikTokInfluencer() {
                   <tr key={item.creatorId ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
-                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt="" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0" />
+                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt="" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs font-medium text-lc-text-primary">{item.displayName || item.username}</div>
                           <div className="text-[10px] truncate max-w-[130px] text-lc-text-muted">{item.bio}</div>

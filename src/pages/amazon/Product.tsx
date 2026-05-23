@@ -121,7 +121,7 @@ export default function AmazonProduct() {
               <tbody>
                 {data?.items.map((item, idx) => (
                   <tr key={item.asin} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border" /></td>
+                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
                     <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[180px] font-medium text-lc-text-primary" title={item.title}>{item.title}</div></td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.monthlySales ?? 0).toLocaleString()}</td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-primary">${parseFloat(item.monthlyRevenue ?? '0').toLocaleString()}</td>

@@ -130,7 +130,7 @@ export default function TikTokVideo() {
                     </td>
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-1.5">
-                        <img src="/assets/products/p3.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border" />
+                        <img src="/assets/products/p3.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                         <span className="text-xs truncate max-w-[80px] text-lc-text-primary">{item.product}</span>
                       </div>
                     </td>

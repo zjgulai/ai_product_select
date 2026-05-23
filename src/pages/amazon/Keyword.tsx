@@ -118,7 +118,7 @@ export default function AmazonKeyword() {
                   <span className="text-[10px] px-1.5 py-0.5 rounded-sm font-medium" style={{ background: LC.primary, color: LC.textInverse }}>示例</span>
                 </div>
                 <h4 className="text-sm font-semibold mb-2 text-lc-primary">{report.keyword}</h4>
-                <img src={PRODUCT_IMAGES[ri % PRODUCT_IMAGES.length]} alt="" className="w-14 h-14 rounded object-cover mb-2 ring-1 ring-lc-border" />
+                <img src={PRODUCT_IMAGES[ri % PRODUCT_IMAGES.length]} alt="" className="w-14 h-14 rounded object-cover mb-2 ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 <div className="text-[11px] font-mono-num text-lc-text-muted">商品数量: {report.productCount}</div>
                 <div className="text-[11px] text-lc-text-muted">报告日期: {report.date}</div>
               </div>

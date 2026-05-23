@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: voc-ai-select
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      APP_ID: voc-ai-product-select
+      APP_SECRET: default-secret-change-me
+      DATABASE_URL: file:./local.db
+      # 如需启用真实数据库，取消下方注释并启用 mysql service
+      # DATABASE_URL: mysql://app:apppass@mysql:3306/voc_ai
+    volumes:
+      - app-uploads:/app/uploads
+    # 启用真实数据库时取消注释
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
+
+  # 可选：本地 MySQL
+  # mysql:
+  #   image: mysql:8.0
+  #   container_name: voc-ai-mysql
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpass
+  #     MYSQL_DATABASE: voc_ai
+  #     MYSQL_USER: app
+  #     MYSQL_PASSWORD: apppass
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 10
+
+volumes:
+  app-uploads:
+  # mysql-data:

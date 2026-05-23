@@ -3,90 +3,152 @@
 ## 环境要求
 
 - Node.js 22+
-- MySQL 8+（或本地开发环境使用 mockData 自动回退）
+- MySQL 8+（可选，无 DB 时全量 mock 数据自动回退）
 - 至少 512MB 内存
+
+---
 
 ## 本地开发
 
 ```bash
-# 安装依赖
 npm install
-
-# 复制环境变量模板
-cp .env.example .env
-
-# 编辑 .env，配置 DATABASE_URL
-
-# 启动开发服务器
-npm run dev
+cp .env.example .env   # 配置 DATABASE_URL（可留空，走 mock 回退）
+npm run dev            # http://localhost:3000
 ```
 
-无数据库时，所有 tRPC 接口会自动回退到 mockData，不影响开发。
+**无数据库开发**：所有 tRPC 接口通过 `withFallback` 自动回退到 mockData，页面功能完整。
+
+---
 
 ## 数据库初始化
 
 ```bash
-# 生成 schema migration
-npm run db:generate
-
-# 应用 migration
-npm run db:migrate
-
-# 生成种子数据
-npx tsx db/seed-v2.ts
+npm run db:generate    # 生成 Drizzle migration
+npm run db:migrate     # 执行 migration
+npx tsx db/seed-v2.ts  # 写入种子数据
 ```
 
-## 构建与测试
+---
+
+## 生产构建
 
 ```bash
-# 类型检查
-npx tsc --noEmit
-
-# 单元测试
-npm test
-
-# 生产构建
+# 标准构建（需配套后端）
 npm run build
 
-# 本地预览生产版本
-npm start
+# GitHub Pages 构建（纯前端静态，无需后端）
+VITE_USE_MOCK_DATA=true npx vite build --base=/your-repo-name/
 ```
 
-## Docker 部署
+构建产物：
+- `dist/public/` — 前端静态资源
+- `dist/boot.js` — 后端 Hono 服务（esbuild 打包）
+
+---
+
+## 部署方式
+
+### 方式一：GitHub Pages（自动 CI）
+
+每次推送 `main` 分支，`.github/workflows/deploy.yml` 自动执行：
+
+1. `npm ci`
+2. `npx vite build --base=/ai_product_select/`（注入 `VITE_USE_MOCK_DATA=true`）
+3. 推送 `dist/public/` 到 `gh-pages` 分支
+
+启用步骤：
+1. GitHub 仓库 → Settings → Pages → Source 选 `gh-pages` 分支
+2. 首次需要手动在 Actions 触发或 push 触发
+
+**注意**：GitHub Pages 纯静态，后端 API 不可用，数据由前端 Mock Link 提供（`src/lib/mock-router.ts`）。
+
+---
+
+### 方式二：Docker
 
 ```bash
-# 构建镜像
-docker build -t voc-ai-select .
-
-# 运行容器
-docker run -d \
-  -p 3000:3000 \
-  -e DATABASE_URL=mysql://user:pass@host:3306/db \
-  -v /local/uploads:/app/uploads \
-  --name voc-ai \
-  voc-ai-select
+docker build -t voc-ai .
+docker run -p 3000:3000 \
+  -e DATABASE_URL="mysql://user:pass@host:3306/db" \
+  -e APP_SECRET="your-secret" \
+  voc-ai
 ```
+
+或使用 docker-compose：
+
+```bash
+cp .env.example .env   # 填写环境变量
+docker-compose up -d
+```
+
+---
+
+### 方式三：裸机 Node.js
+
+```bash
+npm run build
+APP_SECRET=xxx DATABASE_URL=mysql://... NODE_ENV=production node dist/boot.js
+```
+
+默认监听 `3000` 端口，可通过 `PORT` 环境变量修改。
+
+---
+
+## 环境变量
+
+| 变量 | 说明 | 默认值 |
+|------|------|--------|
+| `DATABASE_URL` | MySQL 连接串 | —（留空走 mock） |
+| `APP_SECRET` | 应用密钥 | 必填 |
+| `PORT` | 监听端口 | `3000` |
+| `NODE_ENV` | 环境标识 | `development` |
+| `VITE_USE_MOCK_DATA` | 前端启用 Mock Link | `false` |
+
+---
 
 ## CI/CD
 
-GitHub Actions 已配置：
-- `.github/workflows/ci.yml` — push/PR 触发，运行类型检查、Lint、单元测试、构建
+`.github/workflows/ci.yml` 在每次推送时自动执行：
 
-## 监控建议
+```
+类型检查（tsc --noEmit）
+  ↓
+ESLint（continue-on-error）
+  ↓
+单元测试 + 覆盖率报告（vitest）
+  ↓
+生产构建（npm run build）
+```
 
-1. 错误监控：集成 Sentry，在 `main.tsx` 的 `__reportError` 钩子中调用
-2. 性能监控：使用 Web Vitals + Lighthouse CI
-3. API 监控：tRPC 接口接入 OpenTelemetry / DataDog
+`.github/workflows/deploy.yml` 在 `main` 分支推送时额外执行 GitHub Pages 部署。
 
-## 性能配置
+---
 
-- 已开启路由级代码分割（React.lazy + Suspense）
-- ECharts/Lucide/Recharts 等大型库已通过 manualChunks 单独拆包
-- tRPC 全局缓存：staleTime 5min / gcTime 10min
-- 图表组件使用 IntersectionObserver 懒挂载
+## 健康检查
 
-## 容量评估（参考）
+```bash
+curl http://localhost:3000/api/trpc/ping
+# 响应：{"result":{"data":{"json":{"ok":true,"ts":1234567890}}}}
+```
 
-- 200 商品 / 2000 评论 / 300 视频 / 20 概念 / 600 指标
-- 数据库占用 ~20MB
-- 内存占用 ~150MB（生产模式）
+---
+
+## 常见问题
+
+**Q: `npm run build` 报 `cannot execute binary file`**
+```bash
+npm rebuild esbuild
+```
+
+**Q: 数据库连接失败**
+
+检查 `DATABASE_URL` 格式：`mysql://user:password@host:port/dbname`
+无数据库时删除 `.env` 中的 `DATABASE_URL`，系统自动使用 mock 数据。
+
+**Q: GitHub Pages 页面白屏**
+
+确认构建时注入了 `VITE_USE_MOCK_DATA=true`，检查 `deploy.yml` 的 env 配置。
+
+**Q: vite dev 模式空白页**
+
+`vite.config.ts` 中 `@hono/vite-dev-server` 的 `exclude` 必须包含 `/^\/api\/services\/mockData\//`，确保 mock 模块走 Vite 而非 Hono。

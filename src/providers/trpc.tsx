@@ -1,13 +1,14 @@
 import { createTRPCReact } from "@trpc/react-query";
-import { httpBatchLink } from "@trpc/client";
+import { httpBatchLink, type TRPCLink } from "@trpc/client";
+import { observable } from "@trpc/server/observable";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import superjson from "superjson";
 import type { AppRouter } from "../../api/router";
 import type { ReactNode } from "react";
+import { callMock } from "@/lib/mock-router";
 
 export const trpc = createTRPCReact<AppRouter>();
 
-// 全局缓存策略：5分钟新鲜，10分钟保留；窗口聚焦不重新拉取
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,18 +20,32 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const mockLink: TRPCLink<AppRouter> = () =>
+  ({ op }) =>
+    observable((observer) => {
+      try {
+        const result = callMock(op.path, op.input as Record<string, unknown> | undefined);
+        observer.next({ result: { type: "data", data: result } });
+        observer.complete();
+      } catch (err) {
+        observer.error(err as Parameters<typeof observer.error>[0]);
+      }
+    });
+
+const USE_MOCK = import.meta.env.VITE_USE_MOCK_DATA === "true";
+
 const trpcClient = trpc.createClient({
   links: [
-    httpBatchLink({
-      url: "/api/trpc",
-      transformer: superjson,
-      fetch(input, init) {
-        return globalThis.fetch(input, {
-          ...(init ?? {}),
-          credentials: "include",
-        });
-      },
-    }),
+    USE_MOCK
+      ? mockLink
+      : httpBatchLink({
+          url: "/api/trpc",
+          transformer: superjson,
+          fetch(input, init) {
+            return globalThis.fetch(input, { ...(init ?? {}), credentials: "include" });
+          },
+        }),
   ],
 });
 

@@ -28,6 +28,7 @@ jobs:
         run: npx vite build --base=/ai_product_select/
         env:
           NODE_ENV: production
+          VITE_USE_MOCK_DATA: "true"
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4

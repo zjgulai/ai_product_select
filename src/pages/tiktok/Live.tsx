@@ -102,25 +102,24 @@ export default function TikTokLive() {
                         <span className="text-xs truncate max-w-[140px] text-lc-text-primary" title={item.title}>{item.title}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3">
-                      <div className="text-[10px] space-y-0.5 text-lc-text-muted">
-                        <div>开播 {item.startTime}</div>
-                        <div>结束 {item.endTime}</div>
-                        <div className="font-medium text-lc-text-secondary">时长 {item.duration}</div>
-                      </div>
-                    </td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{item.viewers.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{item.peakOnline.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{item.likes.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.replies.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{item.newFans.toLocaleString()}</span></td>
-                    <td className="py-2.5 px-3">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold ring-1 ring-lc-border" style={{ background: `${LC.primary}10`, color: LC.primary }}>{item.creator[0]?.toUpperCase()}</div>
-                        <div><div className="text-xs truncate max-w-[70px] text-lc-text-primary">{item.creator}</div><div className="text-[10px] font-mono-num text-lc-text-muted">{(item.creatorFollowers/1000000).toFixed(0)}M粉</div></div>
-                      </div>
-                    </td>
-                    <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><Star size={13} /></button></td>
+                     <td className="py-2.5 px-3">
+                       <div className="text-[10px] space-y-0.5 text-lc-text-muted">
+                         <div>开播 {item.startTime}</div>
+                         <div className="font-medium text-lc-text-secondary">时长 {typeof item.duration === 'number' ? `${Math.floor(item.duration/60)}h${item.duration%60}m` : item.duration}</div>
+                       </div>
+                     </td>
+                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.viewers ?? 0).toLocaleString()}</td>
+                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.maxOnline ?? item.peakOnline ?? 0).toLocaleString()}</td>
+                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes ?? 0).toLocaleString()}</td>
+                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{(item.comments ?? item.replies ?? 0).toLocaleString()}</td>
+                     <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{(item.gpm ?? item.newFans ?? 0).toLocaleString()}</span></td>
+                     <td className="py-2.5 px-3">
+                       <div className="flex items-center gap-1.5">
+                         <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold ring-1 ring-lc-border" style={{ background: `${LC.primary}10`, color: LC.primary }}>{(item.creator ?? '?')[0]?.toUpperCase()}</div>
+                         <div><div className="text-xs truncate max-w-[70px] text-lc-text-primary">{item.creator ?? '未知达人'}</div><div className="text-[10px] font-mono-num text-lc-text-muted">{((item.creatorFollowers ?? 0)/1000000).toFixed(0)}M粉</div></div>
+                       </div>
+                     </td>
+                     <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (

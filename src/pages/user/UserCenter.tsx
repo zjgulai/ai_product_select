@@ -15,8 +15,8 @@ const TABS = [
 ];
 
 const ORDERS = [
-  { plan: "高级版年付", price: "¥2,999", date: "2025-04-22", status: "生效中", expire: "2026-04-22" },
-  { plan: "专业版月付", price: "¥399", date: "2025-03-22", status: "已过期", expire: "2025-04-22" },
+  { plan: "高级版年付", price: "¥2,999", date: "2026-12-31", status: "生效中", expire: "2027-12-31" },
+  { plan: "专业版月付", price: "¥399", date: "2026-11-30", status: "已过期", expire: "2026-12-30" },
 ];
 
 export default function UserCenter() {
@@ -41,10 +41,10 @@ export default function UserCenter() {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>13680382537</h2>
+              <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>lute_user_001</h2>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: LC.primary, color: LC.text }}>高级版</span>
             </div>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>套餐到期: 2026-04-22 | 剩余 365 天</p>
+            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>套餐到期: 2027-12-31 | 剩余 580 天</p>
           </div>
           <button className="px-4 h-8 rounded-full text-xs font-bold transition-all hover:brightness-110" style={{ background: LC.primary, color: LC.text }}>
             <Crown size={12} className="inline mr-1" />续费会员
@@ -70,7 +70,7 @@ export default function UserCenter() {
         {tab === 'overview' && (
           <div className="grid grid-cols-4 gap-4">
             {[
-              { label: '剩余天数', value: '365', unit: '天', color: LC.primary },
+              { label: '剩余天数', value: '580', unit: '天', color: LC.primary },
               { label: '已生成报告', value: String(reportsData?.total || 0), unit: '份', color: LC.primary },
               { label: '关注商品', value: '128', unit: '个', color: LC.success },
               { label: '关注达人', value: '56', unit: '个', color: LC.warning },
@@ -131,7 +131,7 @@ export default function UserCenter() {
                   <tr key={r.reportId ?? i} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
                     <td className="py-2.5 px-3 text-xs font-medium text-lc-text-primary">{r.title}</td>
                     <td className="py-2.5 px-3"><span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: LC.primaryLight, color: LC.primary }}>融合分析</span></td>
-                    <td className="py-2.5 px-3 text-xs text-lc-text-muted">{r.createdAt}</td>
+                     <td className="py-2.5 px-3 text-xs text-lc-text-muted">{r.createdAt ? new Date(r.createdAt).toLocaleDateString('zh-CN') : '-'}</td>
                     <td className="py-2.5 px-3"><span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: r.status === 'completed' ? LC.successLight : LC.warningLight, color: r.status === 'completed' ? LC.success : LC.warning }}>{r.status === 'completed' ? '已完成' : '生成中'}</span></td>
                     <td className="py-2.5 px-3"><button className="text-[10px] font-bold flex items-center gap-1 text-lc-primary"><Download size={10} /> 下载</button></td>
                   </tr>

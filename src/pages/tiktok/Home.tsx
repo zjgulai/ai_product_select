@@ -31,17 +31,17 @@ const QUICK_ENTRIES = [
 ];
 
 const PRODUCT_IMAGES = [
-  '/assets/products/p1.jpg',
-  '/assets/products/p2.jpg',
-  '/assets/products/p3.jpg',
-  '/assets/products/p4.jpg',
-  '/assets/products/p5.jpg',
+  import.meta.env.BASE_URL + 'assets/products/p1.jpg',
+  import.meta.env.BASE_URL + 'assets/products/p2.jpg',
+  import.meta.env.BASE_URL + 'assets/products/p3.jpg',
+  import.meta.env.BASE_URL + 'assets/products/p4.jpg',
+  import.meta.env.BASE_URL + 'assets/products/p5.jpg',
 ];
 
 const AVATAR_IMAGES = [
-  '/assets/avatars/a1.jpg',
-  '/assets/avatars/a2.jpg',
-  '/assets/avatars/a3.jpg',
+  import.meta.env.BASE_URL + 'assets/avatars/a1.jpg',
+  import.meta.env.BASE_URL + 'assets/avatars/a2.jpg',
+  import.meta.env.BASE_URL + 'assets/avatars/a3.jpg',
 ];
 
 const TREND_ITEMS = [

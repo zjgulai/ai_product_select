@@ -22,7 +22,7 @@ const BRAND_DATA = [
 ];
 const PRICE_DATA = [{ name: '其他', value: 8.5 }, { name: '$0-$45', value: 34.3 }, { name: '>$45', value: 57.2 }];
 // Chart colors available: ['#E8785A', '#D49450', LC.teal, '#A8A29E', '#16A34A', '#C4D4E0']
-const PRODUCT_IMAGES = ["/assets/products/p6.jpg", "/assets/products/p5.jpg", "/assets/products/p1.jpg"];
+const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p6.jpg", import.meta.env.BASE_URL + "assets/products/p5.jpg", import.meta.env.BASE_URL + "assets/products/p1.jpg"];
 
 const SAMPLE_PRODUCTS = [
   { name: 'Momcozy KleanPal Pro', asin: 'B0C1234567', brand: 'momcozy', price: 299.99, rating: 4.6, sales: 15234, reviews: 4521, img: 0 },

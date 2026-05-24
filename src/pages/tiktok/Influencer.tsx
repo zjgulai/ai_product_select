@@ -10,7 +10,7 @@ import { LC } from '@/lib/lute-colors';
 
 const TABS = ["达人带货榜", "达人涨粉榜"];
 const TAB_KEYS = ["sales", "fans"] as const;
-const AVATAR_IMAGES = ["/assets/avatars/a1.jpg", "/assets/avatars/a2.jpg", "/assets/avatars/a3.jpg"];
+const AVATAR_IMAGES = [import.meta.env.BASE_URL + "assets/avatars/a1.jpg", import.meta.env.BASE_URL + "assets/avatars/a2.jpg", import.meta.env.BASE_URL + "assets/avatars/a3.jpg"];
 
 export default function TikTokInfluencer() {
   const [tab, setTab] = useState(0);

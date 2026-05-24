@@ -12,8 +12,8 @@ import { Search, Download, Star, ShoppingCart, ChevronLeft, ChevronRight, Filter
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
 const TAB_KEYS = ["hot", "soaring", "new"] as const;
 const TIME_RANGES = ["全部", "日", "近7天", "近30天", "自定义"];
-const PRODUCT_IMAGES = ["/assets/products/p1.jpg","/assets/products/p2.jpg","/assets/products/p3.jpg",
-  "/assets/products/p4.jpg","/assets/products/p5.jpg","/assets/products/p6.jpg","/assets/products/p5.jpg"];
+const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p1.jpg",import.meta.env.BASE_URL + "assets/products/p2.jpg",import.meta.env.BASE_URL + "assets/products/p3.jpg",
+  import.meta.env.BASE_URL + "assets/products/p4.jpg",import.meta.env.BASE_URL + "assets/products/p5.jpg",import.meta.env.BASE_URL + "assets/products/p6.jpg",import.meta.env.BASE_URL + "assets/products/p5.jpg"];
 
 export default function TikTokProducts() {
   const [tab, setTab] = useState(0);

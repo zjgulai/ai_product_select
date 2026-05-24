@@ -9,8 +9,8 @@ import { LC } from '@/lib/lute-colors';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import DataBadge from '@/components/shared/DataBadge';
 
-const PRODUCT_IMAGES = ["/assets/products/p1.jpg", "/assets/products/p2.jpg", "/assets/products/p3.jpg",
-  "/assets/products/p4.jpg", "/assets/products/p5.jpg", "/assets/products/p6.jpg"];
+const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p1.jpg", import.meta.env.BASE_URL + "assets/products/p2.jpg", import.meta.env.BASE_URL + "assets/products/p3.jpg",
+  import.meta.env.BASE_URL + "assets/products/p4.jpg", import.meta.env.BASE_URL + "assets/products/p5.jpg", import.meta.env.BASE_URL + "assets/products/p6.jpg"];
 
 const STAT_LINKS: Record<string, string> = {
   "参数趋势": "/amazon/param-trend",

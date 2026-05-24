@@ -8,7 +8,7 @@ import { LC } from '@/lib/lute-colors';
 import { useSavedFilters } from '@/hooks/useSavedFilters';
 
 
-const PRODUCT_IMAGES = ["/assets/products/p6.jpg","/assets/products/p5.jpg","/assets/products/p1.jpg","/assets/products/p2.jpg","/assets/products/p3.jpg"];
+const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p6.jpg",import.meta.env.BASE_URL + "assets/products/p5.jpg",import.meta.env.BASE_URL + "assets/products/p1.jpg",import.meta.env.BASE_URL + "assets/products/p2.jpg",import.meta.env.BASE_URL + "assets/products/p3.jpg"];
 
 export default function AmazonProduct() {
   const [tags, setTags] = useState<string[]>([]);

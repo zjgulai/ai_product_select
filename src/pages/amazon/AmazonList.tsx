@@ -10,7 +10,7 @@ import { LC } from '@/lib/lute-colors';
 import { Download, MessageSquare, Search } from 'lucide-react';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
-const PRODUCT_IMAGES = ["/assets/products/p5.jpg","/assets/products/p1.jpg","/assets/products/p2.jpg","/assets/products/p3.jpg","/assets/products/p4.jpg"];
+const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p5.jpg",import.meta.env.BASE_URL + "assets/products/p1.jpg",import.meta.env.BASE_URL + "assets/products/p2.jpg",import.meta.env.BASE_URL + "assets/products/p3.jpg",import.meta.env.BASE_URL + "assets/products/p4.jpg"];
 
 export default function AmazonListPage() {
   const navigate = useNavigate();

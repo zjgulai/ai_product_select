@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { createRouter, publicQuery } from "../middleware";
 import { getDb } from "../queries/connection";
+import { triggerETL } from "../services/etl/pipeline";
 import {
   dataFiles, dataTemplates, dynamicData, importLogs,
   odsTiktokProducts, odsTiktokCreators, odsTiktokShops,
@@ -365,6 +366,13 @@ const importRouter = createRouter({
         status: errors.length === 0 ? "success" : successRows > 0 ? "partial" : "failed",
         completedAt: new Date(),
       }).where(eq(importLogs.id, logId));
+
+      // Trigger ETL pipeline asynchronously (don't block response)
+      if (successRows > 0 && targetLayer === "ods") {
+        triggerETL(input.dataKey, input.snapshotDate).catch((err) => {
+          console.error(`[ETL] Failed for ${input.dataKey}:`, err);
+        });
+      }
 
       return {
         dryRun: false,

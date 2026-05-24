@@ -7,6 +7,7 @@ import MiniTrend from '@/components/shared/MiniTrend';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { ChevronRight, ArrowRight } from 'lucide-react';
+import DataBadge from '@/components/shared/DataBadge';
 
 const PRODUCT_IMAGES = ["/assets/products/p1.jpg", "/assets/products/p2.jpg", "/assets/products/p3.jpg",
   "/assets/products/p4.jpg", "/assets/products/p5.jpg", "/assets/products/p6.jpg"];

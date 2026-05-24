@@ -11,6 +11,7 @@ import EChartsLine from '@/components/shared/EChartsLine';
 import EChartsBar from '@/components/shared/EChartsBar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Download, Share2, BarChart3, X, Check, Star } from 'lucide-react';
+import DataBadge from '@/components/shared/DataBadge';
 
 const TABS = ["市场概况", "商品样本", "关键词验证", "参数解构", "评价分析", "评论洞察", "商品对比"];
 

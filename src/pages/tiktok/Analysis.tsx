@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */n
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from 'react';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';

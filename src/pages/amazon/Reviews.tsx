@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */n
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import { useParams, useNavigate } from 'react-router';

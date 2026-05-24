@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */n
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { trpc } from '@/providers/trpc';

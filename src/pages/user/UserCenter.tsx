@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */n
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';

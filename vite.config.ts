@@ -22,6 +22,9 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(__dirname),
+  define: {
+    'import.meta.env.VITE_USE_MOCK_DATA': '"true"',
+  },
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,

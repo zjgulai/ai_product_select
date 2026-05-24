@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import {
   Package, Star, ShoppingBag, Users, Store, Play, Video,
   Bell, TrendingUp, TrendingDown, FileText, Eye, Sparkles,
-  ArrowRight, Box, UserRound
+  ArrowRight, Box, UserRound, BarChart3
 } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
 import DataBadge from '@/components/shared/DataBadge';

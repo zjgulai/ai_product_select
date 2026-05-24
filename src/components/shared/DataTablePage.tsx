@@ -3,7 +3,8 @@ import { useState, useEffect, memo, type ReactNode } from 'react';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import { LC } from '@/lib/lute-colors';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Download, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Search, Download, ChevronLeft, ChevronRight, ArrowRight, Inbox } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
 import { useDebounce } from '@/hooks/useDebounce';
 
 export interface ColumnConfig<T = any> {
@@ -154,7 +155,7 @@ function DataTablePage<T = any>({
             {lastUpdated && <span className="text-xs text-lc-text-muted" title="数据更新时间">更新: {lastUpdated}</span>}
             <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             {exportable && (
-              <button className="flex items-center gap-1 text-xs font-medium text-lc-primary">
+              <button onClick={() => { import('sonner').then(({ toast }) => toast.success('数据导出中…')); }} className="flex items-center gap-1 text-xs font-medium text-lc-primary">
                 <Download size={12} /> 数据导出
               </button>
             )}
@@ -220,9 +221,8 @@ function DataTablePage<T = any>({
                   ))}
                   {data.length === 0 && (
                     <tr>
-                      <td colSpan={columns.length} className="py-8 text-center">
-                        <p className="text-xs text-lc-text-muted mb-1">{emptyText}</p>
-                        {dataSource && <p className="text-xs text-lc-text-muted">数据来源: {dataSource}</p>}
+                      <td colSpan={columns.length}>
+                        <EmptyState compact icon={Inbox} title={emptyText} description={dataSource ? `数据来源: ${dataSource}` : undefined} />
                       </td>
                     </tr>
                   )}

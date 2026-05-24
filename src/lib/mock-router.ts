@@ -264,7 +264,7 @@ const mockHandlers: Record<string, (input: Input) => unknown> = {
   "ipms.addStageHistory": () => ({ insertId: 0 }),
   "ipms.delete": () => ({ success: true }),
 
-  // ─── DataManager (空实现，GitHub Pages 无上传功能) ────────────
+  // ─── DataManager (演示实现，静态部署下展示完整体验) ────────────
   "dataManager.template.list": () => [],
   "dataManager.template.getByKey": () => null,
   "dataManager.template.upsert": () => ({ success: true }),
@@ -272,10 +272,19 @@ const mockHandlers: Record<string, (input: Input) => unknown> = {
   "dataManager.dynamic.getActiveKeys": () => [],
   "dataManager.dynamic.bulkInsert": () => ({ success: true, inserted: 0 }),
   "dataManager.dynamic.deleteByKey": () => ({ success: true }),
-  "dataManager.import.ingest": () => ({ dryRun: false, importId: 0, totalRows: 0, successRows: 0, failedRows: 0, errorSummary: [] }),
-  "dataManager.import.logs": () => [],
-  "dataManager.import.stats": () => ({ total: 0, success: 0, failed: 0, totalRows: 0 }),
-  "dataManager.ods.latestDates": () => ({}),
+  "dataManager.import.ingest": (input) => {
+    const records = (input as any)?.records ?? [];
+    const total = records.length;
+    const failed = total > 0 ? Math.floor(Math.random() * Math.min(3, total * 0.1)) : 0;
+    return { dryRun: (input as any)?.dryRun ?? false, importId: Date.now(), totalRows: total, successRows: total - failed, failedRows: failed, errorSummary: failed > 0 ? [{ row: 2, field: 'price', message: '价格格式异常' }] : [] };
+  },
+  "dataManager.import.logs": () => [
+    { id: 1, dataKey: 'tiktok_products', targetLayer: 'ods', targetTable: 'tiktok_products', status: 'completed', totalRows: 12450, successRows: 12450, failedRows: 0, triggeredAt: '2026-05-20T09:30:00Z', completedAt: '2026-05-20T09:32:15Z' },
+    { id: 2, dataKey: 'amazon_products', targetLayer: 'ods', targetTable: 'amazon_products', status: 'completed', totalRows: 8320, successRows: 8318, failedRows: 2, triggeredAt: '2026-05-18T14:20:00Z', completedAt: '2026-05-18T14:21:40Z' },
+    { id: 3, dataKey: 'tiktok_creators', targetLayer: 'ods', targetTable: 'tiktok_creators', status: 'completed', totalRows: 5600, successRows: 5600, failedRows: 0, triggeredAt: '2026-05-15T11:00:00Z', completedAt: '2026-05-15T11:01:30Z' },
+  ],
+  "dataManager.import.stats": () => ({ total: 12, success: 11, failed: 1, totalRows: 186370 }),
+  "dataManager.ods.latestDates": () => ({ tiktok_products: '2026-05-20', amazon_products: '2026-05-18', tiktok_creators: '2026-05-15' }),
   "dataManager.file.list": () => ({ files: [], total: 0 }),
   "dataManager.file.stats": () => ({ totalFiles: 0, activeFiles: 0, totalSize: 0, totalRows: 0 }),
 };

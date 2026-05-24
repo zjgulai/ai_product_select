@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import { CATEGORIES } from '@/data/mockData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
+import { getProductImage } from '@/data/assets';
 import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TABS = ["视频热播榜", "视频热销榜"];
@@ -149,7 +150,7 @@ export default function TikTokVideo() {
                     </td>
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-1.5">
-                        <img src={import.meta.env.BASE_URL + "assets/products/p3.jpg"} alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
+                        <img src={getProductImage(idx)} alt={item.product} className="w-6 h-6 rounded object-cover ring-1 ring-lc-border" loading="lazy" onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <span className="text-xs truncate max-w-[80px] text-lc-text-primary">{item.product}</span>
                       </div>
                     </td>
@@ -157,7 +158,7 @@ export default function TikTokVideo() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={10} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={10}><EmptyState compact icon={SearchX} title="没有找到符合条件的视频" description={searchText || selectedCats.length > 0 ? "尝试调整筛选条件或清除搜索" : undefined} primaryAction={searchText || selectedCats.length > 0 ? { label: '清除筛选', onClick: () => { setSearchText(''); setSelectedCats([]); setPage(0); } } : undefined} /></td></tr>
                 )}
               </tbody>
             </table>

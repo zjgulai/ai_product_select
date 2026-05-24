@@ -9,8 +9,9 @@ import {
   Upload, Database, Activity, CheckCircle, XCircle,
   AlertCircle, RefreshCw, Settings, Layers, ChevronRight, ChevronDown,
   Network, Package, User, Store, Play, Radio, ClipboardList, KeyRound,
-  MessageSquare, AlertTriangle,
+  MessageSquare, AlertTriangle, Inbox,
 } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
 import LineagePanel from '@/components/data-lineage/LineagePanel';
 import { ConfirmDialog, useConfirm } from '@/components/shared/ConfirmDialog';
 
@@ -222,7 +223,7 @@ export default function DataManager() {
                         className="text-xs text-lc-text-muted hover:text-lc-danger transition-colors">重新选择</button>
                     </div>
 
-                    <div className="overflow-x-auto border rounded-lg mb-4" style={{ borderColor: LC.border }}>
+                    <div className="overflow-x-auto border rounded-lg mb-4 animate-fadeIn" style={{ borderColor: LC.border }}>
                       <table className="w-full text-xs">
                         <thead>
                           <tr className="bg-lc-bg-warm">
@@ -342,9 +343,8 @@ export default function DataManager() {
                   })}
                   {!(logs ?? []).length && (
                     <tr>
-                      <td colSpan={8} className="py-10 text-center">
-                        <p className="text-xs text-lc-text-muted mb-2">暂无导入记录</p>
-                        <button onClick={() => setTab('sources')} className="text-xs px-3 py-1.5 rounded-full bg-lc-primary text-white font-medium">去导入数据</button>
+                      <td colSpan={8}>
+                        <EmptyState icon={Inbox} title="暂无导入记录" description="导入数据源后，这里会展示历史导入记录" primaryAction={{ label: '去导入数据', onClick: () => setTab('sources') }} />
                       </td>
                     </tr>
                   )}
@@ -365,10 +365,7 @@ export default function DataManager() {
             {odsErr ? <ErrorState /> : odsLoading ? (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}</div>
             ) : DATA_SOURCES.every(s => !(odsStatus?.[s.targetTable]?.rowCount ?? 0)) ? (
-              <div className="text-center py-10">
-                <p className="text-xs text-lc-text-muted mb-2">暂无数据，请先导入数据源</p>
-                <button onClick={() => setTab('sources')} className="text-xs px-3 py-1.5 rounded-full bg-lc-primary text-white font-medium">去导入数据</button>
-              </div>
+              <EmptyState icon={Inbox} title="还没有导入过数据" description="导入 TikTok 或 Amazon 数据源后，这里会展示数据质量概览" primaryAction={{ label: '去导入数据', onClick: () => setTab('sources') }} />
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {DATA_SOURCES.map(s => {
@@ -450,7 +447,7 @@ export default function DataManager() {
               ))}
             </div>
             <div className="mt-4 p-3 rounded-lg text-xs text-lc-text-muted" style={{ background: LC.bgWarm }}>
-              <strong className="text-lc-text-secondary">自定义字段映射</strong>（即将上线）：配置字段别名规则、数据校验范围、必填字段标记。
+              <strong className="text-lc-text-secondary">自定义字段映射</strong>：已内置别名识别（如 "月销量"/monthly_sales/monthlySales 均可识别），数据校验范围与必填字段标记根据数据源自动适配。
             </div>
           </div>
         )}

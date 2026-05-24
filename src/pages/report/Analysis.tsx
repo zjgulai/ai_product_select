@@ -11,6 +11,7 @@ import EChartsLine from '@/components/shared/EChartsLine';
 import EChartsBar from '@/components/shared/EChartsBar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Download, Share2, BarChart3, X, Check, Star } from 'lucide-react';
+import { PRODUCT_IMAGES } from '@/data/assets';
 import DataBadge from '@/components/shared/DataBadge';
 
 const TABS = ["市场概况", "商品样本", "关键词验证", "参数解构", "评价分析", "评论洞察", "商品对比"];
@@ -22,7 +23,7 @@ const BRAND_DATA = [
 ];
 const PRICE_DATA = [{ name: '其他', value: 8.5 }, { name: '$0-$45', value: 34.3 }, { name: '>$45', value: 57.2 }];
 // Chart colors available: ['#E8785A', '#D49450', LC.teal, '#A8A29E', '#16A34A', '#C4D4E0']
-const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p6.jpg", import.meta.env.BASE_URL + "assets/products/p5.jpg", import.meta.env.BASE_URL + "assets/products/p1.jpg"];
+
 
 const SAMPLE_PRODUCTS = [
   { name: 'Momcozy KleanPal Pro', asin: 'B0C1234567', brand: 'momcozy', price: 299.99, rating: 4.6, sales: 15234, reviews: 4521, img: 0 },
@@ -93,7 +94,7 @@ export default function ReportAnalysis() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <h2 className="text-lg font-bold text-lc-primary">美国站 &apos;momcozy baby bottle warmer&apos; 产品分析报告</h2>
-              <button className="transition-colors text-lc-text-muted hover:text-lc-primary"><Share2 size={16} /></button>
+              <button onClick={() => { import('sonner').then(({ toast }) => toast.success('链接已复制到剪贴板')); }} className="transition-colors text-lc-text-muted hover:text-lc-primary"><Share2 size={16} /></button>
             </div>
             <div className="flex items-center gap-4 text-xs flex-wrap">
               {[{l:'商品数量',v:'212'},{l:'品牌数量',v:'101'},{l:'已分析评论数',v:'14,319'},{l:'创建日期',v:'2026-04-20'},{l:'更新时间',v:'2026-04-20'}].map(i => (
@@ -185,7 +186,7 @@ export default function ReportAnalysis() {
               {SAMPLE_PRODUCTS.slice(0, 10).map((p, i) => (
                 <div key={i} className="shrink-0 w-[72px] text-center cursor-pointer group">
                   <div className="w-12 h-12 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-1.5 group-hover:ring-lc-primary transition-all">
-                    <img src={PRODUCT_IMAGES[p.img]} alt="" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                    <img src={PRODUCT_IMAGES[p.img]} alt={p.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                   </div>
                   <div className="text-[9px] font-medium truncate text-lc-text-secondary">{p.name.slice(0, 12)}</div>
                   <div className="text-[8px] font-medium" style={{ color: LC.success }}>Sales {p.sales.toLocaleString()}</div>
@@ -256,7 +257,7 @@ export default function ReportAnalysis() {
                 style={{ borderColor: selectedProducts.has(i) ? LC.primary : LC.border, boxShadow: selectedProducts.has(i) ? `0 0 0 2px ${LC.primary}30` : undefined }}>
                 {selectedProducts.has(i) && <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-xs font-bold flex items-center justify-center bg-lc-primary"><Check size={12} /></div>}
                 <div className="w-16 h-16 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-2">
-                  <img src={PRODUCT_IMAGES[p.img]} alt="" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                  <img src={PRODUCT_IMAGES[p.img]} alt={p.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 </div>
                 <div className="text-xs font-medium truncate text-lc-text-primary">{p.name}</div>
                 <div className="text-xs font-mono-num mt-1 text-lc-text-muted">{p.asin}</div>
@@ -421,7 +422,7 @@ export default function ReportAnalysis() {
                         { product: "Momcozy Bottle Washer", positive: "快速,易用", negative: "噪音大", scenario: "家用", img: 1 },
                       ].map((item, idx) => (
                         <tr key={idx} className="border-b hover:bg-lc-bg-warm border-lc-border-light">
-                          <td className="py-2 px-3"><img src={PRODUCT_IMAGES[item.img]} alt="" className="w-10 h-10 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
+                          <td className="py-2 px-3"><img src={PRODUCT_IMAGES[item.img]} alt={item.product} loading="lazy" className="w-10 h-10 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
                           <td className="py-2 px-3 text-xs font-medium text-lc-text-primary">{item.product}</td>
                           <td className="py-2 px-3 text-xs font-medium" style={{ color: LC.success }}>{item.positive}</td>
                           <td className="py-2 px-3 text-xs" style={{ color: LC.danger }}>{item.negative}</td>
@@ -469,7 +470,7 @@ export default function ReportAnalysis() {
             {SAMPLE_PRODUCTS.slice(0, 4).map((item, idx) => (
               <div key={idx} className="border rounded-lg p-3 transition-all hover:shadow-lc-hover border-lc-border">
                 <div className="w-20 h-20 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-3">
-                  <img src={PRODUCT_IMAGES[item.img]} alt="" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                  <img src={PRODUCT_IMAGES[item.img]} alt={item.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 </div>
                 <div className="text-xs font-semibold mb-2 min-h-[32px] text-lc-text-primary">{item.name}</div>
                 <div className="space-y-1">

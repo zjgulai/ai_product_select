@@ -21,6 +21,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
+import { PRODUCT_IMAGES, AVATAR_IMAGES } from '@/data/assets';
 
 const QUICK_ENTRIES = [
   { icon: ShoppingBag, label: '找商品', path: '/tiktok/products' },
@@ -30,19 +31,7 @@ const QUICK_ENTRIES = [
   { icon: Video, label: '找直播', path: '/tiktok/live' },
 ];
 
-const PRODUCT_IMAGES = [
-  import.meta.env.BASE_URL + 'assets/products/p1.jpg',
-  import.meta.env.BASE_URL + 'assets/products/p2.jpg',
-  import.meta.env.BASE_URL + 'assets/products/p3.jpg',
-  import.meta.env.BASE_URL + 'assets/products/p4.jpg',
-  import.meta.env.BASE_URL + 'assets/products/p5.jpg',
-];
 
-const AVATAR_IMAGES = [
-  import.meta.env.BASE_URL + 'assets/avatars/a1.jpg',
-  import.meta.env.BASE_URL + 'assets/avatars/a2.jpg',
-  import.meta.env.BASE_URL + 'assets/avatars/a3.jpg',
-];
 
 const TREND_ITEMS = [
   { name: '便携温奶器', change: 'SHI +15%', type: 'up' },
@@ -354,7 +343,7 @@ export default function TikTokHome() {
                         <>
                           <img
                             src={PRODUCT_IMAGES[(item.rank - 1) % PRODUCT_IMAGES.length]}
-                            alt=""
+                            alt={item.name} loading="lazy"
                             className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = FALLBACK_IMG;
@@ -376,7 +365,7 @@ export default function TikTokHome() {
                         <>
                           <img
                             src={AVATAR_IMAGES[(item.rank - 1) % AVATAR_IMAGES.length]}
-                            alt=""
+                            alt={item.name} loading="lazy"
                             className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = FALLBACK_IMG;

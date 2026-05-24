@@ -69,7 +69,7 @@ export default function UserCenter() {
             </div>
             <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>套餐到期: 2027-12-31 | 剩余 580 天</p>
           </div>
-          <button className="px-4 h-8 rounded-full text-xs font-bold transition-all hover:brightness-110" style={{ background: LC.primary, color: LC.text }}>
+          <button onClick={() => { import('sonner').then(({ toast }) => toast.info('演示环境不支持支付')); }} className="px-4 h-8 rounded-full text-xs font-bold transition-all hover:brightness-110" style={{ background: LC.primary, color: LC.text }}>
             <Crown size={12} className="inline mr-1" />续费会员
           </button>
         </div>

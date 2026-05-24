@@ -6,7 +6,8 @@ import Breadcrumb from '@/components/shared/Breadcrumb';
 import { CATEGORIES } from '@/data/mockData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
-import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, Star, ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
 
 const TABS = ["直播人气榜", "直播涨粉榜"];
 const TIME_RANGES = ["全部", "日", "近7天", "近30天", "自定义"];
@@ -144,7 +145,7 @@ export default function TikTokLive() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={9} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={9}><EmptyState compact icon={SearchX} title="没有找到符合条件的直播" description={searchText || selectedCats.length > 0 ? "尝试调整筛选条件或清除搜索" : undefined} primaryAction={searchText || selectedCats.length > 0 ? { label: '清除筛选', onClick: () => { setSearchText(''); setSelectedCats([]); setPage(0); } } : undefined} /></td></tr>
                 )}
               </tbody>
             </table>

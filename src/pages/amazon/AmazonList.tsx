@@ -8,9 +8,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useNavigate } from 'react-router';
 import { LC } from '@/lib/lute-colors';
 import { Download, MessageSquare, Search } from 'lucide-react';
+import { PRODUCT_IMAGES } from '@/data/assets';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
-const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p5.jpg",import.meta.env.BASE_URL + "assets/products/p1.jpg",import.meta.env.BASE_URL + "assets/products/p2.jpg",import.meta.env.BASE_URL + "assets/products/p3.jpg",import.meta.env.BASE_URL + "assets/products/p4.jpg"];
+
 
 export default function AmazonListPage() {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ export default function AmazonListPage() {
                 {data?.items.map((item, idx) => (
                   <tr key={item.asin} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
                     <td className="py-2.5 px-3 text-xs font-mono-num font-semibold" style={{ color: idx < 3 ? LC.primary : LC.textMuted }}>{idx + 1}</td>
-                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/></td>
+                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt={item.title} loading="lazy" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/></td>
                     <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[200px] font-medium text-lc-text-primary" title={item.title}>{item.title}</div></td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.monthlySales ?? 0).toLocaleString()}</td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-primary">${parseFloat(item.monthlyRevenue ?? '0').toLocaleString()}</td>
@@ -109,7 +110,7 @@ export default function AmazonListPage() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={7} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={7}><EmptyState compact icon={SearchX} title="没有找到符合条件的商品" description={inputValue ? "尝试调整搜索关键词" : undefined} primaryAction={inputValue ? { label: '清除搜索', onClick: () => { setInputValue(''); setSearchText(''); } } : undefined} /></td></tr>
                 )}
               </tbody>
             </table>

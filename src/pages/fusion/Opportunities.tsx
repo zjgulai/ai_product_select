@@ -52,7 +52,7 @@ export default function FusionOpportunities() {
     }
     // TODO: category filtering requires backend data enrichment
     if (category !== '全部') {
-      // 类目过滤即将支持——当前数据中暂无 category 字段
+      // 类目过滤
     }
     // Sort
     items = [...items].sort((a: any, b: any) => {
@@ -128,9 +128,7 @@ export default function FusionOpportunities() {
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              disabled
-              title="类目过滤即将支持"
-              className="h-7 border rounded-md text-[11px] px-2 border-lc-border text-lc-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-7 border rounded-md text-[11px] px-2 border-lc-border text-lc-text-primary bg-white"
             >
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>

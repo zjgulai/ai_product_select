@@ -5,12 +5,13 @@ import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import CategoryFilter from '@/components/shared/CategoryFilter';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, Star, ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
 import { LC } from '@/lib/lute-colors';
+import { AVATAR_IMAGES } from '@/data/assets';
 
 const TABS = ["达人带货榜", "达人涨粉榜"];
 const TAB_KEYS = ["sales", "fans"] as const;
-const AVATAR_IMAGES = [import.meta.env.BASE_URL + "assets/avatars/a1.jpg", import.meta.env.BASE_URL + "assets/avatars/a2.jpg", import.meta.env.BASE_URL + "assets/avatars/a3.jpg"];
 
 export default function TikTokInfluencer() {
   const [tab, setTab] = useState(0);
@@ -99,7 +100,7 @@ export default function TikTokInfluencer() {
                   <tr key={item.creatorId ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
-                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt="" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
+                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt={item.displayName ?? item.creatorName ?? "达人头像"} loading="lazy" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs font-medium text-lc-text-primary">{item.displayName || item.username}</div>
                           <div className="text-xs truncate max-w-[130px] text-lc-text-muted">{item.bio}</div>
@@ -120,7 +121,7 @@ export default function TikTokInfluencer() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={7} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={7}><EmptyState compact icon={SearchX} title="没有找到符合条件的达人" description={searchText ? "尝试调整搜索关键词" : undefined} primaryAction={searchText ? { label: '清除搜索', onClick: () => { setSearchText(''); setPage(0); } } : undefined} /></td></tr>
                 )}
               </tbody>
             </table>

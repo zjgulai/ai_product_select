@@ -7,13 +7,13 @@ import { CATEGORIES } from '@/data/mockData';
 import MiniTrend from '@/components/shared/MiniTrend';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
-import { Search, Download, Star, ShoppingCart, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import { Search, Download, Star, ShoppingCart, ChevronLeft, ChevronRight, Filter, SearchX } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
+import { PRODUCT_IMAGES } from '@/data/assets';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
 const TAB_KEYS = ["hot", "soaring", "new"] as const;
 const TIME_RANGES = ["全部", "日", "近7天", "近30天", "自定义"];
-const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p1.jpg",import.meta.env.BASE_URL + "assets/products/p2.jpg",import.meta.env.BASE_URL + "assets/products/p3.jpg",
-  import.meta.env.BASE_URL + "assets/products/p4.jpg",import.meta.env.BASE_URL + "assets/products/p5.jpg",import.meta.env.BASE_URL + "assets/products/p6.jpg",import.meta.env.BASE_URL + "assets/products/p5.jpg"];
 
 export default function TikTokProducts() {
   const [tab, setTab] = useState(0);
@@ -154,7 +154,7 @@ export default function TikTokProducts() {
                   <tr key={item.id ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2.5">
-                        <img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
+                        <img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt={item.title} loading="lazy" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs truncate max-w-[200px] font-medium text-lc-text-primary" title={item.name}>{item.name}</div>
                           <span className="text-xs font-medium px-1.5 py-0.5 rounded-sm mt-0.5 inline-block" style={{ background: `${LC.primary}08`, color: LC.primary }}>{item.category}</span>
@@ -181,7 +181,7 @@ export default function TikTokProducts() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={9} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={9}><EmptyState compact icon={SearchX} title="没有找到符合条件的商品" description={searchText || selectedCats.length > 0 || priceMin || priceMax || ratingMin ? "尝试调整筛选条件或清除搜索" : undefined} primaryAction={searchText || selectedCats.length > 0 || priceMin || priceMax || ratingMin ? { label: '清除筛选', onClick: () => { setSearchText(''); setSelectedCats([]); setPriceMin(''); setPriceMax(''); setRatingMin(''); setPage(0); } } : undefined} /></td></tr>
                 )}
               </tbody>
             </table>

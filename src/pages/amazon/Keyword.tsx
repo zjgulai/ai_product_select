@@ -7,10 +7,10 @@ import MiniTrend from '@/components/shared/MiniTrend';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { ChevronRight, ArrowRight } from 'lucide-react';
+import { PRODUCT_IMAGES } from '@/data/assets';
 import DataBadge from '@/components/shared/DataBadge';
 
-const PRODUCT_IMAGES = [import.meta.env.BASE_URL + "assets/products/p1.jpg", import.meta.env.BASE_URL + "assets/products/p2.jpg", import.meta.env.BASE_URL + "assets/products/p3.jpg",
-  import.meta.env.BASE_URL + "assets/products/p4.jpg", import.meta.env.BASE_URL + "assets/products/p5.jpg", import.meta.env.BASE_URL + "assets/products/p6.jpg"];
+
 
 const STAT_LINKS: Record<string, string> = {
   "参数趋势": "/amazon/param-trend",
@@ -119,7 +119,7 @@ export default function AmazonKeyword() {
                   <DataBadge type="sample" />
                 </div>
                 <h4 className="text-sm font-semibold mb-2 text-lc-primary">{report.keyword}</h4>
-                <img src={PRODUCT_IMAGES[ri % PRODUCT_IMAGES.length]} alt="" className="w-14 h-14 rounded object-cover mb-2 ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                <img src={PRODUCT_IMAGES[ri % PRODUCT_IMAGES.length]} alt={report.keyword} loading="lazy" className="w-14 h-14 rounded object-cover mb-2 ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 <div className="text-[11px] font-mono-num text-lc-text-muted">商品数量: {report.productCount}</div>
                 <div className="text-[11px] text-lc-text-muted">报告日期: {report.date}</div>
               </div>
@@ -179,8 +179,8 @@ export default function AmazonKeyword() {
                       <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-text-primary">{item.avgPrice}</td>
                       <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.avgRating >= 4.5 ? LC.success : LC.teal }}>{item.avgRating}</span></td>
                       <td className="py-2.5 px-3 text-center">
-                        <button className="text-xs font-medium block mb-1 text-lc-primary">查看商品</button>
-                        <button className="text-xs text-white px-2 py-0.5 rounded-sm font-medium bg-lc-primary">创建报告</button>
+                        <button onClick={() => { import('sonner').then(({ toast }) => toast.info('演示环境：商品详情页')); }} className="text-xs font-medium block mb-1 text-lc-primary">查看商品</button>
+                        <button onClick={() => { import('sonner').then(({ toast }) => toast.success('报告已创建（演示）')); }} className="text-xs text-white px-2 py-0.5 rounded-sm font-medium bg-lc-primary">创建报告</button>
                       </td>
                     </tr>
                   ))}

@@ -18,6 +18,12 @@ import {
 } from "./fusionDb";
 
 import {
+  dbGetIpmsProjects, dbGetIpmsProjectById,
+  dbCreateIpmsProject, dbUpdateIpmsProject, dbDeleteIpmsProject,
+  dbGetIpmsStageHistory, dbAddIpmsStageHistory, dbUpdateIpmsStageHistory,
+} from "./ipmsDb";
+
+import {
   dbGetTiktokProducts, dbGetTiktokCreators, dbGetTiktokShops,
   dbGetTiktokVideos, dbGetTiktokLives,
   dbGetHomeData, dbGetAnalysisData,
@@ -34,6 +40,10 @@ export {
   dbGetConceptMetrics, dbGetLatestMetrics,
   dbGetKeywordMappings,
   dbGetFusionReports, dbGetFusionReportById,
+  // IPMS
+  dbGetIpmsProjects, dbGetIpmsProjectById,
+  dbCreateIpmsProject, dbUpdateIpmsProject, dbDeleteIpmsProject,
+  dbGetIpmsStageHistory, dbAddIpmsStageHistory, dbUpdateIpmsStageHistory,
   // TikTok
   dbGetTiktokProducts, dbGetTiktokCreators, dbGetTiktokShops,
   dbGetTiktokVideos, dbGetTiktokLives,

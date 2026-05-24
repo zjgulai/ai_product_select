@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 

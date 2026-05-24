@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 

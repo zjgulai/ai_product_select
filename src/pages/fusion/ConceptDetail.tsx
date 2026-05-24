@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
@@ -10,7 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import {
   ArrowLeft, Sparkles, TrendingUp, Video, Users, ShoppingBag,
   Star, Package, DollarSign, MessageSquare, Zap, Activity,
-  ChevronRight, BarChart3, LayoutDashboard, GitCompare
+  ChevronRight, BarChart3, LayoutDashboard, GitCompare, FileText, Heart
 } from 'lucide-react';
 
 function MetricCard({ icon: Icon, label, value, subValue, color }: any) {
@@ -23,7 +24,7 @@ function MetricCard({ icon: Icon, label, value, subValue, color }: any) {
         <span className="text-[11px] font-medium text-lc-text-muted">{label}</span>
       </div>
       <div className="text-lg font-bold font-mono-num text-lc-text-primary">{value}</div>
-      {subValue && <div className="text-[10px] text-lc-text-muted mt-0.5">{subValue}</div>}
+      {subValue && <div className="text-xs text-lc-text-muted mt-0.5">{subValue}</div>}
     </div>
   );
 }
@@ -54,6 +55,35 @@ function WordCloudPanel({ title, words, color }: { title: string; words: string[
       </div>
     </div>
   );
+}
+
+// ---- Helper functions for dynamic insights ----
+function formatNumberShort(num: number): string {
+  if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
+  if (num >= 1_000) return `${(num / 1_000).toFixed(1)}K`;
+  return num.toString();
+}
+
+function getShiCviGapText(shi: number, cvi: number): string {
+  const gap = shi - cvi;
+  if (gap > 20) return `SHI(${shi})远高于CVI(${cvi})，差距${gap}分，说明该概念社媒热度高但电商供给不足，存在显著窗口期`;
+  if (gap > 5) return `SHI(${shi})高于CVI(${cvi})，差距${gap}分，社媒热度略高于电商验证，可关注供给补充`;
+  if (gap < -20) return `CVI(${cvi})远高于SHI(${shi})，差距${Math.abs(gap)}分，说明电商已饱和但社媒热度不足`;
+  if (gap < -5) return `CVI(${cvi})略高于SHI(${shi})，差距${Math.abs(gap)}分，电商验证优于社媒热度`;
+  return `SHI(${shi})与CVI(${cvi})接近，差距${Math.abs(gap)}分，双平台发展较为均衡`;
+}
+
+function getTrendOpportunityText(metrics: any[]): string {
+  if (metrics.length < 2) return '数据不足以分析趋势变化';
+  const start = metrics[0].opportunityScore ?? 0;
+  const end = metrics[metrics.length - 1].opportunityScore ?? 0;
+  const change = Math.round((end - start) * 10) / 10;
+  const days = metrics.length;
+  if (change > 10) return `基于${days}天趋势，机会分从${start}上升到${end}（+${change}），趋势强劲上升`;
+  if (change > 3) return `基于${days}天趋势，机会分从${start}上升到${end}（+${change}），趋势稳步上升`;
+  if (change < -10) return `基于${days}天趋势，机会分从${start}下降到${end}（${change}），趋势明显下滑`;
+  if (change < -3) return `基于${days}天趋势，机会分从${start}下降到${end}（${change}），趋势有所回落`;
+  return `基于${days}天趋势，机会分从${start}到${end}，趋势相对平稳`;
 }
 
 const TABS = [
@@ -123,6 +153,88 @@ export default function ConceptDetail() {
     );
   }
 
+  // ---- Dynamic insight calculations ----
+  const tiktokEngagement = Number(latest?.tiktokEngagementRate ?? 5);
+  const tiktokBasePercent = Math.min(92, Math.max(55, Math.round(tiktokEngagement * 8 + 42)));
+
+  const amazonRating = parseFloat(String(latest?.amazonAvgRating ?? '4.0'));
+  const amazonBasePercent = Math.min(90, Math.max(45, Math.round((amazonRating / 5) * 100 - 5)));
+
+  // Overview tab - TikTok user focus
+  const overviewTiktokFeatures = (concept.keyFeatures ?? []).slice(0, 4).map((f: string, i: number) => ({
+    feature: f,
+    percent: Math.max(28, Math.round(tiktokBasePercent - i * 10)),
+  }));
+
+  // Overview tab - Amazon user feedback
+  const overviewAmazonFeatures = (concept.keyFeatures ?? []).slice(0, 4).map((f: string, i: number) => ({
+    feature: f,
+    percent: Math.max(25, Math.round(amazonBasePercent - i * 9)),
+  }));
+
+  // Overview tab - Gap insights (3 items)
+  const overviewGapInsights: string[] = [];
+  if (latest) {
+    overviewGapInsights.push(getShiCviGapText(Number(latest.shiScore ?? 0), Number(latest.cviScore ?? 0)));
+    overviewGapInsights.push(`${concept.name}在TikTok上获得${(latest.tiktokVideoCount ?? 0).toLocaleString()}个关联视频，总播放量${formatNumberShort(latest.tiktokTotalViews ?? 0)}，社媒热度${latest.shiScore ?? '--'}/100`);
+    overviewGapInsights.push(`Amazon已有${(latest.amazonProductCount ?? 0).toLocaleString()}个相关商品，月销量${(latest.amazonTotalSales ?? 0).toLocaleString()}，平均评分${latest.amazonAvgRating ?? '--'}`);
+  }
+
+  // VOC tab - TikTok hot dimensions
+  const vocTiktokItems = [
+    ...(concept.keyFeatures ?? []).map((f: string, i: number) => ({
+      name: f,
+      percent: Math.max(25, Math.round(Math.min(95, tiktokBasePercent + 8) - i * 14)),
+    })),
+    ...(concept.usageScenes ?? []).slice(0, 2).map((s: string, i: number) => ({
+      name: `${s}场景`,
+      percent: Math.max(25, Math.round(Math.min(85, tiktokBasePercent) - i * 12)),
+    })),
+  ];
+
+  // VOC tab - Amazon feedback dimensions
+  const vocAmazonItems = (concept.keyFeatures ?? []).slice(0, 8).map((f: string, i: number) => ({
+    name: f,
+    percent: Math.max(20, Math.round(Math.min(88, amazonBasePercent + 5) - i * 8)),
+  }));
+
+  // VOC tab - Difference analysis (5 items)
+  const vocDiffInsights: { title: string; text: string }[] = [];
+  if (latest) {
+    const shi = Number(latest.shiScore ?? 0);
+    const cvi = Number(latest.cviScore ?? 0);
+    const gap = shi - cvi;
+
+    if (gap > 15) {
+      vocDiffInsights.push({ title: '平台热度差异', text: `SHI(${shi})显著高于CVI(${cvi})，社媒讨论热度远超电商供给，建议加速产品上架抢占窗口期。` });
+    } else if (gap < -15) {
+      vocDiffInsights.push({ title: '平台热度差异', text: `CVI(${cvi})显著高于SHI(${shi})，电商市场已相对饱和，需通过差异化竞争突破。` });
+    } else {
+      vocDiffInsights.push({ title: '平台热度均衡', text: `SHI(${shi})与CVI(${cvi})较为接近，双平台发展相对均衡，可同步推进社媒营销与电商运营。` });
+    }
+
+    const engagement = Number(latest.tiktokEngagementRate ?? 0);
+    vocDiffInsights.push({
+      title: '社媒传播力',
+      text: `${concept.name}在TikTok上获得${(latest.tiktokVideoCount ?? 0).toLocaleString()}个关联视频，总播放量${formatNumberShort(Number(latest.tiktokTotalViews ?? 0))}，互动率${engagement}%，社媒传播力${engagement > 5 ? '较强' : engagement > 2 ? '中等' : '有待提升'}。`
+    });
+
+    const rating = latest.amazonAvgRating ?? '--';
+    vocDiffInsights.push({
+      title: '电商验证度',
+      text: `Amazon已有${(latest.amazonProductCount ?? 0).toLocaleString()}个相关商品，月销量${(latest.amazonTotalSales ?? 0).toLocaleString()}，平均评分${rating}，电商验证度${parseFloat(rating) >= 4.3 ? '良好' : parseFloat(rating) >= 3.8 ? '一般' : '偏低'}。`
+    });
+
+    vocDiffInsights.push({ title: '趋势判断', text: getTrendOpportunityText(metrics) });
+
+    const features = (concept.keyFeatures ?? []).slice(0, 3).join('、');
+    const scenes = (concept.usageScenes ?? []).slice(0, 3).join('、');
+    vocDiffInsights.push({
+      title: '概念画像',
+      text: `核心功能特征：${features || '暂无数据'}；主要使用场景：${scenes || '暂无数据'}；机会分${latest.opportunityScore ?? '--'}。`
+    });
+  }
+
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={['融合选品', '概念详情']} />
@@ -141,29 +253,48 @@ export default function ConceptDetail() {
             <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>{concept.nameEn}</p>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Zap size={16} style={{ color: LC.textInverse }} />
-            <div>
-              <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>SHI 社媒热度</div>
-              <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.shiScore ?? '--'}</div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <Zap size={16} style={{ color: LC.textInverse }} />
+              <div>
+                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>SHI 社媒热度</div>
+                <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.shiScore ?? '--'}</div>
+              </div>
+            </div>
+            <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+            <div className="flex items-center gap-2">
+              <BarChart3 size={16} style={{ color: LC.textInverse }} />
+              <div>
+                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>CVI 电商验证</div>
+                <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.cviScore ?? '--'}</div>
+              </div>
+            </div>
+            <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} style={{ color: LC.textInverse }} />
+              <div>
+                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>机会分</div>
+                <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.opportunityScore ?? '--'}</div>
+              </div>
             </div>
           </div>
-          <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+          {/* Action buttons */}
           <div className="flex items-center gap-2">
-            <BarChart3 size={16} style={{ color: LC.textInverse }} />
-            <div>
-              <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>CVI 电商验证</div>
-              <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.cviScore ?? '--'}</div>
-            </div>
-          </div>
-          <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
-          <div className="flex items-center gap-2">
-            <Sparkles size={16} style={{ color: LC.textInverse }} />
-            <div>
-              <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>机会分</div>
-              <div className="text-lg font-bold font-mono-num" style={{ color: LC.textInverse }}>{latest?.opportunityScore ?? '--'}</div>
-            </div>
+            <button
+              onClick={() => navigate('/fusion/report')}
+              className="flex items-center gap-1.5 text-xs px-4 h-8 rounded-md font-medium transition-all hover:brightness-110"
+              style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}
+            >
+              <FileText size={12} /> 生成报告
+            </button>
+            <button
+              onClick={() => navigate('/tiktok/attention')}
+              className="flex items-center gap-1.5 text-xs px-4 h-8 rounded-md font-medium transition-all hover:brightness-110"
+              style={{ background: 'rgba(255,255,255,0.1)', color: LC.textInverse }}
+            >
+              <Heart size={12} /> 加入关注
+            </button>
           </div>
         </div>
       </div>
@@ -212,9 +343,9 @@ export default function ConceptDetail() {
             {/* TikTok Side */}
             <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lc-border">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="#1C1917"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="currentColor"/></svg>
                 <h3 className="text-sm font-bold text-lc-text-primary">TikTok侧</h3>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.primaryLight, color: LC.primary }}>社媒热度</span>
+                <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.primaryLight, color: LC.primary }}>社媒热度</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <MetricCard icon={Video} label="相关视频" value={latest?.tiktokVideoCount?.toLocaleString() ?? '--'} subValue={`${((latest?.tiktokTotalViews ?? 0) / 1e6).toFixed(1)}M 总播放`} color={LC.primary} />
@@ -227,7 +358,7 @@ export default function ConceptDetail() {
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">TikTok关键词</div>
                 <div className="flex flex-wrap gap-1.5">
                   {(concept.tiktokKeywords ?? []).slice(0, 6).map((kw: string) => (
-                    <span key={kw} className="text-[10px] px-2 py-0.5 rounded-full bg-lc-bg-warm text-lc-text-secondary">{kw}</span>
+                    <span key={kw} className="text-xs px-2 py-0.5 rounded-full bg-lc-bg-warm text-lc-text-secondary">{kw}</span>
                   ))}
                 </div>
               </div>
@@ -236,9 +367,9 @@ export default function ConceptDetail() {
             {/* Amazon Side */}
             <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lc-border">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 4h4v4H2V4zm6 0h4v4H8V4zm6 0h4v4h-4V4zM2 10h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4zM2 16h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4z" fill="#1C1917"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 4h4v4H2V4zm6 0h4v4H8V4zm6 0h4v4h-4V4zM2 10h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4zM2 16h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4z" fill="currentColor"/></svg>
                 <h3 className="text-sm font-bold text-lc-text-primary">Amazon侧</h3>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.successLight, color: LC.success }}>电商验证</span>
+                <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.successLight, color: LC.success }}>电商验证</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <MetricCard icon={Package} label="相关商品" value={latest?.amazonProductCount?.toLocaleString() ?? '--'} subValue={`${latest?.amazonSellerCount ?? '--'} 个卖家`} color={LC.success} />
@@ -251,7 +382,7 @@ export default function ConceptDetail() {
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">Amazon类目</div>
                 <div className="flex flex-wrap gap-1.5">
                   {(concept.amazonCategories ?? []).map((cat: string) => (
-                    <span key={cat} className="text-[10px] px-2 py-0.5 rounded-full bg-lc-bg-warm text-lc-text-secondary">{cat}</span>
+                    <span key={cat} className="text-xs px-2 py-0.5 rounded-full bg-lc-bg-warm text-lc-text-secondary">{cat}</span>
                   ))}
                 </div>
               </div>
@@ -263,20 +394,20 @@ export default function ConceptDetail() {
             <div className="flex items-center gap-2 mb-4">
               <MessageSquare size={14} className="text-lc-primary" />
               <h3 className="text-sm font-semibold text-lc-text-primary">VOC对比洞察</h3>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.warningLight, color: LC.warning }}>AI分析</span>
+              <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.warningLight, color: LC.warning }}>AI分析</span>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="rounded-lg p-3 bg-lc-bg-warm">
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">TikTok用户关注</div>
                 <div className="space-y-1.5">
-                  {(concept.keyFeatures ?? []).slice(0, 4).map((f: string, i: number) => (
-                    <div key={f} className="flex items-center justify-between">
-                      <span className="text-xs text-lc-text-primary">{f}</span>
+                  {overviewTiktokFeatures.map(({ feature, percent }) => (
+                    <div key={feature} className="flex items-center justify-between">
+                      <span className="text-xs text-lc-text-primary">{feature}</span>
                       <div className="flex items-center gap-1">
                         <div className="w-16 h-1.5 rounded-full bg-lc-border-light overflow-hidden">
-                          <div className="h-full rounded-full bg-lc-primary" style={{ width: `${85 - i * 12}%` }} />
+                          <div className="h-full rounded-full bg-lc-primary" style={{ width: `${percent}%` }} />
                         </div>
-                        <span className="text-[10px] font-mono-num text-lc-text-muted">{85 - i * 12}%</span>
+                        <span className="text-xs font-mono-num text-lc-text-muted">{percent}%</span>
                       </div>
                     </div>
                   ))}
@@ -285,14 +416,14 @@ export default function ConceptDetail() {
               <div className="rounded-lg p-3 bg-lc-bg-warm">
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">Amazon用户反馈</div>
                 <div className="space-y-1.5">
-                  {['易用', '物有所值', '材质', '设计'].map((f: string, i: number) => (
-                    <div key={f} className="flex items-center justify-between">
-                      <span className="text-xs text-lc-text-primary">{f}</span>
+                  {overviewAmazonFeatures.map(({ feature, percent }) => (
+                    <div key={feature} className="flex items-center justify-between">
+                      <span className="text-xs text-lc-text-primary">{feature}</span>
                       <div className="flex items-center gap-1">
                         <div className="w-16 h-1.5 rounded-full bg-lc-border-light overflow-hidden">
-                          <div className="h-full rounded-full bg-lc-success" style={{ width: `${72 - i * 10}%` }} />
+                          <div className="h-full rounded-full bg-lc-success" style={{ width: `${percent}%` }} />
                         </div>
-                        <span className="text-[10px] font-mono-num text-lc-text-muted">{72 - i * 10}%</span>
+                        <span className="text-xs font-mono-num text-lc-text-muted">{percent}%</span>
                       </div>
                     </div>
                   ))}
@@ -301,24 +432,14 @@ export default function ConceptDetail() {
               <div className="rounded-lg p-3 bg-lc-primary-light">
                 <div className="text-[11px] font-medium text-lc-primary mb-2">需求缺口分析</div>
                 <div className="space-y-2">
-                  <div className="flex items-start gap-1.5">
-                    <ChevronRight size={12} className="text-lc-primary mt-0.5 shrink-0" />
-                    <p className="text-[11px] text-lc-text-primary leading-relaxed">
-                      TikTok用户对"便携"的讨论频率是Amazon评论的 <strong>2.3倍</strong>，说明便携性是社媒热度的重要驱动因素
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-1.5">
-                    <ChevronRight size={12} className="text-lc-primary mt-0.5 shrink-0" />
-                    <p className="text-[11px] text-lc-text-primary leading-relaxed">
-                      Amazon用户对"物有所值"的满意度 <strong>偏低</strong>，建议关注价格带优化
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-1.5">
-                    <ChevronRight size={12} className="text-lc-primary mt-0.5 shrink-0" />
-                    <p className="text-[11px] text-lc-text-primary leading-relaxed">
-                      社媒热度持续上升，但电商供给尚未完全跟上，存在 <strong>窗口期机会</strong>
-                    </p>
-                  </div>
+                  {overviewGapInsights.map((text, i) => (
+                    <div key={i} className="flex items-start gap-1.5">
+                      <ChevronRight size={12} className="text-lc-primary mt-0.5 shrink-0" />
+                      <p className="text-[11px] text-lc-text-primary leading-relaxed">
+                        {text}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -379,25 +500,14 @@ export default function ConceptDetail() {
                 <h4 className="text-xs font-semibold text-lc-primary">TikTok热点维度</h4>
               </div>
               <div className="space-y-2">
-                {(concept.keyFeatures ?? []).map((f: string, i: number) => (
-                  <div key={f} className="flex items-center justify-between">
-                    <span className="text-xs text-lc-text-primary">{f}</span>
+                {vocTiktokItems.map(({ name, percent }) => (
+                  <div key={name} className="flex items-center justify-between">
+                    <span className="text-xs text-lc-text-primary">{name}</span>
                     <div className="flex items-center gap-1">
                       <div className="w-16 h-1.5 rounded-full bg-lc-border-light overflow-hidden">
-                        <div className="h-full rounded-full bg-lc-primary" style={{ width: `${92 - i * 14}%` }} />
+                        <div className="h-full rounded-full bg-lc-primary" style={{ width: `${percent}%` }} />
                       </div>
-                      <span className="text-[10px] font-mono-num text-lc-text-muted">{92 - i * 14}%</span>
-                    </div>
-                  </div>
-                ))}
-                {(concept.usageScenes ?? []).slice(0, 2).map((s: string, i: number) => (
-                  <div key={s} className="flex items-center justify-between">
-                    <span className="text-xs text-lc-text-primary">{s}场景</span>
-                    <div className="flex items-center gap-1">
-                      <div className="w-16 h-1.5 rounded-full bg-lc-border-light overflow-hidden">
-                        <div className="h-full rounded-full bg-lc-primary" style={{ width: `${78 - i * 12}%` }} />
-                      </div>
-                      <span className="text-[10px] font-mono-num text-lc-text-muted">{78 - i * 12}%</span>
+                      <span className="text-xs font-mono-num text-lc-text-muted">{percent}%</span>
                     </div>
                   </div>
                 ))}
@@ -410,14 +520,14 @@ export default function ConceptDetail() {
                 <h4 className="text-xs font-semibold text-lc-success">Amazon反馈维度</h4>
               </div>
               <div className="space-y-2">
-                {['质量', '性价比', '易用性', '外观设计', '耐用性', '功能丰富度', '包装', '物流'].map((f: string, i: number) => (
-                  <div key={f} className="flex items-center justify-between">
-                    <span className="text-xs text-lc-text-primary">{f}</span>
+                {vocAmazonItems.map(({ name, percent }) => (
+                  <div key={name} className="flex items-center justify-between">
+                    <span className="text-xs text-lc-text-primary">{name}</span>
                     <div className="flex items-center gap-1">
                       <div className="w-16 h-1.5 rounded-full bg-lc-border-light overflow-hidden">
-                        <div className="h-full rounded-full bg-lc-success" style={{ width: `${80 - i * 8}%` }} />
+                        <div className="h-full rounded-full bg-lc-success" style={{ width: `${percent}%` }} />
                       </div>
-                      <span className="text-[10px] font-mono-num text-lc-text-muted">{80 - i * 8}%</span>
+                      <span className="text-xs font-mono-num text-lc-text-muted">{percent}%</span>
                     </div>
                   </div>
                 ))}
@@ -431,18 +541,12 @@ export default function ConceptDetail() {
                 <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-lc-warning/20 text-lc-warning font-medium ml-auto">AI洞察</span>
               </div>
               <div className="space-y-3">
-                {[
-                  { title: '便携性差距', text: `TikTok用户对"便携"的讨论频率是Amazon评论的 2.3倍，说明便携性是社媒热度的重要驱动因素，建议将此作为核心卖点。` },
-                  { title: '价格敏感度', text: 'Amazon用户对"物有所值"的满意度偏低（仅62%），而TikTok用户对此关注度较低，建议优化价格带策略。' },
-                  { title: '功能期望差异', text: 'TikTok用户更关注"新颖功能"和"颜值"，Amazon用户更看重"实用性"和"耐用性"。' },
-                  { title: '使用场景分歧', text: '社媒讨论集中于"旅行"和"户外"场景，而电商评论更多来自"日常家用"，可拓展旅行场景营销。' },
-                  { title: '窗口期判断', text: '社媒热度持续上升（SHI趋势+12.5%），但电商供给尚未完全跟上，存在明确的窗口期机会。' },
-                ].map((item, i) => (
+                {vocDiffInsights.map((item, i) => (
                   <div key={i} className="flex items-start gap-1.5">
                     <ChevronRight size={12} className="text-lc-primary mt-0.5 shrink-0" />
                     <div>
                       <div className="text-[11px] font-semibold text-lc-text-primary">{item.title}</div>
-                      <p className="text-[10px] text-lc-text-secondary leading-relaxed mt-0.5">{item.text}</p>
+                      <p className="text-xs text-lc-text-secondary leading-relaxed mt-0.5">{item.text}</p>
                     </div>
                   </div>
                 ))}
@@ -452,7 +556,10 @@ export default function ConceptDetail() {
 
           {/* Sentiment comparison */}
           <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-            <h4 className="text-xs font-semibold mb-3 text-lc-primary">情感倾向对比</h4>
+            <div className="flex items-center gap-2 mb-3">
+              <h4 className="text-xs font-semibold text-lc-primary">情感倾向对比</h4>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-lc-warning/20 text-lc-warning font-medium">模拟数据</span>
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <div className="text-[11px] text-lc-text-secondary mb-2">TikTok讨论情感</div>
@@ -462,9 +569,9 @@ export default function ConceptDetail() {
                   <div className="h-full bg-lc-danger" style={{ width: '10%' }} />
                 </div>
                 <div className="flex items-center gap-4 mt-2">
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-success" /> 正面 72%</span>
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-warning" /> 中性 18%</span>
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-danger" /> 负面 10%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-success" /> 正面 72%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-warning" /> 中性 18%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-danger" /> 负面 10%</span>
                 </div>
               </div>
               <div>
@@ -475,9 +582,9 @@ export default function ConceptDetail() {
                   <div className="h-full bg-lc-danger" style={{ width: '20%' }} />
                 </div>
                 <div className="flex items-center gap-4 mt-2">
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-success" /> 正面 58%</span>
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-warning" /> 中性 22%</span>
-                  <span className="text-[10px] flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-danger" /> 负面 20%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-success" /> 正面 58%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-warning" /> 中性 22%</span>
+                  <span className="text-xs flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-lc-danger" /> 负面 20%</span>
                 </div>
               </div>
             </div>

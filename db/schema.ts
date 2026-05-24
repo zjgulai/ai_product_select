@@ -779,3 +779,38 @@ export const adsAmazonMarketSummary = mysqlTable("ads_amazon_market_summary", {
   uniqueIndex("idx_ads_amz_market_date_type_rank").on(table.statDate, table.marketType, table.rank),
 ]);
 export type AdsAmazonMarketSummary = typeof adsAmazonMarketSummary.$inferSelect;
+
+// ============================================================
+// 新增：IPMS 项目跟踪系统
+// ============================================================
+
+export const ipmsProjects = mysqlTable("ipms_projects", {
+  id: serial("id").primaryKey(),
+  projectId: varchar("project_id", { length: 50 }).notNull().unique(),
+  conceptId: varchar("concept_id", { length: 50 }),
+  projectName: varchar("project_name", { length: 255 }).notNull(),
+  description: text("description"),
+  currentStage: mysqlEnum("current_stage", ["charter", "concept", "plan", "develop", "qualify", "launch"]).notNull().default("charter"),
+  status: mysqlEnum("status", ["active", "paused", "completed", "cancelled"]).notNull().default("active"),
+  priority: mysqlEnum("priority", ["high", "medium", "low"]).notNull().default("medium"),
+  owner: varchar("owner", { length: 100 }),
+  targetLaunchDate: date("target_launch_date"),
+  actualLaunchDate: date("actual_launch_date"),
+  metadata: json("metadata").$type<Record<string, unknown>>().default({}),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+});
+export type IpmsProject = typeof ipmsProjects.$inferSelect;
+
+export const ipmsStageHistory = mysqlTable("ipms_stage_history", {
+  id: serial("id").primaryKey(),
+  projectId: varchar("project_id", { length: 50 }).notNull(),
+  stage: mysqlEnum("stage", ["charter", "concept", "plan", "develop", "qualify", "launch"]).notNull(),
+  status: mysqlEnum("status", ["pending", "in_progress", "completed", "skipped"]).notNull().default("pending"),
+  startedAt: timestamp("started_at"),
+  completedAt: timestamp("completed_at"),
+  notes: text("notes"),
+  deliverables: json("deliverables").$type<string[]>().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+export type IpmsStageHistory = typeof ipmsStageHistory.$inferSelect;

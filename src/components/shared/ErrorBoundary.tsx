@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from 'react';
 import type { ReactNode, ErrorInfo } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
@@ -59,7 +60,7 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
               </div>
             </div>
             <div className="rounded-lg bg-lc-bg-warm p-3 mb-4">
-              <div className="text-[10px] font-mono text-lc-text-secondary break-all">
+              <div className="text-xs font-mono text-lc-text-secondary break-all">
                 {this.state.error.message || '未知错误'}
               </div>
             </div>

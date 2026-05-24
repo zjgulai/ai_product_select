@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState } from 'react';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import CategoryFilter from '@/components/shared/CategoryFilter';
+import { CATEGORIES } from '@/data/mockData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -15,7 +16,12 @@ export default function TikTokLive() {
   const [timeRange, setTimeRange] = useState(2);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
+  const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const limit = 20;
+
+  const toggleCategory = (cat: string) => {
+    setSelectedCats(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
+  };
 
   const { data, isLoading, isError } = trpc.tiktok.lives.list.useQuery(
     {
@@ -53,21 +59,36 @@ export default function TikTokLive() {
           ))}
         </div>
       </div>
-      <CategoryFilter />
+      {/* Filters + Categories */}
       <div className="bg-white p-3 border-b border-lc-border">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-lc-text-secondary">开播时间:</span>
-          {TIME_RANGES.map((t, i) => (
-            <button key={t} onClick={() => setTimeRange(i)} className="px-3 h-7 rounded-md text-xs font-medium transition-all"
-              style={timeRange === i ? { background: LC.primary, color: LC.textInverse } : { background: LC.textInverse, color: LC.textMuted }}>{t}</button>
-          ))}
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium text-lc-text-secondary">开播时间:</span>
+            {TIME_RANGES.map((t, i) => (
+              <button key={t} onClick={() => setTimeRange(i)} className="px-3 h-7 rounded-md text-xs font-medium transition-all"
+                style={timeRange === i ? { background: LC.primary, color: LC.textInverse } : { background: LC.textInverse, color: LC.textMuted }}>{t}</button>
+            ))}
+          </div>
+          <div className="w-px h-5 bg-lc-border" />
+          <div className="flex items-center gap-1.5 flex-wrap overflow-x-auto max-w-[280px]">
+            <span className="text-xs font-medium text-lc-text-secondary shrink-0">类目:</span>
+            {CATEGORIES.slice(0, 8).map(cat => (
+              <button key={cat} onClick={() => toggleCategory(cat)}
+                className="px-2 h-[22px] rounded-full text-[11px] transition-all duration-150 border font-medium shrink-0"
+                style={selectedCats.includes(cat)
+                  ? { backgroundColor: LC.primary, color: '#fff', borderColor: LC.primary }
+                  : { backgroundColor: '#fff', color: LC.textSecondary, borderColor: LC.border }}>
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">直播信息</h3>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-medium text-lc-text-muted">共 {total} 条</span>
+            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
@@ -85,7 +106,7 @@ export default function TikTokLive() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["直播信息", "开播时间", "累计观看人次", "最高在线人数", "总点赞数", "总回复数", "涨粉数", "达人信息", "操作"].map((h, i) => (
@@ -98,12 +119,12 @@ export default function TikTokLive() {
                   <tr key={item.id ?? idx} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-10 h-8 rounded flex items-center justify-center shrink-0 ring-1 ring-lc-border bg-lc-primary-light"><span className="text-[10px]"><div className="w-2 h-2 rounded-full bg-lc-danger animate-pulse" /></span></div>
+                        <div className="w-10 h-8 rounded flex items-center justify-center shrink-0 ring-1 ring-lc-border bg-lc-primary-light"><span className="text-xs"><div className="w-2 h-2 rounded-full bg-lc-primary" /></span></div>
                         <span className="text-xs truncate max-w-[140px] text-lc-text-primary" title={item.title}>{item.title}</span>
                       </div>
                     </td>
                      <td className="py-2.5 px-3">
-                       <div className="text-[10px] space-y-0.5 text-lc-text-muted">
+                       <div className="text-xs space-y-0.5 text-lc-text-muted">
                          <div>开播 {item.startTime}</div>
                          <div className="font-medium text-lc-text-secondary">时长 {typeof item.duration === 'number' ? `${Math.floor(item.duration/60)}h${item.duration%60}m` : item.duration}</div>
                        </div>
@@ -112,11 +133,11 @@ export default function TikTokLive() {
                      <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.maxOnline ?? item.peakOnline ?? 0).toLocaleString()}</td>
                      <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes ?? 0).toLocaleString()}</td>
                      <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{(item.comments ?? item.replies ?? 0).toLocaleString()}</td>
-                     <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{(item.gpm ?? item.newFans ?? 0).toLocaleString()}</span></td>
+                     <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{(item.newFans ?? 0).toLocaleString()}</span></td>
                      <td className="py-2.5 px-3">
                        <div className="flex items-center gap-1.5">
                          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold ring-1 ring-lc-border" style={{ background: `${LC.primary}10`, color: LC.primary }}>{(item.creator ?? '?')[0]?.toUpperCase()}</div>
-                         <div><div className="text-xs truncate max-w-[70px] text-lc-text-primary">{item.creator ?? '未知达人'}</div><div className="text-[10px] font-mono-num text-lc-text-muted">{((item.creatorFollowers ?? 0)/1000000).toFixed(0)}M粉</div></div>
+                         <div><div className="text-xs truncate max-w-[70px] text-lc-text-primary">{item.creator ?? '未知达人'}</div><div className="text-xs font-mono-num text-lc-text-muted">{((item.creatorFollowers ?? 0)/1000000).toFixed(0)}M粉</div></div>
                        </div>
                      </td>
                      <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>

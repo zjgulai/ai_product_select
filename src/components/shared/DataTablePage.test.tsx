@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import DataTablePage from "@/components/shared/DataTablePage";
 
@@ -65,6 +67,7 @@ describe("DataTablePage", () => {
   });
 
   it("搜索输入触发回调", () => {
+    vi.useFakeTimers();
     const onSearchChange = vi.fn();
     renderWithRouter(
       <DataTablePage
@@ -78,7 +81,9 @@ describe("DataTablePage", () => {
     );
     const input = screen.getByPlaceholderText("搜索关键词") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "test" } });
+    act(() => { vi.advanceTimersByTime(350); });
     expect(onSearchChange).toHaveBeenCalledWith("test");
+    vi.useRealTimers();
   });
 
   it("Tab 切换触发回调", () => {

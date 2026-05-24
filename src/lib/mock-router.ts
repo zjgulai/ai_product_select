@@ -255,6 +255,15 @@ const mockHandlers: Record<string, (input: Input) => unknown> = {
     return getFusionReports().find(r => r.reportId === i.reportId) ?? null;
   },
 
+  // ─── IPMS ────────────────────────────────────────────────
+  "ipms.list": () => ({ items: [], total: 0 }),
+  "ipms.getById": () => null,
+  "ipms.create": () => ({ insertId: 0 }),
+  "ipms.updateStage": () => ({ success: true }),
+  "ipms.updateStatus": () => ({ success: true }),
+  "ipms.addStageHistory": () => ({ insertId: 0 }),
+  "ipms.delete": () => ({ success: true }),
+
   // ─── DataManager (空实现，GitHub Pages 无上传功能) ────────────
   "dataManager.template.list": () => [],
   "dataManager.template.getByKey": () => null,

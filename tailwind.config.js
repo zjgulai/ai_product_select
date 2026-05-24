@@ -64,6 +64,10 @@ module.exports = {
           info: '#3B82F6',
         },
       },
+      fontSize: {
+        xs: '10px',
+        sm: '12px',
+      },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",

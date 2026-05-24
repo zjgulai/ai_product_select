@@ -8,20 +8,24 @@ import { read as xlsxRead, utils as xlsxUtils } from 'xlsx';
 import {
   Upload, Database, Activity, CheckCircle, XCircle,
   AlertCircle, RefreshCw, Settings, Layers, ChevronRight, ChevronDown,
+  Network, Package, User, Store, Play, Radio, ClipboardList, KeyRound,
+  MessageSquare, AlertTriangle,
 } from 'lucide-react';
+import LineagePanel from '@/components/data-lineage/LineagePanel';
+import { ConfirmDialog, useConfirm } from '@/components/shared/ConfirmDialog';
 
 const DATA_SOURCES = [
-  { dataKey: 'ods_tiktok_products',  label: 'TikTok 商品',  layer: 'ODS', icon: '📦', targetTable: 'ods_tiktok_products' },
-  { dataKey: 'ods_tiktok_creators',  label: 'TikTok 达人',  layer: 'ODS', icon: '👤', targetTable: 'ods_tiktok_creators' },
-  { dataKey: 'ods_tiktok_shops',     label: 'TikTok 小店',  layer: 'ODS', icon: '🏪', targetTable: 'ods_tiktok_shops' },
-  { dataKey: 'ods_tiktok_videos',    label: 'TikTok 视频',  layer: 'ODS', icon: '🎬', targetTable: 'ods_tiktok_videos' },
-  { dataKey: 'ods_tiktok_lives',     label: 'TikTok 直播',  layer: 'ODS', icon: '📡', targetTable: 'ods_tiktok_lives' },
-  { dataKey: 'ods_amazon_products',  label: 'Amazon 商品',  layer: 'ODS', icon: '📋', targetTable: 'ods_amazon_products' },
-  { dataKey: 'ods_amazon_keywords',  label: 'Amazon 关键词',layer: 'ODS', icon: '🔑', targetTable: 'ods_amazon_keywords' },
-  { dataKey: 'ods_amazon_reviews',   label: 'Amazon 评论',  layer: 'ODS', icon: '💬', targetTable: 'ods_amazon_reviews' },
+  { dataKey: 'ods_tiktok_products',  label: 'TikTok 商品',  layer: 'ODS', icon: Package, targetTable: 'ods_tiktok_products' },
+  { dataKey: 'ods_tiktok_creators',  label: 'TikTok 达人',  layer: 'ODS', icon: User, targetTable: 'ods_tiktok_creators' },
+  { dataKey: 'ods_tiktok_shops',     label: 'TikTok 小店',  layer: 'ODS', icon: Store, targetTable: 'ods_tiktok_shops' },
+  { dataKey: 'ods_tiktok_videos',    label: 'TikTok 视频',  layer: 'ODS', icon: Play, targetTable: 'ods_tiktok_videos' },
+  { dataKey: 'ods_tiktok_lives',     label: 'TikTok 直播',  layer: 'ODS', icon: Radio, targetTable: 'ods_tiktok_lives' },
+  { dataKey: 'ods_amazon_products',  label: 'Amazon 商品',  layer: 'ODS', icon: ClipboardList, targetTable: 'ods_amazon_products' },
+  { dataKey: 'ods_amazon_keywords',  label: 'Amazon 关键词',layer: 'ODS', icon: KeyRound, targetTable: 'ods_amazon_keywords' },
+  { dataKey: 'ods_amazon_reviews',   label: 'Amazon 评论',  layer: 'ODS', icon: MessageSquare, targetTable: 'ods_amazon_reviews' },
 ];
 
-type TabKey = 'sources' | 'logs' | 'quality' | 'settings';
+type TabKey = 'sources' | 'logs' | 'quality' | 'settings' | 'lineage';
 type ParsedData = { headers: string[]; rows: Record<string, unknown>[]; total: number };
 
 function StatusBadge({ status }: { status: string }) {
@@ -33,7 +37,7 @@ function StatusBadge({ status }: { status: string }) {
     pending: [LC.bgWarm, LC.textMuted, '等待中'],
   };
   const [bg, color, label] = m[status] ?? m.pending;
-  return <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: bg, color }}>{label}</span>;
+  return <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: bg, color }}>{label}</span>;
 }
 
 function LayerBadge({ layer }: { layer: string }) {
@@ -49,15 +53,15 @@ export default function DataManager() {
   const [parsed, setParsed] = useState<ParsedData | null>(null);
   const [importing, setImporting] = useState(false);
   const [dryResult, setDryResult] = useState<{ totalRows: number; failedRows: number; errorSummary: { row: number; field: string; message: string }[] } | null>(null);
-  const [toast, setToast] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
+  const { open, setOpen, options, confirm, handleConfirm } = useConfirm();
 
   const { data: odsStatus, isLoading: odsLoading, isError: odsErr, refetch: refetchOds } = trpc.dataManager.ods.latestDates.useQuery(undefined, { staleTime: 30_000 });
   const { data: logs, isLoading: logsLoading, isError: logsErr, refetch: refetchLogs } = trpc.dataManager.import.logs.useQuery({ limit: 30 }, { staleTime: 10_000 });
   const { data: stats } = trpc.dataManager.import.stats.useQuery(undefined, { staleTime: 30_000 });
   const ingest = trpc.dataManager.import.ingest.useMutation({ onSuccess: () => { void refetchOds(); void refetchLogs(); } });
 
-  const flash = useCallback((msg: string) => { setToast(msg); setTimeout(() => setToast(''), 2500); }, []);
+  const flash = useCallback((msg: string) => { toast.success(msg); }, []);
 
   const parseFile = useCallback((file: File) => {
     const reader = new FileReader();
@@ -88,22 +92,24 @@ export default function DataManager() {
     } finally { setImporting(false); }
   }, [src, parsed, snapshotDate, ingest, flash]);
 
+      <ConfirmDialog open={open} onOpenChange={setOpen} options={options} onConfirm={handleConfirm} />
+
   const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
     { key: 'sources',  label: '数据源',   icon: <Database size={14} /> },
     { key: 'logs',     label: '导入记录', icon: <Activity size={14} /> },
     { key: 'quality',  label: '数据质量', icon: <Layers size={14} /> },
+    { key: 'lineage',  label: '数据血缘', icon: <Network size={14} /> },
     { key: 'settings', label: '模板配置', icon: <Settings size={14} /> },
   ];
 
   return (
     <div className="animate-fadeIn">
+      <ConfirmDialog open={open} onOpenChange={setOpen} options={options} onConfirm={handleConfirm} />
       <Breadcrumb items={['数据管理中心']} />
-      {toast && (
-        <div className="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg text-white text-xs font-medium shadow-lg" style={{ background: LC.primary }}>{toast}</div>
-      )}
+
 
       <div className="bg-white rounded-lg shadow-lc ring-1 ring-lc-border/60 mb-4 p-4">
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {([
             ['已配置数据源', DATA_SOURCES.length, Database, LC.primary],
             ['导入总次数', stats?.total ?? 0, Activity, LC.teal],
@@ -113,7 +119,7 @@ export default function DataManager() {
             <div key={label} className="rounded-lg p-3 bg-lc-bg-warm">
               <div className="flex items-center gap-1.5 mb-1">
                 <Icon size={12} style={{ color }} />
-                <span className="text-[10px] font-medium text-lc-text-muted">{label}</span>
+                <span className="text-xs font-medium text-lc-text-muted">{label}</span>
               </div>
               <div className="text-lg font-bold font-mono-num" style={{ color }}>{value}</div>
             </div>
@@ -138,9 +144,9 @@ export default function DataManager() {
               <>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm font-semibold text-lc-primary">选择数据源开始导入</h3>
-                  <span className="text-[10px] text-lc-text-muted">支持 .xlsx .xls .csv</span>
+                  <span className="text-xs text-lc-text-muted">支持 .xlsx .xls .csv</span>
                 </div>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {DATA_SOURCES.map(s => {
                     const st = odsStatus?.[s.targetTable];
                     return (
@@ -148,12 +154,12 @@ export default function DataManager() {
                         className="text-left rounded-lg p-3 border transition-all hover:shadow-lc-hover hover:-translate-y-0.5 ring-1"
                         style={{ borderColor: LC.border, background: LC.bgWarm }}>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-base">{s.icon}</span>
+                          <span className="text-base inline-flex items-center"><s.icon size={14} /></span>
                           <LayerBadge layer={s.layer} />
                         </div>
                         <div className="text-xs font-semibold text-lc-text-primary mb-1">{s.label}</div>
                         {odsLoading ? <Skeleton className="h-3 w-20" /> : (
-                          <div className="text-[10px] text-lc-text-muted">
+                          <div className="text-xs text-lc-text-muted">
                             {st?.latestDate ? `最新: ${st.latestDate} · ${(st.rowCount ?? 0).toLocaleString()}行` : '暂无数据'}
                           </div>
                         )}
@@ -169,7 +175,7 @@ export default function DataManager() {
                     className="flex items-center gap-1 text-xs text-lc-text-muted hover:text-lc-primary transition-colors">
                     <ChevronRight size={12} className="rotate-180" /> 返回
                   </button>
-                  <span className="text-sm font-semibold text-lc-primary">{src.icon} {src.label}</span>
+                  <span className="text-sm font-semibold text-lc-primary inline-flex items-center gap-1"><src.icon size={14} /> {src.label}</span>
                   <LayerBadge layer={src.layer} />
                 </div>
 
@@ -198,13 +204,22 @@ export default function DataManager() {
                         <CheckCircle size={16} className="text-lc-success" />
                         <div>
                           <div className="text-xs font-semibold text-lc-text-primary">已解析 {parsed.total.toLocaleString()} 行</div>
-                          <div className="text-[10px] text-lc-text-muted mt-0.5">
+                          <div className="text-xs text-lc-text-muted mt-0.5">
                             字段: {parsed.headers.slice(0, 6).join(', ')}{parsed.headers.length > 6 ? ` +${parsed.headers.length - 6}` : ''}
                           </div>
                         </div>
                       </div>
-                      <button onClick={() => { setParsed(null); setDryResult(null); }}
-                        className="text-[10px] text-lc-text-muted hover:text-lc-danger transition-colors">重新选择</button>
+                      <button onClick={async () => {
+                          const ok = await confirm({
+                            title: '重新选择文件',
+                            description: '当前已解析的数据将被清空，是否继续？',
+                            confirmText: '确认清空',
+                            cancelText: '保留',
+                            variant: 'warning',
+                          });
+                          if (ok) { setParsed(null); setDryResult(null); }
+                        }}
+                        className="text-xs text-lc-text-muted hover:text-lc-danger transition-colors">重新选择</button>
                     </div>
 
                     <div className="overflow-x-auto border rounded-lg mb-4" style={{ borderColor: LC.border }}>
@@ -229,7 +244,7 @@ export default function DataManager() {
                         </tbody>
                       </table>
                       {parsed.total > 5 && (
-                        <div className="px-3 py-2 text-[10px] text-lc-text-muted border-t" style={{ borderColor: LC.border }}>
+                        <div className="px-3 py-2 text-xs text-lc-text-muted border-t" style={{ borderColor: LC.border }}>
                           仅展示前 5 行，共 {parsed.total.toLocaleString()} 行
                         </div>
                       )}
@@ -247,7 +262,7 @@ export default function DataManager() {
                           </span>
                         </div>
                         {dryResult.errorSummary.slice(0, 5).map((e, i) => (
-                          <div key={i} className="text-[10px] text-lc-text-secondary ml-5">第 {e.row} 行 · {e.field}：{e.message}</div>
+                          <div key={i} className="text-xs text-lc-text-secondary ml-5">第 {e.row} 行 · {e.field}：{e.message}</div>
                         ))}
                       </div>
                     )}
@@ -258,7 +273,16 @@ export default function DataManager() {
                         style={{ borderColor: LC.primary, color: LC.primary }}>
                         <CheckCircle size={13} /> 预检（不写入）
                       </button>
-                      <button onClick={doImport} disabled={importing}
+                      <button onClick={async () => {
+                          const ok = await confirm({
+                            title: '确认数据导入',
+                            description: `即将向「${src?.label}」写入 ${parsed.total.toLocaleString()} 条数据，可能覆盖同日期已有记录。此操作不可撤销。`,
+                            confirmText: '确认导入',
+                            cancelText: '再检查',
+                            variant: 'danger',
+                          });
+                          if (ok) doImport();
+                        }} disabled={importing}
                         className="h-9 px-6 text-white text-xs font-medium rounded-lg transition-all hover:brightness-110 disabled:opacity-50 flex items-center gap-1.5"
                         style={{ background: LC.primary }}>
                         {importing ? <><RefreshCw size={13} className="animate-spin" /> 导入中...</> : <><Upload size={13} /> 确认导入 {parsed.total.toLocaleString()} 行</>}
@@ -298,7 +322,7 @@ export default function DataManager() {
                       : null;
                     return (
                       <tr key={log.id} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                        <td className="py-2.5 px-3 font-medium text-lc-text-primary">{s?.icon} {s?.label ?? log.dataKey}</td>
+                        <td className="py-2.5 px-3 font-medium text-lc-text-primary">{s ? <span className="inline-flex items-center gap-1"><s.icon size={14} /> {s.label}</span> : log.dataKey}</td>
                         <td className="py-2.5 px-3">
                           <div className="flex items-center gap-1">
                             <LayerBadge layer={(log.targetLayer ?? 'custom').toUpperCase()} />
@@ -317,7 +341,12 @@ export default function DataManager() {
                     );
                   })}
                   {!(logs ?? []).length && (
-                    <tr><td colSpan={8} className="py-10 text-center text-xs text-lc-text-muted">暂无导入记录</td></tr>
+                    <tr>
+                      <td colSpan={8} className="py-10 text-center">
+                        <p className="text-xs text-lc-text-muted mb-2">暂无导入记录</p>
+                        <button onClick={() => setTab('sources')} className="text-xs px-3 py-1.5 rounded-full bg-lc-primary text-white font-medium">去导入数据</button>
+                      </td>
+                    </tr>
                   )}
                 </tbody>
               </table>
@@ -334,9 +363,14 @@ export default function DataManager() {
               </button>
             </div>
             {odsErr ? <ErrorState /> : odsLoading ? (
-              <div className="grid grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}</div>
+            ) : DATA_SOURCES.every(s => !(odsStatus?.[s.targetTable]?.rowCount ?? 0)) ? (
+              <div className="text-center py-10">
+                <p className="text-xs text-lc-text-muted mb-2">暂无数据，请先导入数据源</p>
+                <button onClick={() => setTab('sources')} className="text-xs px-3 py-1.5 rounded-full bg-lc-primary text-white font-medium">去导入数据</button>
+              </div>
             ) : (
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {DATA_SOURCES.map(s => {
                   const st = odsStatus?.[s.targetTable];
                   const hasData = (st?.rowCount ?? 0) > 0;
@@ -348,12 +382,12 @@ export default function DataManager() {
                       style={{ borderColor: hasData && !isStale ? LC.success : isStale ? LC.warning : LC.border, background: LC.bgWarm }}>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-1.5">
-                          <span>{s.icon}</span>
+                          <span className="inline-flex items-center"><s.icon size={14} /></span>
                           <span className="text-xs font-semibold text-lc-text-primary">{s.label}</span>
                         </div>
                         {hasData ? isStale ? <AlertCircle size={13} style={{ color: LC.warning }} /> : <CheckCircle size={13} style={{ color: LC.success }} /> : <XCircle size={13} style={{ color: LC.border }} />}
                       </div>
-                      <div className="space-y-1 text-[10px]">
+                      <div className="space-y-1 text-xs">
                         <div className="flex justify-between">
                           <span className="text-lc-text-muted">总记录</span>
                           <span className="font-mono-num font-semibold text-lc-text-primary">{(st?.rowCount ?? 0).toLocaleString()}</span>
@@ -362,7 +396,7 @@ export default function DataManager() {
                           <span className="text-lc-text-muted">最新快照</span>
                           <span className="font-mono-num" style={{ color: isStale ? LC.warning : LC.textSecondary }}>{st?.latestDate ?? '无'}</span>
                         </div>
-                        {isStale && hasData && <div style={{ color: LC.warning }}>⚠️ 超过 2 天未更新</div>}
+                        {isStale && hasData && <div className="flex items-center gap-1" style={{ color: LC.warning }}><AlertTriangle size={12} /> 超过 2 天未更新</div>}
                         {!hasData && <div className="text-lc-text-muted">待导入</div>}
                       </div>
                     </div>
@@ -374,7 +408,7 @@ export default function DataManager() {
               <h4 className="text-xs font-semibold text-lc-text-primary mb-3 flex items-center gap-1.5">
                 <ChevronDown size={12} /> 数仓分层说明
               </h4>
-              <div className="grid grid-cols-4 gap-3 text-[10px]">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                 {([
                   ['ODS', '#6366F1', '原始数据层 — 直接落库，保留原始字段，含 snapshot_date'],
                   ['DWD', '#0891B2', '标准化明细层 — 类型统一、字段规范、去重'],
@@ -391,6 +425,12 @@ export default function DataManager() {
           </div>
         )}
 
+        {tab === 'lineage' && (
+          <div className="p-4">
+            <LineagePanel />
+          </div>
+        )}
+
         {tab === 'settings' && (
           <div className="p-4">
             <h3 className="text-sm font-semibold text-lc-primary mb-4">数据源模板配置</h3>
@@ -398,18 +438,18 @@ export default function DataManager() {
               {DATA_SOURCES.map(s => (
                 <div key={s.dataKey} className="rounded-lg border p-3 ring-1 ring-lc-border/40">
                   <div className="flex items-center gap-2 mb-1">
-                    <span>{s.icon}</span>
+                    <span className="inline-flex items-center"><s.icon size={14} /></span>
                     <span className="text-xs font-semibold text-lc-text-primary">{s.label}</span>
                     <LayerBadge layer={s.layer} />
                     <code className="text-[9px] px-1.5 py-0.5 rounded font-mono bg-lc-bg-warm text-lc-text-muted">→ {s.targetTable}</code>
                   </div>
-                  <p className="text-[10px] text-lc-text-muted">
+                  <p className="text-xs text-lc-text-muted">
                     支持别名字段映射（如 "月销量" / monthly_sales / monthlySales 均可识别）。上传 Excel 列名无需严格匹配。
                   </p>
                 </div>
               ))}
             </div>
-            <div className="mt-4 p-3 rounded-lg text-[10px] text-lc-text-muted" style={{ background: LC.bgWarm }}>
+            <div className="mt-4 p-3 rounded-lg text-xs text-lc-text-muted" style={{ background: LC.bgWarm }}>
               <strong className="text-lc-text-secondary">自定义字段映射</strong>（即将上线）：配置字段别名规则、数据校验范围、必填字段标记。
             </div>
           </div>

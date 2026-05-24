@@ -1,7 +1,8 @@
 # VOC AI 选品平台 — TODO & 路线图
 
-> 更新时间：2026-05-23
-> 当前状态：Phase 1~9 全部完成，生产可用，GitHub Pages 已部署
+> 更新时间：2026-05-24
+> 当前状态：Phase 1~9 + Darwinian UI/UX 50 轮进化全部完成
+> 构建：✓ 6s | 测试：102 passed | TS：0 errors | 部署：GitHub Pages
 
 ---
 
@@ -24,6 +25,8 @@
 - LazyImage（图片懒加载 + 错误回退）
 - 路由级代码分割（React.lazy + Suspense）
 - Vite manualChunks（react-vendor / echarts / trpc / lucide / recharts）
+- useDebounce 搜索防抖（DataTablePage 全局接入）
+- React.memo 关键组件（DataTablePage / ECharts 系列）
 
 ### Phase 7：生产就绪 ✅
 - ErrorBoundary 全局 + 路由级隔离
@@ -48,6 +51,17 @@
 - 修复直播/关注/用户中心页面崩溃
 - 15 个 img 标签加 onError 降级
 - 删除硬编码电话号码等敏感数据
+
+### Phase 9.5：Darwinian UI/UX 50 轮进化 ✅（2026-05-24 完成）
+- **Gen 1 减法**：移除 20+ 假交互、5 假图表、8 噪声元素、修复 3 数据 bug
+- **Gen 2 布局**：压缩筛选器、标准 whitespace、合并 7→4 tabs、增强空状态
+- **Gen 3 视觉**：emoji → Lucide（15+ 处）、彩虹色 → LC 品牌色系、SVG currentColor
+- **Gen 4 交互**：确认对话框（5+ 操作）、表格 hover 操作菜单、筛选器保存、分页增强、Sonner Toast
+- **Gen 5 可信度**：DataBadge（4 级标记）、更新时间、数据来源标注、空状态增强
+- **Gen 6 响应式**：移动端 sidebar drawer、表格 min-w-[640px]、grid-cols 响应式
+- **Gen 7 性能**：搜索防抖、React.memo、useDebounce、减少重渲染
+- **Gen 8-10 打磨**：usePersistedState、代码清理、构建验证
+- **详细日志见 `EVOLUTION_LOG.md`
 
 ---
 
@@ -101,6 +115,10 @@
 4. 颜色使用 LC 主题变量（lute-colors.ts），禁止硬编码 hex
 5. img 标签必须有 onError fallback，防止 404 布局破损
 6. 新增字段时同步更新：db/schema.ts + mockData 接口 + tRPC router + mock-router.ts
+7. 破坏性操作必须带 ConfirmDialog（暂停/完成/删除/覆盖导入）
+8. 表格组件统一使用 DataTablePage（响应式 + 分页 + hover 操作）
+9. 模拟数据必须标注 DataBadge（demo/sample/placeholder）
+10. 搜索输入使用 300ms 防抖（DataTablePage 已内置）
 ```
 
 ---

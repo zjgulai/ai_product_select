@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createTRPCReact } from "@trpc/react-query";
 import { httpBatchLink, type TRPCLink } from "@trpc/client";
 import { observable } from "@trpc/server/observable";

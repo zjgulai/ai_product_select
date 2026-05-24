@@ -6,6 +6,7 @@
 
 - **线上地址**：https://zjgulai.github.io/ai_product_select/
 - **仓库**：https://github.com/zjgulai/ai_product_select
+- **进化日志**：见 [`EVOLUTION_LOG.md`](./EVOLUTION_LOG.md) — Darwinian UI/UX 50 轮迭代全记录
 
 ---
 
@@ -38,7 +39,7 @@ npm run dev
 | 后端服务 | Hono（轻量 BFF） |
 | ORM | Drizzle ORM + MySQL 8 |
 | 图表 | ECharts + Recharts |
-| 测试 | Vitest（91 用例）+ Playwright E2E |
+| 测试 | Vitest（102 用例）+ Playwright E2E |
 | 部署 | Docker / GitHub Pages（静态） |
 
 ---

@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState } from 'react';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import CategoryFilter from '@/components/shared/CategoryFilter';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Heart, Flame, Search, Download, Star, X, Zap, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
 
 const TABS = ["达人带货榜", "达人涨粉榜"];
@@ -13,7 +14,6 @@ const AVATAR_IMAGES = ["/assets/avatars/a1.jpg", "/assets/avatars/a2.jpg", "/ass
 
 export default function TikTokInfluencer() {
   const [tab, setTab] = useState(0);
-  const [showBanner, setShowBanner] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
   const limit = 20;
@@ -36,28 +36,6 @@ export default function TikTokInfluencer() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["TikTok趋势", "达人"]} />
-
-      {showBanner && (
-        <div className="relative gradient-lc-primary rounded-lg p-5 mb-4 overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <svg width="100%" height="100%"><pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="white"/></pattern><rect width="100%" height="100%" fill="url(#g)"/></svg>
-          </div>
-          <button onClick={() => setShowBanner(false)} className="absolute top-2 right-2 text-white/40 hover:text-white transition-colors z-10"><X size={16} /></button>
-          <div className="relative flex items-center justify-between z-10">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Zap size={18} style={{ color: LC.gold }} />
-                <h3 className="text-lg font-bold text-white tracking-wide">AI驱动的 TK达人建联工具</h3>
-              </div>
-              <div className="flex items-center gap-4 text-white/70 text-xs">
-                <span><Heart size={12} className="text-lc-primary" /> 50+亿级大卖</span>
-                <span><Flame size={12} className="text-[#C84040]" /> 3W+卖家的选择</span>
-              </div>
-            </div>
-            <button className="bg-white px-6 h-9 rounded-full text-sm font-semibold transition-all hover:bg-white/90 text-lc-primary">免费试用</button>
-          </div>
-        </div>
-      )}
 
       {/* Search */}
       <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
@@ -85,30 +63,12 @@ export default function TikTokInfluencer() {
 
       <CategoryFilter />
 
-      {/* More Filters */}
-      <div className="bg-white p-3 border-b border-lc-border">
-        <div className="flex items-center gap-3 flex-wrap">
-          {["带货数", "均播量", "粉丝量", "近30日销量"].map(f => (
-            <span key={f} className="flex items-center gap-1.5">
-              <span className="text-xs font-medium text-lc-text-secondary">{f}:</span>
-              <input type="text" placeholder="最小" className="w-16 h-7 border rounded px-2 text-xs" style={{ borderColor: LC.border, color: LC.text }} />
-              <span className="text-xs text-lc-border-strong">-</span>
-              <input type="text" placeholder="最大" className="w-16 h-7 border rounded px-2 text-xs" style={{ borderColor: LC.border, color: LC.text }} />
-            </span>
-          ))}
-          <div className="ml-auto flex gap-2">
-            <button className="h-7 px-5 text-white text-xs font-medium rounded-md transition-all hover:brightness-110 bg-lc-primary">查询</button>
-            <button className="h-7 px-5 text-xs font-medium rounded-md border transition-all" style={{ color: LC.textSecondary, borderColor: LC.border }}>重置</button>
-          </div>
-        </div>
-      </div>
-
       {/* Table */}
       <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">达人信息</h3>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-medium text-lc-text-muted">共 {total} 条</span>
+            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
@@ -126,10 +86,10 @@ export default function TikTokInfluencer() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
-                  {["达人信息", "带货数", "均播量", "粉丝数", "近30日销量", "近30日销售额($)", "视频GPM($)", "视频数", "直播GPM($)", "直播数", "账号类型", "操作"].map((h) => (
+                  {["达人信息", "带货数", "均播量", "粉丝数", "近30日销量", "近30日销售额($)", "操作"].map((h) => (
                     <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${h === '达人信息' ? 'text-left w-[200px]' : h === '操作' ? 'text-center w-[60px]' : 'text-right'}`}>{h}</th>
                   ))}
                 </tr>
@@ -139,10 +99,10 @@ export default function TikTokInfluencer() {
                   <tr key={item.creatorId ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
-                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt="" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                        <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt="" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs font-medium text-lc-text-primary">{item.displayName || item.username}</div>
-                          <div className="text-[10px] truncate max-w-[130px] text-lc-text-muted">{item.bio}</div>
+                          <div className="text-xs truncate max-w-[130px] text-lc-text-muted">{item.bio}</div>
                         </div>
                       </div>
                     </td>
@@ -150,25 +110,17 @@ export default function TikTokInfluencer() {
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.avgViews?.toLocaleString()}</td>
                     <td className="py-2.5 px-3 text-right">
                       <div className="text-xs font-mono-num font-semibold text-lc-text-primary">{item.followers?.toLocaleString()}</div>
-                      <div className="text-[10px] font-medium text-lc-success">{item.fanGrowth}</div>
+                      <div className="text-xs font-medium text-lc-success">{item.fanGrowth}</div>
                     </td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.monthlySales?.toLocaleString()}</td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.monthlyRevenue?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.videoGpm}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.videoCount?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.liveGpm ?? '-'}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">-</td>
-                    <td className="py-2.5 px-3">
-                      <span className="text-[10px] px-2 py-0.5 rounded-full font-medium"
-                        style={item.accountType === '店铺运营' ? { background: `${LC.primary}10`, color: LC.primary } : { background: `${LC.teal}10`, color: LC.teal }}>{item.accountType}</span>
-                    </td>
                     <td className="py-2.5 px-3 text-center">
-                      <button className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><Star size={13} /></button>
+                      <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button>
                     </td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={12} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={7} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
                 )}
               </tbody>
             </table>

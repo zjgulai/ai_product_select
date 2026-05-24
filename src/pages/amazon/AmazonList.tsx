@@ -3,11 +3,11 @@ import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import CategoryFilter from '@/components/shared/CategoryFilter';
-import MiniTrend from '@/components/shared/MiniTrend';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import { useNavigate } from 'react-router';
 import { LC } from '@/lib/lute-colors';
-import { Download, Star, BarChart3, ShoppingCart, Settings, MessageSquare, Search } from 'lucide-react';
+import { Download, MessageSquare, Search } from 'lucide-react';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
 const PRODUCT_IMAGES = ["/assets/products/p5.jpg","/assets/products/p1.jpg","/assets/products/p2.jpg","/assets/products/p3.jpg","/assets/products/p4.jpg"];
@@ -60,7 +60,6 @@ export default function AmazonListPage() {
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-2">
             <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
-            <button className="transition-colors text-lc-text-muted"><Settings size={14} /></button>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -79,11 +78,11 @@ export default function AmazonListPage() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
-                  {["排名","商品图片","商品名称","月销量","月销售额($)","销量趋势","价格($)","价格趋势","ASIN","类目树","品牌","上架时间","操作"].map((h, i) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[50px]':i===1?'text-left w-[60px]':i===2?'text-left':i===5||i===7?'text-center w-[120px]':i===12?'text-center w-[80px]':'text-right'}`}>{h}</th>
+                  {["排名","商品图片","商品名称","月销量","月销售额($)","价格($)","操作"].map((h, i) => (
+                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[50px]':i===1?'text-left w-[60px]':i===2?'text-left':i===6?'text-center w-[80px]':'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -91,22 +90,13 @@ export default function AmazonListPage() {
                 {data?.items.map((item, idx) => (
                   <tr key={item.asin} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
                     <td className="py-2.5 px-3 text-xs font-mono-num font-semibold" style={{ color: idx < 3 ? LC.primary : LC.textMuted }}>{idx + 1}</td>
-                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
+                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/></td>
                     <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[200px] font-medium text-lc-text-primary" title={item.title}>{item.title}</div></td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.monthlySales ?? 0).toLocaleString()}</td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-primary">${parseFloat(item.monthlyRevenue ?? '0').toLocaleString()}</td>
-                    <td className="py-2.5 px-3"><div className="flex justify-center"><MiniTrend data={item.salesTrend ?? []} /></div></td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">${item.price}</td>
-                    <td className="py-2.5 px-3"><div className="flex justify-center"><MiniTrend data={item.priceTrend ?? []} color="#FF9500" /></div></td>
-                    <td className="py-2.5 px-3 text-xs font-mono-num font-medium text-lc-primary">{item.asin}</td>
-                    <td className="py-2.5 px-3 text-xs truncate max-w-[120px] text-lc-text-muted">{item.category}</td>
-                    <td className="py-2.5 px-3 text-xs font-medium text-lc-text-primary">{item.brand}</td>
-                    <td className="py-2.5 px-3 text-xs font-mono-num text-lc-text-muted">{item.launchDate?.toString()}</td>
                     <td className="py-2.5 px-3">
                       <div className="flex items-center justify-center gap-1">
-                        {[Star, BarChart3, ShoppingCart].map((Icon, ii) => (
-                          <button key={ii} className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><Icon size={12} /></button>
-                        ))}
                         <button
                           onClick={() => navigate(`/amazon/reviews/${item.asin}`)}
                           className="transition-colors text-lc-border-strong hover:text-lc-primary"
@@ -119,7 +109,7 @@ export default function AmazonListPage() {
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (
-                  <tr><td colSpan={13} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
+                  <tr><td colSpan={7} className="py-8 text-center text-xs text-lc-text-muted">暂无数据</td></tr>
                 )}
               </tbody>
             </table>

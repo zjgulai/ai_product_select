@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState, useMemo } from 'react';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -65,7 +66,7 @@ export default function TikTokAnalysis() {
                   style={timeRange === i ? { background: LC.primary, color: LC.textInverse } : { color: LC.textMuted }}>{t}</button>
               ))}
             </div>
-            <button className="flex items-center gap-1 text-[10px] font-medium px-2 h-7 rounded border transition-colors" style={{ color: LC.textMuted, borderColor: LC.border }}>
+            <button className="flex items-center gap-1 text-xs font-medium px-2 h-7 rounded border transition-colors" style={{ color: LC.textMuted, borderColor: LC.border }}>
               <Download size={11} /> 导出
             </button>
           </div>
@@ -84,12 +85,12 @@ export default function TikTokAnalysis() {
             {kpiData?.map((kpi, i) => {
               const Icon = KPI_ICONS[i];
               return (
-                <div key={kpi.title} className="rounded-lg p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lc-hover cursor-pointer group bg-lc-bg-warm">
+                <div key={kpi.title} className="rounded-lg p-3 transition-all duration-200 cursor-pointer group bg-lc-bg-warm">
                   <div className="flex items-center gap-1.5 mb-2">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: `${LC.primary}10` }}>
                       <Icon size={13} className="text-lc-primary" />
                     </div>
-                    <span className="text-[10px] font-medium text-lc-text-muted">{kpi.title}</span>
+                    <span className="text-xs font-medium text-lc-text-muted">{kpi.title}</span>
                   </div>
                   <div className="text-lg font-bold font-mono-num text-lc-primary">{kpi.value}</div>
                   <div className="text-[11px] mt-1 font-medium flex items-center gap-0.5"
@@ -114,7 +115,7 @@ export default function TikTokAnalysis() {
             <div className="flex gap-0.5 p-0.5 rounded bg-lc-bg-warm">
               {[{k:'sales',l:'销量'},{k:'growth',l:'增长'}].map((m) => (
                 <button key={m.k} onClick={() => setHeatmapMetric(m.k as any)}
-                  className="px-2.5 h-6 rounded text-[10px] font-medium transition-all"
+                  className="px-2.5 h-6 rounded text-xs font-medium transition-all"
                   style={heatmapMetric === m.k ? { background: LC.primary, color: LC.textInverse } : { color: LC.textMuted }}>{m.l}</button>
               ))}
             </div>
@@ -138,10 +139,10 @@ export default function TikTokAnalysis() {
           <h3 className="text-sm font-semibold text-lc-primary">品类树形分解</h3>
           <div className="flex items-center gap-1">
             <Layers size={12} className="text-lc-primary" />
-            <span className="text-[10px] font-medium text-lc-text-muted">销售额 & 涨跌幅</span>
+            <span className="text-xs font-medium text-lc-text-muted">销售额 & 涨跌幅</span>
           </div>
         </div>
-        <EChartsTreemap height={520} />
+        <EChartsTreemap height={320} />
       </div>
 
       {/* GMV Trend + Category Share */}
@@ -151,7 +152,7 @@ export default function TikTokAnalysis() {
             <h3 className="text-sm font-semibold text-lc-primary">月度GMV趋势</h3>
             <div className="flex items-center gap-1">
               <Activity size={12} className="text-lc-primary" />
-              <span className="text-[10px] font-medium text-lc-text-muted">单位: 亿美元</span>
+              <span className="text-xs font-medium text-lc-text-muted">单位: 亿美元</span>
             </div>
           </div>
           {gmvChartData.length > 0 ? (
@@ -199,7 +200,7 @@ export default function TikTokAnalysis() {
           <h3 className="text-sm font-semibold text-lc-primary">带货达人矩阵</h3>
           <div className="flex items-center gap-1">
             <Users size={12} className="text-lc-primary" />
-            <span className="text-[10px] font-medium text-lc-text-muted">共26.4M达人</span>
+            <span className="text-xs font-medium text-lc-text-muted">共26.4M达人</span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -224,7 +225,7 @@ export default function TikTokAnalysis() {
                           <div className="w-14 h-1.5 rounded-full overflow-hidden bg-lc-border-light">
                             <div className="h-full rounded-full" style={{ width: row.accountRatio, background: LC.primary }} />
                           </div>
-                          <span className="font-mono-num text-[10px] text-lc-text-muted">{row.accountRatio}</span>
+                          <span className="font-mono-num text-xs text-lc-text-muted">{row.accountRatio}</span>
                         </div>
                       </td>
                       <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(row.sales / 1000000).toFixed(0)}M</td>

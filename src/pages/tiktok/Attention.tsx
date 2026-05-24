@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Package, Star, ShoppingBag, Users, Store, Play, Video } from 'lucide-react';
+import {
+  Package, Star, ShoppingBag, Users, Store, Play, Video,
+  Bell, TrendingUp, TrendingDown, FileText, Eye, Sparkles,
+  ArrowRight, Box, UserRound
+} from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
+import DataBadge from '@/components/shared/DataBadge';
 
 const TABS = [
   { label: "商品", icon: ShoppingBag },
@@ -15,20 +21,21 @@ const TABS = [
 ];
 
 const MOCK_PRODUCTS = [
-  { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7' },
-  { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5' },
-  { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6' },
+  { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7', change: '+12%', trend: 'up' },
+  { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5', change: '+5%', trend: 'up' },
+  { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6', change: '-3%', trend: 'down' },
 ];
 const MOCK_CREATORS = [
-  { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主' },
-  { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人' },
+  { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主', change: '+2.3K', trend: 'up' },
+  { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人', change: '+1.1K', trend: 'up' },
 ];
 const MOCK_SHOPS = [
-  { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8' },
-  { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6' },
+  { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8', change: '+8%', trend: 'up' },
+  { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6', change: '+3%', trend: 'up' },
 ];
 
 export default function TikTokAttention() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState(0);
 
   const { data, isLoading, isError } = trpc.fusion.concepts.list.useQuery(
@@ -43,11 +50,47 @@ export default function TikTokAttention() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["TikTok趋势", "关注"]} />
+
+      {/* Overview Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+        {[
+          { label: '关注概念', value: concepts.length, sub: '实时追踪中', icon: Sparkles, color: LC.primary },
+          { label: 'SHI变化提醒', value: concepts.filter((c: any) => c.shiScore > 60).length, sub: '需要关注', icon: TrendingUp, color: LC.success },
+          { label: 'CVI变化提醒', value: concepts.filter((c: any) => c.cviScore > 30).length, sub: '需要关注', icon: BarChart3, color: LC.warning },
+          { label: '未读提醒', value: 3, sub: '今日更新', icon: Bell, color: LC.teal },
+        ].map((card, i) => (
+          <div key={i} className="bg-white rounded-lg p-3 ring-1 ring-lc-border/60 shadow-lc">
+            <div className="flex items-center gap-2 mb-1.5">
+              <card.icon size={13} style={{ color: card.color }} />
+              <span className="text-xs text-lc-text-muted">{card.label}</span>
+            </div>
+            <div className="text-lg font-bold font-mono-num text-lc-text-primary">{card.value}</div>
+            <div className="text-xs text-lc-text-muted">{card.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Main Content */}
       <div className="bg-white rounded-lg shadow-lc p-6 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-semibold text-lc-primary">我的关注</h2>
-          <span className="text-[10px] text-lc-text-muted">关注商品、达人、小店，实时追踪动态</span>
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-semibold text-lc-primary">我的关注</h2>
+            <DataBadge type="demo" />
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate('/fusion/opportunities')}
+              className="text-xs px-3 h-6 rounded-full font-medium border transition-all hover:bg-lc-primary hover:text-white"
+              style={{ borderColor: `${LC.primary}40`, color: LC.primary, background: LC.primaryLight }}
+            >
+              <span className="flex items-center gap-1">
+                <Sparkles size={10} /> 发现新机会
+              </span>
+            </button>
+            <span className="text-xs text-lc-text-muted">关注商品、达人、小店，实时追踪动态</span>
+          </div>
         </div>
+
         <div className="flex gap-6 border-b mb-6 border-lc-border">
           {TABS.map((t, i) => (
             <button key={t.label} onClick={() => setTab(i)}
@@ -72,42 +115,90 @@ export default function TikTokAttention() {
           </div>
         ) : tab === 0 ? (
           <div className="space-y-2">
+            {/* Section: 关注商品 */}
+            <p className="text-[11px] font-medium text-lc-text-secondary mb-1">关注的商品</p>
             {MOCK_PRODUCTS.map(item => (
               <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
-                <div className="w-9 h-9 rounded flex items-center justify-center text-lg bg-lc-bg-warm">📦</div>
+                <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Box size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
-                  <div className="text-[10px] text-lc-text-muted">{item.sub}</div>
+                  <div className="text-xs text-lc-text-muted">{item.sub}</div>
                 </div>
-                <button className="text-lc-primary"><Star size={13} /></button>
+                <div className="flex items-center gap-1 text-xs font-mono-num shrink-0">
+                  {item.trend === 'up' ? <TrendingUp size={10} className="text-lc-success" /> : <TrendingDown size={10} className="text-lc-danger" />}
+                  <span className={item.trend === 'up' ? 'text-lc-success' : 'text-lc-danger'}>{item.change}</span>
+                </div>
+                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
-            <div className="pt-3 border-t border-lc-border">
-              <p className="text-[11px] font-medium text-lc-text-secondary mb-2">关注的选品概念</p>
-              {concepts.slice(0, 3).map((item: any) => (
-                <div key={item.conceptId} className="flex items-center gap-3 p-2.5 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border mb-1.5">
-                  <div className="w-8 h-8 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
-                    {(item.name ?? '?')[0]}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
-                    <div className="text-[10px] truncate text-lc-text-muted">{item.nameEn}</div>
-                  </div>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded-full font-medium shrink-0" style={{ background: LC.successLight, color: LC.success }}>已关注</span>
+
+            {/* Section: 关注的选品概念 */}
+            <div className="pt-3 border-t border-lc-border mt-3">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-[11px] font-medium text-lc-text-secondary">关注的选品概念</p>
+                <button
+                  onClick={() => navigate('/fusion/opportunities')}
+                  className="text-xs text-lc-primary flex items-center gap-0.5 hover:underline"
+                >
+                  浏览更多 <ArrowRight size={10} />
+                </button>
+              </div>
+              {concepts.length === 0 ? (
+                <div className="text-center py-6">
+                  <p className="text-xs text-lc-text-muted">暂无关注概念</p>
+                  <button
+                    onClick={() => navigate('/fusion/opportunities')}
+                    className="mt-2 text-xs px-3 py-1 rounded-full bg-lc-primary text-white font-medium"
+                  >
+                    去机会榜发现
+                  </button>
                 </div>
-              ))}
+              ) : (
+                concepts.slice(0, 5).map((item: any) => (
+                  <div key={item.conceptId} className="flex items-center gap-3 p-2.5 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border mb-1.5">
+                    <div className="w-8 h-8 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
+                      {(item.name ?? '?')[0]}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
+                      <div className="text-xs truncate text-lc-text-muted">{item.nameEn} · SHI {item.shiScore} · CVI {item.cviScore}</div>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); navigate(`/fusion/concept/${item.conceptId}`); }}
+                        className="text-[9px] px-2 py-1 rounded border transition-colors"
+                        style={{ borderColor: LC.border, color: LC.textSecondary }}
+                      >
+                        <span className="flex items-center gap-0.5"><Eye size={9} />详情</span>
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); navigate('/fusion/report'); }}
+                        className="text-[9px] px-2 py-1 rounded border transition-colors"
+                        style={{ borderColor: `${LC.primary}40`, color: LC.primary, background: LC.primaryLight }}
+                      >
+                        <span className="flex items-center gap-0.5"><FileText size={9} />报告</span>
+                      </button>
+                    </div>
+                    <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         ) : tab === 1 ? (
           <div className="space-y-2">
             {MOCK_CREATORS.map(item => (
               <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-lg bg-lc-bg-warm">👤</div>
+                <div className="w-9 h-9 rounded-full flex items-center justify-center bg-lc-primary-light"><UserRound size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
-                  <div className="text-[10px] text-lc-text-muted">{item.sub}</div>
+                  <div className="text-xs text-lc-text-muted">{item.sub}</div>
                 </div>
-                <button className="text-lc-primary"><Star size={13} /></button>
+                <div className="flex items-center gap-1 text-xs font-mono-num shrink-0">
+                  <TrendingUp size={10} className="text-lc-success" />
+                  <span className="text-lc-success">{item.change}</span>
+                </div>
+                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
           </div>
@@ -115,12 +206,16 @@ export default function TikTokAttention() {
           <div className="space-y-2">
             {MOCK_SHOPS.map(item => (
               <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
-                <div className="w-9 h-9 rounded flex items-center justify-center text-lg bg-lc-bg-warm">🏪</div>
+                <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Store size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
-                  <div className="text-[10px] text-lc-text-muted">{item.sub}</div>
+                  <div className="text-xs text-lc-text-muted">{item.sub}</div>
                 </div>
-                <button className="text-lc-primary"><Star size={13} /></button>
+                <div className="flex items-center gap-1 text-xs font-mono-num shrink-0">
+                  <TrendingUp size={10} className="text-lc-success" />
+                  <span className="text-lc-success">{item.change}</span>
+                </div>
+                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
           </div>
@@ -131,6 +226,18 @@ export default function TikTokAttention() {
             </div>
             <p className="text-sm font-medium text-lc-text-muted">暂无关注的{TABS[tab].label}</p>
             <p className="text-xs mt-1 text-lc-border-strong">在{TABS[tab].label}列表中点击 ☆ 即可关注</p>
+            <button
+              onClick={() => {
+                if (tab === 0) navigate('/tiktok/products');
+                if (tab === 1) navigate('/tiktok/influencer');
+                if (tab === 2) navigate('/tiktok/shop');
+                if (tab === 3) navigate('/tiktok/video');
+                if (tab === 4) navigate('/tiktok/live');
+              }}
+              className="mt-3 text-xs px-3 py-1.5 rounded-full bg-lc-primary text-white font-medium transition-all hover:brightness-110"
+            >
+              去浏览{TABS[tab].label}
+            </button>
           </div>
         )}
       </div>

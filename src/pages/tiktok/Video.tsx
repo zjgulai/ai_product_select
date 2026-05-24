@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState } from 'react';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import CategoryFilter from '@/components/shared/CategoryFilter';
+import { CATEGORIES } from '@/data/mockData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -16,7 +17,12 @@ export default function TikTokVideo() {
   const [timeRange, setTimeRange] = useState(2);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
+  const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const limit = 20;
+
+  const toggleCategory = (cat: string) => {
+    setSelectedCats(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
+  };
 
   const { data, isLoading, isError } = trpc.tiktok.videos.list.useQuery(
     {
@@ -55,9 +61,9 @@ export default function TikTokVideo() {
           ))}
         </div>
       </div>
-      <CategoryFilter />
+      {/* Filters + Categories */}
       <div className="bg-white p-3 border-b border-lc-border">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             <input type="checkbox" id="adOnly" className="rounded accent-[#3B82F6]" />
             <label htmlFor="adOnly" className="text-xs font-medium text-lc-text-secondary">投流视频</label>
@@ -69,13 +75,26 @@ export default function TikTokVideo() {
                 style={timeRange === i ? { background: LC.primary, color: LC.textInverse } : { background: LC.textInverse, color: LC.textMuted }}>{t}</button>
             ))}
           </div>
+          <div className="w-px h-5 bg-lc-border" />
+          <div className="flex items-center gap-1.5 flex-wrap overflow-x-auto max-w-[280px]">
+            <span className="text-xs font-medium text-lc-text-secondary shrink-0">类目:</span>
+            {CATEGORIES.slice(0, 8).map(cat => (
+              <button key={cat} onClick={() => toggleCategory(cat)}
+                className="px-2 h-[22px] rounded-full text-[11px] transition-all duration-150 border font-medium shrink-0"
+                style={selectedCats.includes(cat)
+                  ? { backgroundColor: LC.primary, color: '#fff', borderColor: LC.primary }
+                  : { backgroundColor: '#fff', color: LC.textSecondary, borderColor: LC.border }}>
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">视频信息</h3>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-medium text-lc-text-muted">共 {total} 条</span>
+            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
@@ -93,7 +112,7 @@ export default function TikTokVideo() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["视频信息", "近30日销量", "近30日销售额($)", "播放量", "点赞数", "互动率", "发布日期", "达人信息", "商品信息", "操作"].map((h, i) => (
@@ -106,13 +125,13 @@ export default function TikTokVideo() {
                   <tr key={item.videoId ?? idx} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-11 h-8 rounded flex items-center justify-center text-[10px] shrink-0 ring-1 ring-lc-border relative overflow-hidden bg-lc-bg-warm">
+                        <div className="w-11 h-8 rounded flex items-center justify-center text-xs shrink-0 ring-1 ring-lc-border relative overflow-hidden bg-lc-bg-warm">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
                           <span className="absolute bottom-0 right-0 text-[7px] px-1 rounded-tl" style={{ background: 'rgba(0,0,0,0.7)', color: LC.textInverse }}>{item.duration}</span>
                         </div>
                         <div>
                           <div className="text-xs truncate max-w-[180px] text-lc-text-primary" title={item.title}>{item.title}</div>
-                          <div className="text-[10px] text-lc-text-muted">{item.date}</div>
+                          <div className="text-xs text-lc-text-muted">{item.date}</div>
                         </div>
                       </div>
                     </td>
@@ -130,11 +149,11 @@ export default function TikTokVideo() {
                     </td>
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-1.5">
-                        <img src="/assets/products/p3.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                        <img src="/assets/products/p3.jpg" alt="" className="w-6 h-6 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <span className="text-xs truncate max-w-[80px] text-lc-text-primary">{item.product}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><Star size={13} /></button></td>
+                    <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (

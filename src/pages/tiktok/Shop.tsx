@@ -36,6 +36,8 @@ export default function TikTokShop() {
     <DataTablePage<TikTokShop>
       breadcrumb={['TikTok趋势', '小店']}
       title="小店信息"
+      dataSource="TikTok Shop API"
+      lastUpdated="每日 06:00 UTC"
       searchPlaceholder="小店名称"
       searchValue={searchText}
       onSearchChange={setSearchText}
@@ -56,10 +58,12 @@ export default function TikTokShop() {
           width: '200px',
           render: (item: TikTokShop) => (
             <div className="flex items-center gap-2">
-              <img src="/assets/shops/s2.jpg" alt="" className="w-7 h-7 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+              <div className="w-7 h-7 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
+                {(item.name ?? '?')[0]}
+              </div>
               <div>
                 <div className="text-xs font-medium text-lc-text-primary">{item.name}</div>
-                <div className="text-[10px] text-lc-text-muted">{item.country} | {item.category}</div>
+                <div className="text-xs text-lc-text-muted">{item.country} | {item.category}</div>
               </div>
             </div>
           ),
@@ -71,7 +75,7 @@ export default function TikTokShop() {
           render: (item: TikTokShop) => (
             <div>
               <div className="text-xs font-mono-num font-semibold text-lc-text-primary">{(item.sales ?? 0).toLocaleString()}</div>
-              <div className="text-[10px] font-medium text-lc-success">{item.salesGrowth}</div>
+              <div className="text-xs font-medium text-lc-success">{item.salesGrowth}</div>
             </div>
           ),
         },
@@ -82,20 +86,17 @@ export default function TikTokShop() {
           render: (item: TikTokShop) => (
             <div>
               <div className="text-xs font-mono-num font-semibold text-lc-text-primary">{parseFloat(item.revenue ?? '0').toLocaleString()}</div>
-              <div className="text-[10px] font-medium" style={{ color: (item.revenueGrowth ?? '').startsWith('+') ? LC.success : LC.danger }}>{item.revenueGrowth}</div>
+              <div className="text-xs font-medium" style={{ color: (item.revenueGrowth ?? '').startsWith('+') ? LC.success : LC.danger }}>{item.revenueGrowth}</div>
             </div>
           ),
         },
-        { key: 'activeProducts', label: '动销商品数', align: 'right' },
-        { key: 'totalProducts', label: '在售商品数', align: 'right' },
-        { key: 'newRatio', label: '新商品占比', align: 'right', render: (item: TikTokShop) => <span className="text-xs font-mono-num text-lc-text-muted">{item.newRatio}</span> },
         { key: 'totalSales', label: '总销量', align: 'right', render: (item: TikTokShop) => <span className="text-xs font-mono-num font-semibold text-lc-text-primary">{(item.totalSales ?? 0).toLocaleString()}</span> },
-        { key: 'totalRevenue', label: '总销售额($)', align: 'right', render: (item: TikTokShop) => <span className="text-xs font-mono-num font-semibold text-lc-primary">{parseFloat(item.totalRevenue ?? '0').toLocaleString()}</span> },
         { key: 'rating', label: '评分', align: 'right', render: (item: TikTokShop) => <span className="text-xs font-mono-num font-semibold" style={{ color: parseFloat(item.rating ?? '0') >= 4.5 ? LC.success : LC.teal }}>{item.rating}</span> },
         { key: 'influencers', label: '关联达人', align: 'right', render: (item: TikTokShop) => <span className="text-xs font-mono-num text-lc-text-primary">{(item.influencers ?? 0).toLocaleString()}</span> },
-        { key: 'shopType', label: '卖家类型', render: (item: TikTokShop) => <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: `${LC.teal}10`, color: LC.teal }}>{item.shopType}</span> },
-        { key: 'action', label: '操作', align: 'center', width: '60px', render: () => <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button> },
       ]}
+      rowActions={() => (
+        <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button>
+      )}
       extraHeader={
         <>
           <CategoryFilter />

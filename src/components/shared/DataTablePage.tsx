@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect, memo, type ReactNode } from 'react';
 import Breadcrumb from '@/components/shared/Breadcrumb';
 import { LC } from '@/lib/lute-colors';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Search, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 
 export interface ColumnConfig<T = any> {
   key: string;
@@ -33,9 +35,12 @@ interface DataTablePageProps<T = any> {
   exportable?: boolean;
   emptyText?: string;
   children?: ReactNode;
+  rowActions?: (item: T) => ReactNode;
+  lastUpdated?: string;
+  dataSource?: string;
 }
 
-export default function DataTablePage<T = any>({
+function DataTablePage<T = any>({
   breadcrumb,
   title,
   searchPlaceholder = '搜索...',
@@ -55,9 +60,20 @@ export default function DataTablePage<T = any>({
   onPageChange,
   exportable = false,
   emptyText = '暂无数据',
+  rowActions,
   children,
+  lastUpdated,
+  dataSource,
 }: DataTablePageProps<T>) {
   const totalPages = Math.ceil(total / pageSize);
+  const [localSearch, setLocalSearch] = useState(searchValue);
+  const debouncedSearch = useDebounce(localSearch, 300);
+
+  useEffect(() => {
+    if (debouncedSearch !== searchValue) {
+      onSearchChange?.(debouncedSearch);
+    }
+  }, [debouncedSearch, onSearchChange, searchValue]);
 
   const getRowKey = (item: T, idx: number): string | number => {
     if (typeof rowKey === 'function') return rowKey(item);
@@ -95,7 +111,7 @@ export default function DataTablePage<T = any>({
                 <input
                   type="text"
                   value={searchValue}
-                  onChange={e => onSearchChange?.(e.target.value)}
+                  onChange={e => setLocalSearch(e.target.value)}
                   placeholder={searchPlaceholder}
                   className="w-full h-9 pl-9 pr-3 rounded-l-full border border-r-0 text-xs transition-all focus:outline-none focus:ring-1 border-lc-border text-lc-text-primary"
                 />
@@ -134,7 +150,9 @@ export default function DataTablePage<T = any>({
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">{title}</h3>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-medium text-lc-text-muted">共 {total} 条</span>
+            {dataSource && <span className="text-xs text-lc-text-muted" title="数据来源">来源: {dataSource}</span>}
+            {lastUpdated && <span className="text-xs text-lc-text-muted" title="数据更新时间">更新: {lastUpdated}</span>}
+            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             {exportable && (
               <button className="flex items-center gap-1 text-xs font-medium text-lc-primary">
                 <Download size={12} /> 数据导出
@@ -175,7 +193,7 @@ export default function DataTablePage<T = any>({
                 ))}
               </div>
             ) : (
-              <table className="w-full">
+              <table className="w-full min-w-[640px]">
                 <thead>
                   <tr className="bg-lc-bg-warm">
                     {columns.map(col => (
@@ -187,18 +205,24 @@ export default function DataTablePage<T = any>({
                 </thead>
                 <tbody>
                   {data.map((item, idx) => (
-                    <tr key={getRowKey(item, idx)} className="border-b border-lc-border-light hover:bg-lc-bg-warm transition-colors">
+                    <tr key={getRowKey(item, idx)} className="border-b border-lc-border-light hover:bg-lc-bg-warm transition-colors group">
                       {columns.map(col => (
                         <td key={col.key} className={getCellClass(col)}>
                           {col.render ? col.render(item, idx) : (item as any)[col.key]}
                         </td>
                       ))}
+                      {rowActions && (
+                        <td className="py-2.5 px-3 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          {rowActions(item)}
+                        </td>
+                      )}
                     </tr>
                   ))}
                   {data.length === 0 && (
                     <tr>
-                      <td colSpan={columns.length} className="py-8 text-center text-xs text-lc-text-muted">
-                        {emptyText}
+                      <td colSpan={columns.length} className="py-8 text-center">
+                        <p className="text-xs text-lc-text-muted mb-1">{emptyText}</p>
+                        {dataSource && <p className="text-xs text-lc-text-muted">数据来源: {dataSource}</p>}
                       </td>
                     </tr>
                   )}
@@ -211,8 +235,10 @@ export default function DataTablePage<T = any>({
         {/* Pagination */}
         {onPageChange && totalPages > 0 && (
           <div className="flex items-center justify-between p-3 border-t border-lc-border">
-            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
-            <div className="flex items-center gap-1">
+            <span className="text-xs font-medium text-lc-text-muted">
+              共 {total} 条 · 第 {page + 1} / {totalPages} 页
+            </span>
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={() => onPageChange(Math.max(0, page - 1))}
                 disabled={page === 0}
@@ -221,9 +247,12 @@ export default function DataTablePage<T = any>({
               >
                 <ChevronLeft size={12} />
               </button>
-              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                const p = i;
-                return (
+              {(() => {
+                const range: number[] = [];
+                const start = Math.max(0, Math.min(page - 2, totalPages - 5));
+                const end = Math.min(totalPages, start + 5);
+                for (let i = start; i < end; i++) range.push(i);
+                return range.map(p => (
                   <button
                     key={p}
                     onClick={() => onPageChange(p)}
@@ -235,8 +264,8 @@ export default function DataTablePage<T = any>({
                   >
                     {p + 1}
                   </button>
-                );
-              })}
+                ));
+              })()}
               <button
                 onClick={() => onPageChange(Math.min(totalPages - 1, page + 1))}
                 disabled={page >= totalPages - 1}
@@ -245,6 +274,34 @@ export default function DataTablePage<T = any>({
               >
                 <ChevronRight size={12} />
               </button>
+              {totalPages > 5 && (
+                <div className="flex items-center gap-1 ml-1">
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    placeholder={`${page + 1}`}
+                    className="w-10 h-7 text-center text-xs rounded-md border border-lc-border focus:outline-none focus:ring-1 focus:ring-lc-primary"
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        const v = parseInt((e.target as HTMLInputElement).value, 10);
+                        if (!isNaN(v) && v >= 1 && v <= totalPages) onPageChange(v - 1);
+                        (e.target as HTMLInputElement).value = '';
+                      }
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      const input = document.querySelector('[data-jump-page]') as HTMLInputElement;
+                      const v = parseInt(input?.value || '', 10);
+                      if (!isNaN(v) && v >= 1 && v <= totalPages) onPageChange(v - 1);
+                      if (input) input.value = '';
+                    }}
+                    className="w-7 h-7 flex items-center justify-center rounded-md border border-lc-border text-lc-text-muted hover:text-lc-primary transition-colors"
+                  >
+                    <ArrowRight size={12} />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -252,3 +309,5 @@ export default function DataTablePage<T = any>({
     </div>
   );
 }
+
+export default memo(DataTablePage) as typeof DataTablePage;

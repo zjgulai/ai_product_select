@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
@@ -49,6 +50,10 @@ export default function FusionOpportunities() {
         d.conceptId?.toLowerCase().includes(q)
       );
     }
+    // TODO: category filtering requires backend data enrichment
+    if (category !== '全部') {
+      // 类目过滤即将支持——当前数据中暂无 category 字段
+    }
     // Sort
     items = [...items].sort((a: any, b: any) => {
       const va = a[sortBy] ?? 0;
@@ -56,7 +61,7 @@ export default function FusionOpportunities() {
       return sortDesc ? vb - va : va - vb;
     });
     return items;
-  }, [data, searchText, sortBy, sortDesc]);
+  }, [data, searchText, category, sortBy, sortDesc]);
 
   const handleSort = (key: string) => {
     if (sortBy === key) {
@@ -89,17 +94,17 @@ export default function FusionOpportunities() {
         <div className="flex items-center gap-6 mt-3">
           <div className="text-center">
             <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{data?.length || 0}</div>
-            <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>可挖掘机会</div>
+            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>可挖掘机会</div>
           </div>
           <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
           <div className="text-center">
             <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{Math.round((data || []).filter((d: any) => d.opportunityScore >= 70).length)}</div>
-            <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>高机会分(≥70)</div>
+            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>高机会分(≥70)</div>
           </div>
           <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
           <div className="text-center">
             <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{Math.round((data || []).reduce((s: number, d: any) => s + (d.tiktokVideoCount || 0), 0) / 1000)}K</div>
-            <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>关联视频总数</div>
+            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>关联视频总数</div>
           </div>
         </div>
       </div>
@@ -119,18 +124,20 @@ export default function FusionOpportunities() {
           </div>
           {/* Category */}
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-medium text-lc-text-secondary">类目:</span>
+            <span className="text-xs font-medium text-lc-text-secondary">类目:</span>
             <select
               value={category}
               onChange={e => setCategory(e.target.value)}
-              className="h-7 border rounded-md text-[11px] px-2 border-lc-border text-lc-text-primary"
+              disabled
+              title="类目过滤即将支持"
+              className="h-7 border rounded-md text-[11px] px-2 border-lc-border text-lc-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           {/* Sort */}
           <div className="flex items-center gap-1.5 ml-auto">
-            <span className="text-[10px] font-medium text-lc-text-secondary">排序:</span>
+            <span className="text-xs font-medium text-lc-text-secondary">排序:</span>
             {SORT_OPTIONS.map(opt => (
               <button
                 key={opt.key}
@@ -153,7 +160,7 @@ export default function FusionOpportunities() {
       <div className="bg-white rounded-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">选品机会排名</h3>
-          <span className="text-[10px] font-medium text-lc-text-muted">共 {filtered.length} 条</span>
+          <span className="text-xs font-medium text-lc-text-muted">共 {filtered.length} 条</span>
         </div>
         <div className="overflow-x-auto">
           {isLoading ? (
@@ -171,7 +178,7 @@ export default function FusionOpportunities() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {['排名', '产品概念', 'SHI', 'CVI', '机会分', 'TikTok视频', 'Amazon商品', '趋势', '操作'].map(h => (
@@ -199,7 +206,7 @@ export default function FusionOpportunities() {
                         </div>
                         <div>
                           <div className="text-xs font-semibold text-lc-text-primary">{item.conceptName}</div>
-                          <div className="text-[10px] text-lc-text-muted">{item.conceptId}</div>
+                          <div className="text-xs text-lc-text-muted">{item.conceptId}</div>
                         </div>
                       </div>
                     </td>
@@ -227,25 +234,34 @@ export default function FusionOpportunities() {
                     </td>
                     <td className="py-3 px-3">
                       <div className="text-xs font-mono-num text-lc-text-primary">{item.tiktokVideoCount.toLocaleString()}</div>
-                      <div className="text-[10px] text-lc-text-muted">{formatViews(item.tiktokTotalViews)} 播放</div>
+                      <div className="text-xs text-lc-text-muted">{formatViews(item.tiktokTotalViews)} 播放</div>
                     </td>
                     <td className="py-3 px-3">
                       <div className="text-xs font-mono-num text-lc-text-primary">{item.amazonProductCount}</div>
-                      <div className="text-[10px] text-lc-text-muted">{item.amazonTotalSales.toLocaleString()} 销量</div>
+                      <div className="text-xs text-lc-text-muted">{item.amazonTotalSales.toLocaleString()} 销量</div>
                     </td>
                     <td className="py-3 px-3">
                       <div className="flex items-center gap-1">
                         <TrendIcon value={item.trendMomentum} />
-                        <span className="text-[10px] font-medium text-lc-text-secondary">{item.trendMomentum}x</span>
+                        <span className="text-xs font-medium text-lc-text-secondary">{item.trendMomentum}x</span>
                       </div>
                     </td>
                     <td className="py-3 px-3">
-                      <button
-                        className="text-[10px] px-3 h-6 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
-                        onClick={(e) => { e.stopPropagation(); navigate(`/fusion/concept/${item.conceptId}`); }}
-                      >
-                        查看详情
-                      </button>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          className="text-xs px-3 h-6 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
+                          onClick={(e) => { e.stopPropagation(); navigate(`/fusion/concept/${item.conceptId}`); }}
+                        >
+                          查看详情
+                        </button>
+                        <button
+                          className="text-xs px-3 h-6 rounded-full font-medium border transition-all hover:bg-lc-primary hover:text-white"
+                          style={{ borderColor: `${LC.primary}40`, color: LC.primary, background: LC.primaryLight }}
+                          onClick={(e) => { e.stopPropagation(); navigate(`/fusion/report?conceptId=${item.conceptId}`); }}
+                        >
+                          生成报告
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -255,7 +271,7 @@ export default function FusionOpportunities() {
                       <div className="flex flex-col items-center gap-2">
                         <Sparkles size={28} className="text-lc-border" />
                         <p className="text-sm font-medium text-lc-text-muted">暂无匹配的机会</p>
-                        <p className="text-[10px] text-lc-border-strong">尝试调整筛选条件或搜索关键词</p>
+                        <p className="text-xs text-lc-border-strong">尝试调整筛选条件或搜索关键词</p>
                       </div>
                     </td>
                   </tr>

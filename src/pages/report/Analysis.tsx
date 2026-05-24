@@ -54,9 +54,7 @@ export default function ReportAnalysis() {
   const [showExportModal, setShowExportModal] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<Set<number>>(new Set());
   const [expandedAspect, setExpandedAspect] = useState<number | null>(null);
-  const [toast, setToast] = useState("");
-
-  const t = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 2000); };
+  const t = (msg: string) => { import('sonner').then(({ toast }) => toast.success(msg)); };
 
   const toggleProduct = (i: number) => {
     setSelectedProducts(prev => {
@@ -82,17 +80,19 @@ export default function ReportAnalysis() {
 
   return (
     <div className="animate-fadeIn relative">
-      {toast && <div className="fixed top-16 right-4 z-[200] bg-white px-4 py-2.5 rounded-lg shadow-lg ring-1 animate-slideUp"><span className="text-xs font-medium" style={{ color: LC.success }}>{toast}</span></div>}
-
       <Breadcrumb items={["我的首页", "产品分析报告"]} />
 
+      <div className="flex items-center gap-2 px-4 py-2 bg-lc-bg-warm border-b border-lc-border-light">
+        <DataBadge type="demo" label="报告数据为演示用途" />
+        <span className="text-xs text-lc-text-muted">实际数据需接入 Amazon SP-API / 评论爬虫</span>
+      </div>
       {/* Header */}
       <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <h2 className="text-lg font-bold text-lc-primary">美国站 &apos;momcozy baby bottle warmer&apos; 产品分析报告</h2>
-              <button className="transition-colors text-lc-text-muted" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-text-muted')}><Share2 size={16} /></button>
+              <button className="transition-colors text-lc-text-muted hover:text-lc-primary"><Share2 size={16} /></button>
             </div>
             <div className="flex items-center gap-4 text-xs flex-wrap">
               {[{l:'商品数量',v:'212'},{l:'品牌数量',v:'101'},{l:'已分析评论数',v:'14,319'},{l:'创建日期',v:'2026-04-20'},{l:'更新时间',v:'2026-04-20'}].map(i => (
@@ -196,7 +196,7 @@ export default function ReportAnalysis() {
           {/* Keywords with progress bars */}
           <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词验证</h3>
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["关键词", "搜索排名", "点击集中度", "搜索趋势"].map(h => <th key={h} className={`py-2 px-3 text-xs font-semibold text-lc-text-secondary ${h === '关键词' ? 'text-left' : 'text-right'}`}>{h}</th>)}
@@ -212,11 +212,11 @@ export default function ReportAnalysis() {
                         <div className="w-16 h-1.5 rounded-full overflow-hidden bg-lc-border-light">
                           <div className="h-full rounded-full" style={{ width: `${item.ctr}%`, background: item.ctr > 50 ? LC.danger : item.ctr > 30 ? LC.warning : LC.primary }} />
                         </div>
-                        <span className="text-[10px] font-mono-num text-lc-text-muted">{item.ctr}</span>
+                        <span className="text-xs font-mono-num text-lc-text-muted">{item.ctr}</span>
                       </div>
                     </td>
                     <td className="py-2 px-3 text-right">
-                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-sm" style={{ background: `${LC.success}10`, color: LC.success }}>↑ 上升</span>
+                      <span className="text-xs font-medium px-1.5 py-0.5 rounded-sm" style={{ background: `${LC.success}10`, color: LC.success }}>↑ 上升</span>
                     </td>
                   </tr>
                 ))}
@@ -245,25 +245,25 @@ export default function ReportAnalysis() {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-lc-primary">商品样本 ({selectedProducts.size} 已选)</h3>
             <div className="flex gap-2">
-              <button onClick={() => setSelectedProducts(new Set())} className="text-[10px] px-3 h-7 rounded border" style={{ color: LC.textSecondary, borderColor: LC.border }}>清空选择</button>
-              <button onClick={() => t(`已选择 ${selectedProducts.size} 个商品进行对比`)} className="text-[10px] text-white px-3 h-7 rounded font-medium" style={{ background: selectedProducts.size > 1 ? LC.primary : LC.borderStrong }}>去对比</button>
+              <button onClick={() => setSelectedProducts(new Set())} className="text-xs px-3 h-7 rounded border" style={{ color: LC.textSecondary, borderColor: LC.border }}>清空选择</button>
+              <button onClick={() => t(`已选择 ${selectedProducts.size} 个商品进行对比`)} className="text-xs text-white px-3 h-7 rounded font-medium" style={{ background: selectedProducts.size > 1 ? LC.primary : LC.borderStrong }}>去对比</button>
             </div>
           </div>
           <div className="grid grid-cols-5 gap-4">
             {SAMPLE_PRODUCTS.map((p, i) => (
               <div key={i} onClick={() => toggleProduct(i)} className={`relative border rounded-lg p-3 text-center cursor-pointer transition-all hover:shadow-lc-hover ${selectedProducts.has(i) ? 'ring-2' : ''}`}
                 style={{ borderColor: selectedProducts.has(i) ? LC.primary : LC.border, boxShadow: selectedProducts.has(i) ? `0 0 0 2px ${LC.primary}30` : undefined }}>
-                {selectedProducts.has(i) && <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center bg-lc-primary"><Check size={12} /></div>}
+                {selectedProducts.has(i) && <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-xs font-bold flex items-center justify-center bg-lc-primary"><Check size={12} /></div>}
                 <div className="w-16 h-16 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-2">
                   <img src={PRODUCT_IMAGES[p.img]} alt="" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 </div>
                 <div className="text-xs font-medium truncate text-lc-text-primary">{p.name}</div>
-                <div className="text-[10px] font-mono-num mt-1 text-lc-text-muted">{p.asin}</div>
+                <div className="text-xs font-mono-num mt-1 text-lc-text-muted">{p.asin}</div>
                 <div className="flex items-center justify-center gap-2 mt-1">
                   <span className="text-xs font-bold text-lc-primary">${p.price}</span>
-                  <span className="text-[10px] font-semibold" style={{ color: p.rating >= 4.5 ? LC.success : LC.teal }}><Star size={12} className="text-lc-gold fill-lc-gold" />{p.rating}</span>
+                  <span className="text-xs font-semibold" style={{ color: p.rating >= 4.5 ? LC.success : LC.teal }}><Star size={12} className="text-lc-gold fill-lc-gold" />{p.rating}</span>
                 </div>
-                <div className="text-[10px] font-mono-num mt-0.5" style={{ color: LC.success }}>Sales: {p.sales.toLocaleString()}</div>
+                <div className="text-xs font-mono-num mt-0.5" style={{ color: LC.success }}>Sales: {p.sales.toLocaleString()}</div>
               </div>
             ))}
           </div>
@@ -274,7 +274,7 @@ export default function ReportAnalysis() {
       {activeTab === 2 && (
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词验证 - 扩展列表</h3>
-          <table className="w-full">
+          <table className="w-full min-w-[640px]">
             <thead>
               <tr className="bg-lc-bg-warm">
                 {["关键词", "搜索排名", "月搜索量", "点击集中度", "竞争度", "趋势"].map(h => (
@@ -298,7 +298,7 @@ export default function ReportAnalysis() {
                       </div>
                     </div>
                   </td>
-                  <td className="py-2 px-3 text-right"><span className="text-[10px] font-medium px-1.5 py-0.5 rounded-sm" style={{ background: `${LC.success}10`, color: LC.success }}>↑</span></td>
+                  <td className="py-2 px-3 text-right"><span className="text-xs font-medium px-1.5 py-0.5 rounded-sm" style={{ background: `${LC.success}10`, color: LC.success }}>↑</span></td>
                 </tr>
               ))}
             </tbody>
@@ -332,13 +332,13 @@ export default function ReportAnalysis() {
           <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">评论情感分析</h3>
             {vocLoading ? (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {Array.from({ length: 4 }).map((_, i) => (
                   <Skeleton key={i} className="h-16 w-full" />
                 ))}
               </div>
             ) : vocStats ? (
-              <div className="grid grid-cols-4 gap-4 mb-4">
+              <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="rounded-lg p-3 text-center bg-lc-bg-warm">
                   <div className="text-[11px] font-medium mb-1 text-lc-text-muted">总评论数</div>
                   <div className="text-lg font-bold font-mono-num text-lc-text-primary">{vocStats.total.toLocaleString()}</div>
@@ -346,12 +346,12 @@ export default function ReportAnalysis() {
                 <div className="rounded-lg p-3 text-center bg-lc-success/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-success">好评</div>
                   <div className="text-lg font-bold font-mono-num text-lc-success">{vocStats.positive.toLocaleString()}</div>
-                  <div className="text-[10px] text-lc-success">{((vocStats.positive / vocStats.total) * 100).toFixed(1)}%</div>
+                  <div className="text-xs text-lc-success">{((vocStats.positive / vocStats.total) * 100).toFixed(1)}%</div>
                 </div>
                 <div className="rounded-lg p-3 text-center bg-lc-danger/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-danger">差评</div>
                   <div className="text-lg font-bold font-mono-num text-lc-danger">{vocStats.negative.toLocaleString()}</div>
-                  <div className="text-[10px] text-lc-danger">{((vocStats.negative / vocStats.total) * 100).toFixed(1)}%</div>
+                  <div className="text-xs text-lc-danger">{((vocStats.negative / vocStats.total) * 100).toFixed(1)}%</div>
                 </div>
                 <div className="rounded-lg p-3 text-center bg-lc-warning/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-warning">平均评分</div>
@@ -407,7 +407,7 @@ export default function ReportAnalysis() {
                   <button onClick={() => setShowReviewModal(false)} className="text-lc-text-muted"><X size={18} /></button>
                 </div>
                 <div className="p-4 overflow-auto h-[calc(80vh-60px)]">
-                  <table className="w-full">
+                  <table className="w-full min-w-[640px]">
                     <thead>
                       <tr className="bg-lc-bg-warm">
                         {["商品图片","商品","好评点","吐槽点","使用场景"].map(h => <th key={h} className="py-2 px-3 text-xs font-semibold text-left text-lc-text-secondary">{h}</th>)}
@@ -424,7 +424,7 @@ export default function ReportAnalysis() {
                           <td className="py-2 px-3 text-xs font-medium text-lc-text-primary">{item.product}</td>
                           <td className="py-2 px-3 text-xs font-medium" style={{ color: LC.success }}>{item.positive}</td>
                           <td className="py-2 px-3 text-xs" style={{ color: LC.danger }}>{item.negative}</td>
-                          <td className="py-2 px-3"><span className="text-[10px] px-1.5 py-0.5 rounded-sm font-medium" style={{ background: `${LC.primary}10`, color: LC.primary }}>{item.scenario}</span></td>
+                          <td className="py-2 px-3"><span className="text-xs px-1.5 py-0.5 rounded-sm font-medium" style={{ background: `${LC.primary}10`, color: LC.primary }}>{item.scenario}</span></td>
                         </tr>
                       ))}
                     </tbody>
@@ -464,7 +464,7 @@ export default function ReportAnalysis() {
       {activeTab === 6 && (
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">商品对比</h3>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {SAMPLE_PRODUCTS.slice(0, 4).map((item, idx) => (
               <div key={idx} className="border rounded-lg p-3 transition-all hover:shadow-lc-hover border-lc-border">
                 <div className="w-20 h-20 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-3">
@@ -479,7 +479,7 @@ export default function ReportAnalysis() {
                 <div className="mt-3">
                   {[{t:'好评点',items:['便携','快速','易用'],bg:`${LC.success}10`,tc:LC.success},{t:'使用场景',items:['旅行','日常'],bg:`${LC.primary}10`,tc:LC.gold}].map(g => (
                     <div key={g.t} className="mb-1.5">
-                      <div className="text-[10px] mb-0.5 text-lc-text-muted">{g.t}</div>
+                      <div className="text-xs mb-0.5 text-lc-text-muted">{g.t}</div>
                       <div className="flex flex-wrap gap-1">{g.items.map(t => <span key={t} className="text-[9px] px-1.5 py-0.5 rounded-sm font-medium" style={{ background: g.bg, color: g.tc }}>{t}</span>)}</div>
                     </div>
                   ))}

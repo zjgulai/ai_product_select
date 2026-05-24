@@ -77,7 +77,7 @@ export default function AmazonKeyword() {
 
       {/* Stats Cards - Clickable */}
       {!hasSearched && (
-        <div className="grid grid-cols-4 gap-4 mb-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           {statsLoading ? (
             Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/40">
@@ -111,11 +111,11 @@ export default function AmazonKeyword() {
             <h3 className="text-sm font-semibold text-lc-primary">查看示例报告</h3>
             <span className="text-xs text-lc-text-muted">以下为各类目示例报告</span>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {EXAMPLE_REPORTS.map((report, ri) => (
               <div key={report.keyword} className="border rounded-lg p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lc-hover cursor-pointer group border-lc-border">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-sm font-medium" style={{ background: LC.primary, color: LC.textInverse }}>示例</span>
+                  <DataBadge type="sample" />
                 </div>
                 <h4 className="text-sm font-semibold mb-2 text-lc-primary">{report.keyword}</h4>
                 <img src={PRODUCT_IMAGES[ri % PRODUCT_IMAGES.length]} alt="" className="w-14 h-14 rounded object-cover mb-2 ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
@@ -150,10 +150,10 @@ export default function AmazonKeyword() {
                 ))}
               </div>
             ) : (
-              <table className="w-full">
+              <table className="w-full min-w-[640px]">
                 <thead>
                   <tr className="bg-lc-bg-warm">
-                    {["排名", "关键词", "亚马逊搜索趋势", "月销量", "月销售额($)", "平均价格($)", "评分", "top3销量占比", "新品销量占比", "操作"].map((h, i) => (
+                    {["排名", "关键词", "亚马逊搜索趋势", "月销量", "月销售额($)", "平均价格($)", "评分", "操作"].map((h, i) => (
                       <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[60px]':i===1?'text-left w-[200px]':i===2?'text-center w-[150px]':'text-right'}`}>{h}</th>
                     ))}
                   </tr>
@@ -164,29 +164,27 @@ export default function AmazonKeyword() {
                       <td className="py-2.5 px-3 text-xs font-mono-num text-lc-text-muted">{item.rank}</td>
                       <td className="py-2.5 px-3">
                         <div className="text-xs font-semibold text-lc-primary">{item.keyword}</div>
-                        <button className="text-[10px] font-medium" style={{ color: LC.teal }}>查看所属类目</button>
+                        <button className="text-xs font-medium" style={{ color: LC.teal }}>查看所属类目</button>
                       </td>
                       <td className="py-2.5 px-3"><div className="flex justify-center"><MiniTrend data={item.trend} /></div></td>
                       <td className="py-2.5 px-3 text-right">
                         <div className="text-xs font-mono-num font-semibold text-lc-text-primary">{item.monthlySales.toLocaleString()}</div>
-                        <div className="text-[10px] font-medium" style={{ color: LC.success }}>{item.salesGrowth}</div>
+                        <div className="text-xs font-medium" style={{ color: LC.success }}>{item.salesGrowth}</div>
                       </td>
                       <td className="py-2.5 px-3 text-right">
                         <div className="text-xs font-mono-num font-semibold text-lc-primary">{item.monthlyRevenue.toLocaleString()}</div>
-                        <div className="text-[10px] font-medium" style={{ color: LC.success }}>{item.revenueGrowth}</div>
+                        <div className="text-xs font-medium" style={{ color: LC.success }}>{item.revenueGrowth}</div>
                       </td>
                       <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-text-primary">{item.avgPrice}</td>
                       <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.avgRating >= 4.5 ? LC.success : LC.teal }}>{item.avgRating}</span></td>
-                      <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.top3Ratio}</td>
-                      <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.newRatio}</td>
                       <td className="py-2.5 px-3 text-center">
-                        <button className="text-[10px] font-medium block mb-1 text-lc-primary">查看商品</button>
-                        <button className="text-[10px] text-white px-2 py-0.5 rounded-sm font-medium bg-lc-primary">创建报告</button>
+                        <button className="text-xs font-medium block mb-1 text-lc-primary">查看商品</button>
+                        <button className="text-xs text-white px-2 py-0.5 rounded-sm font-medium bg-lc-primary">创建报告</button>
                       </td>
                     </tr>
                   ))}
                   {searchResults?.length === 0 && (
-                    <tr><td colSpan={10} className="py-8 text-center text-xs text-lc-text-muted">暂无搜索结果</td></tr>
+                    <tr><td colSpan={8} className="py-8 text-center text-xs text-lc-text-muted">暂无搜索结果</td></tr>
                   )}
                 </tbody>
               </table>

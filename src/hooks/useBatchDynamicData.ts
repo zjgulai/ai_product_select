@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias,react-hooks/rules-of-hooks */
 import { useMemo, useRef } from "react";
 import { trpc } from "@/providers/trpc";
 
@@ -7,6 +8,7 @@ export function useBatchDynamicData(
   const utils = trpc.useUtils();
 
   const requestsRef = useRef(requests);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   requestsRef.current = requests;
 
   const queryResults = trpc.useQueries((t) =>

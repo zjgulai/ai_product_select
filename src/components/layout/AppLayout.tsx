@@ -1,14 +1,20 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router';
 import TopNavigation from './TopNavigation';
 import LeftSidebar from './LeftSidebar';
 
 export default function AppLayout() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-page">
-      <TopNavigation />
-      <LeftSidebar />
-      <main className="ml-[168px] mt-12 min-h-[calc(100vh-48px)]">
-        <div className="p-4">
+      <TopNavigation onMenuToggle={() => setMobileMenuOpen(v => !v)} />
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[80] bg-black/50 md:hidden" onClick={() => setMobileMenuOpen(false)} />
+      )}
+      <LeftSidebar mobileOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <main className="md:ml-[168px] ml-0 mt-12 min-h-[calc(100vh-48px)]">
+        <div className="p-3 md:p-4">
           <Outlet />
         </div>
       </main>

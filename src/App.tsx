@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route } from 'react-router';
 import AppLayout from '@/components/layout/AppLayout';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
+import { Toaster } from '@/components/ui/sonner';
 
 // Eager load home page for fastest LCP
 import TikTokHome from '@/pages/tiktok/Home';
@@ -28,6 +29,8 @@ const DataManager = lazy(() => import('@/pages/data/DataManager'));
 const FusionOpportunities = lazy(() => import('@/pages/fusion/Opportunities'));
 const ConceptDetail = lazy(() => import('@/pages/fusion/ConceptDetail'));
 const FusionReport = lazy(() => import('@/pages/fusion/FusionReport'));
+const IpmsTracking = lazy(() => import('@/pages/project/IpmsTracking'));
+const IpmsProjectDetail = lazy(() => import('@/pages/project/IpmsProjectDetail'));
 
 function PageFallback() {
   return (
@@ -51,6 +54,7 @@ const L = (Comp: React.ComponentType) => (
 function App() {
   return (
     <HashRouter>
+      <Toaster position="top-right" richColors closeButton duration={2500} />
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<TikTokHome />} />
@@ -73,6 +77,8 @@ function App() {
           <Route path="/report/analysis" element={L(ReportAnalysis)} />
           <Route path="/user/center" element={L(UserCenter)} />
           <Route path="/data/manager" element={L(DataManager)} />
+          <Route path="/project/tracking" element={L(IpmsTracking)} />
+          <Route path="/project/:id" element={L(IpmsProjectDetail)} />
           <Route path="/fusion/opportunities" element={L(FusionOpportunities)} />
           <Route path="/fusion/concept/:id" element={L(ConceptDetail)} />
           <Route path="/fusion/report" element={L(FusionReport)} />

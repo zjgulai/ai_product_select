@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import { useParams, useNavigate } from 'react-router';
@@ -52,7 +53,7 @@ function SentimentBadge({ sentiment }: { sentiment: string }) {
   const s = map[sentiment] || map.neutral;
 
   return (
-    <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium" style={{ background: s.bg, color: s.color }}>
+    <span className="text-xs px-1.5 py-0.5 rounded-full font-medium" style={{ background: s.bg, color: s.color }}>
       {s.label}
     </span>
   );
@@ -64,7 +65,7 @@ function StarDisplay({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star key={i} size={10} className={i < Math.round(rating) ? 'text-lc-gold fill-lc-gold' : 'text-lc-border'} />
       ))}
-      <span className="text-[10px] font-mono-num ml-0.5 text-lc-text-secondary">{rating.toFixed(1)}</span>
+      <span className="text-xs font-mono-num ml-0.5 text-lc-text-secondary">{rating.toFixed(1)}</span>
     </div>
   );
 }
@@ -144,26 +145,26 @@ export default function ReviewsPage() {
       ) : (
         <>
           {/* Stats Header */}
-          <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
+          <div className="bg-white rounded-xl p-5 mb-4 ring-1 ring-lc-border/60 shadow-lc">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
-                <MessageSquare size={18} style={{ color: LC.textInverse }} />
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: `${LC.primary}12` }}>
+                <MessageSquare size={18} className="text-lc-primary" />
               </div>
               <div>
-                <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>评论分析</h2>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>基于 {statsData?.total || 0} 条评论的情感与维度分析</p>
+                <h2 className="text-lg font-bold text-lc-text-primary">评论分析</h2>
+                <p className="text-xs text-lc-text-muted">基于 {statsData?.total || 0} 条评论的情感与维度分析</p>
               </div>
             </div>
             <div className="flex items-center gap-6">
               {[
-                { label: '总评论', value: statsData?.total || 0, color: LC.textInverse },
-                { label: '好评', value: `${((statsData?.positive || 0) / (statsData?.total || 1) * 100).toFixed(0)}%`, color: LC.successLight },
-                { label: '差评', value: `${((statsData?.negative || 0) / (statsData?.total || 1) * 100).toFixed(0)}%`, color: LC.dangerLight },
+                { label: '总评论', value: statsData?.total || 0, color: LC.primary },
+                { label: '好评率', value: statsData?.total ? `${((statsData?.positive || 0) / statsData.total * 100).toFixed(0)}%` : '--', color: LC.success },
+                { label: '差评率', value: statsData?.total ? `${((statsData?.negative || 0) / statsData.total * 100).toFixed(0)}%` : '--', color: LC.danger },
                 { label: '平均评分', value: statsData?.avgRating || '--', color: LC.gold },
               ].map(s => (
                 <div key={s.label} className="text-center">
                   <div className="text-xl font-bold font-mono-num" style={{ color: s.color }}>{s.value}</div>
-                  <div className="text-[10px]" style={{ color: 'rgba(255,255,255,0.5)' }}>{s.label}</div>
+                  <div className="text-xs text-lc-text-muted">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -175,7 +176,7 @@ export default function ReviewsPage() {
               {/* Sentiment */}
               <div className="flex items-center gap-1.5">
                 <Filter size={12} className="text-lc-text-muted" />
-                <span className="text-[10px] font-medium text-lc-text-secondary">情感:</span>
+                <span className="text-xs font-medium text-lc-text-secondary">情感:</span>
                 {SENTIMENT_OPTIONS.map(opt => (
                   <button
                     key={opt.key}
@@ -193,7 +194,7 @@ export default function ReviewsPage() {
               {/* Rating */}
               <div className="flex items-center gap-1.5">
                 <Star size={12} className="text-lc-text-muted" />
-                <span className="text-[10px] font-medium text-lc-text-secondary">星级:</span>
+                <span className="text-xs font-medium text-lc-text-secondary">星级:</span>
                 {RATING_OPTIONS.map(star => (
                   <button
                     key={star}
@@ -202,7 +203,7 @@ export default function ReviewsPage() {
                       ratingFilter === star ? 'bg-lc-gold text-white' : 'bg-lc-bg-warm text-lc-text-secondary hover:bg-lc-border-light'
                     }`}
                   >
-                    {star}★
+                    <span className="flex items-center gap-0.5"><Star size={10} className="fill-lc-gold text-lc-gold" /> {star}</span>
                   </button>
                 ))}
               </div>
@@ -229,12 +230,12 @@ export default function ReviewsPage() {
             {allAspects.length > 0 && (
               <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-lc-border-light flex-wrap">
                 <Tag size={11} className="text-lc-text-muted shrink-0" />
-                <span className="text-[10px] font-medium text-lc-text-secondary shrink-0">方面:</span>
+                <span className="text-xs font-medium text-lc-text-secondary shrink-0">方面:</span>
                 {allAspects.map(aspect => (
                   <button
                     key={aspect}
                     onClick={() => { setAspectFilter(aspectFilter === aspect ? null : aspect); setPage(0); }}
-                    className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-all ${
+                    className={`px-2 py-0.5 rounded-full text-xs font-medium transition-all ${
                       aspectFilter === aspect ? 'bg-lc-primary text-white' : 'bg-lc-bg-warm text-lc-text-secondary hover:bg-lc-primary-light hover:text-lc-primary'
                     }`}
                   >
@@ -251,7 +252,7 @@ export default function ReviewsPage() {
               <h3 className="text-sm font-semibold text-lc-primary flex items-center gap-1.5">
                 <MessageSquare size={14} /> 评论列表
               </h3>
-              <span className="text-[10px] font-medium text-lc-text-muted">
+              <span className="text-xs font-medium text-lc-text-muted">
                 共 {filteredReviews.length} 条
                 {filteredReviews.length !== allReviews.length && ` (筛选自 ${allReviews.length})`}
               </span>
@@ -261,7 +262,7 @@ export default function ReviewsPage() {
               <div className="flex flex-col items-center justify-center py-16">
                 <MessageSquare size={32} className="text-lc-border mb-3" />
                 <p className="text-sm font-medium text-lc-text-muted">暂无匹配的评论</p>
-                <p className="text-[10px] text-lc-border-strong mt-1">尝试调整筛选条件</p>
+                <p className="text-xs text-lc-border-strong mt-1">尝试调整筛选条件</p>
               </div>
             ) : (
               <div className="divide-y divide-lc-border-light">
@@ -269,12 +270,12 @@ export default function ReviewsPage() {
                   <div key={review.id} className="p-4 hover:bg-lc-bg-warm transition-colors">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-lc-bg-warm flex items-center justify-center text-[10px] font-bold text-lc-text-secondary">
+                        <div className="w-7 h-7 rounded-full bg-lc-bg-warm flex items-center justify-center text-xs font-bold text-lc-text-secondary">
                           {review.reviewerName[0]}
                         </div>
                         <div>
                           <div className="text-xs font-medium text-lc-text-primary">{review.reviewerName}</div>
-                          <div className="text-[10px] text-lc-text-muted">{review.reviewDate}</div>
+                          <div className="text-xs text-lc-text-muted">{review.reviewDate}</div>
                         </div>
                         {review.verifiedPurchase && (
                           <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-lc-success/10 text-lc-success font-medium">Verified</span>
@@ -354,19 +355,19 @@ export default function ReviewsPage() {
                       <div className="h-full bg-lc-warning" style={{ width: `${(a.neutral / a.total) * 100}%` }} />
                       <div className="h-full bg-lc-danger" style={{ width: `${(a.negative / a.total) * 100}%` }} />
                     </div>
-                    <span className="text-[10px] font-mono-num text-lc-text-muted w-8 text-right">{a.total}</span>
+                    <span className="text-xs font-mono-num text-lc-text-muted w-8 text-right">{a.total}</span>
                   </div>
                 ))}
               </div>
               <div className="flex items-center gap-4 mt-3 pt-2 border-t border-lc-border-light">
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 rounded-sm bg-lc-success" /> <span className="text-[10px] text-lc-text-muted">正面</span>
+                  <div className="w-3 h-3 rounded-sm bg-lc-success" /> <span className="text-xs text-lc-text-muted">正面</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 rounded-sm bg-lc-warning" /> <span className="text-[10px] text-lc-text-muted">中性</span>
+                  <div className="w-3 h-3 rounded-sm bg-lc-warning" /> <span className="text-xs text-lc-text-muted">中性</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="w-3 h-3 rounded-sm bg-lc-danger" /> <span className="text-[10px] text-lc-text-muted">负面</span>
+                  <div className="w-3 h-3 rounded-sm bg-lc-danger" /> <span className="text-xs text-lc-text-muted">负面</span>
                 </div>
               </div>
             </div>

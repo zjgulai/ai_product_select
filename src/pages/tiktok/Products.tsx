@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */n
 import { useState } from 'react';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
-import CategoryFilter from '@/components/shared/CategoryFilter';
+import { CATEGORIES } from '@/data/mockData';
 import MiniTrend from '@/components/shared/MiniTrend';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
@@ -22,6 +23,7 @@ export default function TikTokProducts() {
   const [priceMax, setPriceMax] = useState("");
   const [ratingMin, setRatingMin] = useState("");
   const [page, setPage] = useState(0);
+  const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const limit = 20;
 
   const { data, isLoading, isError } = trpc.tiktok.products.list.useQuery(
@@ -40,6 +42,10 @@ export default function TikTokProducts() {
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / limit);
 
+  const toggleCategory = (cat: string) => {
+    setSelectedCats(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
+  };
+
   if (isError) return <ErrorState />;
 
   return (
@@ -57,7 +63,7 @@ export default function TikTokProducts() {
           </div>
           <button className="h-9 px-6 text-white text-xs font-medium rounded-r-full transition-all hover:brightness-110 bg-lc-primary">搜索</button>
           {searchText && (
-            <span className="ml-2 text-[10px] font-medium text-lc-text-muted">找到 {total} 条</span>
+            <span className="ml-2 text-xs font-medium text-lc-text-muted">找到 {total} 条</span>
           )}
         </div>
       </div>
@@ -72,11 +78,9 @@ export default function TikTokProducts() {
         </div>
       </div>
 
-      <CategoryFilter />
-
-      {/* Time + Filters */}
+      {/* Time + Filters + Categories */}
       <div className="bg-white p-3 border-b border-lc-border">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <div className="flex items-center gap-2">
             {TIME_RANGES.map((t, i) => (
               <button key={t} onClick={() => setTimeRange(i)} className="px-3 h-7 rounded-md text-xs font-medium transition-all"
@@ -84,18 +88,31 @@ export default function TikTokProducts() {
             ))}
           </div>
           <div className="w-px h-5 bg-lc-border" />
+          <div className="flex items-center gap-1.5 flex-wrap overflow-x-auto max-w-[280px]">
+            <span className="text-xs font-medium text-lc-text-secondary shrink-0">类目:</span>
+            {CATEGORIES.slice(0, 8).map(cat => (
+              <button key={cat} onClick={() => toggleCategory(cat)}
+                className="px-2 h-[22px] rounded-full text-[11px] transition-all duration-150 border font-medium shrink-0"
+                style={selectedCats.includes(cat)
+                  ? { backgroundColor: LC.primary, color: '#fff', borderColor: LC.primary }
+                  : { backgroundColor: '#fff', color: LC.textSecondary, borderColor: LC.border }}>
+                {cat}
+              </button>
+            ))}
+          </div>
+          <div className="w-px h-5 bg-lc-border" />
           <div className="flex items-center gap-1.5">
             <Filter size={11} className="text-lc-text-muted" />
-            <span className="text-[10px] font-medium text-lc-text-secondary">价格:</span>
-            <input type="number" value={priceMin} onChange={e => setPriceMin(e.target.value)} placeholder="$0" className="w-16 h-6 border rounded px-1.5 text-[10px] border-lc-border" />
-            <span className="text-[10px] text-lc-border-strong">-</span>
-            <input type="number" value={priceMax} onChange={e => setPriceMax(e.target.value)} placeholder="$999" className="w-16 h-6 border rounded px-1.5 text-[10px] border-lc-border" />
+            <span className="text-xs font-medium text-lc-text-secondary">价格:</span>
+            <input type="number" value={priceMin} onChange={e => setPriceMin(e.target.value)} placeholder="$0" className="w-16 h-6 border rounded px-1.5 text-xs border-lc-border" />
+            <span className="text-xs text-lc-border-strong">-</span>
+            <input type="number" value={priceMax} onChange={e => setPriceMax(e.target.value)} placeholder="$999" className="w-16 h-6 border rounded px-1.5 text-xs border-lc-border" />
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-medium text-lc-text-secondary">评分:</span>
-            <input type="number" value={ratingMin} onChange={e => setRatingMin(e.target.value)} placeholder="0" min="0" max="5" step="0.1" className="w-14 h-6 border rounded px-1.5 text-[10px] border-lc-border" />
+            <span className="text-xs font-medium text-lc-text-secondary">评分:</span>
+            <input type="number" value={ratingMin} onChange={e => setRatingMin(e.target.value)} placeholder="0" min="0" max="5" step="0.1" className="w-14 h-6 border rounded px-1.5 text-xs border-lc-border" />
           </div>
-          <button onClick={() => { setPriceMin(""); setPriceMax(""); setRatingMin(""); setSearchText(""); setPage(0); }} className="ml-auto text-[10px] font-medium px-2 h-6 rounded transition-colors text-lc-text-muted">重置筛选</button>
+          <button onClick={() => { setPriceMin(""); setPriceMax(""); setRatingMin(""); setSearchText(""); setSelectedCats([]); setPage(0); }} className="ml-auto text-xs font-medium px-2 h-6 rounded transition-colors text-lc-text-muted">重置筛选</button>
         </div>
       </div>
 
@@ -104,7 +121,7 @@ export default function TikTokProducts() {
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-medium text-lc-text-muted">共 {total} 条</span>
+            <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
             <button className="flex items-center gap-1 text-xs font-medium transition-colors text-lc-primary">
               <Download size={12} /> 数据导出
             </button>
@@ -124,7 +141,7 @@ export default function TikTokProducts() {
               ))}
             </div>
           ) : (
-            <table className="w-full">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["商品信息","销量","销售额($)","销量趋势","带货达人数","价格($)","评分","所属小店","操作"].map((h, i) => (
@@ -137,16 +154,16 @@ export default function TikTokProducts() {
                   <tr key={item.id ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2.5">
-                        <img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
+                        <img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt="" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
                           <div className="text-xs truncate max-w-[200px] font-medium text-lc-text-primary" title={item.name}>{item.name}</div>
-                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-sm mt-0.5 inline-block" style={{ background: `${LC.primary}08`, color: LC.primary }}>{item.category}</span>
+                          <span className="text-xs font-medium px-1.5 py-0.5 rounded-sm mt-0.5 inline-block" style={{ background: `${LC.primary}08`, color: LC.primary }}>{item.category}</span>
                         </div>
                       </div>
                     </td>
                     <td className="py-2.5 px-3 text-right">
                       <div className="text-xs font-semibold font-mono-num text-lc-text-primary">{item.sales.toLocaleString()}</div>
-                      <div className="text-[10px] font-medium" style={{ color: item.salesGrowth.startsWith('+') ? LC.success : LC.danger }}>{item.salesGrowth}</div>
+                      <div className="text-xs font-medium" style={{ color: item.salesGrowth.startsWith('+') ? LC.success : LC.danger }}>{item.salesGrowth}</div>
                     </td>
                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.revenue.toLocaleString()}</td>
                     <td className="py-2.5 px-3"><div className="flex justify-center"><MiniTrend data={item.trend} /></div></td>
@@ -157,8 +174,8 @@ export default function TikTokProducts() {
                     <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[120px] text-lc-text-primary">{item.shop}</div></td>
                     <td className="py-2.5 px-3">
                       <div className="flex items-center justify-center gap-1">
-                        <button className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.style.color = '#FFB800'} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><Star size={13} /></button>
-                        <button className="transition-colors text-lc-border-strong" onMouseEnter={e => e.currentTarget.classList.add('text-lc-primary')} onMouseLeave={e => e.currentTarget.classList.add('text-lc-border-strong')}><ShoppingCart size={13} /></button>
+                        <button className="transition-colors text-lc-border-strong hover:text-yellow-500"><Star size={13} /></button>
+                        <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><ShoppingCart size={13} /></button>
                       </div>
                     </td>
                   </tr>

@@ -3,7 +3,7 @@
 // 后续替换为真实数据库查询即可
 // ========================================================================
 
-import { faker } from "@faker-js/faker";
+import { faker } from "@/lib/mock-faker";
 
 // --- 预设数据池 ---
 const CATEGORIES = [

@@ -11,7 +11,7 @@ import {
   userFavorites,
   fusionReports,
 } from "./schema";
-import { faker } from "@faker-js/faker";
+import { faker } from "@/lib/mock-faker";
 
 // ========================================================================
 // 虚拟数据生成器 —— 让平台"活"起来

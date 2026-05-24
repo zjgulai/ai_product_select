@@ -2,7 +2,7 @@
 // TikTok 虚拟数据服务层
 // ========================================================================
 
-import { faker } from "@faker-js/faker";
+import { faker } from "@/lib/mock-faker";
 
 function randInt(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function randFloat(min: number, max: number, d = 2) { return parseFloat((Math.random() * (max - min) + min).toFixed(d)); }

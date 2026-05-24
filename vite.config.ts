@@ -32,7 +32,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router', 'react-router-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-dom/client', 'react-router', 'react-router-dom'],
           'echarts': ['echarts', 'echarts-for-react'],
           'trpc': ['@trpc/client', '@trpc/react-query', '@trpc/server', '@tanstack/react-query'],
           'lucide': ['lucide-react'],

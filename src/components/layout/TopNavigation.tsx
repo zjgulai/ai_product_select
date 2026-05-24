@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ChevronDown, Globe, Sparkles, Menu } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface DropdownItem {
   label: string;
@@ -184,16 +185,23 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
 
       {/* Right Tools */}
       <div className="flex items-center gap-3 shrink-0">
-        <button className="text-xs px-5 h-7 rounded-full font-bold transition-all duration-200 hover:brightness-110"
+        <button
+          onClick={() => navigate('/fusion/opportunities')}
+          className="text-xs px-5 h-7 rounded-full font-bold transition-all duration-200 hover:brightness-110"
           style={{ background: '#E8785A', color: '#1C1917' }}>
           免费体验
         </button>
-        <button className="flex items-center gap-1 text-white/40 text-xs hover:text-white/70 transition-colors">
+        <button
+          onClick={() => toast.info('多语言支持即将上线')}
+          className="flex items-center gap-1 text-white/40 text-xs hover:text-white/70 transition-colors">
           <Globe size={13} /><span>中文</span><ChevronDown size={11} />
         </button>
-        <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: '#E8785A' }}>
+        <button
+          onClick={() => navigate('/user/center')}
+          className="w-7 h-7 rounded-full flex items-center justify-center transition-all hover:brightness-110"
+          style={{ background: '#E8785A' }}>
           <span className="text-xs font-bold" style={{ color: '#1C1917' }}>U</span>
-        </div>
+        </button>
       </div>
     </nav>
   );

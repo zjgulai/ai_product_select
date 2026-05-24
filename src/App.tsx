@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route } from 'react-router';
+import { lazy, Suspense, useEffect } from 'react';
+import { HashRouter, Routes, Route, useLocation } from 'react-router';
 import AppLayout from '@/components/layout/AppLayout';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';
 import { Toaster } from '@/components/ui/sonner';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
 
 // Eager load home page for fastest LCP
 import TikTokHome from '@/pages/tiktok/Home';
@@ -31,6 +32,7 @@ const ConceptDetail = lazy(() => import('@/pages/fusion/ConceptDetail'));
 const FusionReport = lazy(() => import('@/pages/fusion/FusionReport'));
 const IpmsTracking = lazy(() => import('@/pages/project/IpmsTracking'));
 const IpmsProjectDetail = lazy(() => import('@/pages/project/IpmsProjectDetail'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 
 function PageFallback() {
   return (
@@ -51,9 +53,16 @@ const L = (Comp: React.ComponentType) => (
   </ErrorBoundary>
 );
 
+function DocumentTitleSetter() {
+  const location = useLocation();
+  useDocumentTitle(location.pathname);
+  return null;
+}
+
 function App() {
   return (
     <HashRouter>
+      <DocumentTitleSetter />
       <Toaster position="top-right" richColors closeButton duration={2500} />
       <Routes>
         <Route element={<AppLayout />}>
@@ -82,6 +91,7 @@ function App() {
           <Route path="/fusion/opportunities" element={L(FusionOpportunities)} />
           <Route path="/fusion/concept/:id" element={L(ConceptDetail)} />
           <Route path="/fusion/report" element={L(FusionReport)} />
+          <Route path="*" element={L(NotFound)} />
         </Route>
       </Routes>
     </HashRouter>

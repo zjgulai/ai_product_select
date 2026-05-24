@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import { toast } from 'sonner';
 import {
   Home, Sparkles, BarChart3, ShoppingBag, Users, Store, Play, Video, Search,
   Trophy, FileText, Heart, Settings, ChevronDown, ChevronRight, Crown,
@@ -63,7 +64,7 @@ const MENU_GROUPS: MenuGroup[] = [
       { icon: FileText, label: "我的报告", path: "/report/analysis" },
       { icon: Briefcase, label: "项目跟踪", path: "/project/tracking", badge: "IPMS" },
       { icon: PersonStanding, label: "用户中心", path: "/user/center" },
-      { icon: Settings, label: "系统设置", path: "/user/center" },
+      { icon: Settings, label: "系统设置", path: "/data/manager" },
     ],
   },
 ];
@@ -145,7 +146,9 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
 
       {/* Bottom user card + upgrade */}
       <div className="p-2.5 pb-3 space-y-2">
-        <button className="w-full rounded-md py-1.5 flex items-center justify-center gap-1.5 text-[11px] font-bold transition-all hover:brightness-110"
+        <button
+          onClick={() => toast.info('会员升级功能即将上线，敬请期待')}
+          className="w-full rounded-md py-1.5 flex items-center justify-center gap-1.5 text-[11px] font-bold transition-all hover:brightness-110"
           style={{ background: 'linear-gradient(90deg, #E8785A, #D49450)', color: '#1C1917' }}>
           <Crown size={13} strokeWidth={1.5} /> 升级会员
         </button>

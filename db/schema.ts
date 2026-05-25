@@ -327,7 +327,7 @@ export type FusionReport = typeof fusionReports.$inferSelect;
 export const odsTiktokProducts = mysqlTable("ods_tiktok_products", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   productId: varchar("product_id", { length: 100 }).notNull(),
   productName: text("product_name"),
   category: varchar("category", { length: 255 }),
@@ -351,7 +351,7 @@ export type OdsTiktokProduct = typeof odsTiktokProducts.$inferSelect;
 export const odsTiktokCreators = mysqlTable("ods_tiktok_creators", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   creatorId: varchar("creator_id", { length: 100 }).notNull(),
   username: varchar("username", { length: 255 }),
   displayName: varchar("display_name", { length: 255 }),
@@ -374,7 +374,7 @@ export type OdsTiktokCreator = typeof odsTiktokCreators.$inferSelect;
 export const odsTiktokShops = mysqlTable("ods_tiktok_shops", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   shopId: varchar("shop_id", { length: 100 }).notNull(),
   name: varchar("name", { length: 255 }),
   country: varchar("country", { length: 50 }),
@@ -398,7 +398,7 @@ export type OdsTiktokShop = typeof odsTiktokShops.$inferSelect;
 export const odsTiktokVideos = mysqlTable("ods_tiktok_videos", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   videoId: varchar("video_id", { length: 100 }).notNull(),
   title: text("title"),
   creatorId: varchar("creator_id", { length: 100 }),
@@ -419,7 +419,7 @@ export type OdsTiktokVideo = typeof odsTiktokVideos.$inferSelect;
 export const odsTiktokLives = mysqlTable("ods_tiktok_lives", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   liveId: varchar("live_id", { length: 100 }).notNull(),
   title: text("title"),
   creatorId: varchar("creator_id", { length: 100 }),
@@ -439,7 +439,7 @@ export type OdsTiktokLive = typeof odsTiktokLives.$inferSelect;
 export const odsAmazonProducts = mysqlTable("ods_amazon_products", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   asin: varchar("asin", { length: 20 }).notNull(),
   title: text("title"),
   brand: varchar("brand", { length: 255 }),
@@ -466,7 +466,7 @@ export type OdsAmazonProduct = typeof odsAmazonProducts.$inferSelect;
 export const odsAmazonKeywords = mysqlTable("ods_amazon_keywords", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   keyword: varchar("keyword", { length: 255 }).notNull(),
   searchVolume: bigint("search_volume", { mode: "number" }).default(0),
   monthlyRevenue: decimal("monthly_revenue", { precision: 16, scale: 2 }),
@@ -488,7 +488,7 @@ export type OdsAmazonKeyword = typeof odsAmazonKeywords.$inferSelect;
 export const odsAmazonReviews = mysqlTable("ods_amazon_reviews", {
   id: serial("id").primaryKey(),
   snapshotDate: date("snapshot_date").notNull(),
-  importId: int("import_id"),
+  importId: bigint("import_id", { mode: "number" }),
   reviewId: varchar("review_id", { length: 100 }).notNull(),
   asin: varchar("asin", { length: 20 }).notNull(),
   rating: decimal("rating", { precision: 3, scale: 2 }),

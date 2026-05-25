@@ -24,7 +24,7 @@ export default defineConfig({
   },
   envDir: path.resolve(__dirname),
   define: {
-    'import.meta.env.VITE_USE_MOCK_DATA': '"false"',
+    // VITE_USE_MOCK_DATA 由 CI 环境变量控制，不在此处硬编码
   },
   build: {
     outDir: path.resolve(__dirname, "dist/public"),

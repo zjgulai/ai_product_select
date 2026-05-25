@@ -172,6 +172,7 @@ async function main() {
         const result = await crawlAmazonSearch({
           marketplace,
           keyword: flags.keyword,
+          category: flags.category,
           limit,
           browserPool,
           rateLimiter,

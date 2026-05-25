@@ -19,6 +19,7 @@ interface SearchResult {
   isPrime: boolean;
   sponsored: boolean;
   monthlySales: number;
+  category?: string;
 }
 
 function getBaseUrl(marketplace: "us" | "uk"): string {
@@ -105,6 +106,7 @@ async function parseSearchPage(page: Page): Promise<SearchResult[]> {
         isPrime: hasPrime,
         sponsored: isSponsored,
         monthlySales,
+        category: (opts as any).category || "search-results",
       });
     } catch {
       continue;
@@ -117,6 +119,7 @@ async function parseSearchPage(page: Page): Promise<SearchResult[]> {
 interface CrawlSearchOptions {
   marketplace?: "us" | "uk";
   keyword: string;
+  category?: string;
   limit?: number;
   browserPool: CrawlContext["browserPool"];
   rateLimiter: CrawlContext["rateLimiter"];
@@ -127,6 +130,7 @@ export async function crawlAmazonSearch(opts: CrawlSearchOptions) {
   const {
     marketplace = "us",
     keyword,
+    category,
     limit = 50,
     browserPool,
     rateLimiter,
@@ -171,6 +175,9 @@ export async function crawlAmazonSearch(opts: CrawlSearchOptions) {
       break;
     }
 
+    for (const r of pageResults) {
+      r.category = category || keyword;
+    }
     allResults.push(...pageResults);
     console.log(`   Page ${pageNum}: +${pageResults.length} results (total: ${allResults.length})`);
 

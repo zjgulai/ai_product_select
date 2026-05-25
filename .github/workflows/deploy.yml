@@ -29,6 +29,9 @@ jobs:
           NODE_ENV: production
           VITE_USE_MOCK_DATA: "true"
 
+      - name: Add 404.html for SPA fallback
+        run: cp dist/public/index.html dist/public/404.html
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 

@@ -26,6 +26,10 @@ const CATEGORY_NODES: Record<string, { us: string; uk: string }> = {
   "home-kitchen": { us: "home-kitchen", uk: "kitchen" },
   "toys-games": { us: "toys-games", uk: "toys" },
   "clothing": { us: "fashion", uk: "clothing" },
+  // 母婴电器细分品类
+  "breast-pumps": { us: "baby-products/166736011", uk: "baby/166736011" },
+  "bottle-feeding": { us: "baby-products/166764011", uk: "baby/166764011" },
+  "baby-food": { us: "baby-products/166835011", uk: "baby/166835011" },
 };
 
 function getBaseUrl(marketplace: "us" | "uk"): string {
@@ -85,9 +89,9 @@ async function parseBestSellersPage(page: Page, category: string): Promise<BestS
         // 提取完整文本块（Amazon Best Sellers 将所有信息放在一个块中）
         const fullText = card.textContent || "";
 
-        // 价格 — 支持 $, £, €, GBP, EUR 等格式
+        // 价格 — 支持 $, £, €, GBP, EUR 等格式（含空格和非断空格）
         let price = "";
-        const priceMatch = fullText.match(/([\$£€]|GBP|EUR|USD)\s*([\d,]+\.?\d*)/);
+        const priceMatch = fullText.match(/([\$£€]|GBP|EUR|USD)[\s\u00A0]*([\d,]+\.?\d*)/);
         if (priceMatch) price = priceMatch[0];
 
         // 评分
@@ -95,11 +99,16 @@ async function parseBestSellersPage(page: Page, category: string): Promise<BestS
         const ratingMatch = fullText.match(/([0-9.]+)\s*out\s*of\s*5/);
         if (ratingMatch) rating = ratingMatch[1];
 
-        // 评论数
+        // 评论数 — 先移除评分文本，避免匹配到 "5 stars"
         let reviewCount = 0;
-        const reviewMatch = fullText.match(/([\d,]+)\s*(?:ratings?|reviews?|stars?)/i);
+        const textWithoutRating = fullText.replace(/[0-9.]+\s*out\s*of\s*5\s*stars?/i, "");
+        const reviewMatch = textWithoutRating.match(/(\d[\d,]*)\s*(?:ratings?|reviews?|stars?)/i);
         if (reviewMatch) {
           reviewCount = parseInt(reviewMatch[1].replace(/,/g, ""), 10);
+        } else {
+          // Fallback: 找 "stars" 后面的数字
+          const fallbackMatch = textWithoutRating.match(/stars?\s+(\d[\d,]*)/i);
+          if (fallbackMatch) reviewCount = parseInt(fallbackMatch[1].replace(/,/g, ""), 10);
         }
 
         if (title && title.trim().length > 2) {

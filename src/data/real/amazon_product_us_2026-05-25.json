@@ -1,0 +1,27 @@
+{
+  "collectedAt": "2026-05-25T03:57:42.025Z",
+  "source": "amazon_product",
+  "marketplace": "us",
+  "count": 1,
+  "data": [
+    {
+      "asin": "B010OVZO64",
+      "title": "Pampers Swaddlers Diapers, Size 5 (20-37 lbs), 132 Count, Hypoallergenic, Absorbent, Keeps Baby Dry and Comfortable, Skin Safe Disposable Baby Diaper",
+      "brand": "Visit the Pampers Store",
+      "category": "",
+      "price": "GBP44.47",
+      "rating": "4.8",
+      "reviewCount": 129535,
+      "bsrRank": 31,
+      "imageUrl": "https://m.media-amazon.com/images/I/61mEyMh1e0L._AC_SY300_SX300_QL70_FMwebp_.jpg",
+      "description": "Wrap your baby in our best dryness and comfort ever. Try Pampers Swaddlers. These Pampers disposable diapers are designed with a KeepDry Liner and irresistible pillowy softness to keep your baby dry and comfortable from their very first days and beyond. Plus, they’re drier than the Luxury Diaper for all-night comfort. Pampers Swaddlers are dermatologist tested, hypoallergenic, and free of elemental chlorine, parabens, and latex** to protect babies’ sensitive skin. Pampers Swaddlers surround your baby with up to 100% blowout and leak protection, thanks to their absorbent core and All-Around LeakGuard with Blowout Barrier. Trusted by pediatricians and parents alike, Pampers Swaddlers are from the Most Awarded Diaper Brand^, the #1 pediatrician recommended brand^^, Best of Babylist winner, and the #1 choice of parents^^^. Pampers has been providing products that prioritize comfort, safety, and effectiveness for over 60 years. Earn savings while you shop with Pampers Rewards. Every 10 scan",
+      "features": [
+        "OUR BEST DRYNESS & COMFORT EVER: Pampers Swaddlers keep baby dry and are irresistibly soft to keep baby comfy.",
+        "DRIER PROTECTION: KeepDr Liner locks away wetness and mess from skin, keeping baby dry and comfortable.",
+        "SKIN-SAFE: Hypoallergenic and free of parabens, elemental chlorine, and latex** and dermatologically approved by the SHA (**No natural rubber)",
+        "LEAK AND BLOWOUT PROTECTION: up to 100% leakproof protection with an All-Around LeakGuard, Blowout Barrier and absorbent core.",
+        "COMFORTABLE SLEEP: Pampers is the #1 Brand*. For sleep. (*Based on Nielsen sales last 52 weeks)"
+      ]
+    }
+  ]
+}

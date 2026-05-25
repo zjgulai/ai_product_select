@@ -1,0 +1,2006 @@
+/* eslint-disable */
+// 自动生成 — 母婴品类 realistic 数据
+// 生成时间: 2026-05-24T18:05:20.885164
+
+export const TIKTOK_CREATORS = [
+  {
+    "id": 1,
+    "username": "creator_4273",
+    "display_name": "奶爸达人88",
+    "followers": 13292,
+    "monthly_sales": 1867,
+    "monthly_revenue": 184992.84,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": -0.24
+  },
+  {
+    "id": 2,
+    "username": "creator_2133",
+    "display_name": "母婴达人87",
+    "followers": 13999,
+    "monthly_sales": 710,
+    "monthly_revenue": 53205.48,
+    "categories": "[\"护理用品\", \"出行用品\", \"孕产妇\"]",
+    "fan_growth_rate": 18.75
+  },
+  {
+    "id": 3,
+    "username": "creator_7176",
+    "display_name": "宝妈达人58",
+    "followers": 17300,
+    "monthly_sales": 1905,
+    "monthly_revenue": 227005.62,
+    "categories": "[\"玩具早教\", \"睡眠用品\"]",
+    "fan_growth_rate": -7.15
+  },
+  {
+    "id": 4,
+    "username": "creator_1602",
+    "display_name": "育儿达人90",
+    "followers": 26246,
+    "monthly_sales": 1799,
+    "monthly_revenue": 198960.65,
+    "categories": "[\"玩具早教\", \"安全用品\", \"喂养用品\"]",
+    "fan_growth_rate": 10.14
+  },
+  {
+    "id": 5,
+    "username": "creator_6816",
+    "display_name": "奶爸达人83",
+    "followers": 11540,
+    "monthly_sales": 516,
+    "monthly_revenue": 43932.76,
+    "categories": "[\"安全用品\", \"孕产妇\", \"睡眠用品\"]",
+    "fan_growth_rate": 23.78
+  },
+  {
+    "id": 6,
+    "username": "creator_2615",
+    "display_name": "育儿达人29",
+    "followers": 21607,
+    "monthly_sales": 536,
+    "monthly_revenue": 40715.02,
+    "categories": "[\"玩具早教\", \"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 13.14
+  },
+  {
+    "id": 7,
+    "username": "creator_8586",
+    "display_name": "奶爸达人45",
+    "followers": 12202,
+    "monthly_sales": 761,
+    "monthly_revenue": 91162.66,
+    "categories": "[\"喂养用品\", \"护理用品\"]",
+    "fan_growth_rate": -7.07
+  },
+  {
+    "id": 8,
+    "username": "creator_3321",
+    "display_name": "育儿达人40",
+    "followers": 11576,
+    "monthly_sales": 1640,
+    "monthly_revenue": 99836.64,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 27.87
+  },
+  {
+    "id": 9,
+    "username": "creator_8178",
+    "display_name": "母婴达人41",
+    "followers": 14495,
+    "monthly_sales": 1111,
+    "monthly_revenue": 40046.76,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 14.48
+  },
+  {
+    "id": 10,
+    "username": "creator_3692",
+    "display_name": "奶爸达人67",
+    "followers": 13104,
+    "monthly_sales": 331,
+    "monthly_revenue": 15126.96,
+    "categories": "[\"护理用品\"]",
+    "fan_growth_rate": 12.93
+  },
+  {
+    "id": 11,
+    "username": "creator_4798",
+    "display_name": "母婴达人81",
+    "followers": 15521,
+    "monthly_sales": 2237,
+    "monthly_revenue": 104245.68,
+    "categories": "[\"安全用品\", \"睡眠用品\", \"孕产妇\"]",
+    "fan_growth_rate": 28.57
+  },
+  {
+    "id": 12,
+    "username": "creator_7370",
+    "display_name": "宝妈达人91",
+    "followers": 12050,
+    "monthly_sales": 1119,
+    "monthly_revenue": 55202.12,
+    "categories": "[\"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 17.52
+  },
+  {
+    "id": 13,
+    "username": "creator_2667",
+    "display_name": "奶爸达人47",
+    "followers": 22209,
+    "monthly_sales": 416,
+    "monthly_revenue": 24684.88,
+    "categories": "[\"喂养用品\", \"护理用品\"]",
+    "fan_growth_rate": 9.46
+  },
+  {
+    "id": 14,
+    "username": "creator_7367",
+    "display_name": "母婴达人76",
+    "followers": 47454,
+    "monthly_sales": 2556,
+    "monthly_revenue": 102957.95,
+    "categories": "[\"孕产妇\", \"睡眠用品\"]",
+    "fan_growth_rate": 4.81
+  },
+  {
+    "id": 15,
+    "username": "creator_5873",
+    "display_name": "宝妈达人87",
+    "followers": 16475,
+    "monthly_sales": 2041,
+    "monthly_revenue": 85834.87,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 12.83
+  },
+  {
+    "id": 16,
+    "username": "creator_7852",
+    "display_name": "奶爸达人74",
+    "followers": 18115,
+    "monthly_sales": 1476,
+    "monthly_revenue": 95252.03,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 20.98
+  },
+  {
+    "id": 17,
+    "username": "creator_3838",
+    "display_name": "奶爸达人63",
+    "followers": 16820,
+    "monthly_sales": 1801,
+    "monthly_revenue": 100847.23,
+    "categories": "[\"护理用品\"]",
+    "fan_growth_rate": 22.59
+  },
+  {
+    "id": 18,
+    "username": "creator_8939",
+    "display_name": "奶爸达人25",
+    "followers": 25892,
+    "monthly_sales": 3709,
+    "monthly_revenue": 383397.23,
+    "categories": "[\"玩具早教\", \"安全用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 3.36
+  },
+  {
+    "id": 19,
+    "username": "creator_8272",
+    "display_name": "母婴达人22",
+    "followers": 13701,
+    "monthly_sales": 1080,
+    "monthly_revenue": 40435.58,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 15.58
+  },
+  {
+    "id": 20,
+    "username": "creator_3755",
+    "display_name": "母婴达人73",
+    "followers": 12572,
+    "monthly_sales": 1071,
+    "monthly_revenue": 103701.33,
+    "categories": "[\"玩具早教\", \"孕产妇\"]",
+    "fan_growth_rate": 6.71
+  },
+  {
+    "id": 21,
+    "username": "creator_9898",
+    "display_name": "育儿达人70",
+    "followers": 11561,
+    "monthly_sales": 300,
+    "monthly_revenue": 31210.5,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 12.56
+  },
+  {
+    "id": 22,
+    "username": "creator_5055",
+    "display_name": "育儿达人5",
+    "followers": 81299,
+    "monthly_sales": 1978,
+    "monthly_revenue": 139401.35,
+    "categories": "[\"孕产妇\", \"喂养用品\"]",
+    "fan_growth_rate": 2.66
+  },
+  {
+    "id": 23,
+    "username": "creator_4882",
+    "display_name": "奶爸达人95",
+    "followers": 14005,
+    "monthly_sales": 2088,
+    "monthly_revenue": 173122.66,
+    "categories": "[\"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 6.86
+  },
+  {
+    "id": 24,
+    "username": "creator_4390",
+    "display_name": "宝妈达人73",
+    "followers": 16453,
+    "monthly_sales": 1972,
+    "monthly_revenue": 121422.73,
+    "categories": "[\"玩具早教\", \"孕产妇\"]",
+    "fan_growth_rate": 8.25
+  },
+  {
+    "id": 25,
+    "username": "creator_5794",
+    "display_name": "育儿达人74",
+    "followers": 11874,
+    "monthly_sales": 1746,
+    "monthly_revenue": 94390.29,
+    "categories": "[\"安全用品\", \"喂养用品\", \"出行用品\"]",
+    "fan_growth_rate": 32.07
+  },
+  {
+    "id": 26,
+    "username": "creator_3078",
+    "display_name": "奶爸达人32",
+    "followers": 32302,
+    "monthly_sales": 4811,
+    "monthly_revenue": 207651.95,
+    "categories": "[\"孕产妇\", \"出行用品\"]",
+    "fan_growth_rate": 10.93
+  },
+  {
+    "id": 27,
+    "username": "creator_9019",
+    "display_name": "奶爸达人74",
+    "followers": 20183,
+    "monthly_sales": 2112,
+    "monthly_revenue": 183566.97,
+    "categories": "[\"睡眠用品\", \"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 30.83
+  },
+  {
+    "id": 28,
+    "username": "creator_5558",
+    "display_name": "育儿达人59",
+    "followers": 20461,
+    "monthly_sales": 1358,
+    "monthly_revenue": 156880.05,
+    "categories": "[\"玩具早教\", \"喂养用品\"]",
+    "fan_growth_rate": 23.13
+  },
+  {
+    "id": 29,
+    "username": "creator_2526",
+    "display_name": "母婴达人82",
+    "followers": 26182,
+    "monthly_sales": 3367,
+    "monthly_revenue": 302265.5,
+    "categories": "[\"孕产妇\", \"喂养用品\"]",
+    "fan_growth_rate": 17.85
+  },
+  {
+    "id": 30,
+    "username": "creator_9105",
+    "display_name": "育儿达人42",
+    "followers": 48893,
+    "monthly_sales": 6135,
+    "monthly_revenue": 641419.93,
+    "categories": "[\"玩具早教\", \"孕产妇\"]",
+    "fan_growth_rate": 5.34
+  },
+  {
+    "id": 31,
+    "username": "creator_6631",
+    "display_name": "宝妈达人6",
+    "followers": 11656,
+    "monthly_sales": 1507,
+    "monthly_revenue": 58715.32,
+    "categories": "[\"喂养用品\", \"孕产妇\"]",
+    "fan_growth_rate": 20.3
+  },
+  {
+    "id": 32,
+    "username": "creator_8009",
+    "display_name": "奶爸达人89",
+    "followers": 14193,
+    "monthly_sales": 2112,
+    "monthly_revenue": 236220.12,
+    "categories": "[\"护理用品\", \"出行用品\", \"孕产妇\"]",
+    "fan_growth_rate": 12.48
+  },
+  {
+    "id": 33,
+    "username": "creator_2350",
+    "display_name": "育儿达人86",
+    "followers": 11455,
+    "monthly_sales": 692,
+    "monthly_revenue": 77048.68,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 8.21
+  },
+  {
+    "id": 34,
+    "username": "creator_2494",
+    "display_name": "宝妈达人1",
+    "followers": 18270,
+    "monthly_sales": 781,
+    "monthly_revenue": 38431.37,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 20.18
+  },
+  {
+    "id": 35,
+    "username": "creator_8291",
+    "display_name": "宝妈达人2",
+    "followers": 16058,
+    "monthly_sales": 1328,
+    "monthly_revenue": 122977.77,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 10.3
+  },
+  {
+    "id": 36,
+    "username": "creator_2678",
+    "display_name": "宝妈达人41",
+    "followers": 11339,
+    "monthly_sales": 721,
+    "monthly_revenue": 45481.08,
+    "categories": "[\"出行用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 17.5
+  },
+  {
+    "id": 37,
+    "username": "creator_3181",
+    "display_name": "奶爸达人9",
+    "followers": 20638,
+    "monthly_sales": 2382,
+    "monthly_revenue": 185190.36,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 8.67
+  },
+  {
+    "id": 38,
+    "username": "creator_3480",
+    "display_name": "母婴达人79",
+    "followers": 18906,
+    "monthly_sales": 1851,
+    "monthly_revenue": 169905.06,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 6.29
+  },
+  {
+    "id": 39,
+    "username": "creator_3017",
+    "display_name": "母婴达人45",
+    "followers": 29049,
+    "monthly_sales": 859,
+    "monthly_revenue": 100238.76,
+    "categories": "[\"孕产妇\", \"出行用品\"]",
+    "fan_growth_rate": 15.2
+  },
+  {
+    "id": 40,
+    "username": "creator_5668",
+    "display_name": "宝妈达人85",
+    "followers": 12384,
+    "monthly_sales": 1165,
+    "monthly_revenue": 126780.48,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 29.38
+  },
+  {
+    "id": 41,
+    "username": "creator_7418",
+    "display_name": "育儿达人83",
+    "followers": 16287,
+    "monthly_sales": 593,
+    "monthly_revenue": 20702.35,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 9.4
+  },
+  {
+    "id": 42,
+    "username": "creator_1197",
+    "display_name": "育儿达人41",
+    "followers": 16872,
+    "monthly_sales": 336,
+    "monthly_revenue": 14071.16,
+    "categories": "[\"睡眠用品\", \"护理用品\", \"玩具早教\"]",
+    "fan_growth_rate": 19.88
+  },
+  {
+    "id": 43,
+    "username": "creator_2195",
+    "display_name": "宝妈达人76",
+    "followers": 17856,
+    "monthly_sales": 2085,
+    "monthly_revenue": 75222.49,
+    "categories": "[\"出行用品\", \"喂养用品\"]",
+    "fan_growth_rate": 36.54
+  },
+  {
+    "id": 44,
+    "username": "creator_9209",
+    "display_name": "母婴达人55",
+    "followers": 13594,
+    "monthly_sales": 681,
+    "monthly_revenue": 63443.97,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 3.61
+  },
+  {
+    "id": 45,
+    "username": "creator_5546",
+    "display_name": "宝妈达人40",
+    "followers": 15184,
+    "monthly_sales": 1461,
+    "monthly_revenue": 54220.55,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 19.98
+  },
+  {
+    "id": 46,
+    "username": "creator_2083",
+    "display_name": "育儿达人90",
+    "followers": 15938,
+    "monthly_sales": 1862,
+    "monthly_revenue": 129173.91,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 22.37
+  },
+  {
+    "id": 47,
+    "username": "creator_2900",
+    "display_name": "母婴达人79",
+    "followers": 12359,
+    "monthly_sales": 1723,
+    "monthly_revenue": 146101.64,
+    "categories": "[\"安全用品\", \"孕产妇\"]",
+    "fan_growth_rate": 11.61
+  },
+  {
+    "id": 48,
+    "username": "creator_1185",
+    "display_name": "奶爸达人64",
+    "followers": 11058,
+    "monthly_sales": 323,
+    "monthly_revenue": 37394.18,
+    "categories": "[\"玩具早教\", \"安全用品\", \"护理用品\"]",
+    "fan_growth_rate": 9.79
+  },
+  {
+    "id": 49,
+    "username": "creator_5403",
+    "display_name": "宝妈达人99",
+    "followers": 11865,
+    "monthly_sales": 329,
+    "monthly_revenue": 36515.96,
+    "categories": "[\"孕产妇\", \"睡眠用品\"]",
+    "fan_growth_rate": 14.5
+  },
+  {
+    "id": 50,
+    "username": "creator_2262",
+    "display_name": "母婴达人59",
+    "followers": 18617,
+    "monthly_sales": 1689,
+    "monthly_revenue": 128313.95,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 18.6
+  },
+  {
+    "id": 51,
+    "username": "creator_3577",
+    "display_name": "育儿达人99",
+    "followers": 25390,
+    "monthly_sales": 847,
+    "monthly_revenue": 33254.44,
+    "categories": "[\"安全用品\", \"孕产妇\", \"喂养用品\"]",
+    "fan_growth_rate": 16.61
+  },
+  {
+    "id": 52,
+    "username": "creator_5006",
+    "display_name": "宝妈达人61",
+    "followers": 11206,
+    "monthly_sales": 1465,
+    "monthly_revenue": 91940.3,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 26.81
+  },
+  {
+    "id": 53,
+    "username": "creator_7870",
+    "display_name": "奶爸达人42",
+    "followers": 34748,
+    "monthly_sales": 4518,
+    "monthly_revenue": 236488.78,
+    "categories": "[\"护理用品\", \"孕产妇\", \"喂养用品\"]",
+    "fan_growth_rate": 10.46
+  },
+  {
+    "id": 54,
+    "username": "creator_4656",
+    "display_name": "宝妈达人52",
+    "followers": 17628,
+    "monthly_sales": 306,
+    "monthly_revenue": 11078.23,
+    "categories": "[\"孕产妇\", \"护理用品\"]",
+    "fan_growth_rate": 12.81
+  },
+  {
+    "id": 55,
+    "username": "creator_2415",
+    "display_name": "母婴达人2",
+    "followers": 20641,
+    "monthly_sales": 1104,
+    "monthly_revenue": 69775.83,
+    "categories": "[\"玩具早教\", \"护理用品\"]",
+    "fan_growth_rate": 14.51
+  },
+  {
+    "id": 56,
+    "username": "creator_4201",
+    "display_name": "奶爸达人20",
+    "followers": 13321,
+    "monthly_sales": 1945,
+    "monthly_revenue": 59466.45,
+    "categories": "[\"喂养用品\", \"出行用品\"]",
+    "fan_growth_rate": 7.56
+  },
+  {
+    "id": 57,
+    "username": "creator_1157",
+    "display_name": "育儿达人1",
+    "followers": 15254,
+    "monthly_sales": 1510,
+    "monthly_revenue": 148438.47,
+    "categories": "[\"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 14.33
+  },
+  {
+    "id": 58,
+    "username": "creator_9061",
+    "display_name": "宝妈达人19",
+    "followers": 15091,
+    "monthly_sales": 654,
+    "monthly_revenue": 61507.86,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 10.36
+  },
+  {
+    "id": 59,
+    "username": "creator_9515",
+    "display_name": "母婴达人90",
+    "followers": 32751,
+    "monthly_sales": 4441,
+    "monthly_revenue": 491183.55,
+    "categories": "[\"安全用品\", \"喂养用品\"]",
+    "fan_growth_rate": 4.63
+  },
+  {
+    "id": 60,
+    "username": "creator_2020",
+    "display_name": "母婴达人85",
+    "followers": 16854,
+    "monthly_sales": 1099,
+    "monthly_revenue": 128340.83,
+    "categories": "[\"护理用品\"]",
+    "fan_growth_rate": 9.23
+  },
+  {
+    "id": 61,
+    "username": "creator_7438",
+    "display_name": "育儿达人41",
+    "followers": 12473,
+    "monthly_sales": 674,
+    "monthly_revenue": 47684.29,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 20.07
+  },
+  {
+    "id": 62,
+    "username": "creator_2731",
+    "display_name": "奶爸达人58",
+    "followers": 20509,
+    "monthly_sales": 517,
+    "monthly_revenue": 37195.54,
+    "categories": "[\"喂养用品\", \"玩具早教\"]",
+    "fan_growth_rate": 13.12
+  },
+  {
+    "id": 63,
+    "username": "creator_8404",
+    "display_name": "育儿达人60",
+    "followers": 13234,
+    "monthly_sales": 1559,
+    "monthly_revenue": 83953.26,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 23.35
+  },
+  {
+    "id": 64,
+    "username": "creator_1660",
+    "display_name": "奶爸达人42",
+    "followers": 23163,
+    "monthly_sales": 2491,
+    "monthly_revenue": 107982.71,
+    "categories": "[\"出行用品\", \"护理用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 27.73
+  },
+  {
+    "id": 65,
+    "username": "creator_5262",
+    "display_name": "奶爸达人4",
+    "followers": 14874,
+    "monthly_sales": 1558,
+    "monthly_revenue": 180242.99,
+    "categories": "[\"玩具早教\", \"安全用品\"]",
+    "fan_growth_rate": 10.76
+  },
+  {
+    "id": 66,
+    "username": "creator_2989",
+    "display_name": "宝妈达人8",
+    "followers": 11500,
+    "monthly_sales": 1393,
+    "monthly_revenue": 145893.78,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 13.62
+  },
+  {
+    "id": 67,
+    "username": "creator_2376",
+    "display_name": "育儿达人10",
+    "followers": 12055,
+    "monthly_sales": 796,
+    "monthly_revenue": 25441.77,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 23.86
+  },
+  {
+    "id": 68,
+    "username": "creator_6432",
+    "display_name": "宝妈达人6",
+    "followers": 11646,
+    "monthly_sales": 1592,
+    "monthly_revenue": 182769.97,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 8.78
+  },
+  {
+    "id": 69,
+    "username": "creator_7471",
+    "display_name": "母婴达人4",
+    "followers": 33289,
+    "monthly_sales": 2351,
+    "monthly_revenue": 151511.72,
+    "categories": "[\"出行用品\", \"护理用品\"]",
+    "fan_growth_rate": 16.42
+  },
+  {
+    "id": 70,
+    "username": "creator_1567",
+    "display_name": "奶爸达人83",
+    "followers": 12609,
+    "monthly_sales": 1685,
+    "monthly_revenue": 95302.7,
+    "categories": "[\"玩具早教\", \"睡眠用品\"]",
+    "fan_growth_rate": 21.28
+  },
+  {
+    "id": 71,
+    "username": "creator_3248",
+    "display_name": "母婴达人26",
+    "followers": 11290,
+    "monthly_sales": 555,
+    "monthly_revenue": 48750.49,
+    "categories": "[\"出行用品\", \"安全用品\", \"玩具早教\"]",
+    "fan_growth_rate": 23.39
+  },
+  {
+    "id": 72,
+    "username": "creator_9921",
+    "display_name": "母婴达人45",
+    "followers": 20981,
+    "monthly_sales": 1264,
+    "monthly_revenue": 141746.14,
+    "categories": "[\"护理用品\", \"睡眠用品\", \"孕产妇\"]",
+    "fan_growth_rate": -13.97
+  },
+  {
+    "id": 73,
+    "username": "creator_4588",
+    "display_name": "宝妈达人36",
+    "followers": 11942,
+    "monthly_sales": 652,
+    "monthly_revenue": 22998.13,
+    "categories": "[\"玩具早教\", \"护理用品\"]",
+    "fan_growth_rate": 19.18
+  },
+  {
+    "id": 74,
+    "username": "creator_4951",
+    "display_name": "育儿达人69",
+    "followers": 53518,
+    "monthly_sales": 1285,
+    "monthly_revenue": 132953.38,
+    "categories": "[\"喂养用品\", \"出行用品\", \"玩具早教\"]",
+    "fan_growth_rate": -24.37
+  },
+  {
+    "id": 75,
+    "username": "creator_6813",
+    "display_name": "奶爸达人23",
+    "followers": 24439,
+    "monthly_sales": 2972,
+    "monthly_revenue": 152432.7,
+    "categories": "[\"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 7.84
+  },
+  {
+    "id": 76,
+    "username": "creator_3328",
+    "display_name": "奶爸达人64",
+    "followers": 11130,
+    "monthly_sales": 1202,
+    "monthly_revenue": 94707.04,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": -5.96
+  },
+  {
+    "id": 77,
+    "username": "creator_4584",
+    "display_name": "宝妈达人68",
+    "followers": 11177,
+    "monthly_sales": 199,
+    "monthly_revenue": 14530.78,
+    "categories": "[\"玩具早教\", \"出行用品\"]",
+    "fan_growth_rate": 18.17
+  },
+  {
+    "id": 78,
+    "username": "creator_6301",
+    "display_name": "宝妈达人3",
+    "followers": 11928,
+    "monthly_sales": 1459,
+    "monthly_revenue": 63166.07,
+    "categories": "[\"出行用品\", \"喂养用品\", \"玩具早教\"]",
+    "fan_growth_rate": 6.44
+  },
+  {
+    "id": 79,
+    "username": "creator_7120",
+    "display_name": "母婴达人76",
+    "followers": 25494,
+    "monthly_sales": 3683,
+    "monthly_revenue": 143979.13,
+    "categories": "[\"护理用品\", \"出行用品\"]",
+    "fan_growth_rate": 31.05
+  },
+  {
+    "id": 80,
+    "username": "creator_8982",
+    "display_name": "育儿达人23",
+    "followers": 13982,
+    "monthly_sales": 1391,
+    "monthly_revenue": 130262.23,
+    "categories": "[\"安全用品\", \"玩具早教\", \"护理用品\"]",
+    "fan_growth_rate": 12.55
+  },
+  {
+    "id": 81,
+    "username": "creator_3872",
+    "display_name": "母婴达人40",
+    "followers": 12216,
+    "monthly_sales": 1129,
+    "monthly_revenue": 108451.23,
+    "categories": "[\"出行用品\", \"孕产妇\"]",
+    "fan_growth_rate": 11.77
+  },
+  {
+    "id": 82,
+    "username": "creator_1530",
+    "display_name": "奶爸达人78",
+    "followers": 39574,
+    "monthly_sales": 2565,
+    "monthly_revenue": 150410.37,
+    "categories": "[\"出行用品\", \"安全用品\", \"玩具早教\"]",
+    "fan_growth_rate": -9.16
+  },
+  {
+    "id": 83,
+    "username": "creator_6425",
+    "display_name": "宝妈达人31",
+    "followers": 11512,
+    "monthly_sales": 914,
+    "monthly_revenue": 55948.6,
+    "categories": "[\"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 18.24
+  },
+  {
+    "id": 84,
+    "username": "creator_6500",
+    "display_name": "母婴达人2",
+    "followers": 18525,
+    "monthly_sales": 1842,
+    "monthly_revenue": 99226.92,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 12.16
+  },
+  {
+    "id": 85,
+    "username": "creator_2770",
+    "display_name": "宝妈达人7",
+    "followers": 11324,
+    "monthly_sales": 520,
+    "monthly_revenue": 33661.86,
+    "categories": "[\"睡眠用品\", \"出行用品\", \"孕产妇\"]",
+    "fan_growth_rate": 5.25
+  },
+  {
+    "id": 86,
+    "username": "creator_8855",
+    "display_name": "奶爸达人21",
+    "followers": 15318,
+    "monthly_sales": 370,
+    "monthly_revenue": 26127.87,
+    "categories": "[\"护理用品\"]",
+    "fan_growth_rate": 15.42
+  },
+  {
+    "id": 87,
+    "username": "creator_2715",
+    "display_name": "宝妈达人44",
+    "followers": 11092,
+    "monthly_sales": 516,
+    "monthly_revenue": 23379.69,
+    "categories": "[\"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 36.25
+  },
+  {
+    "id": 88,
+    "username": "creator_8909",
+    "display_name": "宝妈达人56",
+    "followers": 57730,
+    "monthly_sales": 3308,
+    "monthly_revenue": 379823.91,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 25.83
+  },
+  {
+    "id": 89,
+    "username": "creator_2659",
+    "display_name": "育儿达人27",
+    "followers": 28245,
+    "monthly_sales": 903,
+    "monthly_revenue": 106279.36,
+    "categories": "[\"安全用品\", \"玩具早教\"]",
+    "fan_growth_rate": 12.17
+  },
+  {
+    "id": 90,
+    "username": "creator_4891",
+    "display_name": "宝妈达人7",
+    "followers": 12504,
+    "monthly_sales": 617,
+    "monthly_revenue": 40327.86,
+    "categories": "[\"孕产妇\", \"睡眠用品\", \"出行用品\"]",
+    "fan_growth_rate": -0.93
+  },
+  {
+    "id": 91,
+    "username": "creator_2435",
+    "display_name": "育儿达人85",
+    "followers": 11258,
+    "monthly_sales": 118,
+    "monthly_revenue": 10178.47,
+    "categories": "[\"出行用品\", \"喂养用品\"]",
+    "fan_growth_rate": 21.04
+  },
+  {
+    "id": 92,
+    "username": "creator_2892",
+    "display_name": "育儿达人51",
+    "followers": 12698,
+    "monthly_sales": 272,
+    "monthly_revenue": 19688.72,
+    "categories": "[\"护理用品\", \"喂养用品\", \"玩具早教\"]",
+    "fan_growth_rate": 15.99
+  },
+  {
+    "id": 93,
+    "username": "creator_7249",
+    "display_name": "育儿达人24",
+    "followers": 13496,
+    "monthly_sales": 835,
+    "monthly_revenue": 58550.01,
+    "categories": "[\"睡眠用品\", \"孕产妇\"]",
+    "fan_growth_rate": 13.4
+  },
+  {
+    "id": 94,
+    "username": "creator_2584",
+    "display_name": "宝妈达人86",
+    "followers": 15587,
+    "monthly_sales": 485,
+    "monthly_revenue": 29556.49,
+    "categories": "[\"睡眠用品\", \"玩具早教\", \"出行用品\"]",
+    "fan_growth_rate": 33.98
+  },
+  {
+    "id": 95,
+    "username": "creator_9561",
+    "display_name": "母婴达人69",
+    "followers": 15428,
+    "monthly_sales": 1970,
+    "monthly_revenue": 180917.14,
+    "categories": "[\"玩具早教\", \"出行用品\"]",
+    "fan_growth_rate": 10.99
+  },
+  {
+    "id": 96,
+    "username": "creator_9226",
+    "display_name": "奶爸达人16",
+    "followers": 29847,
+    "monthly_sales": 3283,
+    "monthly_revenue": 378966.32,
+    "categories": "[\"出行用品\", \"孕产妇\"]",
+    "fan_growth_rate": 15.6
+  },
+  {
+    "id": 97,
+    "username": "creator_3067",
+    "display_name": "宝妈达人55",
+    "followers": 51933,
+    "monthly_sales": 6397,
+    "monthly_revenue": 237029.11,
+    "categories": "[\"睡眠用品\", \"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 18.89
+  },
+  {
+    "id": 98,
+    "username": "creator_2097",
+    "display_name": "宝妈达人50",
+    "followers": 30999,
+    "monthly_sales": 4277,
+    "monthly_revenue": 342471.27,
+    "categories": "[\"护理用品\", \"孕产妇\", \"玩具早教\"]",
+    "fan_growth_rate": 8.33
+  },
+  {
+    "id": 99,
+    "username": "creator_9561",
+    "display_name": "母婴达人15",
+    "followers": 14211,
+    "monthly_sales": 1879,
+    "monthly_revenue": 126456.35,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 0.65
+  },
+  {
+    "id": 100,
+    "username": "creator_2654",
+    "display_name": "育儿达人69",
+    "followers": 36829,
+    "monthly_sales": 5137,
+    "monthly_revenue": 561023.18,
+    "categories": "[\"护理用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 6.15
+  },
+  {
+    "id": 101,
+    "username": "creator_8750",
+    "display_name": "宝妈达人23",
+    "followers": 17216,
+    "monthly_sales": 1550,
+    "monthly_revenue": 84920.27,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 3.07
+  },
+  {
+    "id": 102,
+    "username": "creator_6431",
+    "display_name": "奶爸达人7",
+    "followers": 11181,
+    "monthly_sales": 1504,
+    "monthly_revenue": 146064.7,
+    "categories": "[\"护理用品\", \"喂养用品\"]",
+    "fan_growth_rate": 5.3
+  },
+  {
+    "id": 103,
+    "username": "creator_6094",
+    "display_name": "育儿达人63",
+    "followers": 13061,
+    "monthly_sales": 1581,
+    "monthly_revenue": 169548.23,
+    "categories": "[\"喂养用品\", \"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 9.85
+  },
+  {
+    "id": 104,
+    "username": "creator_7828",
+    "display_name": "宝妈达人25",
+    "followers": 20661,
+    "monthly_sales": 1134,
+    "monthly_revenue": 79101.6,
+    "categories": "[\"安全用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 30.68
+  },
+  {
+    "id": 105,
+    "username": "creator_1920",
+    "display_name": "奶爸达人9",
+    "followers": 20111,
+    "monthly_sales": 2642,
+    "monthly_revenue": 153238.85,
+    "categories": "[\"睡眠用品\", \"出行用品\", \"玩具早教\"]",
+    "fan_growth_rate": 16.76
+  },
+  {
+    "id": 106,
+    "username": "creator_1944",
+    "display_name": "奶爸达人5",
+    "followers": 12022,
+    "monthly_sales": 1522,
+    "monthly_revenue": 108184.34,
+    "categories": "[\"安全用品\", \"出行用品\"]",
+    "fan_growth_rate": 13.33
+  },
+  {
+    "id": 107,
+    "username": "creator_9275",
+    "display_name": "母婴达人82",
+    "followers": 12566,
+    "monthly_sales": 1574,
+    "monthly_revenue": 177982.6,
+    "categories": "[\"喂养用品\", \"出行用品\", \"护理用品\"]",
+    "fan_growth_rate": 4.16
+  },
+  {
+    "id": 108,
+    "username": "creator_6730",
+    "display_name": "育儿达人21",
+    "followers": 44452,
+    "monthly_sales": 3397,
+    "monthly_revenue": 358005.89,
+    "categories": "[\"安全用品\", \"孕产妇\"]",
+    "fan_growth_rate": 15.77
+  },
+  {
+    "id": 109,
+    "username": "creator_1813",
+    "display_name": "奶爸达人74",
+    "followers": 11440,
+    "monthly_sales": 158,
+    "monthly_revenue": 15829.18,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 16.28
+  },
+  {
+    "id": 110,
+    "username": "creator_9409",
+    "display_name": "宝妈达人99",
+    "followers": 12110,
+    "monthly_sales": 1225,
+    "monthly_revenue": 111962.52,
+    "categories": "[\"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 22.03
+  },
+  {
+    "id": 111,
+    "username": "creator_4666",
+    "display_name": "育儿达人78",
+    "followers": 11902,
+    "monthly_sales": 1453,
+    "monthly_revenue": 148871.04,
+    "categories": "[\"安全用品\", \"孕产妇\"]",
+    "fan_growth_rate": 8.45
+  },
+  {
+    "id": 112,
+    "username": "creator_5128",
+    "display_name": "奶爸达人60",
+    "followers": 13395,
+    "monthly_sales": 787,
+    "monthly_revenue": 45010.94,
+    "categories": "[\"孕产妇\", \"玩具早教\", \"睡眠用品\"]",
+    "fan_growth_rate": 6.8
+  },
+  {
+    "id": 113,
+    "username": "creator_7131",
+    "display_name": "育儿达人39",
+    "followers": 15906,
+    "monthly_sales": 175,
+    "monthly_revenue": 16029.51,
+    "categories": "[\"喂养用品\", \"护理用品\"]",
+    "fan_growth_rate": 29.27
+  },
+  {
+    "id": 114,
+    "username": "creator_5895",
+    "display_name": "奶爸达人20",
+    "followers": 25560,
+    "monthly_sales": 1190,
+    "monthly_revenue": 91102.14,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 13.95
+  },
+  {
+    "id": 115,
+    "username": "creator_7620",
+    "display_name": "育儿达人88",
+    "followers": 22044,
+    "monthly_sales": 2696,
+    "monthly_revenue": 114832.5,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 6.63
+  },
+  {
+    "id": 116,
+    "username": "creator_1578",
+    "display_name": "奶爸达人44",
+    "followers": 30422,
+    "monthly_sales": 2027,
+    "monthly_revenue": 193354.49,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 15.14
+  },
+  {
+    "id": 117,
+    "username": "creator_6873",
+    "display_name": "育儿达人22",
+    "followers": 15158,
+    "monthly_sales": 1817,
+    "monthly_revenue": 191979.65,
+    "categories": "[\"出行用品\", \"护理用品\", \"喂养用品\"]",
+    "fan_growth_rate": -1.16
+  },
+  {
+    "id": 118,
+    "username": "creator_3999",
+    "display_name": "育儿达人84",
+    "followers": 18987,
+    "monthly_sales": 1675,
+    "monthly_revenue": 63711.95,
+    "categories": "[\"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 18.0
+  },
+  {
+    "id": 119,
+    "username": "creator_6428",
+    "display_name": "育儿达人34",
+    "followers": 26406,
+    "monthly_sales": 1818,
+    "monthly_revenue": 150351.08,
+    "categories": "[\"孕产妇\", \"喂养用品\"]",
+    "fan_growth_rate": -4.72
+  },
+  {
+    "id": 120,
+    "username": "creator_2166",
+    "display_name": "母婴达人25",
+    "followers": 15891,
+    "monthly_sales": 2259,
+    "monthly_revenue": 169522.06,
+    "categories": "[\"睡眠用品\", \"玩具早教\", \"护理用品\"]",
+    "fan_growth_rate": 18.69
+  },
+  {
+    "id": 121,
+    "username": "creator_3470",
+    "display_name": "奶爸达人26",
+    "followers": 13740,
+    "monthly_sales": 1812,
+    "monthly_revenue": 110242.6,
+    "categories": "[\"睡眠用品\", \"出行用品\", \"护理用品\"]",
+    "fan_growth_rate": 19.09
+  },
+  {
+    "id": 122,
+    "username": "creator_3897",
+    "display_name": "育儿达人82",
+    "followers": 11390,
+    "monthly_sales": 644,
+    "monthly_revenue": 22682.47,
+    "categories": "[\"护理用品\", \"出行用品\"]",
+    "fan_growth_rate": 10.2
+  },
+  {
+    "id": 123,
+    "username": "creator_3595",
+    "display_name": "母婴达人98",
+    "followers": 20173,
+    "monthly_sales": 677,
+    "monthly_revenue": 67820.32,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 5.31
+  },
+  {
+    "id": 124,
+    "username": "creator_1076",
+    "display_name": "宝妈达人69",
+    "followers": 13901,
+    "monthly_sales": 1068,
+    "monthly_revenue": 51207.7,
+    "categories": "[\"喂养用品\", \"护理用品\"]",
+    "fan_growth_rate": 19.29
+  },
+  {
+    "id": 125,
+    "username": "creator_1293",
+    "display_name": "宝妈达人81",
+    "followers": 20017,
+    "monthly_sales": 1688,
+    "monthly_revenue": 162089.0,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 21.19
+  },
+  {
+    "id": 126,
+    "username": "creator_6015",
+    "display_name": "奶爸达人9",
+    "followers": 11504,
+    "monthly_sales": 925,
+    "monthly_revenue": 96335.0,
+    "categories": "[\"护理用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 8.96
+  },
+  {
+    "id": 127,
+    "username": "creator_6535",
+    "display_name": "母婴达人88",
+    "followers": 19067,
+    "monthly_sales": 1782,
+    "monthly_revenue": 213113.87,
+    "categories": "[\"睡眠用品\", \"护理用品\"]",
+    "fan_growth_rate": 15.0
+  },
+  {
+    "id": 128,
+    "username": "creator_1313",
+    "display_name": "奶爸达人29",
+    "followers": 30420,
+    "monthly_sales": 3762,
+    "monthly_revenue": 359064.82,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": 9.0
+  },
+  {
+    "id": 129,
+    "username": "creator_3768",
+    "display_name": "宝妈达人47",
+    "followers": 19258,
+    "monthly_sales": 1782,
+    "monthly_revenue": 167507.84,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 20.49
+  },
+  {
+    "id": 130,
+    "username": "creator_1785",
+    "display_name": "宝妈达人84",
+    "followers": 15159,
+    "monthly_sales": 254,
+    "monthly_revenue": 26733.7,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 9.62
+  },
+  {
+    "id": 131,
+    "username": "creator_3024",
+    "display_name": "育儿达人61",
+    "followers": 11575,
+    "monthly_sales": 835,
+    "monthly_revenue": 77795.4,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 14.46
+  },
+  {
+    "id": 132,
+    "username": "creator_9524",
+    "display_name": "育儿达人80",
+    "followers": 13818,
+    "monthly_sales": 333,
+    "monthly_revenue": 28140.86,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 13.74
+  },
+  {
+    "id": 133,
+    "username": "creator_2928",
+    "display_name": "育儿达人15",
+    "followers": 23415,
+    "monthly_sales": 578,
+    "monthly_revenue": 58163.22,
+    "categories": "[\"出行用品\", \"玩具早教\"]",
+    "fan_growth_rate": 17.43
+  },
+  {
+    "id": 134,
+    "username": "creator_7713",
+    "display_name": "育儿达人21",
+    "followers": 15001,
+    "monthly_sales": 573,
+    "monthly_revenue": 19222.15,
+    "categories": "[\"出行用品\", \"安全用品\"]",
+    "fan_growth_rate": 22.43
+  },
+  {
+    "id": 135,
+    "username": "creator_1044",
+    "display_name": "宝妈达人86",
+    "followers": 35195,
+    "monthly_sales": 1980,
+    "monthly_revenue": 75260.31,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 4.57
+  },
+  {
+    "id": 136,
+    "username": "creator_2229",
+    "display_name": "宝妈达人33",
+    "followers": 39833,
+    "monthly_sales": 4745,
+    "monthly_revenue": 417514.03,
+    "categories": "[\"护理用品\", \"孕产妇\"]",
+    "fan_growth_rate": 9.76
+  },
+  {
+    "id": 137,
+    "username": "creator_3862",
+    "display_name": "宝妈达人38",
+    "followers": 14280,
+    "monthly_sales": 342,
+    "monthly_revenue": 21347.41,
+    "categories": "[\"护理用品\", \"睡眠用品\", \"喂养用品\"]",
+    "fan_growth_rate": 28.94
+  },
+  {
+    "id": 138,
+    "username": "creator_3793",
+    "display_name": "育儿达人46",
+    "followers": 11215,
+    "monthly_sales": 1449,
+    "monthly_revenue": 160125.35,
+    "categories": "[\"护理用品\", \"安全用品\", \"喂养用品\"]",
+    "fan_growth_rate": 24.47
+  },
+  {
+    "id": 139,
+    "username": "creator_2865",
+    "display_name": "母婴达人52",
+    "followers": 13360,
+    "monthly_sales": 774,
+    "monthly_revenue": 90254.51,
+    "categories": "[\"孕产妇\", \"睡眠用品\"]",
+    "fan_growth_rate": 10.79
+  },
+  {
+    "id": 140,
+    "username": "creator_3732",
+    "display_name": "宝妈达人17",
+    "followers": 13827,
+    "monthly_sales": 1853,
+    "monthly_revenue": 171690.25,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 4.4
+  },
+  {
+    "id": 141,
+    "username": "creator_8908",
+    "display_name": "母婴达人24",
+    "followers": 11821,
+    "monthly_sales": 806,
+    "monthly_revenue": 68525.38,
+    "categories": "[\"玩具早教\", \"喂养用品\"]",
+    "fan_growth_rate": 28.38
+  },
+  {
+    "id": 142,
+    "username": "creator_8914",
+    "display_name": "母婴达人15",
+    "followers": 19050,
+    "monthly_sales": 2568,
+    "monthly_revenue": 282180.71,
+    "categories": "[\"喂养用品\", \"孕产妇\"]",
+    "fan_growth_rate": -0.65
+  },
+  {
+    "id": 143,
+    "username": "creator_9598",
+    "display_name": "奶爸达人86",
+    "followers": 12478,
+    "monthly_sales": 673,
+    "monthly_revenue": 73076.31,
+    "categories": "[\"玩具早教\", \"安全用品\", \"孕产妇\"]",
+    "fan_growth_rate": 27.16
+  },
+  {
+    "id": 144,
+    "username": "creator_7305",
+    "display_name": "奶爸达人72",
+    "followers": 12387,
+    "monthly_sales": 723,
+    "monthly_revenue": 79736.47,
+    "categories": "[\"喂养用品\", \"孕产妇\", \"出行用品\"]",
+    "fan_growth_rate": 23.29
+  },
+  {
+    "id": 145,
+    "username": "creator_9123",
+    "display_name": "奶爸达人10",
+    "followers": 14773,
+    "monthly_sales": 1118,
+    "monthly_revenue": 109148.89,
+    "categories": "[\"出行用品\", \"护理用品\"]",
+    "fan_growth_rate": 18.16
+  },
+  {
+    "id": 146,
+    "username": "creator_7607",
+    "display_name": "奶爸达人11",
+    "followers": 12213,
+    "monthly_sales": 1222,
+    "monthly_revenue": 87151.22,
+    "categories": "[\"睡眠用品\", \"喂养用品\", \"孕产妇\"]",
+    "fan_growth_rate": 14.4
+  },
+  {
+    "id": 147,
+    "username": "creator_9148",
+    "display_name": "宝妈达人14",
+    "followers": 14090,
+    "monthly_sales": 375,
+    "monthly_revenue": 24866.09,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": -2.82
+  },
+  {
+    "id": 148,
+    "username": "creator_5990",
+    "display_name": "奶爸达人84",
+    "followers": 21406,
+    "monthly_sales": 3100,
+    "monthly_revenue": 280341.35,
+    "categories": "[\"护理用品\", \"喂养用品\"]",
+    "fan_growth_rate": 9.32
+  },
+  {
+    "id": 149,
+    "username": "creator_6439",
+    "display_name": "母婴达人92",
+    "followers": 22617,
+    "monthly_sales": 2899,
+    "monthly_revenue": 258431.5,
+    "categories": "[\"睡眠用品\", \"喂养用品\", \"安全用品\"]",
+    "fan_growth_rate": 15.41
+  },
+  {
+    "id": 150,
+    "username": "creator_5783",
+    "display_name": "育儿达人90",
+    "followers": 13090,
+    "monthly_sales": 1651,
+    "monthly_revenue": 65328.42,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 7.93
+  },
+  {
+    "id": 151,
+    "username": "creator_7704",
+    "display_name": "宝妈达人33",
+    "followers": 11712,
+    "monthly_sales": 1292,
+    "monthly_revenue": 109789.84,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 24.05
+  },
+  {
+    "id": 152,
+    "username": "creator_6536",
+    "display_name": "宝妈达人97",
+    "followers": 14199,
+    "monthly_sales": 1695,
+    "monthly_revenue": 114077.45,
+    "categories": "[\"孕产妇\", \"安全用品\", \"玩具早教\"]",
+    "fan_growth_rate": 10.76
+  },
+  {
+    "id": 153,
+    "username": "creator_8493",
+    "display_name": "奶爸达人64",
+    "followers": 11615,
+    "monthly_sales": 1566,
+    "monthly_revenue": 47591.35,
+    "categories": "[\"喂养用品\", \"玩具早教\", \"睡眠用品\"]",
+    "fan_growth_rate": 21.08
+  },
+  {
+    "id": 154,
+    "username": "creator_3903",
+    "display_name": "奶爸达人94",
+    "followers": 14808,
+    "monthly_sales": 2057,
+    "monthly_revenue": 212636.15,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 5.26
+  },
+  {
+    "id": 155,
+    "username": "creator_6273",
+    "display_name": "母婴达人54",
+    "followers": 17275,
+    "monthly_sales": 1638,
+    "monthly_revenue": 193538.0,
+    "categories": "[\"孕产妇\", \"出行用品\", \"护理用品\"]",
+    "fan_growth_rate": 7.66
+  },
+  {
+    "id": 156,
+    "username": "creator_3263",
+    "display_name": "母婴达人78",
+    "followers": 12715,
+    "monthly_sales": 1559,
+    "monthly_revenue": 144989.0,
+    "categories": "[\"玩具早教\", \"护理用品\", \"孕产妇\"]",
+    "fan_growth_rate": 20.48
+  },
+  {
+    "id": 157,
+    "username": "creator_4560",
+    "display_name": "奶爸达人27",
+    "followers": 25497,
+    "monthly_sales": 2796,
+    "monthly_revenue": 240945.53,
+    "categories": "[\"安全用品\", \"护理用品\"]",
+    "fan_growth_rate": 19.69
+  },
+  {
+    "id": 158,
+    "username": "creator_3913",
+    "display_name": "育儿达人91",
+    "followers": 18564,
+    "monthly_sales": 2720,
+    "monthly_revenue": 109851.21,
+    "categories": "[\"玩具早教\", \"睡眠用品\"]",
+    "fan_growth_rate": 12.46
+  },
+  {
+    "id": 159,
+    "username": "creator_7839",
+    "display_name": "育儿达人55",
+    "followers": 15878,
+    "monthly_sales": 2254,
+    "monthly_revenue": 231592.71,
+    "categories": "[\"喂养用品\", \"孕产妇\", \"睡眠用品\"]",
+    "fan_growth_rate": 24.11
+  },
+  {
+    "id": 160,
+    "username": "creator_3636",
+    "display_name": "育儿达人88",
+    "followers": 12066,
+    "monthly_sales": 1387,
+    "monthly_revenue": 72887.53,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 26.79
+  },
+  {
+    "id": 161,
+    "username": "creator_9866",
+    "display_name": "宝妈达人46",
+    "followers": 21083,
+    "monthly_sales": 812,
+    "monthly_revenue": 83849.04,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 26.08
+  },
+  {
+    "id": 162,
+    "username": "creator_7371",
+    "display_name": "奶爸达人66",
+    "followers": 25835,
+    "monthly_sales": 2943,
+    "monthly_revenue": 296029.44,
+    "categories": "[\"护理用品\", \"安全用品\", \"喂养用品\"]",
+    "fan_growth_rate": 2.91
+  },
+  {
+    "id": 163,
+    "username": "creator_6122",
+    "display_name": "宝妈达人2",
+    "followers": 33755,
+    "monthly_sales": 2169,
+    "monthly_revenue": 210241.81,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 28.48
+  },
+  {
+    "id": 164,
+    "username": "creator_7025",
+    "display_name": "奶爸达人93",
+    "followers": 14047,
+    "monthly_sales": 584,
+    "monthly_revenue": 68203.07,
+    "categories": "[\"睡眠用品\", \"出行用品\"]",
+    "fan_growth_rate": 0.44
+  },
+  {
+    "id": 165,
+    "username": "creator_3847",
+    "display_name": "宝妈达人49",
+    "followers": 65517,
+    "monthly_sales": 1338,
+    "monthly_revenue": 45033.17,
+    "categories": "[\"玩具早教\", \"护理用品\"]",
+    "fan_growth_rate": 24.06
+  },
+  {
+    "id": 166,
+    "username": "creator_3536",
+    "display_name": "宝妈达人20",
+    "followers": 12431,
+    "monthly_sales": 699,
+    "monthly_revenue": 79390.0,
+    "categories": "[\"喂养用品\", \"安全用品\", \"玩具早教\"]",
+    "fan_growth_rate": 24.66
+  },
+  {
+    "id": 167,
+    "username": "creator_6866",
+    "display_name": "宝妈达人91",
+    "followers": 24210,
+    "monthly_sales": 1262,
+    "monthly_revenue": 73962.43,
+    "categories": "[\"出行用品\"]",
+    "fan_growth_rate": -2.42
+  },
+  {
+    "id": 168,
+    "username": "creator_7609",
+    "display_name": "宝妈达人45",
+    "followers": 11821,
+    "monthly_sales": 1016,
+    "monthly_revenue": 50706.35,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 12.73
+  },
+  {
+    "id": 169,
+    "username": "creator_4579",
+    "display_name": "母婴达人72",
+    "followers": 13011,
+    "monthly_sales": 787,
+    "monthly_revenue": 81951.85,
+    "categories": "[\"喂养用品\", \"孕产妇\", \"护理用品\"]",
+    "fan_growth_rate": -5.42
+  },
+  {
+    "id": 170,
+    "username": "creator_1653",
+    "display_name": "育儿达人49",
+    "followers": 16408,
+    "monthly_sales": 1590,
+    "monthly_revenue": 178769.93,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 22.26
+  },
+  {
+    "id": 171,
+    "username": "creator_1404",
+    "display_name": "育儿达人66",
+    "followers": 12442,
+    "monthly_sales": 1385,
+    "monthly_revenue": 141621.11,
+    "categories": "[\"睡眠用品\", \"喂养用品\"]",
+    "fan_growth_rate": 10.82
+  },
+  {
+    "id": 172,
+    "username": "creator_2572",
+    "display_name": "奶爸达人99",
+    "followers": 12918,
+    "monthly_sales": 278,
+    "monthly_revenue": 21800.13,
+    "categories": "[\"安全用品\"]",
+    "fan_growth_rate": 28.91
+  },
+  {
+    "id": 173,
+    "username": "creator_4492",
+    "display_name": "母婴达人14",
+    "followers": 11312,
+    "monthly_sales": 1174,
+    "monthly_revenue": 56941.54,
+    "categories": "[\"安全用品\", \"睡眠用品\", \"喂养用品\"]",
+    "fan_growth_rate": 14.89
+  },
+  {
+    "id": 174,
+    "username": "creator_2433",
+    "display_name": "宝妈达人7",
+    "followers": 14223,
+    "monthly_sales": 802,
+    "monthly_revenue": 36907.47,
+    "categories": "[\"玩具早教\", \"喂养用品\"]",
+    "fan_growth_rate": 9.22
+  },
+  {
+    "id": 175,
+    "username": "creator_5237",
+    "display_name": "母婴达人50",
+    "followers": 15753,
+    "monthly_sales": 659,
+    "monthly_revenue": 46526.26,
+    "categories": "[\"睡眠用品\", \"护理用品\"]",
+    "fan_growth_rate": 29.87
+  },
+  {
+    "id": 176,
+    "username": "creator_2036",
+    "display_name": "宝妈达人90",
+    "followers": 15160,
+    "monthly_sales": 1512,
+    "monthly_revenue": 160790.03,
+    "categories": "[\"玩具早教\", \"喂养用品\"]",
+    "fan_growth_rate": 16.58
+  },
+  {
+    "id": 177,
+    "username": "creator_2417",
+    "display_name": "育儿达人98",
+    "followers": 12683,
+    "monthly_sales": 1344,
+    "monthly_revenue": 152412.53,
+    "categories": "[\"睡眠用品\", \"安全用品\"]",
+    "fan_growth_rate": 20.72
+  },
+  {
+    "id": 178,
+    "username": "creator_9941",
+    "display_name": "育儿达人82",
+    "followers": 12194,
+    "monthly_sales": 1396,
+    "monthly_revenue": 59981.65,
+    "categories": "[\"孕产妇\", \"安全用品\", \"护理用品\"]",
+    "fan_growth_rate": 16.12
+  },
+  {
+    "id": 179,
+    "username": "creator_3316",
+    "display_name": "宝妈达人6",
+    "followers": 42971,
+    "monthly_sales": 496,
+    "monthly_revenue": 15104.53,
+    "categories": "[\"睡眠用品\", \"玩具早教\", \"安全用品\"]",
+    "fan_growth_rate": 23.06
+  },
+  {
+    "id": 180,
+    "username": "creator_6633",
+    "display_name": "奶爸达人53",
+    "followers": 19720,
+    "monthly_sales": 2691,
+    "monthly_revenue": 300064.05,
+    "categories": "[\"出行用品\", \"孕产妇\", \"安全用品\"]",
+    "fan_growth_rate": 12.21
+  },
+  {
+    "id": 181,
+    "username": "creator_4183",
+    "display_name": "宝妈达人24",
+    "followers": 12200,
+    "monthly_sales": 1547,
+    "monthly_revenue": 139830.25,
+    "categories": "[\"孕产妇\", \"喂养用品\", \"玩具早教\"]",
+    "fan_growth_rate": 2.74
+  },
+  {
+    "id": 182,
+    "username": "creator_2608",
+    "display_name": "奶爸达人93",
+    "followers": 12689,
+    "monthly_sales": 246,
+    "monthly_revenue": 20234.39,
+    "categories": "[\"护理用品\", \"出行用品\"]",
+    "fan_growth_rate": 18.04
+  },
+  {
+    "id": 183,
+    "username": "creator_5671",
+    "display_name": "宝妈达人25",
+    "followers": 17581,
+    "monthly_sales": 753,
+    "monthly_revenue": 44126.35,
+    "categories": "[\"护理用品\", \"玩具早教\"]",
+    "fan_growth_rate": 6.71
+  },
+  {
+    "id": 184,
+    "username": "creator_6182",
+    "display_name": "母婴达人22",
+    "followers": 11780,
+    "monthly_sales": 1052,
+    "monthly_revenue": 32017.48,
+    "categories": "[\"孕产妇\"]",
+    "fan_growth_rate": 2.05
+  },
+  {
+    "id": 185,
+    "username": "creator_8145",
+    "display_name": "育儿达人47",
+    "followers": 12205,
+    "monthly_sales": 1386,
+    "monthly_revenue": 58333.31,
+    "categories": "[\"护理用品\", \"睡眠用品\", \"安全用品\"]",
+    "fan_growth_rate": -1.26
+  },
+  {
+    "id": 186,
+    "username": "creator_2343",
+    "display_name": "育儿达人18",
+    "followers": 14544,
+    "monthly_sales": 367,
+    "monthly_revenue": 40449.54,
+    "categories": "[\"护理用品\"]",
+    "fan_growth_rate": 20.81
+  },
+  {
+    "id": 187,
+    "username": "creator_2235",
+    "display_name": "宝妈达人65",
+    "followers": 19242,
+    "monthly_sales": 1880,
+    "monthly_revenue": 163271.2,
+    "categories": "[\"玩具早教\", \"睡眠用品\", \"孕产妇\"]",
+    "fan_growth_rate": 15.63
+  },
+  {
+    "id": 188,
+    "username": "creator_9842",
+    "display_name": "母婴达人84",
+    "followers": 12471,
+    "monthly_sales": 1685,
+    "monthly_revenue": 168108.66,
+    "categories": "[\"睡眠用品\", \"出行用品\"]",
+    "fan_growth_rate": 17.66
+  },
+  {
+    "id": 189,
+    "username": "creator_5767",
+    "display_name": "奶爸达人60",
+    "followers": 28436,
+    "monthly_sales": 2631,
+    "monthly_revenue": 197590.96,
+    "categories": "[\"睡眠用品\"]",
+    "fan_growth_rate": 14.04
+  },
+  {
+    "id": 190,
+    "username": "creator_3717",
+    "display_name": "奶爸达人58",
+    "followers": 12321,
+    "monthly_sales": 1786,
+    "monthly_revenue": 79173.41,
+    "categories": "[\"玩具早教\", \"安全用品\", \"出行用品\"]",
+    "fan_growth_rate": 16.1
+  },
+  {
+    "id": 191,
+    "username": "creator_6878",
+    "display_name": "宝妈达人29",
+    "followers": 19316,
+    "monthly_sales": 1500,
+    "monthly_revenue": 147798.77,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 14.34
+  },
+  {
+    "id": 192,
+    "username": "creator_6918",
+    "display_name": "母婴达人61",
+    "followers": 17520,
+    "monthly_sales": 1445,
+    "monthly_revenue": 162723.15,
+    "categories": "[\"喂养用品\"]",
+    "fan_growth_rate": 22.27
+  },
+  {
+    "id": 193,
+    "username": "creator_9542",
+    "display_name": "育儿达人95",
+    "followers": 61002,
+    "monthly_sales": 3377,
+    "monthly_revenue": 181339.65,
+    "categories": "[\"玩具早教\", \"出行用品\", \"睡眠用品\"]",
+    "fan_growth_rate": 9.57
+  },
+  {
+    "id": 194,
+    "username": "creator_9465",
+    "display_name": "育儿达人49",
+    "followers": 17185,
+    "monthly_sales": 2181,
+    "monthly_revenue": 256356.2,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 7.16
+  },
+  {
+    "id": 195,
+    "username": "creator_6653",
+    "display_name": "母婴达人62",
+    "followers": 13669,
+    "monthly_sales": 1700,
+    "monthly_revenue": 186737.31,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 22.94
+  },
+  {
+    "id": 196,
+    "username": "creator_5600",
+    "display_name": "奶爸达人20",
+    "followers": 12261,
+    "monthly_sales": 1005,
+    "monthly_revenue": 47055.62,
+    "categories": "[\"玩具早教\", \"安全用品\"]",
+    "fan_growth_rate": 7.73
+  },
+  {
+    "id": 197,
+    "username": "creator_7793",
+    "display_name": "育儿达人93",
+    "followers": 22637,
+    "monthly_sales": 2321,
+    "monthly_revenue": 93305.32,
+    "categories": "[\"睡眠用品\", \"孕产妇\", \"出行用品\"]",
+    "fan_growth_rate": 2.85
+  },
+  {
+    "id": 198,
+    "username": "creator_3095",
+    "display_name": "奶爸达人18",
+    "followers": 13719,
+    "monthly_sales": 605,
+    "monthly_revenue": 52428.48,
+    "categories": "[\"玩具早教\"]",
+    "fan_growth_rate": 7.2
+  },
+  {
+    "id": 199,
+    "username": "creator_3949",
+    "display_name": "母婴达人77",
+    "followers": 11748,
+    "monthly_sales": 391,
+    "monthly_revenue": 45837.69,
+    "categories": "[\"喂养用品\", \"安全用品\", \"护理用品\"]",
+    "fan_growth_rate": 21.61
+  },
+  {
+    "id": 200,
+    "username": "creator_8891",
+    "display_name": "奶爸达人29",
+    "followers": 16280,
+    "monthly_sales": 1237,
+    "monthly_revenue": 129554.38,
+    "categories": "[\"出行用品\", \"玩具早教\", \"孕产妇\"]",
+    "fan_growth_rate": 12.73
+  }
+] as const;

@@ -7,7 +7,7 @@ interface MiniTrendProps {
   color?: string;
 }
 
-export default function MiniTrend({ data, width = 100, height = 32, color = "#E8785A" }: MiniTrendProps) {
+export default function MiniTrend({ data, width = 100, height = 32, color = "#8B354A" }: MiniTrendProps) {
   const chartData = data.map((v, i) => ({ i, v }));
   const gid = `mt-${Math.abs(color.split('').reduce((a, c) => a + c.charCodeAt(0), 0))}`;
 

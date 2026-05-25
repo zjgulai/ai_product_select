@@ -53,7 +53,7 @@ export default function TikTokProducts() {
       <Breadcrumb items={["TikTok趋势", "商品"]} />
 
       {/* Search */}
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-0">
           <div className="relative flex-1 max-w-[400px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -145,14 +145,14 @@ export default function TikTokProducts() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["商品信息","销量","销售额($)","销量趋势","带货达人数","价格($)","评分","所属小店","操作"].map((h, i) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[280px]':i===3?'text-center w-[120px]':i===8?'text-center w-[60px]':'text-right'}`}>{h}</th>
+                    <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[280px]':i===3?'text-center w-[120px]':i===8?'text-center w-[60px]':'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {data?.items.map((item: any, idx: number) => (
                   <tr key={item.id ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-2.5">
                         <img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt={item.title} loading="lazy" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
@@ -161,18 +161,18 @@ export default function TikTokProducts() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-right">
+                    <td className="py-3 px-3 text-right">
                       <div className="text-xs font-semibold font-mono-num text-lc-text-primary">{item.sales.toLocaleString()}</div>
                       <div className="text-xs font-medium" style={{ color: item.salesGrowth.startsWith('+') ? LC.success : LC.danger }}>{item.salesGrowth}</div>
                     </td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.revenue.toLocaleString()}</td>
-                    <td className="py-2.5 px-3"><div className="flex justify-center"><MiniTrend data={item.trend} /></div></td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{item.influencers.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary"
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.revenue.toLocaleString()}</td>
+                    <td className="py-3 px-3"><div className="flex justify-center"><MiniTrend data={item.trend} /></div></td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-primary">{item.influencers.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary"
                       >{'priceRange' in item && item.priceRange ? item.priceRange : `$${item.price}`}</td>
-                    <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.rating >= 4.5 ? LC.success : item.rating >= 4 ? LC.teal : LC.warning }}>{item.rating}</span></td>
-                    <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[120px] text-lc-text-primary">{item.shop}</div></td>
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.rating >= 4.5 ? LC.success : item.rating >= 4 ? LC.teal : LC.warning }}>{item.rating}</span></td>
+                    <td className="py-3 px-3"><div className="text-xs truncate max-w-[120px] text-lc-text-primary">{item.shop}</div></td>
+                    <td className="py-3 px-3">
                       <div className="flex items-center justify-center gap-1">
                         <button className="transition-colors text-lc-border-strong hover:text-yellow-500"><Star size={13} /></button>
                         <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><ShoppingCart size={13} /></button>

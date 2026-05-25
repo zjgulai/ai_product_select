@@ -6,14 +6,14 @@
  * 调用时机：dataManager.import.ingest 成功后
  */
 
-import { getDb } from "../../queries/connection";
+import { getDb } from "../../queries/connection.ts";
 import { productConcepts } from "@db/schema";
 import { eq } from "drizzle-orm";
-import { cleanTiktokProducts, cleanAmazonProducts } from "./dwd-cleaner";
+import { cleanTiktokProducts, cleanAmazonProducts } from "./dwd-cleaner.ts";
 import {
   aggregateTiktokConceptDaily,
   aggregateAmazonConceptWeekly,
-} from "./dws-aggregator";
+} from "./dws-aggregator.ts";
 
 export interface ETLResult {
   dataKey: string;

@@ -1,0 +1,304 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e4091]:
+      - generic [ref=e4093]:
+        - generic [ref=e4095]: 融合选品
+        - generic [ref=e4096]:
+          - generic [ref=e4097]: /
+          - generic [ref=e4098]: 概念详情
+      - generic [ref=e4099]:
+        - button "返回机会榜" [ref=e4100] [cursor=pointer]:
+          - img [ref=e4101]
+          - text: 返回机会榜
+        - generic [ref=e4103]:
+          - generic [ref=e4104]: 硅
+          - generic [ref=e4105]:
+            - heading "硅胶吸管套装" [level=2] [ref=e4106]
+            - paragraph [ref=e4107]: Silicone Straw Set
+        - generic [ref=e4108]:
+          - generic [ref=e4109]:
+            - img [ref=e4110]
+            - generic [ref=e4112]:
+              - generic [ref=e4113]: SHI 社媒热度
+              - generic [ref=e4114]: "100.00"
+          - generic [ref=e4116]:
+            - img [ref=e4117]
+            - generic [ref=e4119]:
+              - generic [ref=e4120]: CVI 电商验证
+              - generic [ref=e4121]: "25.84"
+          - generic [ref=e4123]:
+            - img [ref=e4124]
+            - generic [ref=e4127]:
+              - generic [ref=e4128]: 机会分
+              - generic [ref=e4129]: "61.61"
+      - generic [ref=e4130]:
+        - generic [ref=e4131]:
+          - img [ref=e4132]
+          - heading "概念特征" [level=3] [ref=e4135]
+        - generic [ref=e4136]:
+          - generic [ref=e4137]: 环保
+          - generic [ref=e4138]: 可折叠
+          - generic [ref=e4139]: 易清洗
+          - generic [ref=e4140]: 耐高温
+        - generic [ref=e4141]:
+          - generic [ref=e4142]: "使用场景:"
+          - generic [ref=e4143]: 日常
+          - generic [ref=e4144]: 旅行
+          - generic [ref=e4145]: 咖啡
+      - generic [ref=e4147]:
+        - button "概览" [ref=e4148] [cursor=pointer]:
+          - img [ref=e4149]
+          - text: 概览
+        - button "VOC深度对比" [ref=e4154] [cursor=pointer]:
+          - img [ref=e4155]
+          - text: VOC深度对比
+      - generic [ref=e4160]:
+        - generic [ref=e4161]:
+          - generic [ref=e4162]:
+            - img [ref=e4163]
+            - heading "TikTok侧" [level=3] [ref=e4165]
+            - generic [ref=e4166]: 社媒热度
+          - generic [ref=e4167]:
+            - generic [ref=e4168]:
+              - generic [ref=e4169]:
+                - img [ref=e4171]
+                - generic [ref=e4174]: 相关视频
+              - generic [ref=e4175]: "267"
+              - generic [ref=e4176]: 16.3M 总播放
+            - generic [ref=e4177]:
+              - generic [ref=e4178]:
+                - img [ref=e4180]
+                - generic [ref=e4185]: 互动率
+              - generic [ref=e4186]: 4.83%
+              - generic [ref=e4187]: 高于同类均值
+            - generic [ref=e4188]:
+              - generic [ref=e4189]:
+                - img [ref=e4191]
+                - generic [ref=e4194]: 趋势动量
+              - generic [ref=e4195]: 0.87x
+              - generic [ref=e4196]: 平稳
+            - generic [ref=e4197]:
+              - generic [ref=e4198]:
+                - img [ref=e4200]
+                - generic [ref=e4202]: VOC缺口分
+              - generic [ref=e4203]: "74.99"
+              - generic [ref=e4204]: 用户期望 vs 实际供给
+          - generic [ref=e4205]:
+            - generic [ref=e4206]: TikTok关键词
+            - generic [ref=e4207]:
+              - generic [ref=e4208]: 环保 silicone straw set
+              - generic [ref=e4209]: 可折叠 silicone straw set
+              - generic [ref=e4210]: 易清洗 silicone straw set
+              - generic [ref=e4211]: 耐高温 silicone straw set
+        - generic [ref=e4212]:
+          - generic [ref=e4213]:
+            - img [ref=e4214]
+            - heading "Amazon侧" [level=3] [ref=e4216]
+            - generic [ref=e4217]: 电商验证
+          - generic [ref=e4218]:
+            - generic [ref=e4219]:
+              - generic [ref=e4220]:
+                - img [ref=e4222]
+                - generic [ref=e4226]: 相关商品
+              - generic [ref=e4227]: "39"
+              - generic [ref=e4228]: 66 个卖家
+            - generic [ref=e4229]:
+              - generic [ref=e4230]:
+                - img [ref=e4232]
+                - generic [ref=e4234]: 月销量
+              - generic [ref=e4235]: 141,171
+              - generic [ref=e4236]: 近30天统计
+            - generic [ref=e4237]:
+              - generic [ref=e4238]:
+                - img [ref=e4240]
+                - generic [ref=e4242]: 平均评分
+              - generic [ref=e4243]: "3.98"
+              - generic [ref=e4244]: 有待提升
+            - generic [ref=e4245]:
+              - generic [ref=e4246]:
+                - img [ref=e4248]
+                - generic [ref=e4250]: 供需比
+              - generic [ref=e4251]: "0.15"
+              - generic [ref=e4252]: 商品/视频比
+          - generic [ref=e4253]:
+            - generic [ref=e4254]: Amazon类目
+            - generic [ref=e4255]:
+              - generic [ref=e4256]: 宠物用品
+              - generic [ref=e4257]: 美妆个护
+      - generic [ref=e4258]:
+        - generic [ref=e4259]:
+          - img [ref=e4260]
+          - heading "VOC对比洞察" [level=3] [ref=e4262]
+          - generic [ref=e4263]: AI分析
+        - generic [ref=e4264]:
+          - generic [ref=e4265]:
+            - generic [ref=e4266]: TikTok用户关注
+            - generic [ref=e4267]:
+              - generic [ref=e4268]:
+                - generic [ref=e4269]: 环保
+                - generic [ref=e4273]: 85%
+              - generic [ref=e4274]:
+                - generic [ref=e4275]: 可折叠
+                - generic [ref=e4279]: 73%
+              - generic [ref=e4280]:
+                - generic [ref=e4281]: 易清洗
+                - generic [ref=e4285]: 61%
+              - generic [ref=e4286]:
+                - generic [ref=e4287]: 耐高温
+                - generic [ref=e4291]: 49%
+          - generic [ref=e4292]:
+            - generic [ref=e4293]: Amazon用户反馈
+            - generic [ref=e4294]:
+              - generic [ref=e4295]:
+                - generic [ref=e4296]: 易用
+                - generic [ref=e4300]: 72%
+              - generic [ref=e4301]:
+                - generic [ref=e4302]: 物有所值
+                - generic [ref=e4306]: 62%
+              - generic [ref=e4307]:
+                - generic [ref=e4308]: 材质
+                - generic [ref=e4312]: 52%
+              - generic [ref=e4313]:
+                - generic [ref=e4314]: 设计
+                - generic [ref=e4318]: 42%
+          - generic [ref=e4319]:
+            - generic [ref=e4320]: 需求缺口分析
+            - generic [ref=e4321]:
+              - generic [ref=e4322]:
+                - img [ref=e4323]
+                - paragraph [ref=e4325]:
+                  - text: TikTok用户对"便携"的讨论频率是Amazon评论的
+                  - strong [ref=e4326]: 2.3倍
+                  - text: ，说明便携性是社媒热度的重要驱动因素
+              - generic [ref=e4327]:
+                - img [ref=e4328]
+                - paragraph [ref=e4330]:
+                  - text: Amazon用户对"物有所值"的满意度
+                  - strong [ref=e4331]: 偏低
+                  - text: ，建议关注价格带优化
+              - generic [ref=e4332]:
+                - img [ref=e4333]
+                - paragraph [ref=e4335]:
+                  - text: 社媒热度持续上升，但电商供给尚未完全跟上，存在
+                  - strong [ref=e4336]: 窗口期机会
+      - generic [ref=e4337]:
+        - generic [ref=e4338]:
+          - img [ref=e4339]
+          - heading "SHI/CVI 历史趋势（近30天）" [level=3] [ref=e4341]
+        - generic [ref=e4342]:
+          - generic [ref=e4344]: 社媒热度指数 SHI
+          - generic [ref=e4347]: 电商验证指数 CVI
+          - generic [ref=e4350]: 机会分 Opportunity

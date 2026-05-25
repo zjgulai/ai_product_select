@@ -1,0 +1,205 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e4613]:
+      - generic [ref=e4617]: 数据管理中心
+      - generic [ref=e4619]:
+        - generic [ref=e4620]:
+          - generic [ref=e4621]:
+            - img [ref=e4622]
+            - generic [ref=e4626]: 已配置数据源
+          - generic [ref=e4627]: "8"
+        - generic [ref=e4628]:
+          - generic [ref=e4629]:
+            - img [ref=e4630]
+            - generic [ref=e4632]: 导入总次数
+          - generic [ref=e4633]: "0"
+        - generic [ref=e4634]:
+          - generic [ref=e4635]:
+            - img [ref=e4636]
+            - generic [ref=e4639]: 成功次数
+          - generic [ref=e4640]: "0"
+        - generic [ref=e4641]:
+          - generic [ref=e4642]:
+            - img [ref=e4643]
+            - generic [ref=e4647]: 累计导入行数
+          - generic [ref=e4648]: "0"
+      - generic [ref=e4649]:
+        - generic [ref=e4650]:
+          - button "数据源" [ref=e4651] [cursor=pointer]:
+            - img [ref=e4652]
+            - text: 数据源
+          - button "导入记录" [ref=e4656] [cursor=pointer]:
+            - img [ref=e4657]
+            - text: 导入记录
+          - button "数据质量" [ref=e4659] [cursor=pointer]:
+            - img [ref=e4660]
+            - text: 数据质量
+          - button "模板配置" [ref=e4664] [cursor=pointer]:
+            - img [ref=e4665]
+            - text: 模板配置
+        - generic [ref=e4668]:
+          - generic [ref=e4669]:
+            - heading "选择数据源开始导入" [level=3] [ref=e4670]
+            - generic [ref=e4671]: 支持 .xlsx .xls .csv
+          - generic [ref=e4672]:
+            - button "📦 ODS TikTok 商品 暂无数据" [ref=e4673] [cursor=pointer]:
+              - generic [ref=e4674]:
+                - generic [ref=e4675]: 📦
+                - generic [ref=e4676]: ODS
+              - generic [ref=e4677]: TikTok 商品
+              - generic [ref=e4678]: 暂无数据
+            - button "👤 ODS TikTok 达人 暂无数据" [ref=e4679] [cursor=pointer]:
+              - generic [ref=e4680]:
+                - generic [ref=e4681]: 👤
+                - generic [ref=e4682]: ODS
+              - generic [ref=e4683]: TikTok 达人
+              - generic [ref=e4684]: 暂无数据
+            - button "🏪 ODS TikTok 小店 暂无数据" [ref=e4685] [cursor=pointer]:
+              - generic [ref=e4686]:
+                - generic [ref=e4687]: 🏪
+                - generic [ref=e4688]: ODS
+              - generic [ref=e4689]: TikTok 小店
+              - generic [ref=e4690]: 暂无数据
+            - button "🎬 ODS TikTok 视频 暂无数据" [ref=e4691] [cursor=pointer]:
+              - generic [ref=e4692]:
+                - generic [ref=e4693]: 🎬
+                - generic [ref=e4694]: ODS
+              - generic [ref=e4695]: TikTok 视频
+              - generic [ref=e4696]: 暂无数据
+            - button "📡 ODS TikTok 直播 暂无数据" [ref=e4697] [cursor=pointer]:
+              - generic [ref=e4698]:
+                - generic [ref=e4699]: 📡
+                - generic [ref=e4700]: ODS
+              - generic [ref=e4701]: TikTok 直播
+              - generic [ref=e4702]: 暂无数据
+            - button "📋 ODS Amazon 商品 暂无数据" [ref=e4703] [cursor=pointer]:
+              - generic [ref=e4704]:
+                - generic [ref=e4705]: 📋
+                - generic [ref=e4706]: ODS
+              - generic [ref=e4707]: Amazon 商品
+              - generic [ref=e4708]: 暂无数据
+            - button "🔑 ODS Amazon 关键词 暂无数据" [ref=e4709] [cursor=pointer]:
+              - generic [ref=e4710]:
+                - generic [ref=e4711]: 🔑
+                - generic [ref=e4712]: ODS
+              - generic [ref=e4713]: Amazon 关键词
+              - generic [ref=e4714]: 暂无数据
+            - button "💬 ODS Amazon 评论 暂无数据" [ref=e4715] [cursor=pointer]:
+              - generic [ref=e4716]:
+                - generic [ref=e4717]: 💬
+                - generic [ref=e4718]: ODS
+              - generic [ref=e4719]: Amazon 评论
+              - generic [ref=e4720]: 暂无数据

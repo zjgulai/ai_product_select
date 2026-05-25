@@ -130,7 +130,7 @@ export default function ReviewsPage() {
       <Breadcrumb items={['Amazon榜单', '评论详情']} />
 
       {/* Back button */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-4">
         <button onClick={() => navigate('/amazon/list')} className="flex items-center gap-1 text-[11px] text-lc-text-muted hover:text-lc-primary transition-all">
           <ArrowLeft size={12} /> 返回榜单
         </button>
@@ -146,8 +146,8 @@ export default function ReviewsPage() {
         <>
           {/* Stats Header */}
           <div className="bg-white rounded-xl p-5 mb-4 ring-1 ring-lc-border/60 shadow-lc">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: `${LC.primary}12` }}>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${LC.primary}12` }}>
                 <MessageSquare size={18} className="text-lc-primary" />
               </div>
               <div>
@@ -171,7 +171,7 @@ export default function ReviewsPage() {
           </div>
 
           {/* Filters Bar */}
-          <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
             <div className="flex items-center gap-4 flex-wrap">
               {/* Sentiment */}
               <div className="flex items-center gap-1.5">
@@ -247,7 +247,7 @@ export default function ReviewsPage() {
           </div>
 
           {/* Reviews List */}
-          <div className="bg-white rounded-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
             <div className="flex items-center justify-between p-3 border-b border-lc-border">
               <h3 className="text-sm font-semibold text-lc-primary flex items-center gap-1.5">
                 <MessageSquare size={14} /> 评论列表
@@ -290,7 +290,7 @@ export default function ReviewsPage() {
                     <div className="text-[11px] text-lc-text-secondary leading-relaxed mb-2">
                       {highlightKeywords(review.content, review.keywords)}
                     </div>
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-4 flex-wrap">
                       {review.aspects.map((a: any) => (
                         <span key={a.aspect} className="text-[9px] px-1.5 py-0.5 rounded font-medium"
                           style={{
@@ -344,7 +344,7 @@ export default function ReviewsPage() {
 
           {/* Aspect Stats */}
           {statsData?.aspects && statsData.aspects.length > 0 && (
-            <div className="bg-white rounded-lg shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
               <h3 className="text-sm font-semibold text-lc-primary mb-3">方面维度分析</h3>
               <div className="space-y-2">
                 {statsData.aspects.slice(0, 10).map((a: any) => (

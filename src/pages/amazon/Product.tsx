@@ -56,7 +56,7 @@ export default function AmazonProduct() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["商品榜单"]} />
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-2">
           <div className="relative flex-1 max-w-[400px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -96,7 +96,7 @@ export default function AmazonProduct() {
         </div>
       </div>
       {saved.length > 0 && (
-        <div className="bg-white px-3 py-2 border-b ring-1 ring-lc-border/60 border-lc-border flex items-center gap-2 flex-wrap">
+        <div className="bg-white px-4 py-2.5 border-b ring-1 ring-lc-border/60 border-lc-border flex items-center gap-4 flex-wrap">
           <span className="text-xs text-lc-text-muted">快速筛选:</span>
           {saved.map(f => (
             <button
@@ -117,9 +117,9 @@ export default function AmazonProduct() {
         </div>
       )}
       <div className="bg-white p-3 border-b ring-1 ring-lc-border/60 border-lc-border">
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-4 flex-wrap">
           {tags.map(tag => (
-            <span key={tag} className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium" style={{ background: `${LC.primary}10`, color: LC.primary }}>
+            <span key={tag} className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-full font-medium" style={{ background: `${LC.primary}10`, color: LC.primary }}>
               {tag}<button onClick={() => removeTag(tag)}><X size={10} /></button>
             </span>
           ))}
@@ -131,7 +131,7 @@ export default function AmazonProduct() {
           <select className="h-7 border rounded text-xs px-2 font-medium" style={{ borderColor: LC.border, color: LC.textSecondary }}><option>默认: 总销量从高到低</option></select>
         </div>
         {showAdvanced && (
-          <div className="flex items-center gap-3 flex-wrap mt-2 pt-2 border-t border-lc-border-light">
+          <div className="flex items-center gap-4 flex-wrap mt-2 pt-2 border-t border-lc-border-light">
             <span className="text-xs font-medium text-lc-text-secondary">销量:</span>
             <input type="text" value={salesMinInput} onChange={e => setSalesMinInput(e.target.value)} placeholder="最小值" className="w-20 h-7 border rounded px-2 text-xs" style={{ borderColor: LC.border, color: LC.text }} />
             <span className="text-xs text-lc-border-strong">-</span>
@@ -170,20 +170,20 @@ export default function AmazonProduct() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["商品图片","商品名称","月销量","月销售额($)","价格($)","品牌","操作"].map((h, i) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[60px]':i===1?'text-left':'text-right'}`}>{h}</th>
+                    <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[60px]':i===1?'text-left':'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {data?.items.map((item, idx) => (
                   <tr key={item.asin} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                    <td className="py-2.5 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt={item.title} loading="lazy" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
-                    <td className="py-2.5 px-3"><div className="text-xs truncate max-w-[180px] font-medium text-lc-text-primary" title={item.title}>{item.title}</div></td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.monthlySales ?? 0).toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-medium text-lc-primary">${parseFloat(item.monthlyRevenue ?? '0').toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">${item.price}</td>
-                    <td className="py-2.5 px-3 text-xs font-medium text-lc-text-primary">{item.brand}</td>
-                    <td className="py-2.5 px-3 text-center"><span className="text-xs font-medium text-lc-text-muted">-</span></td>
+                    <td className="py-3 px-3"><img src={PRODUCT_IMAGES[idx % PRODUCT_IMAGES.length]} alt={item.title} loading="lazy" className="w-9 h-9 rounded object-cover ring-1 ring-lc-border"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/></td>
+                    <td className="py-3 px-3"><div className="text-xs truncate max-w-[180px] font-medium text-lc-text-primary" title={item.title}>{item.title}</div></td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.monthlySales ?? 0).toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-medium text-lc-primary">${parseFloat(item.monthlyRevenue ?? '0').toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">${item.price}</td>
+                    <td className="py-3 px-3 text-xs font-medium text-lc-text-primary">{item.brand}</td>
+                    <td className="py-3 px-3 text-center"><span className="text-xs font-medium text-lc-text-muted">-</span></td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (

@@ -41,7 +41,7 @@ export default function TikTokLive() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["TikTok趋势", "直播"]} />
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-0">
           <div className="relative flex-1 max-w-[500px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -111,37 +111,37 @@ export default function TikTokLive() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["直播信息", "开播时间", "累计观看人次", "最高在线人数", "总点赞数", "总回复数", "涨粉数", "达人信息", "操作"].map((h, i) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[200px]':i===1?'text-left w-[200px]':i===8?'text-center w-[60px]':'text-right'}`}>{h}</th>
+                    <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[200px]':i===1?'text-left w-[200px]':i===8?'text-center w-[60px]':'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {data?.items.map((item: any, idx: number) => (
                   <tr key={item.id ?? idx} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-2">
                         <div className="w-10 h-8 rounded flex items-center justify-center shrink-0 ring-1 ring-lc-border bg-lc-primary-light"><span className="text-xs"><div className="w-2 h-2 rounded-full bg-lc-primary" /></span></div>
                         <span className="text-xs truncate max-w-[140px] text-lc-text-primary" title={item.title}>{item.title}</span>
                       </div>
                     </td>
-                     <td className="py-2.5 px-3">
+                     <td className="py-3 px-3">
                        <div className="text-xs space-y-0.5 text-lc-text-muted">
                          <div>开播 {item.startTime}</div>
                          <div className="font-medium text-lc-text-secondary">时长 {typeof item.duration === 'number' ? `${Math.floor(item.duration/60)}h${item.duration%60}m` : item.duration}</div>
                        </div>
                      </td>
-                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.viewers ?? 0).toLocaleString()}</td>
-                     <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.maxOnline ?? item.peakOnline ?? 0).toLocaleString()}</td>
-                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes ?? 0).toLocaleString()}</td>
-                     <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{(item.comments ?? item.replies ?? 0).toLocaleString()}</td>
-                     <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{(item.newFans ?? 0).toLocaleString()}</span></td>
-                     <td className="py-2.5 px-3">
+                     <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.viewers ?? 0).toLocaleString()}</td>
+                     <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(item.maxOnline ?? item.peakOnline ?? 0).toLocaleString()}</td>
+                     <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes ?? 0).toLocaleString()}</td>
+                     <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{(item.comments ?? item.replies ?? 0).toLocaleString()}</td>
+                     <td className="py-3 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: LC.success }}>{(item.newFans ?? 0).toLocaleString()}</span></td>
+                     <td className="py-3 px-3">
                        <div className="flex items-center gap-1.5">
                          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold ring-1 ring-lc-border" style={{ background: `${LC.primary}10`, color: LC.primary }}>{(item.creator ?? '?')[0]?.toUpperCase()}</div>
                          <div><div className="text-xs truncate max-w-[70px] text-lc-text-primary">{item.creator ?? '未知达人'}</div><div className="text-xs font-mono-num text-lc-text-muted">{((item.creatorFollowers ?? 0)/1000000).toFixed(0)}M粉</div></div>
                        </div>
                      </td>
-                     <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
+                     <td className="py-3 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (

@@ -52,15 +52,15 @@ export default function TikTokAttention() {
       <Breadcrumb items={["TikTok趋势", "关注"]} />
 
       {/* Overview Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {[
           { label: '关注概念', value: concepts.length, sub: '实时追踪中', icon: Sparkles, color: LC.primary },
           { label: 'SHI变化提醒', value: concepts.filter((c: any) => c.shiScore > 60).length, sub: '需要关注', icon: TrendingUp, color: LC.success },
           { label: 'CVI变化提醒', value: concepts.filter((c: any) => c.cviScore > 30).length, sub: '需要关注', icon: BarChart3, color: LC.warning },
           { label: '未读提醒', value: 3, sub: '今日更新', icon: Bell, color: LC.teal },
         ].map((card, i) => (
-          <div key={i} className="bg-white rounded-lg p-3 ring-1 ring-lc-border/60 shadow-lc">
-            <div className="flex items-center gap-2 mb-1.5">
+          <div key={i} className="bg-white rounded-xl p-3 ring-1 ring-lc-border/60 shadow-lc">
+            <div className="flex items-center gap-4 mb-1.5">
               <card.icon size={13} style={{ color: card.color }} />
               <span className="text-xs text-lc-text-muted">{card.label}</span>
             </div>
@@ -71,7 +71,7 @@ export default function TikTokAttention() {
       </div>
 
       {/* Main Content */}
-      <div className="bg-white rounded-lg shadow-lc p-6 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-6 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-semibold text-lc-primary">我的关注</h2>
@@ -118,7 +118,7 @@ export default function TikTokAttention() {
             {/* Section: 关注商品 */}
             <p className="text-[11px] font-medium text-lc-text-secondary mb-1">关注的商品</p>
             {MOCK_PRODUCTS.map(item => (
-              <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
+              <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Box size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
@@ -155,7 +155,7 @@ export default function TikTokAttention() {
                 </div>
               ) : (
                 concepts.slice(0, 5).map((item: any) => (
-                  <div key={item.conceptId} className="flex items-center gap-3 p-2.5 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border mb-1.5">
+                  <div key={item.conceptId} className="flex items-center gap-4 p-2.5 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border mb-1.5">
                     <div className="w-8 h-8 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
                       {(item.name ?? '?')[0]}
                     </div>
@@ -166,14 +166,14 @@ export default function TikTokAttention() {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={(e) => { e.stopPropagation(); navigate(`/fusion/concept/${item.conceptId}`); }}
-                        className="text-[9px] px-2 py-1 rounded border transition-colors"
+                        className="text-[9px] px-2.5 py-1.5 rounded border transition-colors"
                         style={{ borderColor: LC.border, color: LC.textSecondary }}
                       >
                         <span className="flex items-center gap-0.5"><Eye size={9} />详情</span>
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); navigate('/fusion/report'); }}
-                        className="text-[9px] px-2 py-1 rounded border transition-colors"
+                        className="text-[9px] px-2.5 py-1.5 rounded border transition-colors"
                         style={{ borderColor: `${LC.primary}40`, color: LC.primary, background: LC.primaryLight }}
                       >
                         <span className="flex items-center gap-0.5"><FileText size={9} />报告</span>
@@ -188,7 +188,7 @@ export default function TikTokAttention() {
         ) : tab === 1 ? (
           <div className="space-y-2">
             {MOCK_CREATORS.map(item => (
-              <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
+              <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded-full flex items-center justify-center bg-lc-primary-light"><UserRound size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
@@ -205,7 +205,7 @@ export default function TikTokAttention() {
         ) : tab === 2 ? (
           <div className="space-y-2">
             {MOCK_SHOPS.map(item => (
-              <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
+              <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Store size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium truncate text-lc-text-primary">{item.name}</div>
@@ -221,7 +221,7 @@ export default function TikTokAttention() {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-14 h-14 rounded-lg border-2 border-dashed flex items-center justify-center mb-3 border-lc-border">
+            <div className="w-14 h-14 rounded-xl border-2 border-dashed flex items-center justify-center mb-3 border-lc-border">
               <Package size={24} className="text-lc-border" />
             </div>
             <p className="text-sm font-medium text-lc-text-muted">暂无关注的{TABS[tab].label}</p>

@@ -63,7 +63,7 @@ export default function UserCenter() {
             <User size={24} className="text-lc-text-primary" />
           </div>
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-4 mb-1">
               <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>lute_user_001</h2>
               <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: LC.primary, color: LC.text }}>高级版</span>
             </div>
@@ -101,10 +101,10 @@ export default function UserCenter() {
                   <button
                     key={action.label}
                     onClick={() => navigate(action.path)}
-                    className="flex flex-col items-center gap-2 p-4 rounded-xl border transition-all hover:-translate-y-0.5 hover:shadow-lc-hover"
+                    className="flex flex-col items-center gap-4 p-4 rounded-xl border transition-all hover:-translate-y-0.5 hover:shadow-lc-hover"
                     style={{ borderColor: LC.border, background: LC.bgWarm }}
                   >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${action.color}12` }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${action.color}12` }}>
                       <action.icon size={18} style={{ color: action.color }} />
                     </div>
                     <span className="text-xs font-medium text-lc-text-primary">{action.label}</span>
@@ -116,7 +116,7 @@ export default function UserCenter() {
             {/* 最近报告 + 最近关注 */}
             <div className="grid grid-cols-2 gap-4">
               {/* 最近报告 */}
-              <div className="rounded-lg p-4 ring-1 ring-lc-border/60">
+              <div className="rounded-xl p-4 ring-1 ring-lc-border/60">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-xs font-semibold text-lc-text-secondary flex items-center gap-1.5">
                     <FileText size={12} /> 最近生成的报告
@@ -147,9 +147,9 @@ export default function UserCenter() {
                 ) : (
                   <div className="space-y-2">
                     {reports.slice(0, 4).map((r: any) => (
-                      <div key={r.reportId} className="flex items-center justify-between p-2 rounded-lg hover:bg-lc-bg-warm transition-colors cursor-pointer"
+                      <div key={r.reportId} className="flex items-center justify-between p-2 rounded-xl hover:bg-lc-bg-warm transition-colors cursor-pointer"
                         onClick={() => navigate('/fusion/report')}>
-                        <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-4 min-w-0">
                           <FileText size={12} className="text-lc-primary shrink-0" />
                           <span className="text-xs text-lc-text-primary truncate">{r.title}</span>
                         </div>
@@ -163,7 +163,7 @@ export default function UserCenter() {
               </div>
 
               {/* 最近关注概念 */}
-              <div className="rounded-lg p-4 ring-1 ring-lc-border/60">
+              <div className="rounded-xl p-4 ring-1 ring-lc-border/60">
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="text-xs font-semibold text-lc-text-secondary flex items-center gap-1.5">
                     <Heart size={12} /> 最近关注的概念
@@ -188,9 +188,9 @@ export default function UserCenter() {
                 ) : (
                   <div className="space-y-2">
                     {concepts.slice(0, 4).map((c: any) => (
-                      <div key={c.conceptId} className="flex items-center justify-between p-2 rounded-lg hover:bg-lc-bg-warm transition-colors cursor-pointer"
+                      <div key={c.conceptId} className="flex items-center justify-between p-2 rounded-xl hover:bg-lc-bg-warm transition-colors cursor-pointer"
                         onClick={() => navigate(`/fusion/concept/${c.conceptId}`)}>
-                        <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-4 min-w-0">
                           <div className="w-5 h-5 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
                             {(c.name ?? '?')[0]}
                           </div>
@@ -208,7 +208,7 @@ export default function UserCenter() {
             </div>
 
             {/* 最近活动 */}
-            <div className="rounded-lg p-4 ring-1 ring-lc-border/60">
+            <div className="rounded-xl p-4 ring-1 ring-lc-border/60">
               <h4 className="text-xs font-semibold text-lc-text-secondary mb-3 flex items-center gap-1.5">
                 <Clock size={12} /> 最近活动
               </h4>
@@ -219,7 +219,7 @@ export default function UserCenter() {
                   { action: '查看了Amazon关键词趋势', target: 'baby bottle warmer', time: '1天前', icon: TrendingUp },
                   { action: '生成了融合分析报告', target: 'LED化妆镜', time: '2天前', icon: FileText },
                 ].map((activity, i) => (
-                  <div key={i} className="flex items-center gap-2 p-2 rounded-lg hover:bg-lc-bg-warm transition-colors">
+                  <div key={i} className="flex items-center gap-4 p-2 rounded-xl hover:bg-lc-bg-warm transition-colors">
                     <activity.icon size={12} className="text-lc-text-muted shrink-0" />
                     <span className="text-xs text-lc-text-primary">{activity.action}</span>
                     <span className="text-xs font-medium text-lc-primary">{activity.target}</span>
@@ -256,7 +256,7 @@ export default function UserCenter() {
           <table className="w-full min-w-[640px]">
             <thead>
               <tr className="bg-lc-bg-warm">
-                {['套餐','金额','开通日期','状态','到期日','操作'].map(h => <th key={h} className="py-2.5 px-3 text-xs font-semibold text-left text-lc-text-secondary">{h}</th>)}
+                {['套餐','金额','开通日期','状态','到期日','操作'].map(h => <th key={h} className="py-3 px-3 text-xs font-semibold text-left text-lc-text-secondary">{h}</th>)}
               </tr>
             </thead>
             <tbody>
@@ -290,17 +290,17 @@ export default function UserCenter() {
             <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-lc-bg-warm">
-                  {['报告名称','类型','创建日期','状态','操作'].map(h => <th key={h} className="py-2.5 px-3 text-xs font-semibold text-left text-lc-text-secondary">{h}</th>)}
+                  {['报告名称','类型','创建日期','状态','操作'].map(h => <th key={h} className="py-3 px-3 text-xs font-semibold text-left text-lc-text-secondary">{h}</th>)}
                 </tr>
               </thead>
               <tbody>
                 {reportsData?.items.map((r: any, i: number) => (
                   <tr key={r.reportId ?? i} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                    <td className="py-2.5 px-3 text-xs font-medium text-lc-text-primary">{r.title}</td>
-                    <td className="py-2.5 px-3"><span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: LC.primaryLight, color: LC.primary }}>融合分析</span></td>
-                     <td className="py-2.5 px-3 text-xs text-lc-text-muted">{r.createdAt ? new Date(r.createdAt).toLocaleDateString('zh-CN') : '-'}</td>
-                    <td className="py-2.5 px-3"><span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: r.status === 'completed' ? LC.successLight : LC.warningLight, color: r.status === 'completed' ? LC.success : LC.warning }}>{r.status === 'completed' ? '已完成' : '生成中'}</span></td>
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3 text-xs font-medium text-lc-text-primary">{r.title}</td>
+                    <td className="py-3 px-3"><span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: LC.primaryLight, color: LC.primary }}>融合分析</span></td>
+                     <td className="py-3 px-3 text-xs text-lc-text-muted">{r.createdAt ? new Date(r.createdAt).toLocaleDateString('zh-CN') : '-'}</td>
+                    <td className="py-3 px-3"><span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: r.status === 'completed' ? LC.successLight : LC.warningLight, color: r.status === 'completed' ? LC.success : LC.warning }}>{r.status === 'completed' ? '已完成' : '生成中'}</span></td>
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => navigate('/fusion/report')}

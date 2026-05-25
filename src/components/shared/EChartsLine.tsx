@@ -10,20 +10,20 @@ interface LineChartProps {
   yAxisName?: string;
 }
 
-function EChartsLine({ data, title, color = '#E8785A', height = 250, yAxisName }: LineChartProps) {
+function EChartsLine({ data, title, color = '#8B354A', height = 250, yAxisName }: LineChartProps) {
   const option = useMemo(() => ({
     title: title ? {
       text: title,
       left: 0,
       top: 0,
-      textStyle: { fontSize: 12, fontWeight: 600, color: '#78716C', fontFamily: 'Inter, sans-serif' },
+      textStyle: { fontSize: 12, fontWeight: 600, color: '#7A6B6B', fontFamily: 'Inter, sans-serif' },
     } : undefined,
     tooltip: {
       trigger: 'axis',
       backgroundColor: 'rgba(255,255,255,0.98)',
-      borderColor: '#EDEAE5',
+      borderColor: '#E5D5CD',
       borderWidth: 1,
-      textStyle: { color: '#1C1917', fontSize: 11 },
+      textStyle: { color: '#2D1F1F', fontSize: 11 },
       formatter: (params: any) => {
         const p = params[0];
         return `<div style="font-weight:600">${p.axisValue}</div>
@@ -38,18 +38,18 @@ function EChartsLine({ data, title, color = '#E8785A', height = 250, yAxisName }
       type: 'category',
       data: data.map(d => d.x),
       boundaryGap: false,
-      axisLine: { lineStyle: { color: '#EDEAE5' } },
+      axisLine: { lineStyle: { color: '#E5D5CD' } },
       axisTick: { show: false },
-      axisLabel: { color: '#A8A29E', fontSize: 10 },
+      axisLabel: { color: '#9A8B8B', fontSize: 10 },
     },
     yAxis: {
       type: 'value',
       name: yAxisName,
-      nameTextStyle: { color: '#A8A29E', fontSize: 10 },
+      nameTextStyle: { color: '#9A8B8B', fontSize: 10 },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { lineStyle: { color: '#F5F2EE', type: 'dashed' } },
-      axisLabel: { color: '#A8A29E', fontSize: 10 },
+      axisLabel: { color: '#9A8B8B', fontSize: 10 },
     },
     series: [{
       type: 'line',

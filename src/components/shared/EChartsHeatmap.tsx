@@ -19,18 +19,18 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
       title: title ? {
         text: title,
         left: 'center',
-        textStyle: { fontSize: 14, fontWeight: 600, color: '#E8785A', fontFamily: 'Inter, sans-serif' },
+        textStyle: { fontSize: 14, fontWeight: 600, color: '#8B354A', fontFamily: 'Inter, sans-serif' },
       } : undefined,
       tooltip: {
         position: 'top',
         backgroundColor: 'rgba(255,255,255,0.98)',
-        borderColor: '#EDEAE5',
+        borderColor: '#E5D5CD',
         borderWidth: 1,
-        textStyle: { color: '#1C1917', fontSize: 12 },
+        textStyle: { color: '#2D1F1F', fontSize: 12 },
         formatter: (params: any) => {
           return `<div style="font-weight:600;margin-bottom:4px">${yLabels[params.value[1]]}</div>
-                  <div style="color:#A8A29E;font-size:11px">${xLabels[params.value[0]]}</div>
-                  <div style="font-size:16px;font-weight:700;color:#E8785A;margin-top:4px">
+                  <div style="color:#9A8B8B;font-size:11px">${xLabels[params.value[0]]}</div>
+                  <div style="font-size:16px;font-weight:700;color:#8B354A;margin-top:4px">
                     热度指数: ${params.value[2]}
                   </div>`;
         },
@@ -40,9 +40,9 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         type: 'category',
         data: xLabels,
         splitArea: { show: false },
-        axisLine: { lineStyle: { color: '#EDEAE5' } },
+        axisLine: { lineStyle: { color: '#E5D5CD' } },
         axisTick: { show: false },
-        axisLabel: { color: '#78716C', fontSize: 11, fontFamily: 'Inter, sans-serif' },
+        axisLabel: { color: '#7A6B6B', fontSize: 11, fontFamily: 'Inter, sans-serif' },
       },
       yAxis: {
         type: 'category',
@@ -50,7 +50,7 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         splitArea: { show: false },
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: '#78716C', fontSize: 11, fontFamily: 'Inter, sans-serif' },
+        axisLabel: { color: '#7A6B6B', fontSize: 11, fontFamily: 'Inter, sans-serif' },
       },
       visualMap: {
         min: minVal,
@@ -61,11 +61,11 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         bottom: 0,
         itemWidth: 12,
         itemHeight: 120,
-        textStyle: { color: '#A8A29E', fontSize: 10 },
+        textStyle: { color: '#9A8B8B', fontSize: 10 },
         inRange: {
           color: [
             '#FFF5F2', '#FDDDD4', '#FBC4B6', '#F8AB98',
-            '#F4927A', '#E8785A', '#D46040', '#C04020',
+            '#F4927A', '#8B354A', '#6B2A3A', '#C04020',
           ],
         },
       },

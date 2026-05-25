@@ -15,8 +15,8 @@ const STAGE_LABELS: Record<string, string> = {
   develop: 'Develop', qualify: 'Qualify', launch: 'Launch',
 };
 const STAGE_COLORS: Record<string, string> = {
-  charter: LC.primary,      // #E8785A
-  concept: '#D49450',       // 品牌金色
+  charter: LC.primary,      // #8B354A
+  concept: '#C47A5A',       // 品牌金色
   plan: '#C8A265',          // 暖色过渡
   develop: LC.teal,         // #2A9D8F
   qualify: LC.success,      // #4CAF50
@@ -106,7 +106,7 @@ export default function IpmsTracking() {
       <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
               <Briefcase size={20} style={{ color: LC.textInverse }} />
             </div>
             <div>
@@ -126,15 +126,15 @@ export default function IpmsTracking() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {[
           { label: '总项目', value: stats.total, icon: Briefcase, color: LC.primary },
           { label: '进行中', value: stats.active, icon: Zap, color: LC.success },
           { label: '已完成', value: stats.completed, icon: CheckCircle, color: LC.teal },
           { label: '即将上线', value: stats.upcoming, icon: Calendar, color: LC.warning },
         ].map(s => (
-          <div key={s.label} className="bg-white rounded-lg p-3 ring-1 ring-lc-border/60 shadow-lc">
-            <div className="flex items-center gap-2 mb-1.5">
+          <div key={s.label} className="bg-white rounded-xl p-3 ring-1 ring-lc-border/60 shadow-lc">
+            <div className="flex items-center gap-4 mb-1.5">
               <s.icon size={13} style={{ color: s.color }} />
               <span className="text-xs text-lc-text-muted">{s.label}</span>
             </div>
@@ -144,7 +144,7 @@ export default function IpmsTracking() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-2">
           {[
             { key: 'all', label: '全部' },
@@ -165,7 +165,7 @@ export default function IpmsTracking() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         {isLoading ? (
           <div className="p-4 space-y-3">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -177,7 +177,7 @@ export default function IpmsTracking() {
             <thead>
               <tr className="bg-lc-bg-warm">
                 {['项目名称', '当前阶段', '状态', '优先级', '负责人', '目标日期', '操作'].map(h => (
-                  <th key={h} className="py-2.5 px-3 text-[11px] font-bold text-lc-text-secondary text-left">{h}</th>
+                  <th key={h} className="py-3 px-3 text-[11px] font-bold text-lc-text-secondary text-left">{h}</th>
                 ))}
               </tr>
             </thead>

@@ -1,0 +1,252 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e4355]:
+      - generic [ref=e4357]:
+        - generic [ref=e4359]: Amazon趋势
+        - generic [ref=e4360]:
+          - generic [ref=e4361]: /
+          - generic [ref=e4362]: 关键词趋势
+      - generic [ref=e4363]:
+        - heading "产品创新加速器，亿级卖家都在用" [level=2] [ref=e4364]
+        - paragraph [ref=e4365]: 自定义产品属性分析，细分市场趋势智能捕获，AI评价一键获取
+        - generic [ref=e4366]:
+          - generic [ref=e4367]:
+            - generic [ref=e4368]: US
+            - generic [ref=e4369]: 美国
+            - img [ref=e4370]
+          - textbox "请输入关键词" [active] [ref=e4372]: baby
+          - button "搜索" [ref=e4373] [cursor=pointer]
+        - generic [ref=e4448]:
+          - generic [ref=e4449]: "已选关键词:"
+          - generic [ref=e4450]: baby
+      - generic [ref=e4451]:
+        - generic [ref=e4452]:
+          - heading "搜索结果" [level=3] [ref=e4453]
+          - paragraph [ref=e4454]: 找到 5 条结果
+        - table [ref=e4456]:
+          - rowgroup [ref=e4457]:
+            - row "排名 关键词 亚马逊搜索趋势 月销量 月销售额($) 平均价格($) 评分 top3销量占比 新品销量占比 操作" [ref=e4458]:
+              - columnheader "排名" [ref=e4459]
+              - columnheader "关键词" [ref=e4460]
+              - columnheader "亚马逊搜索趋势" [ref=e4461]
+              - columnheader "月销量" [ref=e4462]
+              - columnheader "月销售额($)" [ref=e4463]
+              - columnheader "平均价格($)" [ref=e4464]
+              - columnheader "评分" [ref=e4465]
+              - columnheader "top3销量占比" [ref=e4466]
+              - columnheader "新品销量占比" [ref=e4467]
+              - columnheader "操作" [ref=e4468]
+          - rowgroup [ref=e4469]:
+            - row "#4695 baby 查看所属类目 194,812 -4.0% 34,100,410 -18.0% 52.19 4.59 45.5% 4% 查看商品 创建报告" [ref=e4470]:
+              - cell "#4695" [ref=e4471]
+              - cell "baby 查看所属类目" [ref=e4472]:
+                - generic [ref=e4473]: baby
+                - button "查看所属类目" [ref=e4474] [cursor=pointer]
+              - cell [ref=e4475]:
+                - img [ref=e4480]
+              - cell "194,812 -4.0%" [ref=e4485]:
+                - generic [ref=e4486]: 194,812
+                - generic [ref=e4487]: "-4.0%"
+              - cell "34,100,410 -18.0%" [ref=e4488]:
+                - generic [ref=e4489]: 34,100,410
+                - generic [ref=e4490]: "-18.0%"
+              - cell "52.19" [ref=e4491]
+              - cell "4.59" [ref=e4492]
+              - cell "45.5%" [ref=e4493]
+              - cell "4%" [ref=e4494]
+              - cell "查看商品 创建报告" [ref=e4495]:
+                - button "查看商品" [ref=e4496] [cursor=pointer]
+                - button "创建报告" [ref=e4497] [cursor=pointer]
+            - row "#7250 baby set 查看所属类目 287,788 -3.4% 21,883,168 +23.3% 10.09 4.62 13.8% 1.7% 查看商品 创建报告" [ref=e4498]:
+              - cell "#7250" [ref=e4499]
+              - cell "baby set 查看所属类目" [ref=e4500]:
+                - generic [ref=e4501]: baby set
+                - button "查看所属类目" [ref=e4502] [cursor=pointer]
+              - cell [ref=e4503]:
+                - img [ref=e4508]
+              - cell "287,788 -3.4%" [ref=e4513]:
+                - generic [ref=e4514]: 287,788
+                - generic [ref=e4515]: "-3.4%"
+              - cell "21,883,168 +23.3%" [ref=e4516]:
+                - generic [ref=e4517]: 21,883,168
+                - generic [ref=e4518]: +23.3%
+              - cell "10.09" [ref=e4519]
+              - cell "4.62" [ref=e4520]
+              - cell "13.8%" [ref=e4521]
+              - cell "1.7%" [ref=e4522]
+              - cell "查看商品 创建报告" [ref=e4523]:
+                - button "查看商品" [ref=e4524] [cursor=pointer]
+                - button "创建报告" [ref=e4525] [cursor=pointer]
+            - row "#13251 baby kit 查看所属类目 245,669 +13.3% 42,425,145 +10.3% 56.63 4.61 36.7% 1.6% 查看商品 创建报告" [ref=e4526]:
+              - cell "#13251" [ref=e4527]
+              - cell "baby kit 查看所属类目" [ref=e4528]:
+                - generic [ref=e4529]: baby kit
+                - button "查看所属类目" [ref=e4530] [cursor=pointer]
+              - cell [ref=e4531]:
+                - img [ref=e4536]
+              - cell "245,669 +13.3%" [ref=e4541]:
+                - generic [ref=e4542]: 245,669
+                - generic [ref=e4543]: +13.3%
+              - cell "42,425,145 +10.3%" [ref=e4544]:
+                - generic [ref=e4545]: 42,425,145
+                - generic [ref=e4546]: +10.3%
+              - cell "56.63" [ref=e4547]
+              - cell "4.61" [ref=e4548]
+              - cell "36.7%" [ref=e4549]
+              - cell "1.6%" [ref=e4550]
+              - cell "查看商品 创建报告" [ref=e4551]:
+                - button "查看商品" [ref=e4552] [cursor=pointer]
+                - button "创建报告" [ref=e4553] [cursor=pointer]
+            - row "#8632 baby pro 查看所属类目 393,023 +17.7% 14,768,480 +27.9% 59.95 4.2 28.3% 4.5% 查看商品 创建报告" [ref=e4554]:
+              - cell "#8632" [ref=e4555]
+              - cell "baby pro 查看所属类目" [ref=e4556]:
+                - generic [ref=e4557]: baby pro
+                - button "查看所属类目" [ref=e4558] [cursor=pointer]
+              - cell [ref=e4559]:
+                - img [ref=e4564]
+              - cell "393,023 +17.7%" [ref=e4569]:
+                - generic [ref=e4570]: 393,023
+                - generic [ref=e4571]: +17.7%
+              - cell "14,768,480 +27.9%" [ref=e4572]:
+                - generic [ref=e4573]: 14,768,480
+                - generic [ref=e4574]: +27.9%
+              - cell "59.95" [ref=e4575]
+              - cell "4.2" [ref=e4576]
+              - cell "28.3%" [ref=e4577]
+              - cell "4.5%" [ref=e4578]
+              - cell "查看商品 创建报告" [ref=e4579]:
+                - button "查看商品" [ref=e4580] [cursor=pointer]
+                - button "创建报告" [ref=e4581] [cursor=pointer]
+            - row "#24130 baby premium 查看所属类目 506,673 -18.6% 36,330,022 -16.7% 63.65 4.56 46.4% 4.7% 查看商品 创建报告" [ref=e4582]:
+              - cell "#24130" [ref=e4583]
+              - cell "baby premium 查看所属类目" [ref=e4584]:
+                - generic [ref=e4585]: baby premium
+                - button "查看所属类目" [ref=e4586] [cursor=pointer]
+              - cell [ref=e4587]:
+                - img [ref=e4592]
+              - cell "506,673 -18.6%" [ref=e4597]:
+                - generic [ref=e4598]: 506,673
+                - generic [ref=e4599]: "-18.6%"
+              - cell "36,330,022 -16.7%" [ref=e4600]:
+                - generic [ref=e4601]: 36,330,022
+                - generic [ref=e4602]: "-16.7%"
+              - cell "63.65" [ref=e4603]
+              - cell "4.56" [ref=e4604]
+              - cell "46.4%" [ref=e4605]
+              - cell "4.7%" [ref=e4606]
+              - cell "查看商品 创建报告" [ref=e4607]:
+                - button "查看商品" [ref=e4608] [cursor=pointer]
+                - button "创建报告" [ref=e4609] [cursor=pointer]

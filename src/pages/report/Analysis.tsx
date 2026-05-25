@@ -22,7 +22,7 @@ const BRAND_DATA = [
   { name: 'nanobebe', value: 4.2 }, { name: 'others', value: 32.2 },
 ];
 const PRICE_DATA = [{ name: '其他', value: 8.5 }, { name: '$0-$45', value: 34.3 }, { name: '>$45', value: 57.2 }];
-// Chart colors available: ['#E8785A', '#D49450', LC.teal, '#A8A29E', '#16A34A', '#C4D4E0']
+// Chart colors available: ['#8B354A', '#C47A5A', LC.teal, '#9A8B8B', '#5B8C5A', '#C4D4E0']
 
 
 const SAMPLE_PRODUCTS = [
@@ -84,15 +84,15 @@ export default function ReportAnalysis() {
     <div className="animate-fadeIn relative">
       <Breadcrumb items={["我的首页", "产品分析报告"]} />
 
-      <div className="flex items-center gap-2 px-4 py-2 bg-lc-bg-warm border-b border-lc-border-light">
+      <div className="flex items-center gap-4 px-4 py-2 bg-lc-bg-warm border-b border-lc-border-light">
         <DataBadge type="demo" label="报告数据为演示用途" />
         <span className="text-xs text-lc-text-muted">实际数据需接入 Amazon SP-API / 评论爬虫</span>
       </div>
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
         <div className="flex items-start justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-4 mb-2">
               <h2 className="text-lg font-bold text-lc-primary">美国站 &apos;momcozy baby bottle warmer&apos; 产品分析报告</h2>
               <button onClick={() => { import('sonner').then(({ toast }) => toast.success('链接已复制到剪贴板')); }} className="transition-colors text-lc-text-muted hover:text-lc-primary"><Share2 size={16} /></button>
             </div>
@@ -111,7 +111,7 @@ export default function ReportAnalysis() {
       {/* Export Modal */}
       {showExportModal && (
         <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center" onClick={() => setShowExportModal(false)}>
-          <div className="bg-white rounded-lg p-6 w-[400px] shadow-xl animate-slideUp" onClick={e => e.stopPropagation()}>
+          <div className="bg-white rounded-xl p-6 w-[400px] shadow-xl animate-slideUp" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-lc-primary">导出报告</h3>
               <button onClick={() => setShowExportModal(false)}><X size={16} className="text-lc-text-muted" /></button>
@@ -119,7 +119,7 @@ export default function ReportAnalysis() {
             <div className="space-y-2">
               {['PDF报告（完整）','Excel数据表','PPT摘要','Word文档'].map(fmt => (
                 <button key={fmt} onClick={() => { t(`正在生成${fmt}...`); setShowExportModal(false); }}
-                  className="w-full text-left px-4 py-3 rounded-lg border text-xs font-medium transition-all hover:shadow-sm" style={{ borderColor: LC.border, color: LC.text }}>{fmt}</button>
+                  className="w-full text-left px-4 py-3 rounded-xl border text-xs font-medium transition-all hover:shadow-sm" style={{ borderColor: LC.border, color: LC.text }}>{fmt}</button>
               ))}
             </div>
           </div>
@@ -139,11 +139,11 @@ export default function ReportAnalysis() {
       {/* ===== TAB 0: 市场概况 ===== */}
       {activeTab === 0 && (
         <>
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">市场概况</h3>
             <div className="grid grid-cols-6 gap-3">
               {reportKpi.map(kpi => (
-                <div key={kpi.label} className="rounded-lg p-3 bg-lc-bg-warm">
+                <div key={kpi.label} className="rounded-xl p-3 bg-lc-bg-warm">
                   <div className="text-[11px] font-medium mb-1 text-lc-text-muted">{kpi.label}</div>
                   <div className="text-sm font-bold font-mono-num text-lc-primary">{kpi.value}</div>
                 </div>
@@ -153,22 +153,22 @@ export default function ReportAnalysis() {
 
           {/* Monthly GMV */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
               <h3 className="text-sm font-semibold mb-3 text-lc-primary">月度GMV趋势</h3>
-              <EChartsLine data={MONTHLY_GMV.map(d => ({ x: d.month.slice(5), y: d.gmv }))} color={'#E8785A'} height={240} yAxisName="$B" />
+              <EChartsLine data={MONTHLY_GMV.map(d => ({ x: d.month.slice(5), y: d.gmv }))} color={'#8B354A'} height={240} yAxisName="$B" />
             </div>
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
               <h3 className="text-sm font-semibold mb-3 text-lc-primary">品类市场份额</h3>
               <EChartsPie data={CATEGORY_SHARE.slice(0, 6).map(c => ({ name: c.name, value: c.value }))} height={240} donut />
             </div>
           </div>
 
           {/* Word Cloud */}
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词词云</h3>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 min-h-[200px] px-6">
               {WORD_CLOUD.map((word, i) => {
-                const colors = ['#E8785A', '#D49450', LC.teal, '#A8A29E', '#16A34A'];
+                const colors = ['#8B354A', '#C47A5A', LC.teal, '#9A8B8B', '#5B8C5A'];
                 return (
                   <span key={i} className="cursor-pointer hover:opacity-60 transition-opacity font-medium"
                     style={{ fontSize: `${Math.max(12, word.size * 0.35)}px`, color: colors[i % colors.length], fontWeight: word.size > 35 ? 700 : word.size > 25 ? 600 : 400 }}>
@@ -180,12 +180,12 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Sample Products with Images */}
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">商品样本</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <div className="flex gap-4 overflow-x-auto pb-2">
               {SAMPLE_PRODUCTS.slice(0, 10).map((p, i) => (
                 <div key={i} className="shrink-0 w-[72px] text-center cursor-pointer group">
-                  <div className="w-12 h-12 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-1.5 group-hover:ring-lc-primary transition-all">
+                  <div className="w-12 h-12 mx-auto rounded-xl overflow-hidden ring-1 ring-lc-border mb-1.5 group-hover:ring-lc-primary transition-all">
                     <img src={PRODUCT_IMAGES[p.img]} alt={p.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                   </div>
                   <div className="text-[9px] font-medium truncate text-lc-text-secondary">{p.name.slice(0, 12)}</div>
@@ -196,7 +196,7 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Keywords with progress bars */}
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词验证</h3>
             <table className="w-full min-w-[640px]">
               <thead>
@@ -227,7 +227,7 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Parameters - Donut Charts */}
-          <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">参数解构</h3>
             <div className="grid grid-cols-3 gap-6">
               <EChartsPie data={BRAND_DATA} title="品牌" height={200} donut />
@@ -243,7 +243,7 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 1: 商品样本 ===== */}
       {activeTab === 1 && (
-        <div className="bg-white rounded-lg shadow-lc p-6 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-6 ring-1 ring-lc-border/60">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-lc-primary">商品样本 ({selectedProducts.size} 已选)</h3>
             <div className="flex gap-2">
@@ -253,15 +253,15 @@ export default function ReportAnalysis() {
           </div>
           <div className="grid grid-cols-5 gap-4">
             {SAMPLE_PRODUCTS.map((p, i) => (
-              <div key={i} onClick={() => toggleProduct(i)} className={`relative border rounded-lg p-3 text-center cursor-pointer transition-all hover:shadow-lc-hover ${selectedProducts.has(i) ? 'ring-2' : ''}`}
+              <div key={i} onClick={() => toggleProduct(i)} className={`relative border rounded-xl p-3 text-center cursor-pointer transition-all hover:shadow-lc-hover ${selectedProducts.has(i) ? 'ring-2' : ''}`}
                 style={{ borderColor: selectedProducts.has(i) ? LC.primary : LC.border, boxShadow: selectedProducts.has(i) ? `0 0 0 2px ${LC.primary}30` : undefined }}>
                 {selectedProducts.has(i) && <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-white text-xs font-bold flex items-center justify-center bg-lc-primary"><Check size={12} /></div>}
-                <div className="w-16 h-16 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-2">
+                <div className="w-16 h-16 mx-auto rounded-xl overflow-hidden ring-1 ring-lc-border mb-2">
                   <img src={PRODUCT_IMAGES[p.img]} alt={p.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 </div>
                 <div className="text-xs font-medium truncate text-lc-text-primary">{p.name}</div>
                 <div className="text-xs font-mono-num mt-1 text-lc-text-muted">{p.asin}</div>
-                <div className="flex items-center justify-center gap-2 mt-1">
+                <div className="flex items-center justify-center gap-4 mt-1">
                   <span className="text-xs font-bold text-lc-primary">${p.price}</span>
                   <span className="text-xs font-semibold" style={{ color: p.rating >= 4.5 ? LC.success : LC.teal }}><Star size={12} className="text-lc-gold fill-lc-gold" />{p.rating}</span>
                 </div>
@@ -274,7 +274,7 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 2: 关键词验证 ===== */}
       {activeTab === 2 && (
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词验证 - 扩展列表</h3>
           <table className="w-full min-w-[640px]">
             <thead>
@@ -310,11 +310,11 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 3: 参数解构 ===== */}
       {activeTab === 3 && (
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">参数解构 - 详细分析</h3>
           <div className="mb-6">
             <h4 className="text-xs font-semibold mb-2 text-lc-text-secondary">价格带销量趋势</h4>
-            <EChartsLine data={priceTrendData.map(d => ({ x: d.month.slice(5), y: d['>$45'] + d['$0-$45'] }))} color={'#D49450'} height={260} yAxisName="销量(K)" />
+            <EChartsLine data={priceTrendData.map(d => ({ x: d.month.slice(5), y: d['>$45'] + d['$0-$45'] }))} color={'#C47A5A'} height={260} yAxisName="销量(K)" />
           </div>
           <div className="mb-6">
             <h4 className="text-xs font-semibold mb-2 text-lc-text-secondary">新品占比趋势</h4>
@@ -331,7 +331,7 @@ export default function ReportAnalysis() {
       {activeTab === 4 && (
         <>
           {/* VOC情感概览 */}
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">评论情感分析</h3>
             {vocLoading ? (
               <div className="grid grid-cols-2 gap-4">
@@ -341,21 +341,21 @@ export default function ReportAnalysis() {
               </div>
             ) : vocStats ? (
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="rounded-lg p-3 text-center bg-lc-bg-warm">
+                <div className="rounded-xl p-3 text-center bg-lc-bg-warm">
                   <div className="text-[11px] font-medium mb-1 text-lc-text-muted">总评论数</div>
                   <div className="text-lg font-bold font-mono-num text-lc-text-primary">{vocStats.total.toLocaleString()}</div>
                 </div>
-                <div className="rounded-lg p-3 text-center bg-lc-success/10">
+                <div className="rounded-xl p-3 text-center bg-lc-success/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-success">好评</div>
                   <div className="text-lg font-bold font-mono-num text-lc-success">{vocStats.positive.toLocaleString()}</div>
                   <div className="text-xs text-lc-success">{((vocStats.positive / vocStats.total) * 100).toFixed(1)}%</div>
                 </div>
-                <div className="rounded-lg p-3 text-center bg-lc-danger/10">
+                <div className="rounded-xl p-3 text-center bg-lc-danger/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-danger">差评</div>
                   <div className="text-lg font-bold font-mono-num text-lc-danger">{vocStats.negative.toLocaleString()}</div>
                   <div className="text-xs text-lc-danger">{((vocStats.negative / vocStats.total) * 100).toFixed(1)}%</div>
                 </div>
-                <div className="rounded-lg p-3 text-center bg-lc-warning/10">
+                <div className="rounded-xl p-3 text-center bg-lc-warning/10">
                   <div className="text-[11px] font-medium mb-1 text-lc-warning">平均评分</div>
                   <div className="text-lg font-bold font-mono-num text-lc-warning">{vocStats.avgRating}</div>
                 </div>
@@ -363,7 +363,7 @@ export default function ReportAnalysis() {
             ) : null}
           </div>
 
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">好评点标签云</h3>
             <div className="flex flex-wrap items-center gap-2">
               {reviewAspects.map((aspect, i) => (
@@ -375,13 +375,13 @@ export default function ReportAnalysis() {
               ))}
             </div>
             {expandedAspect !== null && (
-              <div className="mt-3 p-3 rounded-lg bg-lc-bg-warm">
+              <div className="mt-3 p-3 rounded-xl bg-lc-bg-warm">
                 <p className="text-xs text-lc-text-secondary"><strong className="text-lc-text-primary">{REVIEW_ASPECTS[expandedAspect].aspect}</strong>: {REVIEW_ASPECTS[expandedAspect].desc} ({REVIEW_ASPECTS[expandedAspect].count} 条评论)</p>
               </div>
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-lc-primary">评价维度分析</h3>
               <button onClick={() => setShowReviewModal(true)} className="flex items-center gap-1.5 text-xs text-white px-3 h-7 rounded-md font-medium bg-lc-primary">
@@ -392,18 +392,18 @@ export default function ReportAnalysis() {
               <Skeleton className="h-[220px] w-full" />
             ) : vocStats?.aspects ? (
               <div className="mb-4">
-                <EChartsBar data={vocStats.aspects.slice(0, 10).map((a: any) => ({ label: a.aspect, value: a.total }))} color={'#E8785A'} height={220} horizontal />
+                <EChartsBar data={vocStats.aspects.slice(0, 10).map((a: any) => ({ label: a.aspect, value: a.total }))} color={'#8B354A'} height={220} horizontal />
               </div>
             ) : (
               <div className="mb-4">
-                <EChartsBar data={reviewAspects.map(a => ({ label: a.aspect, value: a.count }))} color={'#E8785A'} height={220} horizontal />
+                <EChartsBar data={reviewAspects.map(a => ({ label: a.aspect, value: a.count }))} color={'#8B354A'} height={220} horizontal />
               </div>
             )}
           </div>
 
           {showReviewModal && (
             <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center" onClick={() => setShowReviewModal(false)}>
-              <div className="bg-white rounded-lg w-[80vw] h-[80vh] overflow-hidden shadow-xl animate-slideUp ring-1" onClick={e => e.stopPropagation()}>
+              <div className="bg-white rounded-xl w-[80vw] h-[80vh] overflow-hidden shadow-xl animate-slideUp ring-1" onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-between p-4 border-b border-lc-border">
                   <h3 className="text-sm font-semibold text-lc-primary">样本评论分析</h3>
                   <button onClick={() => setShowReviewModal(false)} className="text-lc-text-muted"><X size={18} /></button>
@@ -440,7 +440,7 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 5: 评论洞察 ===== */}
       {activeTab === 5 && (
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">评论洞察</h3>
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -464,12 +464,12 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 6: 商品对比 ===== */}
       {activeTab === 6 && (
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">商品对比</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {SAMPLE_PRODUCTS.slice(0, 4).map((item, idx) => (
-              <div key={idx} className="border rounded-lg p-3 transition-all hover:shadow-lc-hover border-lc-border">
-                <div className="w-20 h-20 mx-auto rounded-lg overflow-hidden ring-1 ring-lc-border mb-3">
+              <div key={idx} className="border rounded-xl p-3 transition-all hover:shadow-lc-hover border-lc-border">
+                <div className="w-20 h-20 mx-auto rounded-xl overflow-hidden ring-1 ring-lc-border mb-3">
                   <img src={PRODUCT_IMAGES[item.img]} alt={item.name} loading="lazy" className="w-full h-full object-cover"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%23C8C3BC'%3E📷%3C/text%3E%3C/svg%3E"; }}/>
                 </div>
                 <div className="text-xs font-semibold mb-2 min-h-[32px] text-lc-text-primary">{item.name}</div>

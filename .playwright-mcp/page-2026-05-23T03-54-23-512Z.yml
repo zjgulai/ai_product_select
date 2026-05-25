@@ -1,0 +1,651 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e4724]:
+      - generic [ref=e4726]:
+        - generic [ref=e4728]: TikTok趋势
+        - generic [ref=e4729]:
+          - generic [ref=e4730]: /
+          - generic [ref=e4731]: 商品
+      - generic [ref=e4733]:
+        - generic [ref=e4734]:
+          - img [ref=e4735]
+          - textbox "商品标题" [ref=e4738]
+        - button "搜索" [ref=e4739] [cursor=pointer]
+      - generic [ref=e4741]:
+        - button "商品热销榜" [ref=e4742] [cursor=pointer]
+        - button "商品飙升榜" [ref=e4743] [cursor=pointer]
+        - button "商品新品榜" [ref=e4744] [cursor=pointer]
+      - generic [ref=e4746]:
+        - generic [ref=e4747]: "商品类目:"
+        - button "汽车与摩托车" [ref=e4748] [cursor=pointer]
+        - button "母婴用品" [ref=e4749] [cursor=pointer]
+        - button "美妆个护" [ref=e4750] [cursor=pointer]
+        - button "图书、杂志&音频" [ref=e4751] [cursor=pointer]
+        - button "收藏品" [ref=e4752] [cursor=pointer]
+        - button "电脑办公" [ref=e4753] [cursor=pointer]
+        - button "时尚配饰" [ref=e4754] [cursor=pointer]
+        - button "食品饮料" [ref=e4755] [cursor=pointer]
+        - button "家具" [ref=e4756] [cursor=pointer]
+        - button "健康" [ref=e4757] [cursor=pointer]
+        - button "家装建材" [ref=e4758] [cursor=pointer]
+        - button "居家日用" [ref=e4759] [cursor=pointer]
+        - button "家电" [ref=e4760] [cursor=pointer]
+        - button "珠宝与衍生品" [ref=e4761] [cursor=pointer]
+        - button "儿童时尚" [ref=e4762] [cursor=pointer]
+        - button "厨房用品" [ref=e4763] [cursor=pointer]
+        - button "箱包" [ref=e4764] [cursor=pointer]
+        - button "男装与男士内衣" [ref=e4765] [cursor=pointer]
+        - button "穆斯林时尚" [ref=e4766] [cursor=pointer]
+        - button "宠物用品" [ref=e4767] [cursor=pointer]
+        - button "手机与数码" [ref=e4768] [cursor=pointer]
+        - button "二手" [ref=e4769] [cursor=pointer]
+        - button "鞋靴" [ref=e4770] [cursor=pointer]
+        - button "运动与户外" [ref=e4771] [cursor=pointer]
+        - button "家纺布艺" [ref=e4772] [cursor=pointer]
+        - button "五金工具" [ref=e4773] [cursor=pointer]
+        - button "玩具和爱好" [ref=e4774] [cursor=pointer]
+        - button "虚拟产品" [ref=e4775] [cursor=pointer]
+        - button "女装与女士内衣" [ref=e4776] [cursor=pointer]
+      - generic [ref=e4778]:
+        - generic [ref=e4779]:
+          - button "全部" [ref=e4780] [cursor=pointer]
+          - button "日" [ref=e4781] [cursor=pointer]
+          - button "近7天" [ref=e4782] [cursor=pointer]
+          - button "近30天" [ref=e4783] [cursor=pointer]
+          - button "自定义" [ref=e4784] [cursor=pointer]
+        - generic [ref=e4786]:
+          - img [ref=e4787]
+          - generic [ref=e4789]: "价格:"
+          - spinbutton [ref=e4790]
+          - generic [ref=e4791]: "-"
+          - spinbutton [ref=e4792]
+        - generic [ref=e4793]:
+          - generic [ref=e4794]: "评分:"
+          - spinbutton [ref=e4795]
+        - button "重置筛选" [ref=e4796] [cursor=pointer]
+      - generic [ref=e4797]:
+        - generic [ref=e4798]:
+          - heading "商品信息" [level=3] [ref=e4799]
+          - generic [ref=e4800]:
+            - generic [ref=e4801]: 共 100 条
+            - button "数据导出" [ref=e4802] [cursor=pointer]:
+              - img [ref=e4803]
+              - text: 数据导出
+        - table [ref=e4807]:
+          - rowgroup [ref=e4808]:
+            - row "商品信息 销量 销售额($) 销量趋势 带货达人数 价格($) 评分 所属小店 操作" [ref=e4809]:
+              - columnheader "商品信息" [ref=e4810]
+              - columnheader "销量" [ref=e4811]
+              - columnheader "销售额($)" [ref=e4812]
+              - columnheader "销量趋势" [ref=e4813]
+              - columnheader "带货达人数" [ref=e4814]
+              - columnheader "价格($)" [ref=e4815]
+              - columnheader "评分" [ref=e4816]
+              - columnheader "所属小店" [ref=e4817]
+              - columnheader "操作" [ref=e4818]
+          - rowgroup [ref=e4819]:
+            - row "Fresh Bamboo Chair 家电 36,856 -28.8% $345,709.28 1,820 $22.63 3.73 Morar, Gleichner and Leannon Store" [ref=e4820]:
+              - cell "Fresh Bamboo Chair 家电" [ref=e4821]:
+                - generic [ref=e4823]:
+                  - generic "Fresh Bamboo Chair" [ref=e4824]
+                  - generic [ref=e4825]: 家电
+              - cell "36,856 -28.8%" [ref=e4826]:
+                - generic [ref=e4827]: 36,856
+                - generic [ref=e4828]: "-28.8%"
+              - cell "$345,709.28" [ref=e4829]
+              - cell [ref=e4830]:
+                - img [ref=e4835]
+              - cell "1,820" [ref=e4840]
+              - cell "$22.63" [ref=e4841]
+              - cell "3.73" [ref=e4842]
+              - cell "Morar, Gleichner and Leannon Store" [ref=e4843]:
+                - generic [ref=e4844]: Morar, Gleichner and Leannon Store
+              - cell [ref=e4845]:
+                - generic [ref=e4846]:
+                  - button [ref=e4847] [cursor=pointer]:
+                    - img [ref=e4848]
+                  - button [ref=e4850] [cursor=pointer]:
+                    - img [ref=e4851]
+            - row "Electronic Ceramic Table 宠物用品 4,085 +27.6% $239,176.75 610 $14.26-$33.23 3.73 Schaden Group Store" [ref=e4855]:
+              - cell "Electronic Ceramic Table 宠物用品" [ref=e4856]:
+                - generic [ref=e4858]:
+                  - generic "Electronic Ceramic Table" [ref=e4859]
+                  - generic [ref=e4860]: 宠物用品
+              - cell "4,085 +27.6%" [ref=e4861]:
+                - generic [ref=e4862]: 4,085
+                - generic [ref=e4863]: +27.6%
+              - cell "$239,176.75" [ref=e4864]
+              - cell [ref=e4865]:
+                - img [ref=e4870]
+              - cell "610" [ref=e4875]
+              - cell "$14.26-$33.23" [ref=e4876]
+              - cell "3.73" [ref=e4877]
+              - cell "Schaden Group Store" [ref=e4878]:
+                - generic [ref=e4879]: Schaden Group Store
+              - cell [ref=e4880]:
+                - generic [ref=e4881]:
+                  - button [ref=e4882] [cursor=pointer]:
+                    - img [ref=e4883]
+                  - button [ref=e4885] [cursor=pointer]:
+                    - img [ref=e4886]
+            - row "Elegant Rubber Sausages 母婴用品 2,414 -27.0% $25,540.12 574 $62.5 4.34 Gutkowski Inc Store" [ref=e4890]:
+              - cell "Elegant Rubber Sausages 母婴用品" [ref=e4891]:
+                - generic [ref=e4893]:
+                  - generic "Elegant Rubber Sausages" [ref=e4894]
+                  - generic [ref=e4895]: 母婴用品
+              - cell "2,414 -27.0%" [ref=e4896]:
+                - generic [ref=e4897]: 2,414
+                - generic [ref=e4898]: "-27.0%"
+              - cell "$25,540.12" [ref=e4899]
+              - cell [ref=e4900]:
+                - img [ref=e4905]
+              - cell "574" [ref=e4910]
+              - cell "$62.5" [ref=e4911]
+              - cell "4.34" [ref=e4912]
+              - cell "Gutkowski Inc Store" [ref=e4913]:
+                - generic [ref=e4914]: Gutkowski Inc Store
+              - cell [ref=e4915]:
+                - generic [ref=e4916]:
+                  - button [ref=e4917] [cursor=pointer]:
+                    - img [ref=e4918]
+                  - button [ref=e4920] [cursor=pointer]:
+                    - img [ref=e4921]
+            - row "Modern Metal Bike 玩具爱好 44,462 +54.7% $802,094.48 4,866 $11.72 4.58 Mayert, Ledner and Gleason Store" [ref=e4925]:
+              - cell "Modern Metal Bike 玩具爱好" [ref=e4926]:
+                - generic [ref=e4928]:
+                  - generic "Modern Metal Bike" [ref=e4929]
+                  - generic [ref=e4930]: 玩具爱好
+              - cell "44,462 +54.7%" [ref=e4931]:
+                - generic [ref=e4932]: 44,462
+                - generic [ref=e4933]: +54.7%
+              - cell "$802,094.48" [ref=e4934]
+              - cell [ref=e4935]:
+                - img [ref=e4940]
+              - cell "4,866" [ref=e4945]
+              - cell "$11.72" [ref=e4946]
+              - cell "4.58" [ref=e4947]
+              - cell "Mayert, Ledner and Gleason Store" [ref=e4948]:
+                - generic [ref=e4949]: Mayert, Ledner and Gleason Store
+              - cell [ref=e4950]:
+                - generic [ref=e4951]:
+                  - button [ref=e4952] [cursor=pointer]:
+                    - img [ref=e4953]
+                  - button [ref=e4955] [cursor=pointer]:
+                    - img [ref=e4956]
+            - row "Small Marble Soap 女装内衣 5,530 +26.5% $218,766.8 1,689 $50.17 4.6 Larson - Halvorson Store" [ref=e4960]:
+              - cell "Small Marble Soap 女装内衣" [ref=e4961]:
+                - generic [ref=e4963]:
+                  - generic "Small Marble Soap" [ref=e4964]
+                  - generic [ref=e4965]: 女装内衣
+              - cell "5,530 +26.5%" [ref=e4966]:
+                - generic [ref=e4967]: 5,530
+                - generic [ref=e4968]: +26.5%
+              - cell "$218,766.8" [ref=e4969]
+              - cell [ref=e4970]:
+                - img [ref=e4975]
+              - cell "1,689" [ref=e4980]
+              - cell "$50.17" [ref=e4981]
+              - cell "4.6" [ref=e4982]
+              - cell "Larson - Halvorson Store" [ref=e4983]:
+                - generic [ref=e4984]: Larson - Halvorson Store
+              - cell [ref=e4985]:
+                - generic [ref=e4986]:
+                  - button [ref=e4987] [cursor=pointer]:
+                    - img [ref=e4988]
+                  - button [ref=e4990] [cursor=pointer]:
+                    - img [ref=e4991]
+            - row "Oriental Silk Chair 宠物用品 10,603 +46.2% $628,651.87 2,950 $13.82-$42.19 3.73 Leffler - Nienow Store" [ref=e4995]:
+              - cell "Oriental Silk Chair 宠物用品" [ref=e4996]:
+                - generic [ref=e4998]:
+                  - generic "Oriental Silk Chair" [ref=e4999]
+                  - generic [ref=e5000]: 宠物用品
+              - cell "10,603 +46.2%" [ref=e5001]:
+                - generic [ref=e5002]: 10,603
+                - generic [ref=e5003]: +46.2%
+              - cell "$628,651.87" [ref=e5004]
+              - cell [ref=e5005]:
+                - img [ref=e5010]
+              - cell "2,950" [ref=e5015]
+              - cell "$13.82-$42.19" [ref=e5016]
+              - cell "3.73" [ref=e5017]
+              - cell "Leffler - Nienow Store" [ref=e5018]:
+                - generic [ref=e5019]: Leffler - Nienow Store
+              - cell [ref=e5020]:
+                - generic [ref=e5021]:
+                  - button [ref=e5022] [cursor=pointer]:
+                    - img [ref=e5023]
+                  - button [ref=e5025] [cursor=pointer]:
+                    - img [ref=e5026]
+            - row "Intelligent Granite Mouse 家电 33,455 +49.0% $473,722.8 2,904 $31 3.89 Balistreri-Schuster, Robel and Paucek Store" [ref=e5030]:
+              - cell "Intelligent Granite Mouse 家电" [ref=e5031]:
+                - generic [ref=e5033]:
+                  - generic "Intelligent Granite Mouse" [ref=e5034]
+                  - generic [ref=e5035]: 家电
+              - cell "33,455 +49.0%" [ref=e5036]:
+                - generic [ref=e5037]: 33,455
+                - generic [ref=e5038]: +49.0%
+              - cell "$473,722.8" [ref=e5039]
+              - cell [ref=e5040]:
+                - img [ref=e5045]
+              - cell "2,904" [ref=e5050]
+              - cell "$31" [ref=e5051]
+              - cell "3.89" [ref=e5052]
+              - cell "Balistreri-Schuster, Robel and Paucek Store" [ref=e5053]:
+                - generic [ref=e5054]: Balistreri-Schuster, Robel and Paucek Store
+              - cell [ref=e5055]:
+                - generic [ref=e5056]:
+                  - button [ref=e5057] [cursor=pointer]:
+                    - img [ref=e5058]
+                  - button [ref=e5060] [cursor=pointer]:
+                    - img [ref=e5061]
+            - row "Frozen Bronze Sausages 厨房用品 9,190 +18.8% $434,411.3 2,688 $57.4 4.71 Williamson - Dicki Store" [ref=e5065]:
+              - cell "Frozen Bronze Sausages 厨房用品" [ref=e5066]:
+                - generic [ref=e5068]:
+                  - generic "Frozen Bronze Sausages" [ref=e5069]
+                  - generic [ref=e5070]: 厨房用品
+              - cell "9,190 +18.8%" [ref=e5071]:
+                - generic [ref=e5072]: 9,190
+                - generic [ref=e5073]: +18.8%
+              - cell "$434,411.3" [ref=e5074]
+              - cell [ref=e5075]:
+                - img [ref=e5080]
+              - cell "2,688" [ref=e5085]
+              - cell "$57.4" [ref=e5086]
+              - cell "4.71" [ref=e5087]
+              - cell "Williamson - Dicki Store" [ref=e5088]:
+                - generic [ref=e5089]: Williamson - Dicki Store
+              - cell [ref=e5090]:
+                - generic [ref=e5091]:
+                  - button [ref=e5092] [cursor=pointer]:
+                    - img [ref=e5093]
+                  - button [ref=e5095] [cursor=pointer]:
+                    - img [ref=e5096]
+            - row "Handmade Marble Chips 手机数码 24,212 +13.6% $279,164.36 360 $43.86 3.61 Marvin - Prohaska Store" [ref=e5100]:
+              - cell "Handmade Marble Chips 手机数码" [ref=e5101]:
+                - generic [ref=e5103]:
+                  - generic "Handmade Marble Chips" [ref=e5104]
+                  - generic [ref=e5105]: 手机数码
+              - cell "24,212 +13.6%" [ref=e5106]:
+                - generic [ref=e5107]: 24,212
+                - generic [ref=e5108]: +13.6%
+              - cell "$279,164.36" [ref=e5109]
+              - cell [ref=e5110]:
+                - img [ref=e5115]
+              - cell "360" [ref=e5120]
+              - cell "$43.86" [ref=e5121]
+              - cell "3.61" [ref=e5122]
+              - cell "Marvin - Prohaska Store" [ref=e5123]:
+                - generic [ref=e5124]: Marvin - Prohaska Store
+              - cell [ref=e5125]:
+                - generic [ref=e5126]:
+                  - button [ref=e5127] [cursor=pointer]:
+                    - img [ref=e5128]
+                  - button [ref=e5130] [cursor=pointer]:
+                    - img [ref=e5131]
+            - row "Incredible Cotton Gloves 母婴用品 4,735 +18.8% $99,150.9 4,278 $11.36-$37.65 4.63 Goodwin Group Store" [ref=e5135]:
+              - cell "Incredible Cotton Gloves 母婴用品" [ref=e5136]:
+                - generic [ref=e5138]:
+                  - generic "Incredible Cotton Gloves" [ref=e5139]
+                  - generic [ref=e5140]: 母婴用品
+              - cell "4,735 +18.8%" [ref=e5141]:
+                - generic [ref=e5142]: 4,735
+                - generic [ref=e5143]: +18.8%
+              - cell "$99,150.9" [ref=e5144]
+              - cell [ref=e5145]:
+                - img [ref=e5150]
+              - cell "4,278" [ref=e5155]
+              - cell "$11.36-$37.65" [ref=e5156]
+              - cell "4.63" [ref=e5157]
+              - cell "Goodwin Group Store" [ref=e5158]:
+                - generic [ref=e5159]: Goodwin Group Store
+              - cell [ref=e5160]:
+                - generic [ref=e5161]:
+                  - button [ref=e5162] [cursor=pointer]:
+                    - img [ref=e5163]
+                  - button [ref=e5165] [cursor=pointer]:
+                    - img [ref=e5166]
+            - row "Electronic Gold Fish 运动户外 29,781 -4.6% $1,198,089.63 1,057 $10.81 4.6 Schaefer - Skiles Store" [ref=e5170]:
+              - cell "Electronic Gold Fish 运动户外" [ref=e5171]:
+                - generic [ref=e5173]:
+                  - generic "Electronic Gold Fish" [ref=e5174]
+                  - generic [ref=e5175]: 运动户外
+              - cell "29,781 -4.6%" [ref=e5176]:
+                - generic [ref=e5177]: 29,781
+                - generic [ref=e5178]: "-4.6%"
+              - cell "$1,198,089.63" [ref=e5179]
+              - cell [ref=e5180]:
+                - img [ref=e5185]
+              - cell "1,057" [ref=e5190]
+              - cell "$10.81" [ref=e5191]
+              - cell "4.6" [ref=e5192]
+              - cell "Schaefer - Skiles Store" [ref=e5193]:
+                - generic [ref=e5194]: Schaefer - Skiles Store
+              - cell [ref=e5195]:
+                - generic [ref=e5196]:
+                  - button [ref=e5197] [cursor=pointer]:
+                    - img [ref=e5198]
+                  - button [ref=e5200] [cursor=pointer]:
+                    - img [ref=e5201]
+            - row "Tasty Wooden Chicken 宠物用品 5,110 +50.1% $26,776.4 63 $18.9-$46.81 3.9 Bogan-Jones - West Store" [ref=e5205]:
+              - cell "Tasty Wooden Chicken 宠物用品" [ref=e5206]:
+                - generic [ref=e5208]:
+                  - generic "Tasty Wooden Chicken" [ref=e5209]
+                  - generic [ref=e5210]: 宠物用品
+              - cell "5,110 +50.1%" [ref=e5211]:
+                - generic [ref=e5212]: 5,110
+                - generic [ref=e5213]: +50.1%
+              - cell "$26,776.4" [ref=e5214]
+              - cell [ref=e5215]:
+                - img [ref=e5220]
+              - cell "63" [ref=e5225]
+              - cell "$18.9-$46.81" [ref=e5226]
+              - cell "3.9" [ref=e5227]
+              - cell "Bogan-Jones - West Store" [ref=e5228]:
+                - generic [ref=e5229]: Bogan-Jones - West Store
+              - cell [ref=e5230]:
+                - generic [ref=e5231]:
+                  - button [ref=e5232] [cursor=pointer]:
+                    - img [ref=e5233]
+                  - button [ref=e5235] [cursor=pointer]:
+                    - img [ref=e5236]
+            - row "Practical Bronze Pants 男装内衣 4,305 +29.8% $79,943.85 582 $19.44-$43.53 4.68 Kulas LLC Store" [ref=e5240]:
+              - cell "Practical Bronze Pants 男装内衣" [ref=e5241]:
+                - generic [ref=e5243]:
+                  - generic "Practical Bronze Pants" [ref=e5244]
+                  - generic [ref=e5245]: 男装内衣
+              - cell "4,305 +29.8%" [ref=e5246]:
+                - generic [ref=e5247]: 4,305
+                - generic [ref=e5248]: +29.8%
+              - cell "$79,943.85" [ref=e5249]
+              - cell [ref=e5250]:
+                - img [ref=e5255]
+              - cell "582" [ref=e5260]
+              - cell "$19.44-$43.53" [ref=e5261]
+              - cell "4.68" [ref=e5262]
+              - cell "Kulas LLC Store" [ref=e5263]:
+                - generic [ref=e5264]: Kulas LLC Store
+              - cell [ref=e5265]:
+                - generic [ref=e5266]:
+                  - button [ref=e5267] [cursor=pointer]:
+                    - img [ref=e5268]
+                  - button [ref=e5270] [cursor=pointer]:
+                    - img [ref=e5271]
+            - row "Handmade Plastic Bike 运动户外 21,914 +6.7% $730,174.48 3,987 $14.06-$50.68 4.76 Hane Inc Store" [ref=e5275]:
+              - cell "Handmade Plastic Bike 运动户外" [ref=e5276]:
+                - generic [ref=e5278]:
+                  - generic "Handmade Plastic Bike" [ref=e5279]
+                  - generic [ref=e5280]: 运动户外
+              - cell "21,914 +6.7%" [ref=e5281]:
+                - generic [ref=e5282]: 21,914
+                - generic [ref=e5283]: +6.7%
+              - cell "$730,174.48" [ref=e5284]
+              - cell [ref=e5285]:
+                - img [ref=e5290]
+              - cell "3,987" [ref=e5295]
+              - cell "$14.06-$50.68" [ref=e5296]
+              - cell "4.76" [ref=e5297]
+              - cell "Hane Inc Store" [ref=e5298]:
+                - generic [ref=e5299]: Hane Inc Store
+              - cell [ref=e5300]:
+                - generic [ref=e5301]:
+                  - button [ref=e5302] [cursor=pointer]:
+                    - img [ref=e5303]
+                  - button [ref=e5305] [cursor=pointer]:
+                    - img [ref=e5306]
+            - row "Licensed Silk Soap 男装内衣 25,388 -23.7% $744,122.28 2,983 $55.69 4.28 Rowe Group Store" [ref=e5310]:
+              - cell "Licensed Silk Soap 男装内衣" [ref=e5311]:
+                - generic [ref=e5313]:
+                  - generic "Licensed Silk Soap" [ref=e5314]
+                  - generic [ref=e5315]: 男装内衣
+              - cell "25,388 -23.7%" [ref=e5316]:
+                - generic [ref=e5317]: 25,388
+                - generic [ref=e5318]: "-23.7%"
+              - cell "$744,122.28" [ref=e5319]
+              - cell [ref=e5320]:
+                - img [ref=e5325]
+              - cell "2,983" [ref=e5330]
+              - cell "$55.69" [ref=e5331]
+              - cell "4.28" [ref=e5332]
+              - cell "Rowe Group Store" [ref=e5333]:
+                - generic [ref=e5334]: Rowe Group Store
+              - cell [ref=e5335]:
+                - generic [ref=e5336]:
+                  - button [ref=e5337] [cursor=pointer]:
+                    - img [ref=e5338]
+                  - button [ref=e5340] [cursor=pointer]:
+                    - img [ref=e5341]
+            - row "Gorgeous Ceramic Table 运动户外 2,412 +10.4% $46,937.52 4,441 $61.55 3.94 VonRueden LLC Store" [ref=e5345]:
+              - cell "Gorgeous Ceramic Table 运动户外" [ref=e5346]:
+                - generic [ref=e5348]:
+                  - generic "Gorgeous Ceramic Table" [ref=e5349]
+                  - generic [ref=e5350]: 运动户外
+              - cell "2,412 +10.4%" [ref=e5351]:
+                - generic [ref=e5352]: 2,412
+                - generic [ref=e5353]: +10.4%
+              - cell "$46,937.52" [ref=e5354]
+              - cell [ref=e5355]:
+                - img [ref=e5360]
+              - cell "4,441" [ref=e5365]
+              - cell "$61.55" [ref=e5366]
+              - cell "3.94" [ref=e5367]
+              - cell "VonRueden LLC Store" [ref=e5368]:
+                - generic [ref=e5369]: VonRueden LLC Store
+              - cell [ref=e5370]:
+                - generic [ref=e5371]:
+                  - button [ref=e5372] [cursor=pointer]:
+                    - img [ref=e5373]
+                  - button [ref=e5375] [cursor=pointer]:
+                    - img [ref=e5376]
+            - row "Ergonomic Aluminum Salad 玩具爱好 31,696 +5.1% $526,153.6 63 $45.57 3.95 Hermiston, Corwin and Cummerata Store" [ref=e5380]:
+              - cell "Ergonomic Aluminum Salad 玩具爱好" [ref=e5381]:
+                - generic [ref=e5383]:
+                  - generic "Ergonomic Aluminum Salad" [ref=e5384]
+                  - generic [ref=e5385]: 玩具爱好
+              - cell "31,696 +5.1%" [ref=e5386]:
+                - generic [ref=e5387]: 31,696
+                - generic [ref=e5388]: +5.1%
+              - cell "$526,153.6" [ref=e5389]
+              - cell [ref=e5390]:
+                - img [ref=e5395]
+              - cell "63" [ref=e5400]
+              - cell "$45.57" [ref=e5401]
+              - cell "3.95" [ref=e5402]
+              - cell "Hermiston, Corwin and Cummerata Store" [ref=e5403]:
+                - generic [ref=e5404]: Hermiston, Corwin and Cummerata Store
+              - cell [ref=e5405]:
+                - generic [ref=e5406]:
+                  - button [ref=e5407] [cursor=pointer]:
+                    - img [ref=e5408]
+                  - button [ref=e5410] [cursor=pointer]:
+                    - img [ref=e5411]
+            - row "Elegant Steel Chair 健康保健 8,981 +47.9% $456,234.8 2,095 $12.16-$43.5 4.66 Schinner, Labadie and Connelly Store" [ref=e5415]:
+              - cell "Elegant Steel Chair 健康保健" [ref=e5416]:
+                - generic [ref=e5418]:
+                  - generic "Elegant Steel Chair" [ref=e5419]
+                  - generic [ref=e5420]: 健康保健
+              - cell "8,981 +47.9%" [ref=e5421]:
+                - generic [ref=e5422]: 8,981
+                - generic [ref=e5423]: +47.9%
+              - cell "$456,234.8" [ref=e5424]
+              - cell [ref=e5425]:
+                - img [ref=e5430]
+              - cell "2,095" [ref=e5435]
+              - cell "$12.16-$43.5" [ref=e5436]
+              - cell "4.66" [ref=e5437]
+              - cell "Schinner, Labadie and Connelly Store" [ref=e5438]:
+                - generic [ref=e5439]: Schinner, Labadie and Connelly Store
+              - cell [ref=e5440]:
+                - generic [ref=e5441]:
+                  - button [ref=e5442] [cursor=pointer]:
+                    - img [ref=e5443]
+                  - button [ref=e5445] [cursor=pointer]:
+                    - img [ref=e5446]
+            - row "Refined Gold Tuna 家电 33,067 +18.2% $1,132,544.75 3,394 $11.33-$37.55 4.58 Waters and Sons Store" [ref=e5450]:
+              - cell "Refined Gold Tuna 家电" [ref=e5451]:
+                - generic [ref=e5453]:
+                  - generic "Refined Gold Tuna" [ref=e5454]
+                  - generic [ref=e5455]: 家电
+              - cell "33,067 +18.2%" [ref=e5456]:
+                - generic [ref=e5457]: 33,067
+                - generic [ref=e5458]: +18.2%
+              - cell "$1,132,544.75" [ref=e5459]
+              - cell [ref=e5460]:
+                - img [ref=e5465]
+              - cell "3,394" [ref=e5470]
+              - cell "$11.33-$37.55" [ref=e5471]
+              - cell "4.58" [ref=e5472]
+              - cell "Waters and Sons Store" [ref=e5473]:
+                - generic [ref=e5474]: Waters and Sons Store
+              - cell [ref=e5475]:
+                - generic [ref=e5476]:
+                  - button [ref=e5477] [cursor=pointer]:
+                    - img [ref=e5478]
+                  - button [ref=e5480] [cursor=pointer]:
+                    - img [ref=e5481]
+            - row "Oriental Plastic Shirt 玩具爱好 14,972 -19.5% $559,204.2 2,658 $12.8-$55.59 4.47 Murphy - Zboncak Store" [ref=e5485]:
+              - cell "Oriental Plastic Shirt 玩具爱好" [ref=e5486]:
+                - generic [ref=e5488]:
+                  - generic "Oriental Plastic Shirt" [ref=e5489]
+                  - generic [ref=e5490]: 玩具爱好
+              - cell "14,972 -19.5%" [ref=e5491]:
+                - generic [ref=e5492]: 14,972
+                - generic [ref=e5493]: "-19.5%"
+              - cell "$559,204.2" [ref=e5494]
+              - cell [ref=e5495]:
+                - img [ref=e5500]
+              - cell "2,658" [ref=e5505]
+              - cell "$12.8-$55.59" [ref=e5506]
+              - cell "4.47" [ref=e5507]
+              - cell "Murphy - Zboncak Store" [ref=e5508]:
+                - generic [ref=e5509]: Murphy - Zboncak Store
+              - cell [ref=e5510]:
+                - generic [ref=e5511]:
+                  - button [ref=e5512] [cursor=pointer]:
+                    - img [ref=e5513]
+                  - button [ref=e5515] [cursor=pointer]:
+                    - img [ref=e5516]
+        - generic [ref=e5520]:
+          - generic [ref=e5521]: 共 100 条
+          - generic [ref=e5522]:
+            - button [disabled] [ref=e5523]:
+              - img [ref=e5524]
+            - button "1" [ref=e5526] [cursor=pointer]
+            - button "2" [ref=e5527] [cursor=pointer]
+            - button "3" [ref=e5528] [cursor=pointer]
+            - button "4" [ref=e5529] [cursor=pointer]
+            - button "5" [ref=e5530] [cursor=pointer]
+            - button [ref=e5531] [cursor=pointer]:
+              - img [ref=e5532]

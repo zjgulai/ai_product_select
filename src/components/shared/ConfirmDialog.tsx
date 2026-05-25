@@ -46,7 +46,7 @@ export function ConfirmDialog({ open, onOpenChange, options, onConfirm }: Confir
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="sm:max-w-md">
         <AlertDialogHeader>
-          <AlertDialogTitle className="flex items-center gap-2 text-base">
+          <AlertDialogTitle className="flex items-center gap-4 text-base">
             <AlertTriangle size={18} style={{ color: confirmColor }} />
             {title}
           </AlertDialogTitle>

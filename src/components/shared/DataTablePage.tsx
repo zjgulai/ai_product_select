@@ -85,14 +85,14 @@ function DataTablePage<T = any>({
   };
 
   const getCellClass = (col: ColumnConfig<T>) => {
-    const base = 'py-2.5 px-3 ';
+    const base = 'py-3 px-4 text-[13px] ';
     if (col.align === 'right') return base + 'text-right';
     if (col.align === 'center') return base + 'text-center';
     return base + 'text-left';
   };
 
   const getHeaderClass = (col: ColumnConfig<T>) => {
-    const base = 'py-2.5 px-3 text-xs font-semibold ';
+    const base = 'py-3 px-4 text-xs font-semibold uppercase tracking-wide ';
     if (col.align === 'right') return base + 'text-right';
     if (col.align === 'center') return base + 'text-center';
     return base + 'text-left';

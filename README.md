@@ -161,6 +161,50 @@ OppScore = SHI × 0.45 + CVI × 0.35 + 趋势动量 × 0.20
 
 ---
 
+## 爬虫数据接入（Playwright）
+
+```
+Internet → Playwright Crawler → JSON 文件 → Mock Data 层（优先加载）
+                                    ↓
+                              MySQL ODS（可选，需本地启动数据库）
+```
+
+### Amazon 爬虫
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `crawl:amazon:bestsellers` | 抓取 Best Sellers 榜单 | `--category=baby-products --limit=50` |
+| `crawl:amazon:product` | 抓取 ASIN 详情页 | `--asin=B010OVZO64,B07SCL613T` |
+| `crawl:amazon:enrich` | 富化已有数据 | `--offset=0 --limit=50` |
+
+数据保存到 `src/data/real/amazon_bestsellers_{market}_{date}.json`，Mock 数据层自动优先加载。
+
+### TikTok 爬虫
+
+TikTok 反爬严格（需登录态/住宅代理），当前实现 3 策略回退：
+1. `www.tiktok.com/search` + 预热 + 反爬指纹
+2. `m.tiktok.com` 移动端
+3. Google `site:tiktok.com` 搜索
+
+当全部失败时返回空结果，CLI 提示使用 **手动导入**：
+
+```bash
+# 方式 1：从 URL 列表创建模板（编辑后生效）
+npm run crawl:tiktok:import -- \
+  --urls="https://tiktok.com/@user1/video/123,https://tiktok.com/@user2/video/456"
+
+# 方式 2：从 JSON 文件导入
+npm run crawl:tiktok:import -- --file=./my-tiktok-data.json
+```
+
+手动导入文件保存到 `src/data/real/tiktok_videos_manual_us_{date}.json`。
+
+### 数据来源标记
+
+前端页面已添加数据来源徽章：
+- **真实数据**（绿色）— Amazon 数据来自爬虫真实采集
+- **演示数据**（黄色）— TikTok 数据当前为 mock，需手动导入或后续数仓接入
+
 ## 数仓架构（ODS → DWD → DWS → ADS）
 
 ```
@@ -176,6 +220,13 @@ ADS（应用层）：3 张表，直接服务前端 tRPC API
 数据导入流程：
 ```
 Excel/CSV → DataManager 字段映射 + 校验 → ODS → DWD → DWS → ADS → Fusion 指标重算
+```
+
+爬虫数据导入流程：
+```
+Playwright Crawler → JSON 文件 → 验证阶段
+                                    ↓
+                             数仓 ETL Pipeline（用户自行接入 DWD/DWS/ADS）
 ```
 
 ---
@@ -199,6 +250,7 @@ tRPC Client
 ## 开发命令
 
 ```bash
+# 开发 & 构建
 npm run dev           # 开发服务器（localhost:3000）
 npm run build         # 生产构建
 npm run test          # 单元测试
@@ -206,9 +258,20 @@ npm run test:coverage # 覆盖率报告
 npm run test:e2e      # Playwright E2E
 npm run lint          # ESLint
 npm run check         # TypeScript 类型检查
+
+# 数据库
 npm run db:generate   # 生成 migration
 npm run db:migrate    # 执行 migration
 npm run db:push       # 直接 push schema（开发用）
+
+# 爬虫 CLI（Playwright + 真实数据）
+npm run crawl:amazon:bestsellers  # 抓取 Amazon Best Sellers
+npm run crawl:amazon:product      # 抓取单个/多个 ASIN 详情
+npm run crawl:amazon:reviews      # 抓取评论
+npm run crawl:amazon:search       # 按关键词搜索
+npm run crawl:amazon:enrich       # 批量富化 review count / price / rating
+npm run crawl:tiktok:v2           # TikTok 视频搜索（多策略回退）
+npm run crawl:tiktok:import       # 手动导入 TikTok 视频数据
 ```
 
 ---

@@ -93,13 +93,13 @@ export default function BrandTrend() {
         rowActions={(_item: MarketItem) => (
           <button
             onClick={() => navigate('/fusion/opportunities')}
-            className="text-xs px-2 py-1 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
+            className="text-xs px-2.5 py-1.5 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
           >
             查看选品机会
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h2 className="text-base font-bold text-lc-text-primary">品牌趋势</h2>
@@ -107,28 +107,28 @@ export default function BrandTrend() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <BarChart3 size={12} style={{ color: LC.primary }} />
                   <span className="text-xs font-medium text-lc-text-muted">品牌总数</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.totalBrands}</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Crown size={12} style={{ color: LC.warning }} />
                   <span className="text-xs font-medium text-lc-text-muted">头部集中度</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.headConcentration}%</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Sparkles size={12} style={{ color: LC.success }} />
                   <span className="text-xs font-medium text-lc-text-muted">新兴品牌数</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.emergingBrands}</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <TrendingUp size={12} style={{ color: LC.danger }} />
                   <span className="text-xs font-medium text-lc-text-muted">份额变化</span>
@@ -141,7 +141,7 @@ export default function BrandTrend() {
           </div>
         )}
       />
-      <div className="bg-white rounded-lg shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <BarChart3 size={28} className="text-lc-border mx-auto mb-2" />

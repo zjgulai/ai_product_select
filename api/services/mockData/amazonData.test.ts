@@ -54,6 +54,6 @@ describe("amazonData", () => {
   it("getPotMarket 返回潜力字段", () => {
     const items = getPotMarket();
     expect(items.length).toBeGreaterThan(0);
-    expect(items[0].potential).toBeTruthy();
+    expect(items[0].salesG).toBeTruthy();
   });
 });

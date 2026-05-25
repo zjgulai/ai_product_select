@@ -1,0 +1,680 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e5537]:
+      - generic [ref=e5539]:
+        - generic [ref=e5541]: TikTok趋势
+        - generic [ref=e5542]:
+          - generic [ref=e5543]: /
+          - generic [ref=e5544]: 小店
+      - generic [ref=e5545]:
+        - generic [ref=e5546]:
+          - generic [ref=e5547]:
+            - img [ref=e5548]
+            - textbox "小店名称" [ref=e5551]
+          - button "搜索" [ref=e5552] [cursor=pointer]
+        - generic [ref=e5553]:
+          - button "小店热销榜" [ref=e5554] [cursor=pointer]
+          - button "小店飙升榜" [ref=e5555] [cursor=pointer]
+      - generic [ref=e5557]:
+        - generic [ref=e5558]: "商品类目:"
+        - button "汽车与摩托车" [ref=e5559] [cursor=pointer]
+        - button "母婴用品" [ref=e5560] [cursor=pointer]
+        - button "美妆个护" [ref=e5561] [cursor=pointer]
+        - button "图书、杂志&音频" [ref=e5562] [cursor=pointer]
+        - button "收藏品" [ref=e5563] [cursor=pointer]
+        - button "电脑办公" [ref=e5564] [cursor=pointer]
+        - button "时尚配饰" [ref=e5565] [cursor=pointer]
+        - button "食品饮料" [ref=e5566] [cursor=pointer]
+        - button "家具" [ref=e5567] [cursor=pointer]
+        - button "健康" [ref=e5568] [cursor=pointer]
+        - button "家装建材" [ref=e5569] [cursor=pointer]
+        - button "居家日用" [ref=e5570] [cursor=pointer]
+        - button "家电" [ref=e5571] [cursor=pointer]
+        - button "珠宝与衍生品" [ref=e5572] [cursor=pointer]
+        - button "儿童时尚" [ref=e5573] [cursor=pointer]
+        - button "厨房用品" [ref=e5574] [cursor=pointer]
+        - button "箱包" [ref=e5575] [cursor=pointer]
+        - button "男装与男士内衣" [ref=e5576] [cursor=pointer]
+        - button "穆斯林时尚" [ref=e5577] [cursor=pointer]
+        - button "宠物用品" [ref=e5578] [cursor=pointer]
+        - button "手机与数码" [ref=e5579] [cursor=pointer]
+        - button "二手" [ref=e5580] [cursor=pointer]
+        - button "鞋靴" [ref=e5581] [cursor=pointer]
+        - button "运动与户外" [ref=e5582] [cursor=pointer]
+        - button "家纺布艺" [ref=e5583] [cursor=pointer]
+        - button "五金工具" [ref=e5584] [cursor=pointer]
+        - button "玩具和爱好" [ref=e5585] [cursor=pointer]
+        - button "虚拟产品" [ref=e5586] [cursor=pointer]
+        - button "女装与女士内衣" [ref=e5587] [cursor=pointer]
+      - generic [ref=e5589]:
+        - button "全部" [ref=e5590] [cursor=pointer]
+        - button "日" [ref=e5591] [cursor=pointer]
+        - button "近7天" [ref=e5592] [cursor=pointer]
+        - button "近30天" [ref=e5593] [cursor=pointer]
+        - button "自定义" [ref=e5594] [cursor=pointer]
+      - generic [ref=e5595]:
+        - generic [ref=e5596]:
+          - heading "小店信息" [level=3] [ref=e5597]
+          - generic [ref=e5598]:
+            - generic [ref=e5599]: 共 30 条
+            - button "数据导出" [ref=e5600] [cursor=pointer]:
+              - img [ref=e5601]
+              - text: 数据导出
+        - table [ref=e5605]:
+          - rowgroup [ref=e5606]:
+            - row "小店信息 销量 销售额($) 动销商品数 在售商品数 新商品占比 总销量 总销售额($) 评分 关联达人 卖家类型 操作" [ref=e5607]:
+              - columnheader "小店信息" [ref=e5608]
+              - columnheader "销量" [ref=e5609]
+              - columnheader "销售额($)" [ref=e5610]
+              - columnheader "动销商品数" [ref=e5611]
+              - columnheader "在售商品数" [ref=e5612]
+              - columnheader "新商品占比" [ref=e5613]
+              - columnheader "总销量" [ref=e5614]
+              - columnheader "总销售额($)" [ref=e5615]
+              - columnheader "评分" [ref=e5616]
+              - columnheader "关联达人" [ref=e5617]
+              - columnheader "卖家类型" [ref=e5618]
+              - columnheader "操作" [ref=e5619]
+          - rowgroup [ref=e5620]:
+            - row "Schumm, Pouros and Kuhn 澳大利亚 | 手机数码,健康保健 351,690 +43.4% 9,569,484.9 +47.1% 217 975 8.91% 14,868,756 754,878,634.91 4.23 4,649 跨境店" [ref=e5621]:
+              - cell "Schumm, Pouros and Kuhn 澳大利亚 | 手机数码,健康保健" [ref=e5622]:
+                - generic [ref=e5624]:
+                  - generic [ref=e5625]: Schumm, Pouros and Kuhn
+                  - generic [ref=e5626]: 澳大利亚 | 手机数码,健康保健
+              - cell "351,690 +43.4%" [ref=e5627]:
+                - generic [ref=e5628]:
+                  - generic [ref=e5629]: 351,690
+                  - generic [ref=e5630]: +43.4%
+              - cell "9,569,484.9 +47.1%" [ref=e5631]:
+                - generic [ref=e5632]:
+                  - generic [ref=e5633]: 9,569,484.9
+                  - generic [ref=e5634]: +47.1%
+              - cell "217" [ref=e5635]
+              - cell "975" [ref=e5636]
+              - cell "8.91%" [ref=e5637]
+              - cell "14,868,756" [ref=e5638]
+              - cell "754,878,634.91" [ref=e5639]
+              - cell "4.23" [ref=e5640]
+              - cell "4,649" [ref=e5641]
+              - cell "跨境店" [ref=e5642]
+              - cell [ref=e5643]:
+                - button [ref=e5644] [cursor=pointer]:
+                  - img [ref=e5645]
+            - row "Hamill - O'Connell 美国 | 健康保健,厨房用品 22,712 +15.5% 257,781.2 -22.0% 481 359 1.49% 846,663 55,942,081.64 3.99 1,177 本土店" [ref=e5647]:
+              - cell "Hamill - O'Connell 美国 | 健康保健,厨房用品" [ref=e5648]:
+                - generic [ref=e5650]:
+                  - generic [ref=e5651]: Hamill - O'Connell
+                  - generic [ref=e5652]: 美国 | 健康保健,厨房用品
+              - cell "22,712 +15.5%" [ref=e5653]:
+                - generic [ref=e5654]:
+                  - generic [ref=e5655]: 22,712
+                  - generic [ref=e5656]: +15.5%
+              - cell "257,781.2 -22.0%" [ref=e5657]:
+                - generic [ref=e5658]:
+                  - generic [ref=e5659]: 257,781.2
+                  - generic [ref=e5660]: "-22.0%"
+              - cell "481" [ref=e5661]
+              - cell "359" [ref=e5662]
+              - cell "1.49%" [ref=e5663]
+              - cell "846,663" [ref=e5664]
+              - cell "55,942,081.64" [ref=e5665]
+              - cell "3.99" [ref=e5666]
+              - cell "1,177" [ref=e5667]
+              - cell "本土店" [ref=e5668]
+              - cell [ref=e5669]:
+                - button [ref=e5670] [cursor=pointer]:
+                  - img [ref=e5671]
+            - row "Bailey, White and Koepp Store 美国 | 运动户外,食品饮料,手机数码 203,035 +5.7% 9,136,575 +21.9% 398 1714 9.35% 19,650,739 108,349,302.89 4.27 4,440 本土店" [ref=e5673]:
+              - cell "Bailey, White and Koepp Store 美国 | 运动户外,食品饮料,手机数码" [ref=e5674]:
+                - generic [ref=e5676]:
+                  - generic [ref=e5677]: Bailey, White and Koepp Store
+                  - generic [ref=e5678]: 美国 | 运动户外,食品饮料,手机数码
+              - cell "203,035 +5.7%" [ref=e5679]:
+                - generic [ref=e5680]:
+                  - generic [ref=e5681]: 203,035
+                  - generic [ref=e5682]: +5.7%
+              - cell "9,136,575 +21.9%" [ref=e5683]:
+                - generic [ref=e5684]:
+                  - generic [ref=e5685]: 9,136,575
+                  - generic [ref=e5686]: +21.9%
+              - cell "398" [ref=e5687]
+              - cell "1714" [ref=e5688]
+              - cell "9.35%" [ref=e5689]
+              - cell "19,650,739" [ref=e5690]
+              - cell "108,349,302.89" [ref=e5691]
+              - cell "4.27" [ref=e5692]
+              - cell "4,440" [ref=e5693]
+              - cell "本土店" [ref=e5694]
+              - cell [ref=e5695]:
+                - button [ref=e5696] [cursor=pointer]:
+                  - img [ref=e5697]
+            - row "Medhurst Inc Store 加拿大 | 玩具爱好 5,139 -23.3% 108,124.56 +21.9% 111 1381 0.8% 444,852 6,333,106.26 4.14 418 跨境店" [ref=e5699]:
+              - cell "Medhurst Inc Store 加拿大 | 玩具爱好" [ref=e5700]:
+                - generic [ref=e5702]:
+                  - generic [ref=e5703]: Medhurst Inc Store
+                  - generic [ref=e5704]: 加拿大 | 玩具爱好
+              - cell "5,139 -23.3%" [ref=e5705]:
+                - generic [ref=e5706]:
+                  - generic [ref=e5707]: 5,139
+                  - generic [ref=e5708]: "-23.3%"
+              - cell "108,124.56 +21.9%" [ref=e5709]:
+                - generic [ref=e5710]:
+                  - generic [ref=e5711]: 108,124.56
+                  - generic [ref=e5712]: +21.9%
+              - cell "111" [ref=e5713]
+              - cell "1381" [ref=e5714]
+              - cell "0.8%" [ref=e5715]
+              - cell "444,852" [ref=e5716]
+              - cell "6,333,106.26" [ref=e5717]
+              - cell "4.14" [ref=e5718]
+              - cell "418" [ref=e5719]
+              - cell "跨境店" [ref=e5720]
+              - cell [ref=e5721]:
+                - button [ref=e5722] [cursor=pointer]:
+                  - img [ref=e5723]
+            - row "Rice Group Store 美国 | 美妆个护 166,861 +23.2% 2,583,008.28 -12.7% 218 553 3.81% 4,909,050 364,996,640.43 4.12 627 跨境店" [ref=e5725]:
+              - cell "Rice Group Store 美国 | 美妆个护" [ref=e5726]:
+                - generic [ref=e5728]:
+                  - generic [ref=e5729]: Rice Group Store
+                  - generic [ref=e5730]: 美国 | 美妆个护
+              - cell "166,861 +23.2%" [ref=e5731]:
+                - generic [ref=e5732]:
+                  - generic [ref=e5733]: 166,861
+                  - generic [ref=e5734]: +23.2%
+              - cell "2,583,008.28 -12.7%" [ref=e5735]:
+                - generic [ref=e5736]:
+                  - generic [ref=e5737]: 2,583,008.28
+                  - generic [ref=e5738]: "-12.7%"
+              - cell "218" [ref=e5739]
+              - cell "553" [ref=e5740]
+              - cell "3.81%" [ref=e5741]
+              - cell "4,909,050" [ref=e5742]
+              - cell "364,996,640.43" [ref=e5743]
+              - cell "4.12" [ref=e5744]
+              - cell "627" [ref=e5745]
+              - cell "跨境店" [ref=e5746]
+              - cell [ref=e5747]:
+                - button [ref=e5748] [cursor=pointer]:
+                  - img [ref=e5749]
+            - row "Ryan, Marvin and Schulist Store 英国 | 宠物用品,家居日用,女装内衣 365,313 -18.8% 14,627,132.52 +7.0% 315 273 0.73% 4,103,145 75,330,463.1 3.82 411 本土店" [ref=e5751]:
+              - cell "Ryan, Marvin and Schulist Store 英国 | 宠物用品,家居日用,女装内衣" [ref=e5752]:
+                - generic [ref=e5754]:
+                  - generic [ref=e5755]: Ryan, Marvin and Schulist Store
+                  - generic [ref=e5756]: 英国 | 宠物用品,家居日用,女装内衣
+              - cell "365,313 -18.8%" [ref=e5757]:
+                - generic [ref=e5758]:
+                  - generic [ref=e5759]: 365,313
+                  - generic [ref=e5760]: "-18.8%"
+              - cell "14,627,132.52 +7.0%" [ref=e5761]:
+                - generic [ref=e5762]:
+                  - generic [ref=e5763]: 14,627,132.52
+                  - generic [ref=e5764]: +7.0%
+              - cell "315" [ref=e5765]
+              - cell "273" [ref=e5766]
+              - cell "0.73%" [ref=e5767]
+              - cell "4,103,145" [ref=e5768]
+              - cell "75,330,463.1" [ref=e5769]
+              - cell "3.82" [ref=e5770]
+              - cell "411" [ref=e5771]
+              - cell "本土店" [ref=e5772]
+              - cell [ref=e5773]:
+                - button [ref=e5774] [cursor=pointer]:
+                  - img [ref=e5775]
+            - row "Baumbach - Marks Store 澳大利亚 | 厨房用品 76,766 +34.5% 1,708,811.16 -18.0% 243 135 3.71% 2,330,973 227,422,744.82 4.23 87 跨境店" [ref=e5777]:
+              - cell "Baumbach - Marks Store 澳大利亚 | 厨房用品" [ref=e5778]:
+                - generic [ref=e5780]:
+                  - generic [ref=e5781]: Baumbach - Marks Store
+                  - generic [ref=e5782]: 澳大利亚 | 厨房用品
+              - cell "76,766 +34.5%" [ref=e5783]:
+                - generic [ref=e5784]:
+                  - generic [ref=e5785]: 76,766
+                  - generic [ref=e5786]: +34.5%
+              - cell "1,708,811.16 -18.0%" [ref=e5787]:
+                - generic [ref=e5788]:
+                  - generic [ref=e5789]: 1,708,811.16
+                  - generic [ref=e5790]: "-18.0%"
+              - cell "243" [ref=e5791]
+              - cell "135" [ref=e5792]
+              - cell "3.71%" [ref=e5793]
+              - cell "2,330,973" [ref=e5794]
+              - cell "227,422,744.82" [ref=e5795]
+              - cell "4.23" [ref=e5796]
+              - cell "87" [ref=e5797]
+              - cell "跨境店" [ref=e5798]
+              - cell [ref=e5799]:
+                - button [ref=e5800] [cursor=pointer]:
+                  - img [ref=e5801]
+            - row "Monahan - Paucek Store 澳大利亚 | 时尚配饰,家电,玩具爱好 120,627 +53.7% 1,477,680.75 +7.6% 380 1707 0.29% 1,451,001 217,624,376.97 4.84 3,462 本土店" [ref=e5803]:
+              - cell "Monahan - Paucek Store 澳大利亚 | 时尚配饰,家电,玩具爱好" [ref=e5804]:
+                - generic [ref=e5806]:
+                  - generic [ref=e5807]: Monahan - Paucek Store
+                  - generic [ref=e5808]: 澳大利亚 | 时尚配饰,家电,玩具爱好
+              - cell "120,627 +53.7%" [ref=e5809]:
+                - generic [ref=e5810]:
+                  - generic [ref=e5811]: 120,627
+                  - generic [ref=e5812]: +53.7%
+              - cell "1,477,680.75 +7.6%" [ref=e5813]:
+                - generic [ref=e5814]:
+                  - generic [ref=e5815]: 1,477,680.75
+                  - generic [ref=e5816]: +7.6%
+              - cell "380" [ref=e5817]
+              - cell "1707" [ref=e5818]
+              - cell "0.29%" [ref=e5819]
+              - cell "1,451,001" [ref=e5820]
+              - cell "217,624,376.97" [ref=e5821]
+              - cell "4.84" [ref=e5822]
+              - cell "3,462" [ref=e5823]
+              - cell "本土店" [ref=e5824]
+              - cell [ref=e5825]:
+                - button [ref=e5826] [cursor=pointer]:
+                  - img [ref=e5827]
+            - row "Batz - Schowalter-Botsford 美国 | 运动户外 325,066 -21.6% 4,609,435.88 +11.2% 222 1197 1.99% 19,887,219 404,071,340.9 4.61 4,853 本土店" [ref=e5829]:
+              - cell "Batz - Schowalter-Botsford 美国 | 运动户外" [ref=e5830]:
+                - generic [ref=e5832]:
+                  - generic [ref=e5833]: Batz - Schowalter-Botsford
+                  - generic [ref=e5834]: 美国 | 运动户外
+              - cell "325,066 -21.6%" [ref=e5835]:
+                - generic [ref=e5836]:
+                  - generic [ref=e5837]: 325,066
+                  - generic [ref=e5838]: "-21.6%"
+              - cell "4,609,435.88 +11.2%" [ref=e5839]:
+                - generic [ref=e5840]:
+                  - generic [ref=e5841]: 4,609,435.88
+                  - generic [ref=e5842]: +11.2%
+              - cell "222" [ref=e5843]
+              - cell "1197" [ref=e5844]
+              - cell "1.99%" [ref=e5845]
+              - cell "19,887,219" [ref=e5846]
+              - cell "404,071,340.9" [ref=e5847]
+              - cell "4.61" [ref=e5848]
+              - cell "4,853" [ref=e5849]
+              - cell "本土店" [ref=e5850]
+              - cell [ref=e5851]:
+                - button [ref=e5852] [cursor=pointer]:
+                  - img [ref=e5853]
+            - row "Wilderman, Feest and Baumbach Store 加拿大 | 手机数码 223,516 +6.9% 8,368,439.04 -2.2% 488 553 6.76% 18,810,521 270,767,192.99 4.09 2,654 本土店" [ref=e5855]:
+              - cell "Wilderman, Feest and Baumbach Store 加拿大 | 手机数码" [ref=e5856]:
+                - generic [ref=e5858]:
+                  - generic [ref=e5859]: Wilderman, Feest and Baumbach Store
+                  - generic [ref=e5860]: 加拿大 | 手机数码
+              - cell "223,516 +6.9%" [ref=e5861]:
+                - generic [ref=e5862]:
+                  - generic [ref=e5863]: 223,516
+                  - generic [ref=e5864]: +6.9%
+              - cell "8,368,439.04 -2.2%" [ref=e5865]:
+                - generic [ref=e5866]:
+                  - generic [ref=e5867]: 8,368,439.04
+                  - generic [ref=e5868]: "-2.2%"
+              - cell "488" [ref=e5869]
+              - cell "553" [ref=e5870]
+              - cell "6.76%" [ref=e5871]
+              - cell "18,810,521" [ref=e5872]
+              - cell "270,767,192.99" [ref=e5873]
+              - cell "4.09" [ref=e5874]
+              - cell "2,654" [ref=e5875]
+              - cell "本土店" [ref=e5876]
+              - cell [ref=e5877]:
+                - button [ref=e5878] [cursor=pointer]:
+                  - img [ref=e5879]
+            - row "Wiza - Mayert Store 美国 | 手机数码,运动户外 483,887 +29.1% 12,556,867.65 +17.9% 462 896 0.93% 15,115,726 1,083,470,607.48 4.56 73 本土店" [ref=e5881]:
+              - cell "Wiza - Mayert Store 美国 | 手机数码,运动户外" [ref=e5882]:
+                - generic [ref=e5884]:
+                  - generic [ref=e5885]: Wiza - Mayert Store
+                  - generic [ref=e5886]: 美国 | 手机数码,运动户外
+              - cell "483,887 +29.1%" [ref=e5887]:
+                - generic [ref=e5888]:
+                  - generic [ref=e5889]: 483,887
+                  - generic [ref=e5890]: +29.1%
+              - cell "12,556,867.65 +17.9%" [ref=e5891]:
+                - generic [ref=e5892]:
+                  - generic [ref=e5893]: 12,556,867.65
+                  - generic [ref=e5894]: +17.9%
+              - cell "462" [ref=e5895]
+              - cell "896" [ref=e5896]
+              - cell "0.93%" [ref=e5897]
+              - cell "15,115,726" [ref=e5898]
+              - cell "1,083,470,607.48" [ref=e5899]
+              - cell "4.56" [ref=e5900]
+              - cell "73" [ref=e5901]
+              - cell "本土店" [ref=e5902]
+              - cell [ref=e5903]:
+                - button [ref=e5904] [cursor=pointer]:
+                  - img [ref=e5905]
+            - row "Wintheiser, O'Connell and Crist-Schneider Store 美国 | 健康保健,母婴用品,运动户外 257,414 +45.0% 9,650,450.86 +35.3% 342 661 2.45% 25,729,534 104,178,998.11 4.86 2,248 本土店" [ref=e5907]:
+              - cell "Wintheiser, O'Connell and Crist-Schneider Store 美国 | 健康保健,母婴用品,运动户外" [ref=e5908]:
+                - generic [ref=e5910]:
+                  - generic [ref=e5911]: Wintheiser, O'Connell and Crist-Schneider Store
+                  - generic [ref=e5912]: 美国 | 健康保健,母婴用品,运动户外
+              - cell "257,414 +45.0%" [ref=e5913]:
+                - generic [ref=e5914]:
+                  - generic [ref=e5915]: 257,414
+                  - generic [ref=e5916]: +45.0%
+              - cell "9,650,450.86 +35.3%" [ref=e5917]:
+                - generic [ref=e5918]:
+                  - generic [ref=e5919]: 9,650,450.86
+                  - generic [ref=e5920]: +35.3%
+              - cell "342" [ref=e5921]
+              - cell "661" [ref=e5922]
+              - cell "2.45%" [ref=e5923]
+              - cell "25,729,534" [ref=e5924]
+              - cell "104,178,998.11" [ref=e5925]
+              - cell "4.86" [ref=e5926]
+              - cell "2,248" [ref=e5927]
+              - cell "本土店" [ref=e5928]
+              - cell [ref=e5929]:
+                - button [ref=e5930] [cursor=pointer]:
+                  - img [ref=e5931]
+            - row "Funk Group 澳大利亚 | 美妆个护,宠物用品 20,139 +10.1% 122,042.34 +36.8% 404 1718 0.01% 1,565,619 12,878,801.89 4.29 4,518 跨境店" [ref=e5933]:
+              - cell "Funk Group 澳大利亚 | 美妆个护,宠物用品" [ref=e5934]:
+                - generic [ref=e5936]:
+                  - generic [ref=e5937]: Funk Group
+                  - generic [ref=e5938]: 澳大利亚 | 美妆个护,宠物用品
+              - cell "20,139 +10.1%" [ref=e5939]:
+                - generic [ref=e5940]:
+                  - generic [ref=e5941]: 20,139
+                  - generic [ref=e5942]: +10.1%
+              - cell "122,042.34 +36.8%" [ref=e5943]:
+                - generic [ref=e5944]:
+                  - generic [ref=e5945]: 122,042.34
+                  - generic [ref=e5946]: +36.8%
+              - cell "404" [ref=e5947]
+              - cell "1718" [ref=e5948]
+              - cell "0.01%" [ref=e5949]
+              - cell "1,565,619" [ref=e5950]
+              - cell "12,878,801.89" [ref=e5951]
+              - cell "4.29" [ref=e5952]
+              - cell "4,518" [ref=e5953]
+              - cell "跨境店" [ref=e5954]
+              - cell [ref=e5955]:
+                - button [ref=e5956] [cursor=pointer]:
+                  - img [ref=e5957]
+            - row "Johnston - Fadel Store 澳大利亚 | 美妆个护,健康保健 77,660 +27.3% 677,195.2 +53.3% 147 118 2.83% 1,883,848 103,433,055.26 4.68 288 跨境店" [ref=e5959]:
+              - cell "Johnston - Fadel Store 澳大利亚 | 美妆个护,健康保健" [ref=e5960]:
+                - generic [ref=e5962]:
+                  - generic [ref=e5963]: Johnston - Fadel Store
+                  - generic [ref=e5964]: 澳大利亚 | 美妆个护,健康保健
+              - cell "77,660 +27.3%" [ref=e5965]:
+                - generic [ref=e5966]:
+                  - generic [ref=e5967]: 77,660
+                  - generic [ref=e5968]: +27.3%
+              - cell "677,195.2 +53.3%" [ref=e5969]:
+                - generic [ref=e5970]:
+                  - generic [ref=e5971]: 677,195.2
+                  - generic [ref=e5972]: +53.3%
+              - cell "147" [ref=e5973]
+              - cell "118" [ref=e5974]
+              - cell "2.83%" [ref=e5975]
+              - cell "1,883,848" [ref=e5976]
+              - cell "103,433,055.26" [ref=e5977]
+              - cell "4.68" [ref=e5978]
+              - cell "288" [ref=e5979]
+              - cell "跨境店" [ref=e5980]
+              - cell [ref=e5981]:
+                - button [ref=e5982] [cursor=pointer]:
+                  - img [ref=e5983]
+            - row "Spinka - Nienow 加拿大 | 母婴用品,美妆个护,健康保健 239,474 +40.9% 1,599,686.32 +29.4% 128 401 4.2% 22,333,077 756,638,266.71 3.57 1,619 本土店" [ref=e5985]:
+              - cell "Spinka - Nienow 加拿大 | 母婴用品,美妆个护,健康保健" [ref=e5986]:
+                - generic [ref=e5988]:
+                  - generic [ref=e5989]: Spinka - Nienow
+                  - generic [ref=e5990]: 加拿大 | 母婴用品,美妆个护,健康保健
+              - cell "239,474 +40.9%" [ref=e5991]:
+                - generic [ref=e5992]:
+                  - generic [ref=e5993]: 239,474
+                  - generic [ref=e5994]: +40.9%
+              - cell "1,599,686.32 +29.4%" [ref=e5995]:
+                - generic [ref=e5996]:
+                  - generic [ref=e5997]: 1,599,686.32
+                  - generic [ref=e5998]: +29.4%
+              - cell "128" [ref=e5999]
+              - cell "401" [ref=e6000]
+              - cell "4.2%" [ref=e6001]
+              - cell "22,333,077" [ref=e6002]
+              - cell "756,638,266.71" [ref=e6003]
+              - cell "3.57" [ref=e6004]
+              - cell "1,619" [ref=e6005]
+              - cell "本土店" [ref=e6006]
+              - cell [ref=e6007]:
+                - button [ref=e6008] [cursor=pointer]:
+                  - img [ref=e6009]
+            - row "Mayer, Becker and Goyette Store 美国 | 食品饮料,家居日用,母婴用品 467,218 -11.1% 14,969,664.72 -15.9% 154 1363 14.84% 33,585,172 146,968,187.52 4.05 1,727 本土店" [ref=e6011]:
+              - cell "Mayer, Becker and Goyette Store 美国 | 食品饮料,家居日用,母婴用品" [ref=e6012]:
+                - generic [ref=e6014]:
+                  - generic [ref=e6015]: Mayer, Becker and Goyette Store
+                  - generic [ref=e6016]: 美国 | 食品饮料,家居日用,母婴用品
+              - cell "467,218 -11.1%" [ref=e6017]:
+                - generic [ref=e6018]:
+                  - generic [ref=e6019]: 467,218
+                  - generic [ref=e6020]: "-11.1%"
+              - cell "14,969,664.72 -15.9%" [ref=e6021]:
+                - generic [ref=e6022]:
+                  - generic [ref=e6023]: 14,969,664.72
+                  - generic [ref=e6024]: "-15.9%"
+              - cell "154" [ref=e6025]
+              - cell "1363" [ref=e6026]
+              - cell "14.84%" [ref=e6027]
+              - cell "33,585,172" [ref=e6028]
+              - cell "146,968,187.52" [ref=e6029]
+              - cell "4.05" [ref=e6030]
+              - cell "1,727" [ref=e6031]
+              - cell "本土店" [ref=e6032]
+              - cell [ref=e6033]:
+                - button [ref=e6034] [cursor=pointer]:
+                  - img [ref=e6035]
+            - row "Walker, Ortiz and Schowalter Store 英国 | 玩具爱好,男装内衣 281,157 +8.3% 9,719,597.49 -22.7% 416 151 1.93% 24,789,573 330,088,186.61 3.52 1,014 跨境店" [ref=e6037]:
+              - cell "Walker, Ortiz and Schowalter Store 英国 | 玩具爱好,男装内衣" [ref=e6038]:
+                - generic [ref=e6040]:
+                  - generic [ref=e6041]: Walker, Ortiz and Schowalter Store
+                  - generic [ref=e6042]: 英国 | 玩具爱好,男装内衣
+              - cell "281,157 +8.3%" [ref=e6043]:
+                - generic [ref=e6044]:
+                  - generic [ref=e6045]: 281,157
+                  - generic [ref=e6046]: +8.3%
+              - cell "9,719,597.49 -22.7%" [ref=e6047]:
+                - generic [ref=e6048]:
+                  - generic [ref=e6049]: 9,719,597.49
+                  - generic [ref=e6050]: "-22.7%"
+              - cell "416" [ref=e6051]
+              - cell "151" [ref=e6052]
+              - cell "1.93%" [ref=e6053]
+              - cell "24,789,573" [ref=e6054]
+              - cell "330,088,186.61" [ref=e6055]
+              - cell "3.52" [ref=e6056]
+              - cell "1,014" [ref=e6057]
+              - cell "跨境店" [ref=e6058]
+              - cell [ref=e6059]:
+                - button [ref=e6060] [cursor=pointer]:
+                  - img [ref=e6061]
+            - row "Prosacco - Jacobs Store 美国 | 母婴用品 376,786 +19.8% 7,456,594.94 +29.7% 346 1470 0.95% 30,153,878 1,351,350,223.29 4.07 884 本土店" [ref=e6063]:
+              - cell "Prosacco - Jacobs Store 美国 | 母婴用品" [ref=e6064]:
+                - generic [ref=e6066]:
+                  - generic [ref=e6067]: Prosacco - Jacobs Store
+                  - generic [ref=e6068]: 美国 | 母婴用品
+              - cell "376,786 +19.8%" [ref=e6069]:
+                - generic [ref=e6070]:
+                  - generic [ref=e6071]: 376,786
+                  - generic [ref=e6072]: +19.8%
+              - cell "7,456,594.94 +29.7%" [ref=e6073]:
+                - generic [ref=e6074]:
+                  - generic [ref=e6075]: 7,456,594.94
+                  - generic [ref=e6076]: +29.7%
+              - cell "346" [ref=e6077]
+              - cell "1470" [ref=e6078]
+              - cell "0.95%" [ref=e6079]
+              - cell "30,153,878" [ref=e6080]
+              - cell "1,351,350,223.29" [ref=e6081]
+              - cell "4.07" [ref=e6082]
+              - cell "884" [ref=e6083]
+              - cell "本土店" [ref=e6084]
+              - cell [ref=e6085]:
+                - button [ref=e6086] [cursor=pointer]:
+                  - img [ref=e6087]
+            - row "Runte, Fahey and Bednar Store 加拿大 | 时尚配饰,男装内衣,家居日用 272,145 +34.7% 5,154,426.3 +42.0% 52 276 5.1% 16,949,533 495,209,411.26 3.59 2,148 跨境店" [ref=e6089]:
+              - cell "Runte, Fahey and Bednar Store 加拿大 | 时尚配饰,男装内衣,家居日用" [ref=e6090]:
+                - generic [ref=e6092]:
+                  - generic [ref=e6093]: Runte, Fahey and Bednar Store
+                  - generic [ref=e6094]: 加拿大 | 时尚配饰,男装内衣,家居日用
+              - cell "272,145 +34.7%" [ref=e6095]:
+                - generic [ref=e6096]:
+                  - generic [ref=e6097]: 272,145
+                  - generic [ref=e6098]: +34.7%
+              - cell "5,154,426.3 +42.0%" [ref=e6099]:
+                - generic [ref=e6100]:
+                  - generic [ref=e6101]: 5,154,426.3
+                  - generic [ref=e6102]: +42.0%
+              - cell "52" [ref=e6103]
+              - cell "276" [ref=e6104]
+              - cell "5.1%" [ref=e6105]
+              - cell "16,949,533" [ref=e6106]
+              - cell "495,209,411.26" [ref=e6107]
+              - cell "3.59" [ref=e6108]
+              - cell "2,148" [ref=e6109]
+              - cell "跨境店" [ref=e6110]
+              - cell [ref=e6111]:
+                - button [ref=e6112] [cursor=pointer]:
+                  - img [ref=e6113]
+            - row "Daugherty-Prohaska - Trantow Store 加拿大 | 健康保健,美妆个护 16,477 +50.9% 782,492.73 +51.4% 187 577 8.62% 1,373,629 13,186,180.61 4.53 632 跨境店" [ref=e6115]:
+              - cell "Daugherty-Prohaska - Trantow Store 加拿大 | 健康保健,美妆个护" [ref=e6116]:
+                - generic [ref=e6118]:
+                  - generic [ref=e6119]: Daugherty-Prohaska - Trantow Store
+                  - generic [ref=e6120]: 加拿大 | 健康保健,美妆个护
+              - cell "16,477 +50.9%" [ref=e6121]:
+                - generic [ref=e6122]:
+                  - generic [ref=e6123]: 16,477
+                  - generic [ref=e6124]: +50.9%
+              - cell "782,492.73 +51.4%" [ref=e6125]:
+                - generic [ref=e6126]:
+                  - generic [ref=e6127]: 782,492.73
+                  - generic [ref=e6128]: +51.4%
+              - cell "187" [ref=e6129]
+              - cell "577" [ref=e6130]
+              - cell "8.62%" [ref=e6131]
+              - cell "1,373,629" [ref=e6132]
+              - cell "13,186,180.61" [ref=e6133]
+              - cell "4.53" [ref=e6134]
+              - cell "632" [ref=e6135]
+              - cell "跨境店" [ref=e6136]
+              - cell [ref=e6137]:
+                - button [ref=e6138] [cursor=pointer]:
+                  - img [ref=e6139]
+        - generic [ref=e6141]:
+          - generic [ref=e6142]: 共 30 条
+          - generic [ref=e6143]:
+            - button [disabled] [ref=e6144]:
+              - img [ref=e6145]
+            - button "1" [ref=e6147] [cursor=pointer]
+            - button "2" [ref=e6148] [cursor=pointer]
+            - button [ref=e6149] [cursor=pointer]:
+              - img [ref=e6150]

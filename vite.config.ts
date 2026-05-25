@@ -20,10 +20,11 @@ export default defineConfig({
       "@db": path.resolve(__dirname, "./db"),
       "db": path.resolve(__dirname, "./db"),
     },
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   envDir: path.resolve(__dirname),
   define: {
-    'import.meta.env.VITE_USE_MOCK_DATA': '"true"',
+    'import.meta.env.VITE_USE_MOCK_DATA': '"false"',
   },
   build: {
     outDir: path.resolve(__dirname, "dist/public"),

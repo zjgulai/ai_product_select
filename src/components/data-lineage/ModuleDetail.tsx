@@ -63,7 +63,7 @@ export default function ModuleDetail({ data, onGapClick }: { data?: ModuleDetail
     DWD: '#0891B2',
     DWS: '#059669',
     ADS: '#D97706',
-    Mock: '#DC2626',
+    Mock: '#C44545',
     External: '#7C3AED',
   };
 

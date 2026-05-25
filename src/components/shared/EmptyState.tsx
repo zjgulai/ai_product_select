@@ -1,11 +1,12 @@
-import { LucideIcon } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
 
+interface IconProps { size?: number; className?: string; style?: React.CSSProperties }
+
 interface EmptyStateProps {
-  icon?: LucideIcon;
+  icon?: React.ComponentType<IconProps>;
   title?: string;
   description?: string;
-  primaryAction?: { label: string; onClick: () => void; icon?: LucideIcon };
+  primaryAction?: { label: string; onClick: () => void; icon?: React.ComponentType<IconProps> };
   secondaryAction?: { label: string; onClick: () => void };
   compact?: boolean;
 }

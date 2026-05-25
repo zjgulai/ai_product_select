@@ -1,0 +1,180 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e6155]:
+      - generic [ref=e6157]:
+        - generic [ref=e6159]: Amazon榜单
+        - generic [ref=e6160]:
+          - generic [ref=e6161]: /
+          - generic [ref=e6162]: 评论详情
+      - generic [ref=e6163]:
+        - button "返回榜单" [ref=e6164] [cursor=pointer]:
+          - img [ref=e6165]
+          - text: 返回榜单
+        - generic [ref=e6167]: "ASIN: B0C1234567"
+      - generic [ref=e6168]:
+        - generic [ref=e6169]:
+          - img [ref=e6171]
+          - generic [ref=e6173]:
+            - heading "评论分析" [level=2] [ref=e6174]
+            - paragraph [ref=e6175]: 基于 0 条评论的情感与维度分析
+        - generic [ref=e6176]:
+          - generic [ref=e6177]:
+            - generic [ref=e6178]: "0"
+            - generic [ref=e6179]: 总评论
+          - generic [ref=e6180]:
+            - generic [ref=e6181]: 0%
+            - generic [ref=e6182]: 好评
+          - generic [ref=e6183]:
+            - generic [ref=e6184]: 0%
+            - generic [ref=e6185]: 差评
+          - generic [ref=e6186]:
+            - generic [ref=e6187]: "--"
+            - generic [ref=e6188]: 平均评分
+      - generic [ref=e6190]:
+        - generic [ref=e6191]:
+          - img [ref=e6192]
+          - generic [ref=e6194]: "情感:"
+          - button "全部" [ref=e6195] [cursor=pointer]
+          - button "正面" [ref=e6196] [cursor=pointer]:
+            - img [ref=e6197]
+            - text: 正面
+          - button "中性" [ref=e6200] [cursor=pointer]:
+            - img [ref=e6201]
+            - text: 中性
+          - button "负面" [ref=e6203] [cursor=pointer]:
+            - img [ref=e6204]
+            - text: 负面
+        - generic [ref=e6207]:
+          - img [ref=e6208]
+          - generic [ref=e6210]: "星级:"
+          - button "5★" [ref=e6211] [cursor=pointer]
+          - button "4★" [ref=e6212] [cursor=pointer]
+          - button "3★" [ref=e6213] [cursor=pointer]
+          - button "2★" [ref=e6214] [cursor=pointer]
+          - button "1★" [ref=e6215] [cursor=pointer]
+        - generic [ref=e6216]:
+          - img [ref=e6217]
+          - textbox "搜索评论内容..." [ref=e6220]
+      - generic [ref=e6221]:
+        - generic [ref=e6222]:
+          - heading "评论列表" [level=3] [ref=e6223]:
+            - img [ref=e6224]
+            - text: 评论列表
+          - generic [ref=e6226]: 共 0 条
+        - generic [ref=e6227]:
+          - img [ref=e6228]
+          - paragraph [ref=e6230]: 暂无匹配的评论
+          - paragraph [ref=e6231]: 尝试调整筛选条件

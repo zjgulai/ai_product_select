@@ -17,7 +17,7 @@ import {
 function MetricCard({ icon: Icon, label, value, subValue, color }: any) {
   return (
     <div className="rounded-xl p-4 ring-1 ring-lc-border/40 bg-white">
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center gap-4 mb-2">
         <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: `${color}12` }}>
           <Icon size={14} style={{ color }} />
         </div>
@@ -36,7 +36,7 @@ function WordCloudPanel({ title, words, color }: { title: string; words: string[
   const colors = [color, color, LC.primary, LC.success, LC.warning, LC.teal, LC.textSecondary, LC.textMuted];
 
   return (
-    <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+    <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
       <h4 className="text-xs font-semibold mb-4 text-lc-text-primary">{title}</h4>
       <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 min-h-[260px] px-4">
         {words.map((word, i) => (
@@ -244,8 +244,8 @@ export default function ConceptDetail() {
         <button onClick={() => navigate('/fusion/opportunities')} className="flex items-center gap-1 text-[11px] mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
           <ArrowLeft size={12} /> 返回机会榜
         </button>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
             {concept.name[0]}
           </div>
           <div>
@@ -300,12 +300,12 @@ export default function ConceptDetail() {
       </div>
 
       {/* Key Features & Scenes */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
-        <div className="flex items-center gap-2 mb-3">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+        <div className="flex items-center gap-4 mb-3">
           <Sparkles size={14} className="text-lc-primary" />
           <h3 className="text-sm font-semibold text-lc-text-primary">概念特征</h3>
         </div>
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-4 mb-3">
           {(concept.keyFeatures ?? []).map((f: string) => (
             <span key={f} className="text-[11px] px-2.5 py-1 rounded-full font-medium" style={{ background: LC.primaryLight, color: LC.primary }}>{f}</span>
           ))}
@@ -341,8 +341,8 @@ export default function ConceptDetail() {
           {/* Dual Platform Panel */}
           <div className="grid grid-cols-2 gap-4 mb-4">
             {/* TikTok Side */}
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lc-border">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+              <div className="flex items-center gap-4 mb-4 pb-3 border-b border-lc-border">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="currentColor"/></svg>
                 <h3 className="text-sm font-bold text-lc-text-primary">TikTok侧</h3>
                 <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.primaryLight, color: LC.primary }}>社媒热度</span>
@@ -365,8 +365,8 @@ export default function ConceptDetail() {
             </div>
 
             {/* Amazon Side */}
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lc-border">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+              <div className="flex items-center gap-4 mb-4 pb-3 border-b border-lc-border">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 4h4v4H2V4zm6 0h4v4H8V4zm6 0h4v4h-4V4zM2 10h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4zM2 16h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4z" fill="currentColor"/></svg>
                 <h3 className="text-sm font-bold text-lc-text-primary">Amazon侧</h3>
                 <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.successLight, color: LC.success }}>电商验证</span>
@@ -390,14 +390,14 @@ export default function ConceptDetail() {
           </div>
 
           {/* VOC Insights */}
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+            <div className="flex items-center gap-4 mb-4">
               <MessageSquare size={14} className="text-lc-primary" />
               <h3 className="text-sm font-semibold text-lc-text-primary">VOC对比洞察</h3>
               <span className="text-xs px-1.5 py-0.5 rounded-full font-medium ml-auto" style={{ background: LC.warningLight, color: LC.warning }}>AI分析</span>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <div className="rounded-lg p-3 bg-lc-bg-warm">
+              <div className="rounded-xl p-3 bg-lc-bg-warm">
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">TikTok用户关注</div>
                 <div className="space-y-1.5">
                   {overviewTiktokFeatures.map(({ feature, percent }) => (
@@ -413,7 +413,7 @@ export default function ConceptDetail() {
                   ))}
                 </div>
               </div>
-              <div className="rounded-lg p-3 bg-lc-bg-warm">
+              <div className="rounded-xl p-3 bg-lc-bg-warm">
                 <div className="text-[11px] font-medium text-lc-text-secondary mb-2">Amazon用户反馈</div>
                 <div className="space-y-1.5">
                   {overviewAmazonFeatures.map(({ feature, percent }) => (
@@ -429,7 +429,7 @@ export default function ConceptDetail() {
                   ))}
                 </div>
               </div>
-              <div className="rounded-lg p-3 bg-lc-primary-light">
+              <div className="rounded-xl p-3 bg-lc-primary-light">
                 <div className="text-[11px] font-medium text-lc-primary mb-2">需求缺口分析</div>
                 <div className="space-y-2">
                   {overviewGapInsights.map((text, i) => (
@@ -446,8 +446,8 @@ export default function ConceptDetail() {
           </div>
 
           {/* Trend Charts */}
-          <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="flex items-center gap-4 mb-4">
               <Activity size={14} className="text-lc-primary" />
               <h3 className="text-sm font-semibold text-lc-text-primary">SHI/CVI 历史趋势（近30天）</h3>
             </div>
@@ -494,8 +494,8 @@ export default function ConceptDetail() {
 
           {/* Gap Analysis */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-              <div className="flex items-center gap-2 mb-3">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+              <div className="flex items-center gap-4 mb-3">
                 <TrendingUp size={14} className="text-lc-primary" />
                 <h4 className="text-xs font-semibold text-lc-primary">TikTok热点维度</h4>
               </div>
@@ -514,8 +514,8 @@ export default function ConceptDetail() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-              <div className="flex items-center gap-2 mb-3">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+              <div className="flex items-center gap-4 mb-3">
                 <ShoppingBag size={14} className="text-lc-success" />
                 <h4 className="text-xs font-semibold text-lc-success">Amazon反馈维度</h4>
               </div>
@@ -534,8 +534,8 @@ export default function ConceptDetail() {
               </div>
             </div>
 
-            <div className="bg-lc-primary-light rounded-lg p-4 ring-1 ring-lc-primary/20">
-              <div className="flex items-center gap-2 mb-3">
+            <div className="bg-lc-primary-light rounded-xl p-4 ring-1 ring-lc-primary/20">
+              <div className="flex items-center gap-4 mb-3">
                 <GitCompare size={14} className="text-lc-primary" />
                 <h4 className="text-xs font-semibold text-lc-primary">差异分析</h4>
                 <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-lc-warning/20 text-lc-warning font-medium ml-auto">AI洞察</span>
@@ -555,15 +555,15 @@ export default function ConceptDetail() {
           </div>
 
           {/* Sentiment comparison */}
-          <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
-            <div className="flex items-center gap-2 mb-3">
+          <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="flex items-center gap-4 mb-3">
               <h4 className="text-xs font-semibold text-lc-primary">情感倾向对比</h4>
               <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-lc-warning/20 text-lc-warning font-medium">模拟数据</span>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <div className="text-[11px] text-lc-text-secondary mb-2">TikTok讨论情感</div>
-                <div className="flex items-center gap-2 h-6 rounded-full overflow-hidden bg-lc-border-light">
+                <div className="flex items-center gap-4 h-6 rounded-full overflow-hidden bg-lc-border-light">
                   <div className="h-full bg-lc-success" style={{ width: '72%' }} />
                   <div className="h-full bg-lc-warning" style={{ width: '18%' }} />
                   <div className="h-full bg-lc-danger" style={{ width: '10%' }} />
@@ -576,7 +576,7 @@ export default function ConceptDetail() {
               </div>
               <div>
                 <div className="text-[11px] text-lc-text-secondary mb-2">Amazon评论情感</div>
-                <div className="flex items-center gap-2 h-6 rounded-full overflow-hidden bg-lc-border-light">
+                <div className="flex items-center gap-4 h-6 rounded-full overflow-hidden bg-lc-border-light">
                   <div className="h-full bg-lc-success" style={{ width: '58%' }} />
                   <div className="h-full bg-lc-warning" style={{ width: '22%' }} />
                   <div className="h-full bg-lc-danger" style={{ width: '20%' }} />

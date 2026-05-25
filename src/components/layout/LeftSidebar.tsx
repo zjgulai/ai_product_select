@@ -69,8 +69,8 @@ const MENU_GROUPS: MenuGroup[] = [
   },
 ];
 
-const neonBg = '#E8785A';
-const neonText = '#0A0A0A';
+const neonBg = '#8B354A';
+const neonText = '#2D1F1F';
 
 interface LeftSidebarProps {
   mobileOpen?: boolean;
@@ -94,7 +94,7 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
 
   return (
     <aside className={`fixed left-0 top-12 bottom-0 w-[180px] z-[90] flex-col overflow-y-auto transition-transform duration-300 md:translate-x-0 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:flex`}
-      style={{ background: '#0A0A0A' }}
+      style={{ background: '#1A1212' }}
       onClick={(e) => { if (e.target === e.currentTarget && onClose) onClose(); }}>
       {MENU_GROUPS.map((group, groupIdx) => (
         <div key={group.label}>
@@ -132,7 +132,7 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
                     <item.icon size={15} strokeWidth={1.5} />
                     <span>{item.label}</span>
                     {item.badge && (
-                      <span className="text-[8px] font-bold ml-auto tracking-wider" style={{ color: '#E8785A' }}>{item.badge}</span>
+                      <span className="text-[8px] font-bold ml-auto tracking-wider" style={{ color: '#8B354A' }}>{item.badge}</span>
                     )}
                   </button>
                 ))}
@@ -149,7 +149,7 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
         <button
           onClick={() => toast.info('会员升级功能即将上线，敬请期待')}
           className="w-full rounded-md py-1.5 flex items-center justify-center gap-1.5 text-[11px] font-bold transition-all hover:brightness-110"
-          style={{ background: 'linear-gradient(90deg, #E8785A, #D49450)', color: '#1C1917' }}>
+          style={{ background: 'linear-gradient(90deg, #8B354A, #C47A5A)', color: '#2D1F1F' }}>
           <Crown size={13} strokeWidth={1.5} /> 升级会员
         </button>
         <div className="rounded-md p-2.5 space-y-1" style={{ background: 'rgba(255,255,255,0.04)' }}>

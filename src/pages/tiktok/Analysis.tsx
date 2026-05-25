@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
+import DataBadge from '@/components/shared/DataBadge';
 import EChartsHeatmap from '@/components/shared/EChartsHeatmap';
 import EChartsTreemap from '@/components/shared/EChartsTreemap';
 import EChartsLine from '@/components/shared/EChartsLine';
@@ -53,9 +54,13 @@ export default function TikTokAnalysis() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["TikTok趋势", "大盘数据"]} />
+      <div className="flex items-center gap-4 mb-3">
+        <DataBadge type="demo" />
+        <span className="text-xs text-lc-text-muted">TikTok 反爬限制，当前为演示数据。</span>
+      </div>
 
       {/* KPI Cards */}
-      <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-lc-primary">数据大盘</h3>
           <div className="flex items-center gap-2">
@@ -74,7 +79,7 @@ export default function TikTokAnalysis() {
         {kpiLoading ? (
           <div className="grid grid-cols-6 gap-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="rounded-lg p-3 bg-lc-bg-warm">
+              <div key={i} className="rounded-xl p-3 bg-lc-bg-warm">
                 <Skeleton className="h-4 w-16 mb-2" />
                 <Skeleton className="h-6 w-20" />
               </div>
@@ -85,7 +90,7 @@ export default function TikTokAnalysis() {
             {kpiData?.map((kpi, i) => {
               const Icon = KPI_ICONS[i];
               return (
-                <div key={kpi.title} className="rounded-lg p-3 transition-all duration-200 cursor-pointer group bg-lc-bg-warm">
+                <div key={kpi.title} className="rounded-xl p-3 transition-all duration-200 cursor-pointer group bg-lc-bg-warm">
                   <div className="flex items-center gap-1.5 mb-2">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: `${LC.primary}10` }}>
                       <Icon size={13} className="text-lc-primary" />
@@ -105,7 +110,7 @@ export default function TikTokAnalysis() {
       </div>
 
       {/* Category Heatmap */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between mb-1">
           <div>
             <h3 className="text-sm font-semibold text-lc-primary">品类热力图</h3>
@@ -134,7 +139,7 @@ export default function TikTokAnalysis() {
       </div>
 
       {/* Category Treemap */}
-      <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60 mt-4">
+      <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60 mt-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-sm font-semibold text-lc-primary">品类树形分解</h3>
           <div className="flex items-center gap-1">
@@ -147,7 +152,7 @@ export default function TikTokAnalysis() {
 
       {/* GMV Trend + Category Share */}
       <div className="grid grid-cols-2 gap-4 mt-4">
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-lc-primary">月度GMV趋势</h3>
             <div className="flex items-center gap-1">
@@ -156,13 +161,13 @@ export default function TikTokAnalysis() {
             </div>
           </div>
           {gmvChartData.length > 0 ? (
-            <EChartsLine data={gmvChartData} color={'#E8785A'} height={260} yAxisName="GMV($B)" />
+            <EChartsLine data={gmvChartData} color={'#8B354A'} height={260} yAxisName="GMV($B)" />
           ) : (
             <Skeleton className="w-full h-[260px]" />
           )}
         </div>
 
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold mb-2 text-lc-primary">品类市场份额</h3>
           {categoryShare ? (
             <EChartsPie
@@ -177,12 +182,12 @@ export default function TikTokAnalysis() {
       </div>
 
       {/* Price Distribution */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
         <h3 className="text-sm font-semibold mb-4 text-lc-primary">价格带分布</h3>
         {priceDist ? (
           <div className="grid grid-cols-3 gap-4">
-            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.products }))} title="商品数量" color={'#E8785A'} height={220} />
-            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesVolume }))} title="销量" color={'#E8785A'} height={220} />
+            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.products }))} title="商品数量" color={'#8B354A'} height={220} />
+            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesVolume }))} title="销量" color={'#8B354A'} height={220} />
             <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesRevenue }))} title="销售额($M)" color={LC.teal} height={220} />
           </div>
         ) : (
@@ -195,7 +200,7 @@ export default function TikTokAnalysis() {
       </div>
 
       {/* Influencer Matrix */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-lc-primary">带货达人矩阵</h3>
           <div className="flex items-center gap-1">
@@ -210,7 +215,7 @@ export default function TikTokAnalysis() {
                 <thead>
                   <tr className="bg-lc-bg-warm">
                     {["粉丝量级", "达人数", "占比", "总销量", "平均GPM"].map(h => (
-                      <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${h === '粉丝量级' ? 'text-left' : 'text-right'}`}>{h}</th>
+                      <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${h === '粉丝量级' ? 'text-left' : 'text-right'}`}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -218,9 +223,9 @@ export default function TikTokAnalysis() {
                   {influencerMatrix.map((row: any) => (
                     <tr key={row.range} className="border-b transition-colors hover:bg-lc-bg-warm cursor-pointer border-lc-border-light"
                       onClick={() => setActiveCategory(activeCategory === 0 ? null : 0)}>
-                      <td className="py-2.5 px-3 font-semibold text-left text-xs text-lc-primary">{row.range}</td>
-                      <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(row.accounts / 1000000).toFixed(1)}M</td>
-                      <td className="py-2.5 px-3">
+                      <td className="py-3 px-3 font-semibold text-left text-xs text-lc-primary">{row.range}</td>
+                      <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(row.accounts / 1000000).toFixed(1)}M</td>
+                      <td className="py-3 px-3">
                         <div className="flex items-center justify-end gap-2">
                           <div className="w-14 h-1.5 rounded-full overflow-hidden bg-lc-border-light">
                             <div className="h-full rounded-full" style={{ width: row.accountRatio, background: LC.primary }} />
@@ -228,8 +233,8 @@ export default function TikTokAnalysis() {
                           <span className="font-mono-num text-xs text-lc-text-muted">{row.accountRatio}</span>
                         </div>
                       </td>
-                      <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(row.sales / 1000000).toFixed(0)}M</td>
-                      <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${row.avgRevenue.toFixed(0)}</td>
+                      <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{(row.sales / 1000000).toFixed(0)}M</td>
+                      <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${row.avgRevenue.toFixed(0)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -109,7 +109,7 @@ export default function DataManager() {
       <Breadcrumb items={['数据管理中心']} />
 
 
-      <div className="bg-white rounded-lg shadow-lc ring-1 ring-lc-border/60 mb-4 p-4">
+      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60 mb-4 p-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {([
             ['已配置数据源', DATA_SOURCES.length, Database, LC.primary],
@@ -117,7 +117,7 @@ export default function DataManager() {
             ['成功次数', stats?.success ?? 0, CheckCircle, LC.success],
             ['累计导入行数', (stats?.totalRows ?? 0).toLocaleString(), Layers, LC.warning],
           ] as const).map(([label, value, Icon, color]) => (
-            <div key={label} className="rounded-lg p-3 bg-lc-bg-warm">
+            <div key={label} className="rounded-xl p-3 bg-lc-bg-warm">
               <div className="flex items-center gap-1.5 mb-1">
                 <Icon size={12} style={{ color }} />
                 <span className="text-xs font-medium text-lc-text-muted">{label}</span>
@@ -128,7 +128,7 @@ export default function DataManager() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-lc ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60">
         <div className="flex gap-6 border-b border-lc-border px-4 pt-3">
           {TABS.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)}
@@ -152,7 +152,7 @@ export default function DataManager() {
                     const st = odsStatus?.[s.targetTable];
                     return (
                       <button key={s.dataKey} onClick={() => setSrc(s)}
-                        className="text-left rounded-lg p-3 border transition-all hover:shadow-lc-hover hover:-translate-y-0.5 ring-1"
+                        className="text-left rounded-xl p-3 border transition-all hover:shadow-lc-hover hover:-translate-y-0.5 ring-1"
                         style={{ borderColor: LC.border, background: LC.bgWarm }}>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-base inline-flex items-center"><s.icon size={14} /></span>
@@ -171,7 +171,7 @@ export default function DataManager() {
               </>
             ) : (
               <div>
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center gap-4 mb-4">
                   <button onClick={() => { setSrc(null); setParsed(null); setDryResult(null); }}
                     className="flex items-center gap-1 text-xs text-lc-text-muted hover:text-lc-primary transition-colors">
                     <ChevronRight size={12} className="rotate-180" /> 返回
@@ -200,7 +200,7 @@ export default function DataManager() {
                   </div>
                 ) : (
                   <div>
-                    <div className="flex items-center justify-between mb-3 p-3 rounded-lg bg-lc-bg-warm">
+                    <div className="flex items-center justify-between mb-3 p-3 rounded-xl bg-lc-bg-warm">
                       <div className="flex items-center gap-3">
                         <CheckCircle size={16} className="text-lc-success" />
                         <div>
@@ -223,7 +223,7 @@ export default function DataManager() {
                         className="text-xs text-lc-text-muted hover:text-lc-danger transition-colors">重新选择</button>
                     </div>
 
-                    <div className="overflow-x-auto border rounded-lg mb-4 animate-fadeIn" style={{ borderColor: LC.border }}>
+                    <div className="overflow-x-auto border rounded-xl mb-4 animate-fadeIn" style={{ borderColor: LC.border }}>
                       <table className="w-full text-xs">
                         <thead>
                           <tr className="bg-lc-bg-warm">
@@ -245,16 +245,16 @@ export default function DataManager() {
                         </tbody>
                       </table>
                       {parsed.total > 5 && (
-                        <div className="px-3 py-2 text-xs text-lc-text-muted border-t" style={{ borderColor: LC.border }}>
+                        <div className="px-4 py-2.5 text-xs text-lc-text-muted border-t" style={{ borderColor: LC.border }}>
                           仅展示前 5 行，共 {parsed.total.toLocaleString()} 行
                         </div>
                       )}
                     </div>
 
                     {dryResult && (
-                      <div className="mb-4 p-3 rounded-lg border"
+                      <div className="mb-4 p-3 rounded-xl border"
                         style={{ borderColor: dryResult.failedRows > 0 ? LC.warning : LC.success, background: dryResult.failedRows > 0 ? LC.warningLight : LC.successLight }}>
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-4 mb-2">
                           {dryResult.failedRows > 0
                             ? <AlertCircle size={14} style={{ color: LC.warning }} />
                             : <CheckCircle size={14} style={{ color: LC.success }} />}
@@ -270,7 +270,7 @@ export default function DataManager() {
 
                     <div className="flex items-center gap-3">
                       <button onClick={dryRun} disabled={importing}
-                        className="h-9 px-5 text-xs font-medium rounded-lg border transition-all flex items-center gap-1.5"
+                        className="h-9 px-5 text-xs font-medium rounded-xl border transition-all flex items-center gap-1.5"
                         style={{ borderColor: LC.primary, color: LC.primary }}>
                         <CheckCircle size={13} /> 预检（不写入）
                       </button>
@@ -284,7 +284,7 @@ export default function DataManager() {
                           });
                           if (ok) doImport();
                         }} disabled={importing}
-                        className="h-9 px-6 text-white text-xs font-medium rounded-lg transition-all hover:brightness-110 disabled:opacity-50 flex items-center gap-1.5"
+                        className="h-9 px-6 text-white text-xs font-medium rounded-xl transition-all hover:brightness-110 disabled:opacity-50 flex items-center gap-1.5"
                         style={{ background: LC.primary }}>
                         {importing ? <><RefreshCw size={13} className="animate-spin" /> 导入中...</> : <><Upload size={13} /> 确认导入 {parsed.total.toLocaleString()} 行</>}
                       </button>
@@ -311,7 +311,7 @@ export default function DataManager() {
                 <thead>
                   <tr className="bg-lc-bg-warm">
                     {['数据源', '目标层/表', '状态', '总行数', '成功', '失败', '时间', '耗时'].map(h => (
-                      <th key={h} className="py-2.5 px-3 text-left text-lc-text-secondary font-semibold">{h}</th>
+                      <th key={h} className="py-3 px-3 text-left text-lc-text-secondary font-semibold">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -323,21 +323,21 @@ export default function DataManager() {
                       : null;
                     return (
                       <tr key={log.id} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                        <td className="py-2.5 px-3 font-medium text-lc-text-primary">{s ? <span className="inline-flex items-center gap-1"><s.icon size={14} /> {s.label}</span> : log.dataKey}</td>
-                        <td className="py-2.5 px-3">
+                        <td className="py-3 px-3 font-medium text-lc-text-primary">{s ? <span className="inline-flex items-center gap-1"><s.icon size={14} /> {s.label}</span> : log.dataKey}</td>
+                        <td className="py-3 px-3">
                           <div className="flex items-center gap-1">
                             <LayerBadge layer={(log.targetLayer ?? 'custom').toUpperCase()} />
                             <span className="text-lc-text-muted">{log.targetTable ?? '-'}</span>
                           </div>
                         </td>
-                        <td className="py-2.5 px-3"><StatusBadge status={log.status} /></td>
-                        <td className="py-2.5 px-3 font-mono-num text-lc-text-primary">{(log.totalRows ?? 0).toLocaleString()}</td>
-                        <td className="py-2.5 px-3 font-mono-num text-lc-success">{(log.successRows ?? 0).toLocaleString()}</td>
-                        <td className="py-2.5 px-3 font-mono-num" style={{ color: (log.failedRows ?? 0) > 0 ? LC.danger : LC.textMuted }}>{log.failedRows ?? 0}</td>
-                        <td className="py-2.5 px-3 text-lc-text-muted">
+                        <td className="py-3 px-3"><StatusBadge status={log.status} /></td>
+                        <td className="py-3 px-3 font-mono-num text-lc-text-primary">{(log.totalRows ?? 0).toLocaleString()}</td>
+                        <td className="py-3 px-3 font-mono-num text-lc-success">{(log.successRows ?? 0).toLocaleString()}</td>
+                        <td className="py-3 px-3 font-mono-num" style={{ color: (log.failedRows ?? 0) > 0 ? LC.danger : LC.textMuted }}>{log.failedRows ?? 0}</td>
+                        <td className="py-3 px-3 text-lc-text-muted">
                           {new Date(log.triggeredAt).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}
                         </td>
-                        <td className="py-2.5 px-3 font-mono-num text-lc-text-muted">{dur != null ? `${dur}s` : '-'}</td>
+                        <td className="py-3 px-3 font-mono-num text-lc-text-muted">{dur != null ? `${dur}s` : '-'}</td>
                       </tr>
                     );
                   })}
@@ -363,7 +363,7 @@ export default function DataManager() {
               </button>
             </div>
             {odsErr ? <ErrorState /> : odsLoading ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-lg" />)}</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-24 rounded-xl" />)}</div>
             ) : DATA_SOURCES.every(s => !(odsStatus?.[s.targetTable]?.rowCount ?? 0)) ? (
               <EmptyState icon={Inbox} title="还没有导入过数据" description="导入 TikTok 或 Amazon 数据源后，这里会展示数据质量概览" primaryAction={{ label: '去导入数据', onClick: () => setTab('sources') }} />
             ) : (
@@ -375,7 +375,7 @@ export default function DataManager() {
                     ? new Date().getTime() - new Date(st.latestDate).getTime() > 2 * 86400_000
                     : false;
                   return (
-                    <div key={s.dataKey} className="rounded-lg p-3 border ring-1"
+                    <div key={s.dataKey} className="rounded-xl p-3 border ring-1"
                       style={{ borderColor: hasData && !isStale ? LC.success : isStale ? LC.warning : LC.border, background: LC.bgWarm }}>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-1.5">
@@ -401,11 +401,11 @@ export default function DataManager() {
                 })}
               </div>
             )}
-            <div className="mt-6 p-4 rounded-lg border" style={{ borderColor: LC.border, background: LC.bgWarm }}>
+            <div className="mt-6 p-4 rounded-xl border" style={{ borderColor: LC.border, background: LC.bgWarm }}>
               <h4 className="text-xs font-semibold text-lc-text-primary mb-3 flex items-center gap-1.5">
                 <ChevronDown size={12} /> 数仓分层说明
               </h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
                 {([
                   ['ODS', '#6366F1', '原始数据层 — 直接落库，保留原始字段，含 snapshot_date'],
                   ['DWD', '#0891B2', '标准化明细层 — 类型统一、字段规范、去重'],
@@ -433,8 +433,8 @@ export default function DataManager() {
             <h3 className="text-sm font-semibold text-lc-primary mb-4">数据源模板配置</h3>
             <div className="space-y-3">
               {DATA_SOURCES.map(s => (
-                <div key={s.dataKey} className="rounded-lg border p-3 ring-1 ring-lc-border/40">
-                  <div className="flex items-center gap-2 mb-1">
+                <div key={s.dataKey} className="rounded-xl border p-3 ring-1 ring-lc-border/40">
+                  <div className="flex items-center gap-4 mb-1">
                     <span className="inline-flex items-center"><s.icon size={14} /></span>
                     <span className="text-xs font-semibold text-lc-text-primary">{s.label}</span>
                     <LayerBadge layer={s.layer} />
@@ -446,7 +446,7 @@ export default function DataManager() {
                 </div>
               ))}
             </div>
-            <div className="mt-4 p-3 rounded-lg text-xs text-lc-text-muted" style={{ background: LC.bgWarm }}>
+            <div className="mt-4 p-3 rounded-xl text-xs text-lc-text-muted" style={{ background: LC.bgWarm }}>
               <strong className="text-lc-text-secondary">自定义字段映射</strong>：已内置别名识别（如 "月销量"/monthly_sales/monthlySales 均可识别），数据校验范围与必填字段标记根据数据源自动适配。
             </div>
           </div>

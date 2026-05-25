@@ -25,8 +25,8 @@ const STAGE_DESC: Record<string, string> = {
   launch: '上线发布与推广',
 };
 const STAGE_COLORS: Record<string, string> = {
-  charter: LC.primary,      // #E8785A
-  concept: '#D49450',       // 品牌金色
+  charter: LC.primary,      // #8B354A
+  concept: '#C47A5A',       // 品牌金色
   plan: '#C8A265',          // 暖色过渡
   develop: LC.teal,         // #2A9D8F
   qualify: LC.success,      // #4CAF50
@@ -38,9 +38,9 @@ const STATUS_LABELS: Record<string, string> = {
 };
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   active: { bg: LC.successLight, color: LC.success },
-  paused: { bg: '#FEF3C7', color: '#E8810A' },
+  paused: { bg: '#F5EDE0', color: '#C47A3A' },
   completed: { bg: '#E0F2FE', color: '#0284C7' },
-  cancelled: { bg: '#F5F5F4', color: '#78716C' },
+  cancelled: { bg: '#F5F5F4', color: '#7A6B6B' },
 };
 
 const STAGE_STATUS_LABELS: Record<string, string> = {
@@ -69,9 +69,9 @@ export default function IpmsProjectDetail() {
       <div className="animate-fadeIn">
         <Breadcrumb items={['决策执行', '项目跟踪', '项目详情']} />
         <div className="space-y-4">
-          <Skeleton className="h-24 w-full rounded-lg" />
-          <Skeleton className="h-40 w-full rounded-lg" />
-          <Skeleton className="h-60 w-full rounded-lg" />
+          <Skeleton className="h-24 w-full rounded-xl" />
+          <Skeleton className="h-40 w-full rounded-xl" />
+          <Skeleton className="h-60 w-full rounded-xl" />
         </div>
       </div>
     );
@@ -131,8 +131,8 @@ export default function IpmsProjectDetail() {
       <Breadcrumb items={['决策执行', '项目跟踪', data.projectName]} />
 
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
-        <div className="flex items-center gap-2 mb-3">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+        <div className="flex items-center gap-4 mb-3">
           <button
             onClick={() => navigate('/project/tracking')}
             className="flex items-center gap-1 text-[11px] text-lc-text-muted hover:text-lc-primary transition-colors"
@@ -142,7 +142,7 @@ export default function IpmsProjectDetail() {
         </div>
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
               {data.projectName?.[0] || '?'}
             </div>
             <div>
@@ -152,7 +152,7 @@ export default function IpmsProjectDetail() {
                   className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold"
                   style={{
                     background: STATUS_STYLES[data.status]?.bg || '#F5F5F4',
-                    color: STATUS_STYLES[data.status]?.color || '#78716C',
+                    color: STATUS_STYLES[data.status]?.color || '#7A6B6B',
                   }}
                 >
                   {STATUS_LABELS[data.status] || data.status}
@@ -175,7 +175,7 @@ export default function IpmsProjectDetail() {
                   if (ok) updateStatusMutation.mutate({ projectId: data.projectId, status: 'paused' });
                 }}
                 className="text-xs px-3 h-7 rounded-full font-medium border transition-all"
-                style={{ borderColor: `${LC.warning}40`, color: LC.warning, background: '#FEF3C7' }}
+                style={{ borderColor: `${LC.warning}40`, color: LC.warning, background: '#F5EDE0' }}
               >
                 暂停项目
               </button>
@@ -202,7 +202,7 @@ export default function IpmsProjectDetail() {
                   if (ok) updateStatusMutation.mutate({ projectId: data.projectId, status: 'completed' });
                 }}
                 className="text-xs px-3 h-7 rounded-full font-medium text-white transition-all hover:brightness-110"
-                style={{ background: '#3B82F6' }}
+                style={{ background: '#5A7A9C' }}
               >
                 标记完成
               </button>
@@ -245,7 +245,7 @@ export default function IpmsProjectDetail() {
       </div>
 
       {/* Stage Timeline */}
-      <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
         <h3 className="text-sm font-semibold text-lc-primary mb-4">IPMS 阶段流程</h3>
         <div className="flex items-center justify-between">
           {STAGES.map((stage, idx) => {
@@ -262,7 +262,7 @@ export default function IpmsProjectDetail() {
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
                     style={{
                       background: isCompleted || isCurrent ? STAGE_COLORS[stage] : '#F5F5F4',
-                      color: isCompleted || isCurrent ? '#fff' : '#A8A29E',
+                      color: isCompleted || isCurrent ? '#fff' : '#9A8B8B',
                       boxShadow: isCurrent ? `0 0 0 4px ${STAGE_COLORS[stage]}20` : 'none',
                     }}
                   >
@@ -271,7 +271,7 @@ export default function IpmsProjectDetail() {
                   <div className="text-center">
                     <div
                       className="text-[11px] font-semibold transition-colors"
-                      style={{ color: isCompleted || isCurrent ? STAGE_COLORS[stage] : '#A8A29E' }}
+                      style={{ color: isCompleted || isCurrent ? STAGE_COLORS[stage] : '#9A8B8B' }}
                     >
                       {STAGE_LABELS[stage]}
                     </div>
@@ -298,13 +298,13 @@ export default function IpmsProjectDetail() {
       {/* Two Column Layout */}
       <div className="grid grid-cols-2 gap-4">
         {/* Current Stage Info */}
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <h3 className="text-sm font-semibold text-lc-primary mb-3">当前阶段详情</h3>
           <div
-            className="rounded-lg p-4 mb-3"
+            className="rounded-xl p-4 mb-3"
             style={{ background: `${STAGE_COLORS[data.currentStage]}08`, border: `1px solid ${STAGE_COLORS[data.currentStage]}20` }}
           >
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-4 mb-2">
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: STAGE_COLORS[data.currentStage] }}>
                 {currentIdx + 1}
               </div>
@@ -338,7 +338,7 @@ export default function IpmsProjectDetail() {
               <div className="text-xs font-medium text-lc-text-muted mb-1">元数据</div>
               <div className="space-y-1">
                 {Object.entries(data.metadata).map(([k, v]) => (
-                  <div key={k} className="flex items-center gap-2 text-[11px]">
+                  <div key={k} className="flex items-center gap-4 text-[11px]">
                     <span className="text-lc-text-muted">{k}:</span>
                     <span className="text-lc-text-primary font-mono">{String(v)}</span>
                   </div>
@@ -349,7 +349,7 @@ export default function IpmsProjectDetail() {
         </div>
 
         {/* Stage History */}
-        <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-lc-primary">阶段历史记录</h3>
             <button
@@ -370,7 +370,7 @@ export default function IpmsProjectDetail() {
               history.map((h: any) => {
                 const stageIdx = STAGES.indexOf(h.stage);
                 return (
-                  <div key={h.id} className="flex items-start gap-2 p-2.5 rounded-md" style={{ background: LC.bgWarm }}>
+                  <div key={h.id} className="flex items-start gap-4 p-2.5 rounded-md" style={{ background: LC.bgWarm }}>
                     <div
                       className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[8px] font-bold shrink-0 mt-0.5"
                       style={{ background: STAGE_COLORS[h.stage] }}
@@ -384,7 +384,7 @@ export default function IpmsProjectDetail() {
                           className="text-[9px] px-1.5 py-0.5 rounded-full font-medium"
                           style={{
                             background: h.status === 'completed' ? LC.successLight : h.status === 'in_progress' ? '#E0F2FE' : '#F5F5F4',
-                            color: h.status === 'completed' ? LC.success : h.status === 'in_progress' ? '#0284C7' : '#78716C',
+                            color: h.status === 'completed' ? LC.success : h.status === 'in_progress' ? '#0284C7' : '#7A6B6B',
                           }}
                         >
                           {STAGE_STATUS_LABELS[h.status] || h.status}
@@ -430,7 +430,7 @@ export default function IpmsProjectDetail() {
                 <textarea
                   value={historyNotes}
                   onChange={e => setHistoryNotes(e.target.value)}
-                  className="w-full px-3 py-2 rounded-md border text-xs border-lc-border focus:outline-none focus:ring-1 focus:ring-lc-primary resize-none"
+                  className="w-full px-4 py-2.5 rounded-md border text-xs border-lc-border focus:outline-none focus:ring-1 focus:ring-lc-primary resize-none"
                   rows={3}
                   placeholder="输入阶段备注..."
                 />
@@ -445,7 +445,7 @@ export default function IpmsProjectDetail() {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-end gap-2 mt-5">
+            <div className="flex items-center justify-end gap-4 mt-5">
               <button
                 onClick={() => setShowAddHistory(false)}
                 className="px-4 h-8 rounded-md text-xs font-medium border border-lc-border text-lc-text-secondary hover:bg-lc-bg-warm transition-colors"

@@ -9,7 +9,7 @@
  */
 
 import { eq, and, gte, lte, sql, desc, like, or, inArray } from "drizzle-orm";
-import { getDb } from "../../queries/connection";
+import { getDb } from "../../queries/connection.ts";
 import {
   productConcepts,
   dwdTiktokProductDaily,

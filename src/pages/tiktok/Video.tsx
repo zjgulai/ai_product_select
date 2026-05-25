@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { getProductImage } from '@/data/assets';
 import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import DataBadge from '@/components/shared/DataBadge';
 
 const TABS = ["视频热播榜", "视频热销榜"];
 const TAB_KEYS = ["views", "sales"] as const;
@@ -43,7 +44,11 @@ export default function TikTokVideo() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["TikTok趋势", "视频"]} />
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="flex items-center gap-4 mb-3">
+        <DataBadge type="demo" />
+        <span className="text-xs text-lc-text-muted">TikTok 反爬限制，当前为演示数据。可通过 npm run crawl:tiktok:import 手动导入真实数据。</span>
+      </div>
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-0">
           <div className="relative flex-1 max-w-[400px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -66,7 +71,7 @@ export default function TikTokVideo() {
       <div className="bg-white p-3 border-b border-lc-border">
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex items-center gap-2">
-            <input type="checkbox" id="adOnly" className="rounded accent-[#3B82F6]" />
+            <input type="checkbox" id="adOnly" className="rounded accent-[#5A7A9C]" />
             <label htmlFor="adOnly" className="text-xs font-medium text-lc-text-secondary">投流视频</label>
           </div>
           <div className="flex items-center gap-2">
@@ -117,14 +122,14 @@ export default function TikTokVideo() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["视频信息", "近30日销量", "近30日销售额($)", "播放量", "点赞数", "互动率", "发布日期", "达人信息", "商品信息", "操作"].map((h, i) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[280px]':i===8?'text-left w-[140px]':i===9?'text-center w-[60px]':'text-right'}`}>{h}</th>
+                    <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${i===0?'text-left w-[280px]':i===8?'text-left w-[140px]':i===9?'text-center w-[60px]':'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {data?.items.map((item: any, idx: number) => (
                   <tr key={item.videoId ?? idx} className="border-b hover:bg-lc-bg-warm transition-colors border-lc-border-light">
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-2">
                         <div className="w-11 h-8 rounded flex items-center justify-center text-xs shrink-0 ring-1 ring-lc-border relative overflow-hidden bg-lc-bg-warm">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
@@ -136,25 +141,25 @@ export default function TikTokVideo() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{item.monthlySales.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">{item.monthlyRevenue.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.views/1000000).toFixed(2)}M</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes/1000).toFixed(0)}K</td>
-                    <td className="py-2.5 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.engagementRate > 2 ? LC.success : item.engagementRate > 1.3 ? LC.teal : LC.textMuted }}>{item.engagementRate}%</span></td>
-                    <td className="py-2.5 px-3 text-xs text-lc-text-muted">{item.publishDate}</td>
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-text-primary">{item.monthlySales.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">{item.monthlyRevenue.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.views/1000000).toFixed(2)}M</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-primary">{(item.likes/1000).toFixed(0)}K</td>
+                    <td className="py-3 px-3 text-right"><span className="text-xs font-mono-num font-semibold" style={{ color: item.engagementRate > 2 ? LC.success : item.engagementRate > 1.3 ? LC.teal : LC.textMuted }}>{item.engagementRate}%</span></td>
+                    <td className="py-3 px-3 text-xs text-lc-text-muted">{item.publishDate}</td>
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-1.5">
                         <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold ring-1 ring-lc-border" style={{ background: `${LC.primary}10`, color: LC.primary }}>{item.creatorName[0]?.toUpperCase()}</div>
                         <span className="text-xs truncate max-w-[80px] text-lc-text-primary">{item.creatorName}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-1.5">
                         <img src={getProductImage(idx)} alt={item.product} className="w-6 h-6 rounded object-cover ring-1 ring-lc-border" loading="lazy" onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <span className="text-xs truncate max-w-[80px] text-lc-text-primary">{item.product}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
+                    <td className="py-3 px-3 text-center"><button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button></td>
                   </tr>
                 ))}
                 {(!data?.items || data.items.length === 0) && (

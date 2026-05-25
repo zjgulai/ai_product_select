@@ -31,3 +31,4 @@ Thumbs.db
 
 # Uploads (runtime)
 uploads/
+scripts/data-generation/generate_mock_data_ts.py

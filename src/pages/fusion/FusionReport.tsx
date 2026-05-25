@@ -36,8 +36,8 @@ function ConceptCard({ concept, selected, onClick }: any) {
         selected ? 'ring-lc-primary bg-lc-primary-light' : 'ring-lc-border/60 bg-white'
       }`}
     >
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold shrink-0" style={{ background: selected ? LC.primary : LC.primaryLight, color: selected ? '#fff' : LC.primary }}>
+      <div className="flex items-center gap-4 mb-3">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold shrink-0" style={{ background: selected ? LC.primary : LC.primaryLight, color: selected ? '#fff' : LC.primary }}>
           {concept.name[0]}
         </div>
         <div>
@@ -78,7 +78,7 @@ function MarketOverviewPanel({ concept, metrics }: { concept: any; metrics: any[
           { label: '机会分', value: latest.opportunityScore ?? '--', color: LC.warning },
           { label: '趋势动量', value: latest.trendMomentum ? `${latest.trendMomentum}x` : '--', color: LC.teal },
         ].map((kpi) => (
-          <div key={kpi.label} className="rounded-lg p-3 bg-white ring-1 ring-lc-border/60">
+          <div key={kpi.label} className="rounded-xl p-3 bg-white ring-1 ring-lc-border/60">
             <div className="text-[11px] text-lc-text-muted mb-1">{kpi.label}</div>
             <div className="text-xl font-bold font-mono-num" style={{ color: kpi.color }}>{kpi.value}</div>
           </div>
@@ -86,11 +86,11 @@ function MarketOverviewPanel({ concept, metrics }: { concept: any; metrics: any[
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">预估GMV趋势</h4>
           <EChartsLine data={gmvData} color={LC.primary} height={220} yAxisName="$" />
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">概念特征</h4>
           <div className="space-y-2">
             {concept.keyFeatures.map((f: string, i: number) => (
@@ -118,7 +118,7 @@ function MarketOverviewPanel({ concept, metrics }: { concept: any; metrics: any[
 
       {/* TikTok + Amazon Keywords */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="currentColor"/></svg>
             TikTok关键词
@@ -129,7 +129,7 @@ function MarketOverviewPanel({ concept, metrics }: { concept: any; metrics: any[
             ))}
           </div>
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M2 4h4v4H2V4zm6 0h4v4H8V4zm6 0h4v4h-4V4zM2 10h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4zM2 16h4v4H2v-4zm6 0h4v4H8v-4zm6 0h4v4h-4v-4z" fill="currentColor"/></svg>
             Amazon类目
@@ -152,16 +152,16 @@ function SocialMediaPanel({ metrics }: { metrics: any[] }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">TikTok视频数趋势</h4>
           <EChartsLine data={videoTrend} color={LC.primary} height={220} yAxisName="视频数" />
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">TikTok播放量趋势 (M)</h4>
           <EChartsLine data={viewsTrend} color={LC.teal} height={220} yAxisName="M views" />
         </div>
       </div>
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-primary">社媒热度指标拆解</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {metrics.length > 0 && [
@@ -170,7 +170,7 @@ function SocialMediaPanel({ metrics }: { metrics: any[] }) {
             { label: '达人覆盖率', value: '86%', sub: '带货达人' },
             { label: '话题热度', value: 'A+', sub: '持续上升' },
           ].map(k => (
-            <div key={k.label} className="rounded-lg p-3 bg-lc-bg-warm text-center">
+            <div key={k.label} className="rounded-xl p-3 bg-lc-bg-warm text-center">
               <div className="text-[11px] text-lc-text-muted mb-1">{k.label}</div>
               <div className="text-lg font-bold font-mono-num text-lc-primary">{k.value}</div>
               <div className="text-xs text-lc-text-muted">{k.sub}</div>
@@ -195,24 +195,24 @@ function EcommercePanel({ metrics }: { metrics: any[] }) {
           { label: '卖家数', value: latest.amazonSellerCount?.toLocaleString() ?? '--' },
           { label: '平均评分', value: latest.amazonAvgRating ?? '--' },
         ].map(k => (
-          <div key={k.label} className="rounded-lg p-3 bg-white ring-1 ring-lc-border/60 text-center">
+          <div key={k.label} className="rounded-xl p-3 bg-white ring-1 ring-lc-border/60 text-center">
             <div className="text-[11px] text-lc-text-muted mb-1">{k.label}</div>
             <div className="text-xl font-bold font-mono-num text-lc-success">{k.value}</div>
           </div>
         ))}
       </div>
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-success">Amazon销量趋势</h4>
         <EChartsLine data={salesData} color={LC.success} height={220} yAxisName="销量" />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success">价格带分布</h4>
           <EChartsPie data={[
             { name: '$0-$25', value: 28 }, { name: '$25-$50', value: 42 }, { name: '$50-$100', value: 22 }, { name: '>$100', value: 8 },
           ]} height={200} donut />
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success">评分分布</h4>
           <EChartsBar data={[
             { label: '5星', value: 45 }, { label: '4星', value: 32 }, { label: '3星', value: 15 }, { label: '2星', value: 5 }, { label: '1星', value: 3 },
@@ -227,7 +227,7 @@ function VOCAnalysisPanel({ concept }: { concept: any }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">TikTok用户关注</h4>
           <div className="space-y-2">
             {concept.keyFeatures.slice(0, 5).map((f: string, i: number) => (
@@ -243,7 +243,7 @@ function VOCAnalysisPanel({ concept }: { concept: any }) {
             ))}
           </div>
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success">Amazon用户反馈</h4>
           <div className="space-y-2">
             {['质量', '性价比', '易用性', '外观', '耐用性'].map((f: string, i: number) => (
@@ -259,7 +259,7 @@ function VOCAnalysisPanel({ concept }: { concept: any }) {
             ))}
           </div>
         </div>
-        <div className="bg-lc-primary-light rounded-lg p-4 ring-1 ring-lc-primary/20">
+        <div className="bg-lc-primary-light rounded-xl p-4 ring-1 ring-lc-primary/20">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">需求缺口分析</h4>
           <div className="space-y-3">
             {[
@@ -282,13 +282,13 @@ function VOCAnalysisPanel({ concept }: { concept: any }) {
 function CompetitorPanel({ concept }: { concept: any }) {
   return (
     <div className="space-y-4">
-      <div className="bg-lc-bg-warm rounded-lg p-3 ring-1 ring-lc-border/40 mb-3">
+      <div className="bg-lc-bg-warm rounded-xl p-3 ring-1 ring-lc-border/40 mb-3">
         <div className="flex items-center gap-2">
           <AlertCircle size={14} className="text-lc-warning" />
           <span className="text-[11px] text-lc-text-secondary">以下竞品数据为模拟参考，实际分析需基于真实市场调研</span>
         </div>
       </div>
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-primary">竞品对比矩阵 — {concept?.name || '本品'}</h4>
         <table className="w-full min-w-[640px]">
           <thead>
@@ -307,10 +307,10 @@ function CompetitorPanel({ concept }: { concept: any }) {
               { dim: '卖家集中度', self: '中等', avg: '高', adv: '入场机会' },
             ].map((row, i) => (
               <tr key={i} className="border-b border-lc-border-light">
-                <td className="py-2.5 px-3 text-xs font-medium text-lc-text-primary">{row.dim}</td>
-                <td className="py-2.5 px-3 text-xs font-mono-num font-semibold text-lc-primary">{row.self}</td>
-                <td className="py-2.5 px-3 text-xs font-mono-num text-lc-text-secondary">{row.avg}</td>
-                <td className="py-2.5 px-3">
+                <td className="py-3 px-3 text-xs font-medium text-lc-text-primary">{row.dim}</td>
+                <td className="py-3 px-3 text-xs font-mono-num font-semibold text-lc-primary">{row.self}</td>
+                <td className="py-3 px-3 text-xs font-mono-num text-lc-text-secondary">{row.avg}</td>
+                <td className="py-3 px-3">
                   <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: row.adv.startsWith('+') || row.adv === '低价优势' || row.adv === '入场机会' ? LC.successLight : LC.warningLight, color: row.adv.startsWith('+') || row.adv === '低价优势' || row.adv === '入场机会' ? LC.success : LC.warning }}>{row.adv}</span>
                 </td>
               </tr>
@@ -330,15 +330,15 @@ function TrendPanel({ metrics }: { metrics: any[] }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-primary">SHI 社媒热度</h4>
           <EChartsLine data={shiData} color={LC.primary} height={200} yAxisName="SHI" />
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success">CVI 电商验证</h4>
           <EChartsLine data={cviData} color={LC.success} height={200} yAxisName="CVI" />
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-warning">机会分</h4>
           <EChartsLine data={oppData} color={LC.warning} height={200} yAxisName="Score" />
         </div>
@@ -358,7 +358,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
   return (
     <div className="space-y-4">
       {/* AI选品建议 */}
-      <div className="bg-lc-primary-light rounded-lg p-5 ring-1 ring-lc-primary/20">
+      <div className="bg-lc-primary-light rounded-xl p-5 ring-1 ring-lc-primary/20">
         <h4 className="text-sm font-semibold mb-3 text-lc-primary flex items-center gap-2">
           <Sparkles size={16} /> AI选品建议
         </h4>
@@ -381,7 +381,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
       </div>
 
       {/* 商业模型画布 */}
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-primary flex items-center gap-2">
           <Target size={14} /> 商业模型画布
         </h4>
@@ -394,7 +394,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
             { label: '关键资源', value: `供应商资源 + ${concept.tiktokKeywords?.[0] || ''}内容资产 + 达人合作`, color: LC.info },
             { label: '成本结构', value: `产品成本~${Math.round(100 - estMargin)}% + 营销~15% + 平台~15%`, color: LC.danger },
           ].map((item, i) => (
-            <div key={i} className="rounded-lg p-3 bg-lc-bg-warm">
+            <div key={i} className="rounded-xl p-3 bg-lc-bg-warm">
               <div className="text-xs font-medium mb-1.5" style={{ color: item.color }}>{item.label}</div>
               <div className="text-[11px] text-lc-text-primary leading-relaxed">{item.value}</div>
             </div>
@@ -404,7 +404,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
 
       {/* 盈利预测 + 风险评估 */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-success flex items-center gap-2">
             <Coins size={14} /> 盈利预测（小规模测试）
           </h4>
@@ -426,7 +426,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
             ))}
           </div>
         </div>
-        <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
           <h4 className="text-xs font-semibold mb-3 text-lc-warning flex items-center gap-2">
             <AlertTriangle size={14} /> 风险评估矩阵
           </h4>
@@ -454,7 +454,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
       </div>
 
       {/* 供应链建议 */}
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-primary flex items-center gap-2">
           <Truck size={14} /> 供应链与物流建议
         </h4>
@@ -465,7 +465,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
             { title: '物流方案', desc: '首批建议走空运（7-10天），验证市场后转海运（30-45天）降低成本。', icon: Truck },
             { title: '合规准备', desc: '确认目标品类所需的FDA/CE/FCC认证要求，提前2-3周启动认证流程。', icon: Shield },
           ].map((item, i) => (
-            <div key={i} className="rounded-lg p-3 bg-lc-bg-warm">
+            <div key={i} className="rounded-xl p-3 bg-lc-bg-warm">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <item.icon size={12} className="text-lc-primary" />
                 <span className="text-[11px] font-semibold text-lc-text-primary">{item.title}</span>
@@ -477,7 +477,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
       </div>
 
       {/* 执行时间线 */}
-      <div className="bg-white rounded-lg p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl p-4 ring-1 ring-lc-border/60">
         <h4 className="text-xs font-semibold mb-3 text-lc-primary">执行时间线建议</h4>
         <div className="space-y-3">
           {[
@@ -491,7 +491,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
               <div className="w-16 text-xs font-bold text-lc-primary text-right shrink-0">{step.phase}</div>
               <div className="w-2 h-2 rounded-full bg-lc-primary shrink-0" />
               <div className="flex-1">
-                <div className="text-xs text-lc-text-primary py-1.5 px-3 rounded-lg bg-lc-bg-warm">{step.action}</div>
+                <div className="text-xs text-lc-text-primary py-1.5 px-3 rounded-xl bg-lc-bg-warm">{step.action}</div>
                 <div className="text-xs text-lc-text-muted mt-0.5 ml-3">里程碑：{step.milestone}</div>
               </div>
             </div>
@@ -557,8 +557,8 @@ export default function FusionReport() {
 
         {/* Header */}
         <div className="rounded-xl p-6 mb-6 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+          <div className="flex items-center gap-4 mb-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
               <FileText size={20} style={{ color: LC.textInverse }} />
             </div>
             <div>
@@ -583,7 +583,7 @@ export default function FusionReport() {
         {/* Search Box */}
         <div className="max-w-xl mx-auto">
           <div className="bg-white rounded-xl p-6 ring-1 ring-lc-border/60 shadow-lc">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-4 mb-4">
               <Search size={18} className="text-lc-primary" />
               <span className="text-sm font-semibold text-lc-text-primary">搜索产品概念</span>
             </div>
@@ -594,11 +594,11 @@ export default function FusionReport() {
                 onChange={e => setSearchText(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleSearch()}
                 placeholder="输入关键词，如：便携温奶器、智能宠物喂食器..."
-                className="flex-1 h-10 px-4 rounded-lg border text-sm focus:outline-none focus:ring-1 border-lc-border text-lc-text-primary"
+                className="flex-1 h-10 px-4 rounded-xl border text-sm focus:outline-none focus:ring-1 border-lc-border text-lc-text-primary"
               />
               <button
                 onClick={handleSearch}
-                className="h-10 px-5 rounded-lg text-sm font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
+                className="h-10 px-5 rounded-xl text-sm font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
               >
                 搜索
               </button>
@@ -620,7 +620,7 @@ export default function FusionReport() {
             <div className="mt-4 pt-4 border-t border-lc-border">
               <button
                 onClick={() => navigate('/fusion/opportunities')}
-                className="w-full flex items-center justify-center gap-2 py-2 rounded-lg text-[11px] font-medium text-lc-primary bg-lc-primary-light hover:bg-lc-primary/10 transition-all"
+                className="w-full flex items-center justify-center gap-4 py-2 rounded-xl text-[11px] font-medium text-lc-primary bg-lc-primary-light hover:bg-lc-primary/10 transition-all"
               >
                 <Sparkles size={12} />
                 或者浏览选品机会榜，从推荐概念直接生成报告
@@ -693,7 +693,7 @@ export default function FusionReport() {
     <div className="animate-fadeIn">
       <Breadcrumb items={['融合选品', '生成报告']} />
 
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-4">
         <button onClick={handleBackToSelect} className="flex items-center gap-1 text-[11px] text-lc-text-muted hover:text-lc-primary transition-all">
           <ArrowLeft size={12} /> 返回选择
         </button>
@@ -715,7 +715,7 @@ export default function FusionReport() {
       <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
               {selectedConcept.name[0]}
             </div>
             <div>

@@ -13,8 +13,8 @@ function growthColor(growth: string, isParent: boolean = false): string {
 
 function growthTextColor(growth: string): string {
   const val = parseFloat(growth);
-  if (val > 0) return '#16A34A';
-  return '#DC2626';
+  if (val > 0) return '#5B8C5A';
+  return '#C44545';
 }
 
 function transformData(nodes: typeof CATEGORY_TREE_DATA) {
@@ -27,7 +27,7 @@ function transformData(nodes: typeof CATEGORY_TREE_DATA) {
       show: true,
       formatter: (p: any) => `{name|${p.name}}\n{growth|${cat.growth}}`,
       rich: {
-        name: { fontSize: 11, fontWeight: 'bold', color: '#1C1917', lineHeight: 18 },
+        name: { fontSize: 11, fontWeight: 'bold', color: '#2D1F1F', lineHeight: 18 },
         growth: { fontSize: 10, fontWeight: 'bold', color: growthTextColor(cat.growth!), lineHeight: 16 },
       },
     },
@@ -59,15 +59,15 @@ export default function EChartsTreemap({ height = 500 }: TreemapProps) {
   const option = {
     tooltip: {
       backgroundColor: 'rgba(255,255,255,0.98)',
-      borderColor: '#EDEAE5',
+      borderColor: '#E5D5CD',
       borderWidth: 1,
-      textStyle: { color: '#1C1917', fontSize: 12 },
+      textStyle: { color: '#2D1F1F', fontSize: 12 },
       formatter: (params: any) => {
         const g = params.data.growth;
         const isUp = parseFloat(g) > 0;
         return `<div style="font-weight:700;margin-bottom:4px;font-size:13px">${params.name}</div>
-                <div style="color:#78716C;margin-bottom:4px">销售额: $${(params.value / 1000000).toFixed(1)}M</div>
-                <div style="color:${isUp ? '#16A34A' : '#DC2626'};font-weight:700">${isUp ? '▲' : '▼'} ${g}</div>`;
+                <div style="color:#7A6B6B;margin-bottom:4px">销售额: $${(params.value / 1000000).toFixed(1)}M</div>
+                <div style="color:${isUp ? '#5B8C5A' : '#C44545'};font-weight:700">${isUp ? '▲' : '▼'} ${g}</div>`;
       },
     },
     series: [{

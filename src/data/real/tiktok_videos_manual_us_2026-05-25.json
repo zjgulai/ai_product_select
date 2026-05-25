@@ -1,0 +1,36 @@
+{
+  "collectedAt": "2026-05-25T04:33:13.504Z",
+  "source": "tiktok_manual_import",
+  "marketplace": "us",
+  "count": 2,
+  "data": [
+    {
+      "videoId": "1234567890",
+      "title": "",
+      "creatorName": "",
+      "creatorId": "",
+      "views": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "hashtags": [],
+      "date": "2026-05-25",
+      "coverUrl": "",
+      "sourceUrl": "https://www.tiktok.com/@fridababy/video/1234567890"
+    },
+    {
+      "videoId": "0987654321",
+      "title": "",
+      "creatorName": "",
+      "creatorId": "",
+      "views": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "hashtags": [],
+      "date": "2026-05-25",
+      "coverUrl": "",
+      "sourceUrl": "https://www.tiktok.com/@babytok/video/0987654321"
+    }
+  ]
+}

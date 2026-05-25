@@ -8,23 +8,23 @@ interface PieChartProps {
   donut?: boolean;
 }
 
-const PIE_COLORS = ['#E8785A', '#C84040', '#D49450', '#16A34A', '#0D9488', '#6366F1', '#8B5CF6', '#EC4899'];
+const PIE_COLORS = ['#8B354A', '#A33D52', '#C47A5A', '#5B8C5A', '#0D9488', '#6366F1', '#8B5CF6', '#EC4899'];
 
 function EChartsPie({ data, title, height = 220, donut = true }: PieChartProps) {
   const option = useMemo(() => ({
     tooltip: {
       trigger: 'item',
       backgroundColor: 'rgba(255,255,255,0.98)',
-      borderColor: '#EDEAE5',
+      borderColor: '#E5D5CD',
       borderWidth: 1,
-      textStyle: { color: '#1C1917', fontSize: 11 },
+      textStyle: { color: '#2D1F1F', fontSize: 11 },
       formatter: '{b}: <strong>{c}%</strong>',
     },
     legend: {
       orient: 'vertical',
       right: 10,
       top: 'center',
-      textStyle: { color: '#78716C', fontSize: 10 },
+      textStyle: { color: '#7A6B6B', fontSize: 10 },
       itemWidth: 10,
       itemHeight: 10,
       itemGap: 8,
@@ -37,7 +37,7 @@ function EChartsPie({ data, title, height = 220, donut = true }: PieChartProps) 
       itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
       label: { show: false },
       emphasis: {
-        label: { show: true, fontSize: 12, fontWeight: 'bold', color: '#E8785A' },
+        label: { show: true, fontSize: 12, fontWeight: 'bold', color: '#8B354A' },
         itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.15)' },
       },
       labelLine: { show: false },
@@ -47,7 +47,7 @@ function EChartsPie({ data, title, height = 220, donut = true }: PieChartProps) 
 
   return (
     <div>
-      {title && <div className="text-xs font-semibold text-center mb-1" style={{ color: '#78716C' }}>{title}</div>}
+      {title && <div className="text-xs font-semibold text-center mb-1" style={{ color: '#7A6B6B' }}>{title}</div>}
       <ReactECharts option={option} style={{ height }} opts={{ renderer: 'canvas' }} notMerge lazyUpdate />
     </div>
   );

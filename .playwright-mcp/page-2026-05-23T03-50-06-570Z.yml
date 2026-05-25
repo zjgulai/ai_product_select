@@ -1,0 +1,191 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e4355]:
+      - generic [ref=e4357]:
+        - generic [ref=e4359]: Amazon趋势
+        - generic [ref=e4360]:
+          - generic [ref=e4361]: /
+          - generic [ref=e4362]: 关键词趋势
+      - generic [ref=e4363]:
+        - heading "产品创新加速器，亿级卖家都在用" [level=2] [ref=e4364]
+        - paragraph [ref=e4365]: 自定义产品属性分析，细分市场趋势智能捕获，AI评价一键获取
+        - generic [ref=e4366]:
+          - generic [ref=e4367]:
+            - generic [ref=e4368]: US
+            - generic [ref=e4369]: 美国
+            - img [ref=e4370]
+          - textbox "请输入关键词" [ref=e4372]
+          - button "搜索" [ref=e4373] [cursor=pointer]
+      - generic [ref=e4374]:
+        - generic [ref=e4375] [cursor=pointer]:
+          - heading "参数趋势" [level=4] [ref=e4377]
+          - paragraph [ref=e4378]: 含产品参数的搜索词，且增长的市场
+          - generic [ref=e4379]:
+            - generic [ref=e4380]: 6,190
+            - img [ref=e4381]
+        - generic [ref=e4383] [cursor=pointer]:
+          - heading "品牌趋势" [level=4] [ref=e4385]
+          - paragraph [ref=e4386]: 含品牌词的搜索词，且增长的市场
+          - generic [ref=e4387]:
+            - generic [ref=e4388]: 14,470
+            - img [ref=e4389]
+        - generic [ref=e4391] [cursor=pointer]:
+          - heading "热门市场" [level=4] [ref=e4393]
+          - paragraph [ref=e4394]: 评论量较大且增长的市场
+          - generic [ref=e4395]:
+            - generic [ref=e4396]: 1,116,283
+            - img [ref=e4397]
+        - generic [ref=e4399] [cursor=pointer]:
+          - heading "潜力市场" [level=4] [ref=e4401]
+          - paragraph [ref=e4402]: 评论量规模中等，且涨幅不错的市场
+          - generic [ref=e4403]:
+            - generic [ref=e4404]: 10,073
+            - img [ref=e4405]
+      - generic [ref=e4407]:
+        - generic [ref=e4408]:
+          - heading "查看示例报告" [level=3] [ref=e4409]
+          - generic [ref=e4410]: 以下为各类目示例报告
+        - generic [ref=e4411]:
+          - generic [ref=e4412] [cursor=pointer]:
+            - generic [ref=e4414]: 示例
+            - heading "air fryer" [level=4] [ref=e4415]
+            - generic [ref=e4416]: "商品数量: 344"
+            - generic [ref=e4417]: "报告日期: 2024-10-15"
+          - generic [ref=e4418] [cursor=pointer]:
+            - generic [ref=e4420]: 示例
+            - heading "vacuum" [level=4] [ref=e4421]
+            - generic [ref=e4422]: "商品数量: 395"
+            - generic [ref=e4423]: "报告日期: 2024-10-15"
+          - generic [ref=e4424] [cursor=pointer]:
+            - generic [ref=e4426]: 示例
+            - heading "women tshirts" [level=4] [ref=e4427]
+            - generic [ref=e4428]: "商品数量: 593"
+            - generic [ref=e4429]: "报告日期: 2024-10-15"
+          - generic [ref=e4430] [cursor=pointer]:
+            - generic [ref=e4432]: 示例
+            - heading "string trimmer" [level=4] [ref=e4433]
+            - generic [ref=e4434]: "商品数量: 390"
+            - generic [ref=e4435]: "报告日期: 2024-10-15"
+          - generic [ref=e4436] [cursor=pointer]:
+            - generic [ref=e4438]: 示例
+            - heading "camping chairs" [level=4] [ref=e4439]
+            - generic [ref=e4440]: "商品数量: 513"
+            - generic [ref=e4441]: "报告日期: 2024-10-15"
+          - generic [ref=e4442] [cursor=pointer]:
+            - generic [ref=e4444]: 示例
+            - heading "massage gun deep tissue" [level=4] [ref=e4445]
+            - generic [ref=e4446]: "商品数量: 341"
+            - generic [ref=e4447]: "报告日期: 2024-10-15"

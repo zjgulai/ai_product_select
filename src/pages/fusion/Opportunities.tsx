@@ -80,8 +80,8 @@ export default function FusionOpportunities() {
 
       {/* Header Card */}
       <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+        <div className="flex items-center gap-4 mb-2">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
             <Sparkles size={18} style={{ color: LC.textInverse }} />
           </div>
           <div>
@@ -110,8 +110,8 @@ export default function FusionOpportunities() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
-        <div className="flex items-center gap-3 flex-wrap">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+        <div className="flex items-center gap-4 flex-wrap">
           {/* Search */}
           <div className="relative flex-1 max-w-[320px]">
             <input
@@ -155,7 +155,7 @@ export default function FusionOpportunities() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">选品机会排名</h3>
           <span className="text-xs font-medium text-lc-text-muted">共 {filtered.length} 条</span>
@@ -180,7 +180,7 @@ export default function FusionOpportunities() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {['排名', '产品概念', 'SHI', 'CVI', '机会分', 'TikTok视频', 'Amazon商品', '趋势', '操作'].map(h => (
-                    <th key={h} className="py-2.5 px-3 text-[11px] font-bold text-lc-text-secondary text-left">
+                    <th key={h} className="py-3 px-3 text-[11px] font-bold text-lc-text-secondary text-left">
                       {h}
                     </th>
                   ))}

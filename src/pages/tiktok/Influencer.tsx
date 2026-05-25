@@ -39,7 +39,7 @@ export default function TikTokInfluencer() {
       <Breadcrumb items={["TikTok趋势", "达人"]} />
 
       {/* Search */}
-      <div className="bg-white rounded-lg shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
         <div className="flex items-center gap-0">
           <div className="relative flex-1 max-w-[400px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -91,14 +91,14 @@ export default function TikTokInfluencer() {
               <thead>
                 <tr className="bg-lc-bg-warm">
                   {["达人信息", "带货数", "均播量", "粉丝数", "近30日销量", "近30日销售额($)", "操作"].map((h) => (
-                    <th key={h} className={`py-2.5 px-3 text-xs font-semibold text-lc-text-secondary ${h === '达人信息' ? 'text-left w-[200px]' : h === '操作' ? 'text-center w-[60px]' : 'text-right'}`}>{h}</th>
+                    <th key={h} className={`py-3 px-3 text-xs font-semibold text-lc-text-secondary ${h === '达人信息' ? 'text-left w-[200px]' : h === '操作' ? 'text-center w-[60px]' : 'text-right'}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {data?.items.map((item: any, idx: number) => (
                   <tr key={item.creatorId ?? idx} className="border-b transition-colors hover:bg-lc-bg-warm border-lc-border-light">
-                    <td className="py-2.5 px-3">
+                    <td className="py-3 px-3">
                       <div className="flex items-center gap-2">
                         <img src={AVATAR_IMAGES[idx % AVATAR_IMAGES.length]} alt={item.displayName ?? item.creatorName ?? "达人头像"} loading="lazy" className="w-8 h-8 rounded-full object-cover ring-1 ring-lc-border shrink-0"  onError={e => { (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23F5F4F2'/%3E%3C/svg%3E"; }}/>
                         <div>
@@ -107,15 +107,15 @@ export default function TikTokInfluencer() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.productsCount?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.avgViews?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right">
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.productsCount?.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.avgViews?.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right">
                       <div className="text-xs font-mono-num font-semibold text-lc-text-primary">{item.followers?.toLocaleString()}</div>
                       <div className="text-xs font-medium text-lc-success">{item.fanGrowth}</div>
                     </td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.monthlySales?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.monthlyRevenue?.toLocaleString()}</td>
-                    <td className="py-2.5 px-3 text-center">
+                    <td className="py-3 px-3 text-right text-xs font-mono-num text-lc-text-secondary">{item.monthlySales?.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-right text-xs font-mono-num font-semibold text-lc-primary">${item.monthlyRevenue?.toLocaleString()}</td>
+                    <td className="py-3 px-3 text-center">
                       <button className="transition-colors text-lc-border-strong hover:text-lc-primary"><Star size={13} /></button>
                     </td>
                   </tr>

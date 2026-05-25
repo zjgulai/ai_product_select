@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
+import DataBadge from '@/components/shared/DataBadge';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Search,
@@ -113,6 +114,10 @@ export default function TikTokHome() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={['TikTok趋势', '首页']} />
+      <div className="flex items-center gap-4 mb-3">
+        <DataBadge type="demo" />
+        <span className="text-xs text-lc-text-muted">TikTok 反爬限制，当前为演示数据。</span>
+      </div>
 
       {/* ── Top: Unified Search + Quick Entries ── */}
       <div className="bg-white rounded-lg shadow-lc p-5 mb-4 ring-1 ring-lc-border/60">
@@ -122,7 +127,7 @@ export default function TikTokHome() {
             <input
               type="text"
               placeholder="搜索商品、达人、视频、小店、直播..."
-              className="w-full h-11 pl-11 pr-4 rounded-full border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#E8785A]/20"
+              className="w-full h-11 pl-11 pr-4 rounded-full border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#8B354A]/20"
               style={{
                 borderColor: LC.border,
                 color: LC.text,
@@ -141,7 +146,7 @@ export default function TikTokHome() {
               <button
                 key={entry.label}
                 onClick={() => navigate(entry.path)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-medium transition-all hover:-translate-y-0.5 hover:shadow-lc-hover"
+                className="flex items-center gap-4 px-4 py-2 rounded-full border text-xs font-medium transition-all hover:-translate-y-0.5 hover:shadow-lc-hover"
                 style={{
                   borderColor: LC.border,
                   color: LC.textSecondary,
@@ -168,7 +173,7 @@ export default function TikTokHome() {
       <div className="grid grid-cols-3 gap-4 mb-4">
         {/* 趋势变化 */}
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60 hover:shadow-lc-hover transition-shadow duration-200">
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-4 mb-3">
             <div
               className="w-8 h-8 rounded-md flex items-center justify-center"
               style={{ backgroundColor: `${LC.primary}12` }}
@@ -203,7 +208,7 @@ export default function TikTokHome() {
 
         {/* 机会提醒 */}
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60 hover:shadow-lc-hover transition-shadow duration-200">
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-4 mb-3">
             <div
               className="w-8 h-8 rounded-md flex items-center justify-center"
               style={{ backgroundColor: `${LC.gold}15` }}
@@ -235,7 +240,7 @@ export default function TikTokHome() {
 
         {/* 快捷任务 */}
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60 hover:shadow-lc-hover transition-shadow duration-200">
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-4 mb-3">
             <div
               className="w-8 h-8 rounded-md flex items-center justify-center"
               style={{ backgroundColor: `${LC.teal}12` }}
@@ -249,7 +254,7 @@ export default function TikTokHome() {
               <button
                 key={task.label}
                 onClick={() => navigate(task.path)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium transition-all border"
+                className="w-full flex items-center justify-between px-4 py-2.5 rounded-md text-xs font-medium transition-all border"
                 style={{
                   borderColor: LC.border,
                   color: LC.textSecondary,
@@ -316,7 +321,7 @@ export default function TikTokHome() {
                   className="border-b last:border-0 transition-colors hover:bg-lc-bg-warm border-lc-border-light cursor-pointer"
                   onClick={() => onItemClick(item)}
                 >
-                  <td className="py-2.5 w-10">
+                  <td className="py-3 w-10">
                     <span
                       className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
                         item.rank <= 3 ? 'text-white' : 'text-lc-text-muted'
@@ -411,19 +416,19 @@ export default function TikTokHome() {
                   </td>
 
                   {/* Metric */}
-                  <td className="py-2.5 text-right text-xs font-semibold font-mono-num text-lc-text-primary">
+                  <td className="py-3 text-right text-xs font-semibold font-mono-num text-lc-text-primary">
                     {currentCategory === 'video' ? item.views : item.sales}
                   </td>
 
                   {/* Actions */}
-                  <td className="py-2.5 pl-4">
+                  <td className="py-3 pl-4">
                     <div className="flex items-center gap-1.5 justify-end">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           onItemClick(item);
                         }}
-                        className="px-2 py-1 rounded text-xs font-medium transition-colors border"
+                        className="px-2.5 py-1.5 rounded text-xs font-medium transition-colors border"
                         style={{
                           borderColor: LC.border,
                           color: LC.textSecondary,
@@ -449,7 +454,7 @@ export default function TikTokHome() {
                             e.stopPropagation();
                             navigate('/tiktok/influencer');
                           }}
-                          className="px-2 py-1 rounded text-xs font-medium transition-colors border"
+                          className="px-2.5 py-1.5 rounded text-xs font-medium transition-colors border"
                           style={{
                             borderColor: LC.border,
                             color: LC.textSecondary,
@@ -475,7 +480,7 @@ export default function TikTokHome() {
                           e.stopPropagation();
                           navigate('/fusion/opportunities');
                         }}
-                        className="px-2 py-1 rounded text-xs font-medium transition-colors border"
+                        className="px-2.5 py-1.5 rounded text-xs font-medium transition-colors border"
                         style={{
                           borderColor: `${LC.primary}40`,
                           color: LC.primary,

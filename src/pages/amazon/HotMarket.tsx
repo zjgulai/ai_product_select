@@ -82,14 +82,14 @@ export default function HotMarket() {
         rowActions={(_item: MarketItem) => (
           <button
             onClick={() => navigate('/fusion/opportunities')}
-            className="text-xs px-2 py-1 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
+            className="text-xs px-2.5 py-1.5 rounded-full font-medium text-white bg-lc-primary hover:brightness-110 transition-all"
           >
             查看选品机会
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-lg shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
-            <div className="flex items-center gap-2 mb-3">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+            <div className="flex items-center gap-4 mb-3">
               <Flame size={18} className="text-lc-danger" />
               <div>
                 <h2 className="text-base font-bold text-lc-text-primary">热门市场</h2>
@@ -97,28 +97,28 @@ export default function HotMarket() {
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <TrendingUp size={12} style={{ color: LC.primary }} />
                   <span className="text-xs font-medium text-lc-text-muted">总关键词数</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.total.toLocaleString()}</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Flame size={12} style={{ color: LC.danger }} />
                   <span className="text-xs font-medium text-lc-text-muted">平均月销量</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.avgSales.toLocaleString()}</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Star size={12} style={{ color: LC.warning }} />
                   <span className="text-xs font-medium text-lc-text-muted">平均评分</span>
                 </div>
                 <div className="text-sm font-bold font-mono-num text-lc-text-primary">{insights.avgRating}</div>
               </div>
-              <div className="rounded-lg p-3" style={{ background: LC.bgWarm }}>
+              <div className="rounded-xl p-3" style={{ background: LC.bgWarm }}>
                 <div className="flex items-center gap-1.5 mb-1">
                   <Shield size={12} style={{ color: LC.success }} />
                   <span className="text-xs font-medium text-lc-text-muted">TOP3品牌集中度</span>
@@ -129,7 +129,7 @@ export default function HotMarket() {
           </div>
         )}
       />
-      <div className="bg-white rounded-lg shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <BarChart3 size={28} className="text-lc-border mx-auto mb-2" />

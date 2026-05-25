@@ -1,0 +1,250 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e9]: 路特
+      - generic [ref=e10]: AI
+    - generic [ref=e11]:
+      - button "首页" [ref=e12] [cursor=pointer]
+      - button "Boost Claw NEW" [ref=e13] [cursor=pointer]:
+        - text: Boost Claw
+        - generic [ref=e14]: NEW
+      - button "开放平台 NEW" [ref=e15] [cursor=pointer]:
+        - text: 开放平台
+        - generic [ref=e16]: NEW
+      - button "AI选品" [ref=e17] [cursor=pointer]: AI选品
+      - button "达人建联" [ref=e19] [cursor=pointer]
+      - button "AI视频" [ref=e20] [cursor=pointer]
+      - button "产品中心" [ref=e21] [cursor=pointer]:
+        - text: 产品中心
+        - img [ref=e22]
+      - button "客户案例" [ref=e24] [cursor=pointer]
+      - button "资源中心" [ref=e25] [cursor=pointer]:
+        - text: 资源中心
+        - img [ref=e26]
+      - button "关于我们" [ref=e28] [cursor=pointer]
+    - generic [ref=e29]:
+      - button "免费体验" [ref=e30] [cursor=pointer]
+      - button "中文" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e35]: 中文
+        - img [ref=e36]
+      - generic [ref=e39]: U
+  - complementary [ref=e40]:
+    - generic [ref=e41]:
+      - button "TikTok趋势" [ref=e42] [cursor=pointer]:
+        - img [ref=e43]
+        - generic [ref=e45]: TikTok趋势
+        - img [ref=e46]
+      - generic [ref=e48]:
+        - button "首页" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e53]: 首页
+        - button "大盘" [ref=e54] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 大盘
+        - button "商品" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - generic [ref=e62]: 商品
+        - button "达人" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - generic [ref=e69]: 达人
+        - button "小店" [ref=e70] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 小店
+        - button "视频" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e79]: 视频
+        - button "直播" [ref=e80] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e84]: 直播
+        - button "关注" [ref=e85] [cursor=pointer]:
+          - img [ref=e86]
+          - generic [ref=e88]: 关注
+    - generic [ref=e89]:
+      - button "Amazon趋势" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+        - generic [ref=e93]: Amazon趋势
+        - img [ref=e94]
+      - generic [ref=e96]:
+        - button "关键词趋势" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: 关键词趋势
+        - button "Amazon榜单" [ref=e102] [cursor=pointer]:
+          - img [ref=e103]
+          - generic [ref=e109]: Amazon榜单
+        - button "商品搜索" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - generic [ref=e114]: 商品搜索
+        - button "我的报告" [ref=e115] [cursor=pointer]:
+          - img [ref=e116]
+          - generic [ref=e119]: 我的报告
+        - button "用户中心" [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e125]: 用户中心
+        - button "我的关注" [ref=e126] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 我的关注
+        - button "数据管理" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: 数据管理
+        - button "设置" [ref=e136] [cursor=pointer]:
+          - img [ref=e137]
+          - generic [ref=e140]: 设置
+    - generic [ref=e141]:
+      - button "融合选品 NEW" [ref=e142] [cursor=pointer]:
+        - img [ref=e143]
+        - generic [ref=e146]: 融合选品
+        - generic [ref=e147]: NEW
+      - generic [ref=e148]:
+        - button "选品机会榜" [ref=e149] [cursor=pointer]:
+          - img [ref=e150]
+          - generic [ref=e153]: 选品机会榜
+        - button "生成报告" [ref=e154] [cursor=pointer]:
+          - img [ref=e155]
+          - generic [ref=e158]: 生成报告
+    - generic [ref=e159]:
+      - button "升级会员" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: 升级会员
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]: "13680382537"
+          - generic [ref=e166]: 高级版
+        - generic [ref=e167]: 2026-04-22 套餐到期
+  - main [ref=e168]:
+    - generic [ref=e578]:
+      - generic [ref=e580]:
+        - generic [ref=e582]: TikTok趋势
+        - generic [ref=e583]:
+          - generic [ref=e584]: /
+          - generic [ref=e585]: 大盘数据
+      - generic [ref=e586]:
+        - generic [ref=e587]:
+          - heading "数据大盘" [level=3] [ref=e588]
+          - generic [ref=e589]:
+            - generic [ref=e590]:
+              - button "近7天" [ref=e591] [cursor=pointer]
+              - button "近30天" [ref=e592] [cursor=pointer]
+            - button "导出" [ref=e593] [cursor=pointer]:
+              - img [ref=e594]
+              - text: 导出
+        - generic [ref=e597]:
+          - generic [ref=e598] [cursor=pointer]:
+            - generic [ref=e599]:
+              - img [ref=e601]
+              - generic [ref=e604]: 总销量
+            - generic [ref=e605]: 17,098,359
+            - generic [ref=e606]:
+              - img [ref=e607]
+              - text: +0.17%
+          - generic [ref=e610] [cursor=pointer]:
+            - generic [ref=e611]:
+              - img [ref=e613]
+              - generic [ref=e615]: 总销售额
+            - generic [ref=e616]: $554M
+            - generic [ref=e617]:
+              - img [ref=e618]
+              - text: "-1.87%"
+          - generic [ref=e621] [cursor=pointer]:
+            - generic [ref=e622]:
+              - img [ref=e624]
+              - generic [ref=e628]: 动销商品数
+            - generic [ref=e629]: 560,322
+            - generic [ref=e630]:
+              - img [ref=e631]
+              - text: +32.3%
+          - generic [ref=e634] [cursor=pointer]:
+            - generic [ref=e635]:
+              - img [ref=e637]
+              - generic [ref=e639]: 平均成交价
+            - generic [ref=e640]: $35.33
+            - generic [ref=e641]:
+              - img [ref=e642]
+              - text: +2.18%
+          - generic [ref=e645] [cursor=pointer]:
+            - generic [ref=e646]:
+              - img [ref=e648]
+              - generic [ref=e652]: 动销新品数
+            - generic [ref=e653]: 28,638
+            - generic [ref=e654]:
+              - img [ref=e655]
+              - text: "-30.36%"
+          - generic [ref=e658] [cursor=pointer]:
+            - generic [ref=e659]:
+              - img [ref=e661]
+              - generic [ref=e663]: 动销新品销售额
+            - generic [ref=e664]: $12M
+            - generic [ref=e665]:
+              - img [ref=e666]
+              - text: "-33.52%"
+      - generic [ref=e670]:
+        - generic [ref=e671]:
+          - heading "品类热力图" [level=3] [ref=e672]
+          - paragraph [ref=e673]: 各品类月度销售热度指数（0-100），颜色越深表示销售额越高
+        - generic [ref=e675]:
+          - button "销量" [ref=e676] [cursor=pointer]
+          - button "增长" [ref=e677] [cursor=pointer]
+      - generic [ref=e682]:
+        - heading "品类树形分解" [level=3] [ref=e683]
+        - generic [ref=e684]:
+          - img [ref=e685]
+          - generic [ref=e689]: 销售额 & 涨跌幅
+      - generic [ref=e693]:
+        - generic [ref=e695]:
+          - heading "月度GMV趋势" [level=3] [ref=e696]
+          - generic [ref=e697]:
+            - img [ref=e698]
+            - generic [ref=e700]: "单位: 亿美元"
+        - heading "品类市场份额" [level=3] [ref=e705]
+      - heading "价格带分布" [level=3] [ref=e711]
+      - generic [ref=e722]:
+        - generic [ref=e723]:
+          - heading "带货达人矩阵" [level=3] [ref=e724]
+          - generic [ref=e725]:
+            - img [ref=e726]
+            - generic [ref=e731]: 共26.4M达人
+        - table [ref=e734]:
+          - rowgroup [ref=e735]:
+            - row "粉丝量级 达人数 占比 总销量 平均GPM" [ref=e736]:
+              - columnheader "粉丝量级" [ref=e737]
+              - columnheader "达人数" [ref=e738]
+              - columnheader "占比" [ref=e739]
+              - columnheader "总销量" [ref=e740]
+              - columnheader "平均GPM" [ref=e741]
+          - rowgroup [ref=e742]:
+            - row "0-10K 22.8M 84.97% 57M $430" [ref=e743] [cursor=pointer]:
+              - cell "0-10K" [ref=e744]
+              - cell "22.8M" [ref=e745]
+              - cell "84.97%" [ref=e746]:
+                - generic [ref=e750]: 84.97%
+              - cell "57M" [ref=e751]
+              - cell "$430" [ref=e752]
+            - row "10K-100K 3.5M 13.05% 53M $1079" [ref=e753] [cursor=pointer]:
+              - cell "10K-100K" [ref=e754]
+              - cell "3.5M" [ref=e755]
+              - cell "13.05%" [ref=e756]:
+                - generic [ref=e760]: 13.05%
+              - cell "53M" [ref=e761]
+              - cell "$1079" [ref=e762]
+            - row "100K-1M 0.5M 1.82% 15M $1622" [ref=e763] [cursor=pointer]:
+              - cell "100K-1M" [ref=e764]
+              - cell "0.5M" [ref=e765]
+              - cell "1.82%" [ref=e766]:
+                - generic [ref=e770]: 1.82%
+              - cell "15M" [ref=e771]
+              - cell "$1622" [ref=e772]
+            - row "1M-5M 0.0M 0.14% 1M $1947" [ref=e773] [cursor=pointer]:
+              - cell "1M-5M" [ref=e774]
+              - cell "0.0M" [ref=e775]
+              - cell "0.14%" [ref=e776]:
+                - generic [ref=e780]: 0.14%
+              - cell "1M" [ref=e781]
+              - cell "$1947" [ref=e782]
+            - row ">5M 0.0M 0.02% 0M $1990" [ref=e783] [cursor=pointer]:
+              - cell ">5M" [ref=e784]
+              - cell "0.0M" [ref=e785]
+              - cell "0.02%" [ref=e786]:
+                - generic [ref=e790]: 0.02%
+              - cell "0M" [ref=e791]
+              - cell "$1990" [ref=e792]

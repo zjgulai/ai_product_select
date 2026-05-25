@@ -1,0 +1,36 @@
+{
+  "collectedAt": "2026-05-25T04:18:23.424Z",
+  "source": "tiktok_videos",
+  "marketplace": "us",
+  "count": 2,
+  "data": [
+    {
+      "videoId": "7630405204390808863",
+      "title": "Top liked",
+      "creatorName": "",
+      "creatorId": "",
+      "views": 2000000,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "hashtags": [],
+      "date": "2026-05-25",
+      "coverUrl": "https://p16-common-sign.tiktokcdn-eu.com/tos-useast8-p-0068-tx2/ocLCrPi8wEBJe0BAK2GAvgiU0kIAIbRiqmYlpA~tplv-tiktokx-origin.image?dr=10395&x-expires=1779854400&x-signature=B7JLMp7phdHYBYWPPyfRyAsshdc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=no1a",
+      "strategy": "www_search"
+    },
+    {
+      "videoId": "7641299701463026958",
+      "title": "Top liked",
+      "creatorName": "",
+      "creatorId": "",
+      "views": 3300000,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "hashtags": [],
+      "date": "2026-05-25",
+      "coverUrl": "https://p16-common-sign.tiktokcdn-eu.com/tos-useast5-p-0068-tx/oMfqjnRAE9DCfLBERWFhnIaaDmhcIgBi1dCS5A~tplv-tiktokx-origin.image?dr=10395&x-expires=1779854400&x-signature=d4%2FyNZprbZ045hItPaWENXAGcOA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=no1a",
+      "strategy": "www_search"
+    }
+  ]
+}

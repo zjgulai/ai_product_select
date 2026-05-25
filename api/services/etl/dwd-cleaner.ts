@@ -9,7 +9,7 @@
  */
 
 import { eq, desc, sql, and } from "drizzle-orm";
-import { getDb } from "../../queries/connection";
+import { getDb } from "../../queries/connection.ts";
 import {
   odsTiktokProducts,
   odsAmazonProducts,

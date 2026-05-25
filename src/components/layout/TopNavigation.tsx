@@ -111,7 +111,7 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 h-12 z-[100] flex items-center px-4"
-      style={{ background: 'linear-gradient(90deg, #1A1212 0%, #2A1A1A 100%)' }}>
+      style={{ background: 'linear-gradient(90deg, #1A1212 0%, #2A1A1A 100%)', boxShadow: 'inset 0 -1px 0 rgba(255,255,255,0.06)' }}>
       {/* Mobile Menu Button */}
       {onMenuToggle && (
         <button onClick={onMenuToggle} className="md:hidden mr-3 text-white/60 hover:text-white transition-colors">
@@ -127,7 +127,7 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
           </svg>
         </div>
         <span className="text-white font-bold text-sm tracking-wide">路特</span>
-        <span className="text-[8px] font-bold px-1 py-0.5 rounded-sm tracking-wider" style={{ background: '#8B354A', color: '#2D1F1F' }}>AI</span>
+        <span className="text-[8px] font-bold px-1 py-0.5 rounded-sm tracking-wider" style={{ background: '#8B354A', color: '#FFFFFF' }}>AI</span>
       </div>
 
       {/* Nav Items */}
@@ -136,10 +136,10 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
           <div key={item.label} className="relative">
             <button
               onClick={() => handleNavClick(item)}
-              className={`relative px-3 h-12 flex items-center gap-1 text-[13px] transition-all duration-200 ${
+              className={`relative px-3 h-12 flex items-center gap-1 text-[13px] tracking-wide transition-all duration-200 rounded-md ${
                 activeNav === item.label
-                  ? 'text-white font-semibold'
-                  : 'text-white/50 hover:text-white/80'
+                  ? 'text-white font-semibold bg-white/[0.08]'
+                  : 'text-white/75 hover:text-white/95 hover:bg-white/[0.04]'
               }`}
             >
               {item.isPrimary && <Sparkles size={12} style={{ color: '#8B354A' }} />}
@@ -147,7 +147,7 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
               {item.dropdown && (
                 <ChevronDown
                   size={11}
-                  className={`text-white/30 transition-transform duration-200 ${openDropdown === item.label ? 'rotate-180' : ''}`}
+                  className={`text-white/50 transition-transform duration-200 ${openDropdown === item.label ? 'rotate-180' : ''}`}
                 />
               )}
               {activeNav === item.label && (
@@ -157,10 +157,11 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
 
             {/* Dropdown menu */}
             {item.dropdown && openDropdown === item.label && (
-              <div className="absolute top-full left-0 mt-1 w-44 rounded-lg overflow-hidden border shadow-xl"
+              <div className="absolute top-full left-0 mt-1 w-44 rounded-lg overflow-hidden border shadow-2xl"
                 style={{
-                  background: '#2A1A1A',
-                  borderColor: 'rgba(255,255,255,0.08)',
+                  background: 'rgba(42,26,26,0.96)',
+                  borderColor: 'rgba(255,255,255,0.14)',
+                  backdropFilter: 'blur(12px)',
                 }}>
                 {item.dropdown.map((d) => (
                   <button
@@ -169,11 +170,11 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
                       navigate(d.href);
                       setOpenDropdown(null);
                     }}
-                    className="flex items-center justify-between w-full px-3 py-2 text-[12px] text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
+                    className="flex items-center justify-between w-full px-3 py-2 text-[12px] text-white/80 hover:text-white hover:bg-white/[0.06] transition-colors"
                   >
                     <span>{d.label}</span>
                     {d.badge && (
-                      <span className="text-[9px] font-bold tracking-wider" style={{ color: '#8B354A' }}>{d.badge}</span>
+                      <span className="text-[9px] font-bold tracking-wider px-1 py-0.5 rounded-sm" style={{ color: '#FFFFFF', background: 'rgba(139,53,74,0.9)' }}>{d.badge}</span>
                     )}
                   </button>
                 ))}
@@ -193,7 +194,7 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
         </button>
         <button
           onClick={() => toast.info('多语言支持即将上线')}
-          className="flex items-center gap-1 text-white/40 text-xs hover:text-white/70 transition-colors">
+          className="flex items-center gap-1 text-white/60 text-xs hover:text-white/90 transition-colors">
           <Globe size={13} /><span>中文</span><ChevronDown size={11} />
         </button>
         <button

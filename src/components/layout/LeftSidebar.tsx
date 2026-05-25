@@ -4,7 +4,8 @@ import { toast } from 'sonner';
 import {
   Home, Sparkles, BarChart3, ShoppingBag, Users, Store, Play, Video, Search,
   Trophy, FileText, Heart, Settings, ChevronDown, ChevronRight, Crown,
-  PersonStanding, Database, Radar, Briefcase, Zap, TrendingUp
+  PersonStanding, Database, Radar, Briefcase, Zap, TrendingUp,
+  Activity, Target, Flame, Compass
 } from 'lucide-react';
 
 interface MenuItem {
@@ -52,6 +53,10 @@ const MENU_GROUPS: MenuGroup[] = [
     defaultOpen: false,
     items: [
       { icon: Heart, label: "关注监控", path: "/tiktok/attention" },
+      { icon: Activity, label: "参数趋势", path: "/amazon/param-trend" },
+      { icon: Target, label: "品牌趋势", path: "/amazon/brand-trend" },
+      { icon: Flame, label: "热门市场", path: "/amazon/hot-market" },
+      { icon: Compass, label: "潜力市场", path: "/amazon/pot-market" },
       { icon: Database, label: "数据管理", path: "/data/manager" },
       { icon: Zap, label: "生成报告", path: "/fusion/report" },
     ],
@@ -64,7 +69,6 @@ const MENU_GROUPS: MenuGroup[] = [
       { icon: FileText, label: "我的报告", path: "/report/analysis" },
       { icon: Briefcase, label: "项目跟踪", path: "/project/tracking", badge: "IPMS" },
       { icon: PersonStanding, label: "用户中心", path: "/user/center" },
-      { icon: Settings, label: "系统设置", path: "/data/manager" },
     ],
   },
 ];

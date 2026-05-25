@@ -45,7 +45,10 @@ const NAV_ITEMS: NavItem[] = [
       { label: "关键词趋势", href: "/amazon/keyword" },
       { label: "Amazon榜单", href: "/amazon/list" },
       { label: "商品搜索", href: "/amazon/product" },
-      { label: "市场深度", href: "/amazon/hot-market", badge: "NEW" },
+      { label: "参数趋势", href: "/amazon/param-trend" },
+      { label: "品牌趋势", href: "/amazon/brand-trend" },
+      { label: "热门市场", href: "/amazon/hot-market", badge: "NEW" },
+      { label: "潜力市场", href: "/amazon/pot-market" },
     ],
   },
   {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
@@ -237,8 +237,8 @@ export default function UserCenter() {
             {[
               { label: '剩余天数', value: '580', unit: '天', color: LC.primary },
               { label: '已生成报告', value: String(reportsData?.total || 0), unit: '份', color: LC.primary },
-              { label: '关注商品', value: '128', unit: '个', color: LC.success },
-              { label: '关注达人', value: '56', unit: '个', color: LC.warning },
+              { label: '关注商品', value: String(followStats.products), unit: '个', color: LC.success },
+              { label: '关注达人', value: String(followStats.creators), unit: '个', color: LC.warning },
             ].map(s => (
               <div key={s.label} className="rounded-xl p-4 ring-1 ring-lc-border/40 bg-lc-bg-warm">
                 <div className="text-[11px] font-medium mb-2 text-lc-text-muted">{s.label}</div>

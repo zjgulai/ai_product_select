@@ -58,6 +58,26 @@ export default function ReportAnalysis() {
   const [expandedAspect, setExpandedAspect] = useState<number | null>(null);
   const t = (msg: string) => { import('sonner').then(({ toast }) => toast.success(msg)); };
 
+  const handleExport = (fmt: string) => {
+    const data = {
+      kpi: reportKpi,
+      keywords: reportKeywords,
+      reviewAspects,
+      sampleProducts: SAMPLE_PRODUCTS,
+      brandShare: BRAND_DATA,
+      priceDistribution: PRICE_DATA,
+      generatedAt: new Date().toISOString(),
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `report_${fmt.replace(/[（】]/g, '').replace(/\s+/g, '_')}_${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    t(`${fmt} 已下载`);
+  };
+
   const toggleProduct = (i: number) => {
     setSelectedProducts(prev => {
       const next = new Set(prev);
@@ -118,7 +138,7 @@ export default function ReportAnalysis() {
             </div>
             <div className="space-y-2">
               {['PDF报告（完整）','Excel数据表','PPT摘要','Word文档'].map(fmt => (
-                <button key={fmt} onClick={() => { t(`正在生成${fmt}...`); setShowExportModal(false); }}
+                <button key={fmt} onClick={() => { handleExport(fmt); setShowExportModal(false); }}
                   className="w-full text-left px-4 py-3 rounded-xl border text-xs font-medium transition-all hover:shadow-sm" style={{ borderColor: LC.border, color: LC.text }}>{fmt}</button>
               ))}
             </div>

@@ -45,6 +45,8 @@ export const amazonRouter = createRouter({
           brand: z.string().optional(),
           priceMin: z.number().optional(),
           priceMax: z.number().optional(),
+          salesMin: z.number().optional(),
+          salesMax: z.number().optional(),
           ratingMin: z.number().optional(),
           sortBy: z.enum(["sales", "rating", "price", "reviews", "heat"]).optional().default("sales"),
           sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
@@ -65,6 +67,8 @@ export const amazonRouter = createRouter({
             if (input?.brand) data = data.filter(p => p.brand === input.brand);
             if (input?.priceMin !== undefined) data = data.filter(p => parseFloat(p.price ?? '0') >= input.priceMin!);
             if (input?.priceMax !== undefined) data = data.filter(p => parseFloat(p.price ?? '0') <= input.priceMax!);
+            if (input?.salesMin !== undefined) data = data.filter(p => (p.monthlySales ?? 0) >= input.salesMin!);
+            if (input?.salesMax !== undefined) data = data.filter(p => (p.monthlySales ?? 0) <= input.salesMax!);
             if (input?.ratingMin !== undefined) data = data.filter(p => parseFloat(p.rating ?? '0') >= input.ratingMin!);
             const sortField = input?.sortBy || "sales";
             const sortDir = input?.sortOrder === "asc" ? 1 : -1;

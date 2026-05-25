@@ -7,7 +7,7 @@ import CategoryFilter from '@/components/shared/CategoryFilter';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useNavigate } from 'react-router';
 import { LC } from '@/lib/lute-colors';
-import { Download, MessageSquare, Search } from 'lucide-react';
+import { Download, MessageSquare, Search, SearchX } from 'lucide-react';
 import { PRODUCT_IMAGES } from '@/data/assets';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
@@ -21,8 +21,13 @@ export default function AmazonListPage() {
 
   const handleSearch = useCallback(() => setSearchText(inputValue), [inputValue]);
 
+  const sortConfig = [
+    { sortBy: 'sales' as const, sortOrder: 'desc' as const },
+    { sortBy: 'heat' as const, sortOrder: 'desc' as const },
+    { sortBy: 'reviews' as const, sortOrder: 'asc' as const },
+  ];
   const { data, isLoading, isError } = trpc.amazon.products.list.useQuery(
-    { search: searchText || undefined, limit: 50 },
+    { search: searchText || undefined, ...sortConfig[tab], limit: 50 },
     { staleTime: 5 * 60 * 1000 }
   );
 
@@ -60,7 +65,12 @@ export default function AmazonListPage() {
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-2">
-            <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
+            <button onClick={() => {
+              const rows = (data?.items || []).map((p: any) => ({ asin: p.asin, title: p.title, price: p.price, rating: p.rating, reviewCount: p.reviewCount, category: p.category }));
+              const blob = new Blob([JSON.stringify(rows, null, 2)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `amazon_list_${Date.now()}.json`; a.click(); URL.revokeObjectURL(url);
+              import('sonner').then(({ toast }) => toast.success('数据已导出'));
+            }} className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
         <div className="overflow-x-auto">

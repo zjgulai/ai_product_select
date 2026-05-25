@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -16,9 +17,11 @@ const TAB_KEYS = ["hot", "soaring", "new"] as const;
 const TIME_RANGES = ["全部", "日", "近7天", "近30天", "自定义"];
 
 export default function TikTokProducts() {
+  const [searchParams] = useSearchParams();
   const [tab, setTab] = useState(0);
   const [timeRange, setTimeRange] = useState(2);
-  const [searchText, setSearchText] = useState("");
+  const urlSearch = searchParams.get('search') || '';
+  const [searchText, setSearchText] = useState(urlSearch);
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [ratingMin, setRatingMin] = useState("");
@@ -30,6 +33,7 @@ export default function TikTokProducts() {
     {
       tab: TAB_KEYS[tab],
       search: searchText || undefined,
+      category: selectedCats[0] || undefined,
       priceMin: priceMin ? parseFloat(priceMin) : undefined,
       priceMax: priceMax ? parseFloat(priceMax) : undefined,
       ratingMin: ratingMin ? parseFloat(ratingMin) : undefined,

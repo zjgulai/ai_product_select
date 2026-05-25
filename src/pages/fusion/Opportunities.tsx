@@ -37,7 +37,7 @@ export default function FusionOpportunities() {
   const [sortDesc, setSortDesc] = useState(true);
 
   const { data, isLoading, isError } = trpc.fusion.metrics.topOpportunities.useQuery(
-    { limit: 50 },
+    { limit: 50, category: category !== '全部' ? category : undefined },
     { staleTime: 5 * 60 * 1000 }
   );
 
@@ -50,10 +50,7 @@ export default function FusionOpportunities() {
         d.conceptId?.toLowerCase().includes(q)
       );
     }
-    // TODO: category filtering requires backend data enrichment
-    if (category !== '全部') {
-      // 类目过滤
-    }
+    // Category filtering is now handled by the backend API
     // Sort
     items = [...items].sort((a: any, b: any) => {
       const va = a[sortBy] ?? 0;

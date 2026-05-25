@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import { LC } from '@/lib/lute-colors';
@@ -506,6 +506,7 @@ function OpportunityPanel({ concept, metrics }: { concept: any; metrics: any[] }
 
 export default function FusionReport() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [searchText, setSearchText] = useState('');
   const [selectedConcept, setSelectedConcept] = useState<any>(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -523,6 +524,18 @@ export default function FusionReport() {
 
   const concepts = conceptsData?.items || [];
   const metrics = metricsData?.items || [];
+
+  // Auto-select concept from URL ?conceptId=xxx
+  const urlConceptId = searchParams.get('conceptId');
+  useEffect(() => {
+    if (urlConceptId && concepts.length > 0 && !selectedConcept) {
+      const found = concepts.find((c: any) => c.conceptId === urlConceptId);
+      if (found) {
+        setSelectedConcept(found);
+        setStep('report');
+      }
+    }
+  }, [urlConceptId, concepts, selectedConcept]);
 
   const handleSearch = () => {
     if (searchText.trim()) {
@@ -731,7 +744,19 @@ export default function FusionReport() {
             >
               <BarChart3 size={12} /> 查看概念详情
             </button>
-            <button className="flex items-center gap-1.5 text-xs px-4 h-8 rounded-md font-medium transition-all hover:brightness-110" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
+            <button
+              onClick={() => {
+                const report = { concept: selectedConcept, metrics, generatedAt: new Date().toISOString() };
+                const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `fusion_report_${selectedConcept.conceptId}_${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                import('sonner').then(({ toast }) => toast.success('报告已下载'));
+              }}
+              className="flex items-center gap-1.5 text-xs px-4 h-8 rounded-md font-medium transition-all hover:brightness-110" style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}>
               <Download size={12} /> 导出报告
             </button>
           </div>

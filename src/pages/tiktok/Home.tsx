@@ -68,6 +68,7 @@ const FALLBACK_IMG =
 export default function TikTokHome() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('product-hot');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // tRPC queries — all in parallel
   const { data: productsHot, isLoading: pHotLoading } = trpc.tiktok.home.productsHot.useQuery();
@@ -132,6 +133,13 @@ export default function TikTokHome() {
                 borderColor: LC.border,
                 color: LC.text,
                 background: LC.textInverse,
+              }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  navigate(`/tiktok/products?search=${encodeURIComponent(searchQuery.trim())}`);
+                }
               }}
               onFocus={(e) => {
                 e.target.style.borderColor = LC.primary;

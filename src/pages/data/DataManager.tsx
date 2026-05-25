@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
+import { toast } from 'sonner';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import Breadcrumb from '@/components/shared/Breadcrumb';
@@ -92,8 +93,6 @@ export default function DataManager() {
       setParsed(null); setDryResult(null); setSrc(null);
     } finally { setImporting(false); }
   }, [src, parsed, snapshotDate, ingest, flash]);
-
-      <ConfirmDialog open={open} onOpenChange={setOpen} options={options} onConfirm={handleConfirm} />
 
   const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
     { key: 'sources',  label: '数据源',   icon: <Database size={14} /> },

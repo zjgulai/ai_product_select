@@ -22,6 +22,8 @@ export default function AmazonProduct() {
   const [appliedPriceMax, setAppliedPriceMax] = useState<number | undefined>(undefined);
   const [salesMinInput, setSalesMinInput] = useState("");
   const [salesMaxInput, setSalesMaxInput] = useState("");
+  const [sortBy, setSortBy] = useState<"sales" | "rating" | "price" | "reviews" | "heat">("sales");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const removeTag = (tag: string) => setTags(tags.filter(t => t !== tag));
@@ -41,13 +43,17 @@ export default function AmazonProduct() {
     setTags([]); setShowAdvanced(false);
   };
 
-  const currentFilterState = { searchText, priceMinInput, priceMaxInput, salesMinInput, salesMaxInput, tags };
+  const currentFilterState = { searchText, priceMinInput, priceMaxInput, salesMinInput, salesMaxInput, sortBy, sortOrder, tags };
   const { saved, save, remove, apply, showSaveInput, setShowSaveInput, saveName, setSaveName } = useSavedFilters('amazon_product', currentFilterState);
 
   const { data, isLoading, isError } = trpc.amazon.products.list.useQuery({
     search: appliedSearch || undefined,
     priceMin: appliedPriceMin,
     priceMax: appliedPriceMax,
+    salesMin: salesMinInput ? parseInt(salesMinInput, 10) : undefined,
+    salesMax: salesMaxInput ? parseInt(salesMaxInput, 10) : undefined,
+    sortBy,
+    sortOrder,
     limit: 50,
   });
 
@@ -104,7 +110,8 @@ export default function AmazonProduct() {
               onClick={() => {
                 const a = apply(f) as typeof currentFilterState;
                 setSearchText(a.searchText); setPriceMinInput(a.priceMinInput); setPriceMaxInput(a.priceMaxInput);
-                setSalesMinInput(a.salesMinInput); setSalesMaxInput(a.salesMaxInput); setTags(a.tags);
+                setSalesMinInput(a.salesMinInput); setSalesMaxInput(a.salesMaxInput);
+                setSortBy(a.sortBy); setSortOrder(a.sortOrder); setTags(a.tags);
               }}
               className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border transition-colors"
               style={{ borderColor: `${LC.primary}30`, color: LC.primary, background: LC.primaryLight }}
@@ -128,7 +135,24 @@ export default function AmazonProduct() {
           <input type="date" className="h-7 border rounded text-xs px-2 border-lc-border" />
           <span className="text-xs text-lc-border-strong">-</span>
           <input type="date" className="h-7 border rounded text-xs px-2 border-lc-border" />
-          <select className="h-7 border rounded text-xs px-2 font-medium" style={{ borderColor: LC.border, color: LC.textSecondary }}><option>默认: 总销量从高到低</option></select>
+          <select
+            className="h-7 border rounded text-xs px-2 font-medium"
+            style={{ borderColor: LC.border, color: LC.textSecondary }}
+            value={`${sortBy}-${sortOrder}`}
+            onChange={(e) => {
+              const [field, order] = e.target.value.split('-') as [typeof sortBy, typeof sortOrder];
+              setSortBy(field);
+              setSortOrder(order);
+            }}
+          >
+            <option value="sales-desc">总销量从高到低</option>
+            <option value="sales-asc">总销量从低到高</option>
+            <option value="price-desc">价格从高到低</option>
+            <option value="price-asc">价格从低到高</option>
+            <option value="rating-desc">评分从高到低</option>
+            <option value="reviews-desc">评论数从高到低</option>
+            <option value="heat-desc">热度从高到低</option>
+          </select>
         </div>
         {showAdvanced && (
           <div className="flex items-center gap-4 flex-wrap mt-2 pt-2 border-t border-lc-border-light">
@@ -148,7 +172,12 @@ export default function AmazonProduct() {
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-2">
             <span className="text-xs text-lc-text-muted">共 {data?.total || 0} 条</span>
-            <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
+            <button onClick={() => {
+              const rows = (data?.items || []).map((p: any) => ({ asin: p.asin, title: p.title, brand: p.brand, price: p.price, monthlySales: p.monthlySales, monthlyRevenue: p.monthlyRevenue, rating: p.rating }));
+              const blob = new Blob([JSON.stringify(rows, null, 2)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `amazon_products_${Date.now()}.json`; a.click(); URL.revokeObjectURL(url);
+              import('sonner').then(({ toast }) => toast.success('数据已导出'));
+            }} className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
         <div className="overflow-x-auto">

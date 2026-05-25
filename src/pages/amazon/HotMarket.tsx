@@ -129,13 +129,9 @@ export default function HotMarket() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <BarChart3 size={28} className="text-lc-border mx-auto mb-2" />
-            <p className="text-xs text-lc-text-muted">热门品类分布数据准备中</p>
-          </div>
-        </div>
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+        <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">热门市场竞争度分布</h3>
+        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ name: d.keyword, value: d.competitionLevel === '高' ? 80 : d.competitionLevel === '中' ? 50 : 20 }))} color={LC.warning} height={240} />
       </div>
     </>
   );

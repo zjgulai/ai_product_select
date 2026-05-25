@@ -108,12 +108,19 @@ export const fusionRouter = createRouter({
     }),
 
     topOpportunities: publicQuery
-      .input(z.object({ limit: z.number().optional().default(20) }))
+      .input(z.object({ limit: z.number().optional().default(20), category: z.string().optional() }))
       .query(async ({ input }) => {
-        const items = await withFallback(
+        let items = await withFallback(
           () => dbGetLatestMetrics(input.limit),
           () => getLatestMetrics().slice(0, input.limit)
         );
+        if (input.category) {
+          const concepts = getProductConcepts();
+          items = items.filter((m: any) => {
+            const c = concepts.find((x: any) => x.conceptId === m.conceptId);
+            return c && (c.amazonCategories ?? []).includes(input.category!);
+          });
+        }
         return items;
       }),
   }),

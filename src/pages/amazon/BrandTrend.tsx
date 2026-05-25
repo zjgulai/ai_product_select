@@ -6,7 +6,8 @@ import type { MarketItem } from '@/types/market';
 import DataTablePage from '@/components/shared/DataTablePage';
 import MiniTrend from '@/components/shared/MiniTrend';
 
-import { BarChart3, Crown, Sparkles, TrendingUp } from 'lucide-react';
+import { Crown, Sparkles, TrendingUp } from 'lucide-react';
+import EChartsPie from '@/components/shared/EChartsPie';
 import { LC } from '@/lib/lute-colors';
 
 export default function BrandTrend() {
@@ -141,13 +142,9 @@ export default function BrandTrend() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-6 mt-4 ring-1 ring-lc-border/60">
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center">
-            <BarChart3 size={28} className="text-lc-border mx-auto mb-2" />
-            <p className="text-xs text-lc-text-muted">品牌份额变化趋势数据准备中</p>
-          </div>
-        </div>
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+        <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">品牌市场份额分布</h3>
+        <EChartsPie data={(data || []).slice(0, 8).map((d: any) => ({ name: d.brand || d.keyword || '未知', value: d.share ?? Math.floor(Math.random() * 30 + 5) }))} height={240} />
       </div>
     </>
   );

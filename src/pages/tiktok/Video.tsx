@@ -101,7 +101,12 @@ export default function TikTokVideo() {
           <h3 className="text-sm font-semibold text-lc-primary">视频信息</h3>
           <div className="flex items-center gap-3">
             <span className="text-xs font-medium text-lc-text-muted">共 {total} 条</span>
-            <button className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
+            <button onClick={() => {
+              const rows = (data?.items || []).map((v: any) => ({ videoId: v.videoId, title: v.title, views: v.views, likes: v.likes, monthlySales: v.monthlySales }));
+              const blob = new Blob([JSON.stringify(rows, null, 2)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `tiktok_videos_${Date.now()}.json`; a.click(); URL.revokeObjectURL(url);
+              import('sonner').then(({ toast }) => toast.success('数据已导出'));
+            }} className="flex items-center gap-1 text-xs font-medium text-lc-primary"><Download size={12} /> 数据导出</button>
           </div>
         </div>
         <div className="overflow-x-auto">

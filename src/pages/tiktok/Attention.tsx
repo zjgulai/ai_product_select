@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
@@ -20,19 +20,26 @@ const TABS = [
   { label: "直播", icon: Video },
 ];
 
-const MOCK_PRODUCTS = [
-  { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7', change: '+12%', trend: 'up' },
-  { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5', change: '+5%', trend: 'up' },
-  { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6', change: '-3%', trend: 'down' },
-];
-const MOCK_CREATORS = [
-  { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主', change: '+2.3K', trend: 'up' },
-  { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人', change: '+1.1K', trend: 'up' },
-];
-const MOCK_SHOPS = [
-  { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8', change: '+8%', trend: 'up' },
-  { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6', change: '+3%', trend: 'up' },
-];
+const DEFAULT_FOLLOWS = {
+  products: [
+    { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7', change: '+12%', trend: 'up' as const },
+    { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5', change: '+5%', trend: 'up' as const },
+    { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6', change: '-3%', trend: 'down' as const },
+  ],
+  creators: [
+    { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主', change: '+2.3K', trend: 'up' as const },
+    { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人', change: '+1.1K', trend: 'up' as const },
+  ],
+  shops: [
+    { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8', change: '+8%', trend: 'up' as const },
+    { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6', change: '+3%', trend: 'up' as const },
+  ],
+  concepts: [],
+};
+
+type FollowItem = { id: string; name: string; sub: string; change: string; trend: 'up' | 'down' };
+type ConceptFollow = { conceptId: string; name: string; nameEn: string; shiScore: string; cviScore: string };
+type FollowMap = { products: FollowItem[]; creators: FollowItem[]; shops: FollowItem[]; concepts: ConceptFollow[] };
 
 export default function TikTokAttention() {
   const navigate = useNavigate();
@@ -117,7 +124,7 @@ export default function TikTokAttention() {
           <div className="space-y-2">
             {/* Section: 关注商品 */}
             <p className="text-[11px] font-medium text-lc-text-secondary mb-1">关注的商品</p>
-            {MOCK_PRODUCTS.map(item => (
+            {follows.products.map(item => (
               <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Box size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
@@ -128,7 +135,7 @@ export default function TikTokAttention() {
                   {item.trend === 'up' ? <TrendingUp size={10} className="text-lc-success" /> : <TrendingDown size={10} className="text-lc-danger" />}
                   <span className={item.trend === 'up' ? 'text-lc-success' : 'text-lc-danger'}>{item.change}</span>
                 </div>
-                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
+                <button onClick={() => toggleFollow('products', item.id)} className="text-lc-primary hover:scale-110 transition-transform" title="取消关注"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
 
@@ -143,7 +150,7 @@ export default function TikTokAttention() {
                   浏览更多 <ArrowRight size={10} />
                 </button>
               </div>
-              {concepts.length === 0 ? (
+              {follows.concepts.length === 0 ? (
                 <div className="text-center py-6">
                   <p className="text-xs text-lc-text-muted">暂无关注概念</p>
                   <button
@@ -154,7 +161,7 @@ export default function TikTokAttention() {
                   </button>
                 </div>
               ) : (
-                concepts.slice(0, 5).map((item: any) => (
+                follows.concepts.slice(0, 5).map((item: any) => (
                   <div key={item.conceptId} className="flex items-center gap-4 p-2.5 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border mb-1.5">
                     <div className="w-8 h-8 rounded flex items-center justify-center text-xs font-bold shrink-0" style={{ background: LC.primaryLight, color: LC.primary }}>
                       {(item.name ?? '?')[0]}
@@ -179,7 +186,7 @@ export default function TikTokAttention() {
                         <span className="flex items-center gap-0.5"><FileText size={9} />报告</span>
                       </button>
                     </div>
-                    <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
+                    <button onClick={(e) => { e.stopPropagation(); toggleFollow('concepts', item.conceptId); }} className="text-lc-primary hover:scale-110 transition-transform" title="取消关注"><Star size={13} fill={LC.primary} /></button>
                   </div>
                 ))
               )}
@@ -187,7 +194,7 @@ export default function TikTokAttention() {
           </div>
         ) : tab === 1 ? (
           <div className="space-y-2">
-            {MOCK_CREATORS.map(item => (
+            {follows.creators.map(item => (
               <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded-full flex items-center justify-center bg-lc-primary-light"><UserRound size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
@@ -198,13 +205,13 @@ export default function TikTokAttention() {
                   <TrendingUp size={10} className="text-lc-success" />
                   <span className="text-lc-success">{item.change}</span>
                 </div>
-                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
+                <button onClick={() => toggleFollow('creators', item.id)} className="text-lc-primary hover:scale-110 transition-transform" title="取消关注"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
           </div>
         ) : tab === 2 ? (
           <div className="space-y-2">
-            {MOCK_SHOPS.map(item => (
+            {follows.shops.map(item => (
               <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl border hover:bg-lc-bg-warm transition-colors cursor-pointer border-lc-border">
                 <div className="w-9 h-9 rounded flex items-center justify-center bg-lc-primary-light"><Store size={18} className="text-lc-primary" /></div>
                 <div className="flex-1 min-w-0">
@@ -215,7 +222,7 @@ export default function TikTokAttention() {
                   <TrendingUp size={10} className="text-lc-success" />
                   <span className="text-lc-success">{item.change}</span>
                 </div>
-                <button className="text-lc-primary"><Star size={13} fill={LC.primary} /></button>
+                <button onClick={() => toggleFollow('shops', item.id)} className="text-lc-primary hover:scale-110 transition-transform" title="取消关注"><Star size={13} fill={LC.primary} /></button>
               </div>
             ))}
           </div>

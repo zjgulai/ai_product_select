@@ -4,6 +4,10 @@
 
 路特 AI 全球智能选品中心 — 双平台（TikTok × Amazon）融合选品分析平台。
 
+**当前生产地址**：https://product.lute-tlz-dddd.top（腾讯云，HTTPS，VITE_USE_MOCK_DATA=true 静态部署）
+**产品门户**：https://lute-tlz-dddd.top（Lute 平台导航，含本项目卡片）
+**GitHub Pages 镜像**：https://zjgulai.github.io/ai_product_select/
+
 用户核心诉求：**先通过爬虫模拟人工采集真实数据，其余数据接入通过数仓进行**。
 
 ## 爬虫体系（Playwright）
@@ -95,6 +99,7 @@ tiktok_videos_manual_*.json  →  tiktok_videos_*.json  →  generated mock
 ```bash
 npm run test       # 102 单元测试（5 个 MySQL 连接跳过，属于预期行为）
 npm run build      # 生产构建（dist/boot.js 6.2mb）
+npm run check      # TypeScript 全量检查（0 错误）
 ```
 
 ## 代码风格
@@ -103,3 +108,12 @@ npm run build      # 生产构建（dist/boot.js 6.2mb）
 - 使用 `LC`（Lute Colors）变量系统，避免硬编码颜色
 - 数据表格使用 `DataTablePage` 统一组件
 - API 路由使用 `publicQuery`（无需认证）
+
+## 部署相关注意事项
+
+- `ai_video.pem` 是腾讯云 SSH 私钥，**已加入 .gitignore，绝对不能提交**
+- 腾讯云生产更新只需 `rsync dist/public/`，无需重建容器
+- nginx 配置改动（新增域名等）需 `docker compose ... up -d --force-recreate --no-deps nginx`
+- SSL 证书扩域用 `certbot certonly --webroot --expand -d xxx`，deploy-hook 自动 reload
+- 服务器上所有应用共享 `ai_video_nginx` 容器，修改 nginx.conf 前必须备份
+- 详细生产部署流程见 [`DEPLOYMENT.md`](./DEPLOYMENT.md)

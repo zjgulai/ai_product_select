@@ -4,7 +4,9 @@
 
 双平台（TikTok × Amazon）融合选品分析平台，覆盖社媒热度追踪、电商数据验证、VOC 评论洞察、Fusion 机会评分四大核心能力。
 
-- **线上地址**：https://zjgulai.github.io/ai_product_select/
+- **生产地址（主）**：https://product.lute-tlz-dddd.top — 腾讯云轻量服务器，HTTPS，全量 mock 数据
+- **静态镜像（GitHub Pages）**：https://zjgulai.github.io/ai_product_select/
+- **产品入口门户**：https://lute-tlz-dddd.top — 路特数据科学平台导航（含本项目卡片）
 - **仓库**：https://github.com/zjgulai/ai_product_select
 - **进化日志**：见 [`EVOLUTION_LOG.md`](./EVOLUTION_LOG.md) — Darwinian UI/UX 50 轮迭代全记录
 
@@ -247,6 +249,32 @@ tRPC Client
 
 ---
 
+## 生产部署（腾讯云）
+
+服务器：`101.34.52.232` (VM-0-16-ubuntu, Ubuntu 22.04)
+域名：`product.lute-tlz-dddd.top`
+SSH Key：`ai_video.pem`（本地，**不入版本库**）
+
+架构：静态文件挂载到现有 `ai_video_nginx` Docker 容器（nginx:alpine），无新增容器。
+
+**快速重新部署（代码更新）**：
+```bash
+# 1. 本地构建
+VITE_USE_MOCK_DATA=true npm run build
+
+# 2. 上传静态文件（覆盖）
+rsync -avz --delete \
+  -e "ssh -i ai_video.pem -o StrictHostKeyChecking=no" \
+  dist/public/ \
+  ubuntu@101.34.52.232:/opt/ai-product-select/html/
+```
+
+静态文件立即生效，无需 nginx reload（bind mount 实时读取）。
+
+详细部署文档见 [`DEPLOYMENT.md`](./DEPLOYMENT.md)。
+
+---
+
 ## 开发命令
 
 ```bash
@@ -279,10 +307,11 @@ npm run crawl:tiktok:import       # 手动导入 TikTok 视频数据
 ## 测试状态
 
 ```
-TypeScript 编译（生产代码）：✅ 0 错误
-单元测试：                   ✅ 91/91 通过
-构建：                       ✅ 成功
+TypeScript 编译（全量代码）：✅ 0 错误（含 crawler / ETL / frontend）
+单元测试：                   ✅ 102/107 通过（5 个 MySQL 连接失败为预期，本地无 DB）
+构建：                       ✅ 成功（dist/public/ 5.3MB，dist/boot.js 6.2MB）
 GitHub Pages：               ✅ 已部署
+腾讯云生产：                 ✅ https://product.lute-tlz-dddd.top（HTTPS）
 ```
 
 ---
@@ -293,9 +322,13 @@ GitHub Pages：               ✅ 已部署
 ✅ Phase 1-7   前端工程化、全页面接入、融合看板、VOC 分析、性能优化、CI/CD
 ✅ Phase 8     数仓架构（ODS/DWD/DWS/ADS）+ DataManager 重构 + Fusion 指标引擎
 ✅ Phase 9     GitHub Pages 静态部署 + mockLink + 全站稳定性修复
+✅ Phase 9.5   Darwinian UI/UX 50 轮进化（Gen 1~10）
+✅ Phase 10a   TypeScript 全量零错误审计（100+ 错误 → 0）+ 安全加固（.gitignore pem/截图）
+✅ Phase 10b   腾讯云生产部署（HTTPS + 独立 nginx server block + certbot 扩域）
 
-🔲 Phase 10   DataManager 调度配置 + DWD/DWS 自动 ETL Job
-🔲 Phase 11   Fusion 指标导入后自动重算
-🔲 Phase 12   第三方数据服务对接（蝉妈妈/Jungle Scout 导出 Excel 标准化）
-🔲 Phase 13   用户认证 + 多租户支持
+🔲 Phase 11   DataManager 调度配置 + DWD/DWS 自动 ETL Job
+🔲 Phase 12   Fusion 指标导入后自动重算
+🔲 Phase 13   第三方数据服务对接（蝉妈妈/Jungle Scout 导出 Excel 标准化）
+🔲 Phase 14   用户认证 + 多租户支持
+🔲 Phase 15   AI 增强（VOC 缺口分析 + 报告 AI 摘要 + 概念自动聚类）
 ```

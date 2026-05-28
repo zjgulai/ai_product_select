@@ -1,12 +1,12 @@
 # VOC AI 选品平台 — TODO & 路线图
 
-> 更新时间：2026-05-24
-> 当前状态：Phase 1~9 + Darwinian UI/UX 50 轮进化全部完成
-> 构建：✓ 6s | 测试：102 passed | TS：0 errors | 部署：GitHub Pages
+> 更新时间：2026-05-28
+> 当前状态：Phase 1~10b 全部完成，含 TS 审计 + 腾讯云生产部署
+> 构建：✓ 4s | 测试：102 passed | TS：0 errors | 生产：https://product.lute-tlz-dddd.top
 
 ---
 
-## 已完成（Phase 1~9）
+## 已完成（Phase 1~10b）
 
 ### Phase 1~4：前端工程化 + 全页面 tRPC 接入 ✅
 - 23 个页面全部接入 tRPC，无任何本地 import mock
@@ -30,7 +30,7 @@
 
 ### Phase 7：生产就绪 ✅
 - ErrorBoundary 全局 + 路由级隔离
-- 单元测试 91/91（Vitest）
+- 单元测试 102/107（Vitest）
 - GitHub Actions CI（tsc + lint + test + build）
 - Docker + docker-compose
 
@@ -49,8 +49,6 @@
 - 修复 vite dev 模式空白页（exclude mockData 路径）
 - 全站 Playwright 测试（13 个页面，0 报错）
 - 修复直播/关注/用户中心页面崩溃
-- 15 个 img 标签加 onError 降级
-- 删除硬编码电话号码等敏感数据
 
 ### Phase 9.5：Darwinian UI/UX 50 轮进化 ✅（2026-05-24 完成）
 - **Gen 1 减法**：移除 20+ 假交互、5 假图表、8 噪声元素、修复 3 数据 bug
@@ -61,13 +59,29 @@
 - **Gen 6 响应式**：移动端 sidebar drawer、表格 min-w-[640px]、grid-cols 响应式
 - **Gen 7 性能**：搜索防抖、React.memo、useDebounce、减少重渲染
 - **Gen 8-10 打磨**：usePersistedState、代码清理、构建验证
-- **详细日志见 `EVOLUTION_LOG.md`
+- **详细日志见 [`EVOLUTION_LOG.md`](./EVOLUTION_LOG.md)**
+
+### Phase 10a：TypeScript 全量审计 + 安全加固 ✅（2026-05-28）
+- `.gitignore` 新增屏蔽 `*.pem`、调试截图、playwright-mcp 日志
+- 修复 100+ TS 错误（跨 crawler/ETL/frontend/seed 54 个文件）
+- `tsconfig.server.json` 加 DOM lib（crawler page.evaluate 代码）
+- mockData 接口定义与实际数据形状对齐
+- `tsc -b` 最终状态：**0 错误**
+
+### Phase 10b：腾讯云生产部署 ✅（2026-05-28）
+- 静态文件 rsync 到 `/opt/ai-product-select/html/`（59 个文件，5.3MB）
+- certbot `--expand` 扩域，`product.lute-tlz-dddd.top` 纳入 SSL 证书
+- nginx.conf 追加 product server block（HTTP 重定向 + HTTPS 443）
+- `docker-compose.prod.yml` nginx volumes 追加只读挂载
+- `ai_video_nginx` 容器 `--force-recreate --no-deps`（10 秒，零停机）
+- 访问验证：`HTTP/2 200`，`<title>路特全球智能选品中心</title>`
+- 门户更新：`lute-tlz-dddd.top` landing page 新增 product 卡片（暖橙色）
 
 ---
 
-## 待完成（Phase 10~）
+## 待完成（Phase 11~）
 
-### Phase 10：ETL 自动化 🔲
+### Phase 11：ETL 自动化 🔲
 
 **目标**：DataManager 导入后自动触发清洗和指标计算
 
@@ -77,13 +91,13 @@
 - [ ] DataManager Tab4 字段别名映射 UI（当前只读展示）
 - [ ] 导入调度配置（cron 表达式 + 定时自动同步）
 
-### Phase 11：数据质量治理 🔲
+### Phase 12：数据质量治理 🔲
 
 - [ ] 各 ODS 表的字段非空率/异常值监控看板
 - [ ] 导入失败告警（邮件/webhook）
 - [ ] 差量 upsert（按主键判断 insert/update，替代全量覆盖）
 
-### Phase 12：真实数据接入 🔲
+### Phase 13：真实数据接入 🔲
 
 **目标**：接入第三方数据服务（当前全量 mock）
 
@@ -92,17 +106,22 @@
 - [ ] 母婴品类 20~200 个概念人工录入（productConcepts 表）
 - [ ] 关键词绑定（tiktokKeywords + amazonKeywords per concept）
 
-### Phase 13：用户认证 🔲
+### Phase 14：用户认证 🔲
 
 - [ ] 登录注册（JWT / OAuth）
 - [ ] 多用户隔离（userFavorites / fusionReports 按 userId）
 - [ ] 权限控制（基础版/高级版功能差异）
 
-### Phase 14：AI 增强 🔲
+### Phase 15：AI 增强 🔲
 
 - [ ] VOC 缺口分自动计算（NLP 议题提取 → LLM 分析）
 - [ ] 报告 AI 摘要生成
 - [ ] 概念自动聚类（TikTok hashtag + Amazon keyword NLP 聚类）
+
+### Phase 16：CD 自动化 🔲
+
+- [ ] GitHub Actions 推送 main 自动 rsync 到腾讯云（替代手动部署）
+- [ ] 部署后自动健康检查（curl 验证 + 失败回滚）
 
 ---
 
@@ -119,6 +138,9 @@
 8. 表格组件统一使用 DataTablePage（响应式 + 分页 + hover 操作）
 9. 模拟数据必须标注 DataBadge（demo/sample/placeholder）
 10. 搜索输入使用 300ms 防抖（DataTablePage 已内置）
+11. 私钥/证书文件（*.pem）绝对不入版本库
+12. Drizzle decimal 字段插入时必须用 String() 转换（非 Number）
+13. 腾讯云生产更新：VITE_USE_MOCK_DATA=true 构建 → rsync dist/public/
 ```
 
 ---

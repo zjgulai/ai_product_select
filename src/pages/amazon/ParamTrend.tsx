@@ -5,7 +5,8 @@ import { trpc } from '@/providers/trpc';
 import type { MarketItem } from '@/types/market';
 import DataTablePage from '@/components/shared/DataTablePage';
 import MiniTrend from '@/components/shared/MiniTrend';
-import { SlidersHorizontal, Tag, Activity, ArrowUpRight, BarChart3 } from 'lucide-react';
+import { SlidersHorizontal, Tag, Activity, ArrowUpRight } from 'lucide-react';
+import EChartsBar from '@/components/shared/EChartsBar';
 import { LC } from '@/lib/lute-colors';
 
 export default function ParamTrend() {
@@ -97,7 +98,7 @@ export default function ParamTrend() {
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h2 className="text-base font-bold text-lc-text-primary">参数趋势</h2>
@@ -137,9 +138,9 @@ export default function ParamTrend() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">Top 10 参数关键词搜索量</h3>
-        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ name: d.keyword, value: d.searchVolume ?? Math.floor(Math.random() * 5000 + 1000) }))} color={LC.primary} height={240} />
+        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ label: d.keyword, value: d.searchVolume ?? Math.floor(Math.random() * 5000 + 1000) }))} color={LC.primary} height={240} />
       </div>
     </>
   );

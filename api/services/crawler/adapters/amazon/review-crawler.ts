@@ -50,7 +50,7 @@ async function parseReviewsPage(page: Page, asin: string): Promise<AmazonReview[
 
       // 评分
       const ratingText = await el.locator("[data-hook='review-star-rating'] .a-icon-alt, i.a-icon-star a-icon-alt").first().getAttribute("aria-label").catch(() => "");
-      const ratingMatch = ratingText.match(/([0-9.]+)\s*out\s*of/);
+      const ratingMatch = (ratingText ?? "").match(/([0-9.]+)\s*out\s*of/);
       const rating = ratingMatch ? ratingMatch[1] : "0";
       const ratingNum = parseFloat(rating) || 0;
 
@@ -91,7 +91,7 @@ async function parseReviewsPage(page: Page, asin: string): Promise<AmazonReview[
           reviewDate: reviewDate || new Date().toISOString().slice(0, 10),
           verifiedPurchase,
           helpfulCount,
-          reviewerName: reviewerName.trim(),
+          reviewerName: (reviewerName ?? "").trim(),
         });
       }
     } catch {

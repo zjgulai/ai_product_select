@@ -104,20 +104,21 @@ function DataTablePage<T = any>({
 
       {/* Search + Tabs Header */}
       {(onSearchChange || tabs) && (
-        <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)' }}>
           {onSearchChange && (
             <div className="flex items-center gap-0 mb-3">
               <div className="relative flex-1 max-w-[400px]">
                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
                 <input
                   type="text"
-                  value={searchValue}
+                  value={localSearch}
                   onChange={e => setLocalSearch(e.target.value)}
                   placeholder={searchPlaceholder}
                   className="w-full h-9 pl-9 pr-3 rounded-l-full border border-r-0 text-xs transition-all focus:outline-none focus:ring-1 border-lc-border text-lc-text-primary"
+                  style={{ background: '#FFFFFF' }}
                 />
               </div>
-              <button className="h-9 px-6 text-white text-xs font-medium rounded-r-full transition-all hover:brightness-110 bg-lc-primary">
+              <button className="h-9 px-6 text-white text-xs font-medium rounded-r-full transition-all hover:brightness-110 bg-lc-primary" style={{ boxShadow: '0 8px 18px rgba(215,92,112,0.14)' }}>
                 搜索
               </button>
             </div>
@@ -146,7 +147,7 @@ function DataTablePage<T = any>({
       {extraHeader}
 
       {/* Table Container */}
-      <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         {/* Table Header */}
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">{title}</h3>
@@ -277,6 +278,7 @@ function DataTablePage<T = any>({
               {totalPages > 5 && (
                 <div className="flex items-center gap-1 ml-1">
                   <input
+                    data-jump-page
                     type="text"
                     inputMode="numeric"
                     placeholder={`${page + 1}`}

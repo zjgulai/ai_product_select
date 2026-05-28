@@ -86,7 +86,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
         // 先删除旧数据（同 asin 同日期），再插入新数据
         const asins = deduped.map((v) => v.asin);
         await db.delete(odsAmazonProducts).where(
-          and(eq(odsAmazonProducts.snapshotDate, snapshotDate), inArray(odsAmazonProducts.asin, asins))
+          and(eq(odsAmazonProducts.snapshotDate, new Date(snapshotDate)), inArray(odsAmazonProducts.asin, asins))
         );
         await (db.insert(odsAmazonProducts) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -121,7 +121,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const reviewIds = deduped.map((v) => v.reviewId);
         await db.delete(odsAmazonReviews).where(
-          and(eq(odsAmazonReviews.snapshotDate, snapshotDate), inArray(odsAmazonReviews.reviewId, reviewIds))
+          and(eq(odsAmazonReviews.snapshotDate, new Date(snapshotDate)), inArray(odsAmazonReviews.reviewId, reviewIds))
         );
         await (db.insert(odsAmazonReviews) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -157,7 +157,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const keywords = deduped.map((v) => v.keyword);
         await db.delete(odsAmazonKeywords).where(
-          and(eq(odsAmazonKeywords.snapshotDate, snapshotDate), inArray(odsAmazonKeywords.keyword, keywords))
+          and(eq(odsAmazonKeywords.snapshotDate, new Date(snapshotDate)), inArray(odsAmazonKeywords.keyword, keywords))
         );
         await (db.insert(odsAmazonKeywords) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -192,7 +192,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const videoIds = deduped.map((v) => v.videoId);
         await db.delete(odsTiktokVideos).where(
-          and(eq(odsTiktokVideos.snapshotDate, snapshotDate), inArray(odsTiktokVideos.videoId, videoIds))
+          and(eq(odsTiktokVideos.snapshotDate, new Date(snapshotDate)), inArray(odsTiktokVideos.videoId, videoIds))
         );
         await (db.insert(odsTiktokVideos) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -229,7 +229,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const creatorIds = deduped.map((v) => v.creatorId);
         await db.delete(odsTiktokCreators).where(
-          and(eq(odsTiktokCreators.snapshotDate, snapshotDate), inArray(odsTiktokCreators.creatorId, creatorIds))
+          and(eq(odsTiktokCreators.snapshotDate, new Date(snapshotDate)), inArray(odsTiktokCreators.creatorId, creatorIds))
         );
         await (db.insert(odsTiktokCreators) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -267,7 +267,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const shopIds = deduped.map((v) => v.shopId);
         await db.delete(odsTiktokShops).where(
-          and(eq(odsTiktokShops.snapshotDate, snapshotDate), inArray(odsTiktokShops.shopId, shopIds))
+          and(eq(odsTiktokShops.snapshotDate, new Date(snapshotDate)), inArray(odsTiktokShops.shopId, shopIds))
         );
         await (db.insert(odsTiktokShops) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;
@@ -302,7 +302,7 @@ export async function writeToODS(opts: WriteOptions): Promise<{ inserted: number
       if (deduped.length > 0) {
         const liveIds = deduped.map((v) => v.liveId);
         await db.delete(odsTiktokLives).where(
-          and(eq(odsTiktokLives.snapshotDate, snapshotDate), inArray(odsTiktokLives.liveId, liveIds))
+          and(eq(odsTiktokLives.snapshotDate, new Date(snapshotDate)), inArray(odsTiktokLives.liveId, liveIds))
         );
         await (db.insert(odsTiktokLives) as unknown as { values: (v: unknown[]) => Promise<unknown> }).values(deduped);
         inserted = deduped.length;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CATEGORIES } from '@/data/mockData';
+import { LC } from '@/lib/lute-colors';
 
 interface CategoryFilterProps {
   onChange?: (selected: string[]) => void;
@@ -17,9 +18,9 @@ export default function CategoryFilter({ onChange }: CategoryFilterProps) {
   };
 
   return (
-    <div className="bg-white p-3 border-b border-[#E2E2DE]">
+    <div className="bg-white p-3 border-b" style={{ borderColor: LC.border, background: LC.card }}>
       <div className="flex items-center gap-4 flex-wrap">
-        <span className="text-xs text-[#7A6B6B] font-medium shrink-0">商品类目:</span>
+        <span className="text-xs font-medium shrink-0" style={{ color: LC.textSecondary }}>商品类目:</span>
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -27,8 +28,8 @@ export default function CategoryFilter({ onChange }: CategoryFilterProps) {
             className="px-2.5 h-[22px] rounded-full text-[11px] transition-all duration-150 border font-medium"
             style={
               selected.includes(cat)
-                ? { backgroundColor: '#8B354A', color: '#fff', borderColor: '#8B354A' }
-                : { backgroundColor: '#fff', color: '#7A6B6B', borderColor: '#E5D5CD' }
+                ? { backgroundColor: LC.primary, color: LC.textInverse, borderColor: LC.primary }
+                : { backgroundColor: LC.card, color: LC.textSecondary, borderColor: LC.border }
             }
           >
             {cat}

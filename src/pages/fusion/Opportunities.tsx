@@ -76,32 +76,32 @@ export default function FusionOpportunities() {
       <Breadcrumb items={['融合选品', '机会榜']} />
 
       {/* Header Card */}
-      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
+      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primaryLight} 0%, #FDF8F6 100%)`, boxShadow: '0 10px 28px rgba(53,20,26,0.05)' }}>
         <div className="flex items-center gap-4 mb-2">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: LC.primary, boxShadow: '0 8px 18px rgba(215,92,112,0.16)' }}>
             <Sparkles size={18} style={{ color: LC.textInverse }} />
           </div>
           <div>
-            <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>融合选品机会榜</h2>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>
+            <h2 className="text-lg font-bold" style={{ color: LC.text }}>融合选品机会榜</h2>
+            <p className="text-xs" style={{ color: LC.textSecondary }}>
               基于SHI（社媒热度指数）+ CVI（电商验证指数）双维度交叉分析，发现高潜力选品机会
             </p>
           </div>
         </div>
         <div className="flex items-center gap-6 mt-3">
           <div className="text-center">
-            <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{data?.length || 0}</div>
-            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>可挖掘机会</div>
+            <div className="text-xl font-bold font-mono-num" style={{ color: LC.text }}>{data?.length || 0}</div>
+            <div className="text-xs" style={{ color: LC.textMuted }}>可挖掘机会</div>
           </div>
-          <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+          <div className="w-px h-8" style={{ background: LC.border }} />
           <div className="text-center">
-            <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{Math.round((data || []).filter((d: any) => d.opportunityScore >= 70).length)}</div>
-            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>高机会分(≥70)</div>
+            <div className="text-xl font-bold font-mono-num" style={{ color: LC.text }}>{Math.round((data || []).filter((d: any) => d.opportunityScore >= 70).length)}</div>
+            <div className="text-xs" style={{ color: LC.textMuted }}>高机会分(≥70)</div>
           </div>
-          <div className="w-px h-8" style={{ background: 'rgba(255,255,255,0.15)' }} />
+          <div className="w-px h-8" style={{ background: LC.border }} />
           <div className="text-center">
-            <div className="text-xl font-bold font-mono-num" style={{ color: LC.textInverse }}>{Math.round((data || []).reduce((s: number, d: any) => s + (d.tiktokVideoCount || 0), 0) / 1000)}K</div>
-            <div className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>关联视频总数</div>
+            <div className="text-xl font-bold font-mono-num" style={{ color: LC.text }}>{Math.round((data || []).reduce((s: number, d: any) => s + (d.tiktokVideoCount || 0), 0) / 1000)}K</div>
+            <div className="text-xs" style={{ color: LC.textMuted }}>关联视频总数</div>
           </div>
         </div>
       </div>

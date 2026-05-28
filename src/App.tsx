@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router';
 import AppLayout from '@/components/layout/AppLayout';
 import ErrorBoundary from '@/components/shared/ErrorBoundary';

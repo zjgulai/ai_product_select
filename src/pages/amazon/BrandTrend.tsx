@@ -6,7 +6,7 @@ import type { MarketItem } from '@/types/market';
 import DataTablePage from '@/components/shared/DataTablePage';
 import MiniTrend from '@/components/shared/MiniTrend';
 
-import { Crown, Sparkles, TrendingUp } from 'lucide-react';
+import { Crown, Sparkles, TrendingUp, BarChart3 } from 'lucide-react';
 import EChartsPie from '@/components/shared/EChartsPie';
 import { LC } from '@/lib/lute-colors';
 
@@ -100,7 +100,7 @@ export default function BrandTrend() {
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h2 className="text-base font-bold text-lc-text-primary">品牌趋势</h2>
@@ -142,7 +142,7 @@ export default function BrandTrend() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">品牌市场份额分布</h3>
         <EChartsPie data={(data || []).slice(0, 8).map((d: any) => ({ name: d.brand || d.keyword || '未知', value: d.share ?? Math.floor(Math.random() * 30 + 5) }))} height={240} />
       </div>

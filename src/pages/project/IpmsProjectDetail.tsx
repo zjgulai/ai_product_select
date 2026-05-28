@@ -25,12 +25,12 @@ const STAGE_DESC: Record<string, string> = {
   launch: '上线发布与推广',
 };
 const STAGE_COLORS: Record<string, string> = {
-  charter: LC.primary,      // #8B354A
-  concept: '#C47A5A',       // 品牌金色
-  plan: '#C8A265',          // 暖色过渡
-  develop: LC.teal,         // #2A9D8F
-  qualify: LC.success,      // #4CAF50
-  launch: LC.warning,       // #F4A261
+  charter: LC.primary,
+  concept: LC.gold,
+  plan: LC.warning,
+  develop: LC.teal,
+  qualify: LC.success,
+  launch: LC.info,
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -38,9 +38,9 @@ const STATUS_LABELS: Record<string, string> = {
 };
 const STATUS_STYLES: Record<string, { bg: string; color: string }> = {
   active: { bg: LC.successLight, color: LC.success },
-  paused: { bg: '#F5EDE0', color: '#C47A3A' },
-  completed: { bg: '#E0F2FE', color: '#0284C7' },
-  cancelled: { bg: '#F5F5F4', color: '#7A6B6B' },
+  paused: { bg: LC.warningLight, color: LC.warning },
+  completed: { bg: `${LC.info}15`, color: LC.info },
+  cancelled: { bg: '#F5F5F4', color: LC.textSecondary },
 };
 
 const STAGE_STATUS_LABELS: Record<string, string> = {
@@ -131,7 +131,7 @@ export default function IpmsProjectDetail() {
       <Breadcrumb items={['决策执行', '项目跟踪', data.projectName]} />
 
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center gap-4 mb-3">
           <button
             onClick={() => navigate('/project/tracking')}
@@ -152,7 +152,7 @@ export default function IpmsProjectDetail() {
                   className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold"
                   style={{
                     background: STATUS_STYLES[data.status]?.bg || '#F5F5F4',
-                    color: STATUS_STYLES[data.status]?.color || '#7A6B6B',
+                    color: STATUS_STYLES[data.status]?.color || LC.textSecondary,
                   }}
                 >
                   {STATUS_LABELS[data.status] || data.status}
@@ -175,7 +175,7 @@ export default function IpmsProjectDetail() {
                   if (ok) updateStatusMutation.mutate({ projectId: data.projectId, status: 'paused' });
                 }}
                 className="text-xs px-3 h-7 rounded-full font-medium border transition-all"
-                style={{ borderColor: `${LC.warning}40`, color: LC.warning, background: '#F5EDE0' }}
+                style={{ borderColor: `${LC.warning}40`, color: LC.warning, background: LC.warningLight }}
               >
                 暂停项目
               </button>
@@ -202,7 +202,7 @@ export default function IpmsProjectDetail() {
                   if (ok) updateStatusMutation.mutate({ projectId: data.projectId, status: 'completed' });
                 }}
                 className="text-xs px-3 h-7 rounded-full font-medium text-white transition-all hover:brightness-110"
-                style={{ background: '#5A7A9C' }}
+                style={{ background: LC.info }}
               >
                 标记完成
               </button>
@@ -245,7 +245,7 @@ export default function IpmsProjectDetail() {
       </div>
 
       {/* Stage Timeline */}
-      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <h3 className="text-sm font-semibold text-lc-primary mb-4">IPMS 阶段流程</h3>
         <div className="flex items-center justify-between">
           {STAGES.map((stage, idx) => {
@@ -262,7 +262,7 @@ export default function IpmsProjectDetail() {
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
                     style={{
                       background: isCompleted || isCurrent ? STAGE_COLORS[stage] : '#F5F5F4',
-                      color: isCompleted || isCurrent ? '#fff' : '#9A8B8B',
+                      color: isCompleted || isCurrent ? '#fff' : LC.textMuted,
                       boxShadow: isCurrent ? `0 0 0 4px ${STAGE_COLORS[stage]}20` : 'none',
                     }}
                   >
@@ -271,7 +271,7 @@ export default function IpmsProjectDetail() {
                   <div className="text-center">
                     <div
                       className="text-[11px] font-semibold transition-colors"
-                      style={{ color: isCompleted || isCurrent ? STAGE_COLORS[stage] : '#9A8B8B' }}
+                      style={{ color: isCompleted || isCurrent ? STAGE_COLORS[stage] : LC.textMuted }}
                     >
                       {STAGE_LABELS[stage]}
                     </div>
@@ -298,7 +298,7 @@ export default function IpmsProjectDetail() {
       {/* Two Column Layout */}
       <div className="grid grid-cols-2 gap-4">
         {/* Current Stage Info */}
-        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <h3 className="text-sm font-semibold text-lc-primary mb-3">当前阶段详情</h3>
           <div
             className="rounded-xl p-4 mb-3"
@@ -349,7 +349,7 @@ export default function IpmsProjectDetail() {
         </div>
 
         {/* Stage History */}
-        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold text-lc-primary">阶段历史记录</h3>
             <button
@@ -383,8 +383,8 @@ export default function IpmsProjectDetail() {
                         <span
                           className="text-[9px] px-1.5 py-0.5 rounded-full font-medium"
                           style={{
-                            background: h.status === 'completed' ? LC.successLight : h.status === 'in_progress' ? '#E0F2FE' : '#F5F5F4',
-                            color: h.status === 'completed' ? LC.success : h.status === 'in_progress' ? '#0284C7' : '#7A6B6B',
+                            background: h.status === 'completed' ? LC.successLight : h.status === 'in_progress' ? `${LC.info}15` : '#F5F5F4',
+                            color: h.status === 'completed' ? LC.success : h.status === 'in_progress' ? LC.info : LC.textSecondary,
                           }}
                         >
                           {STAGE_STATUS_LABELS[h.status] || h.status}

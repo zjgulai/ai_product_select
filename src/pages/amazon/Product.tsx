@@ -62,7 +62,7 @@ export default function AmazonProduct() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["商品榜单"]} />
-      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center gap-2">
           <div className="relative flex-1 max-w-[400px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lc-text-muted" />
@@ -123,7 +123,7 @@ export default function AmazonProduct() {
           ))}
         </div>
       )}
-      <div className="bg-white p-3 border-b ring-1 ring-lc-border/60 border-lc-border">
+      <div className="bg-white p-3 border-b ring-1 ring-lc-border/60 border-lc-border" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)' }}>
         <div className="flex items-center gap-4 flex-wrap">
           {tags.map(tag => (
             <span key={tag} className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-full font-medium" style={{ background: `${LC.primary}10`, color: LC.primary }}>
@@ -167,7 +167,7 @@ export default function AmazonProduct() {
           </div>
         )}
       </div>
-      <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-2">

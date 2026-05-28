@@ -8,7 +8,7 @@
  * 4. 写入 DWD 日/周分区表
  */
 
-import { eq, desc, sql, and } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 import { getDb } from "../../queries/connection.ts";
 import {
   odsTiktokProducts,
@@ -27,7 +27,7 @@ export async function cleanTiktokProducts(snapshotDate: string) {
   const rawRows = await db
     .select()
     .from(odsTiktokProducts)
-    .where(eq(odsTiktokProducts.snapshotDate, snapshotDate))
+    .where(eq(odsTiktokProducts.snapshotDate, new Date(snapshotDate)))
     .orderBy(desc(odsTiktokProducts.importId));
 
   if (rawRows.length === 0) return { inputRows: 0, outputRows: 0 };
@@ -43,11 +43,11 @@ export async function cleanTiktokProducts(snapshotDate: string) {
   // 3. 先删除该日期的旧 DWD 数据（幂等）
   await db
     .delete(dwdTiktokProductDaily)
-    .where(eq(dwdTiktokProductDaily.statDate, snapshotDate));
+    .where(eq(dwdTiktokProductDaily.statDate, new Date(snapshotDate)));
 
   // 4. 标准化写入
   const values = deduped.map((r) => ({
-    statDate: snapshotDate,
+    statDate: new Date(snapshotDate),
     productId: r.productId,
     productName: r.productName ?? null,
     category: r.category ?? null,
@@ -78,7 +78,7 @@ export async function cleanAmazonProducts(snapshotDate: string) {
   const rawRows = await db
     .select()
     .from(odsAmazonProducts)
-    .where(eq(odsAmazonProducts.snapshotDate, snapshotDate))
+    .where(eq(odsAmazonProducts.snapshotDate, new Date(snapshotDate)))
     .orderBy(desc(odsAmazonProducts.importId));
 
   if (rawRows.length === 0) return { inputRows: 0, outputRows: 0 };
@@ -92,10 +92,10 @@ export async function cleanAmazonProducts(snapshotDate: string) {
 
   await db
     .delete(dwdAmazonProductDaily)
-    .where(eq(dwdAmazonProductDaily.statDate, snapshotDate));
+    .where(eq(dwdAmazonProductDaily.statDate, new Date(snapshotDate)));
 
   const values = deduped.map((r) => ({
-    statDate: snapshotDate,
+    statDate: new Date(snapshotDate),
     asin: r.asin,
     title: r.title ?? null,
     brand: r.brand ?? null,
@@ -110,7 +110,7 @@ export async function cleanAmazonProducts(snapshotDate: string) {
     fulfillmentType: r.fulfillmentType ?? null,
     launchDate: r.launchDate ?? null,
     isNewProduct: isNewProduct(r.launchDate),
-    salesGrowthMom: parseGrowthRate(r.salesTrend?.at(-1)),
+    salesGrowthMom: parseGrowthRate((r as { salesTrend?: number[] }).salesTrend?.at(-1)),
   }));
 
   const batchSize = 500;

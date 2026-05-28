@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { LC } from '@/lib/lute-colors';
 import { Download, MessageSquare, Search, SearchX } from 'lucide-react';
 import { PRODUCT_IMAGES } from '@/data/assets';
+import EmptyState from '@/components/shared/EmptyState';
 
 const TABS = ["商品热销榜", "商品飙升榜", "商品新品榜"];
 
@@ -36,7 +37,7 @@ export default function AmazonListPage() {
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["Amazon榜单"]} />
-      <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center justify-between mb-3">
           <div className="flex gap-6">
             {TABS.map((t, i) => (
@@ -61,7 +62,7 @@ export default function AmazonListPage() {
         </div>
       </div>
       <CategoryFilter />
-      <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-b-lg shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center justify-between p-3 border-b border-lc-border">
           <h3 className="text-sm font-semibold text-lc-primary">商品信息</h3>
           <div className="flex items-center gap-2">

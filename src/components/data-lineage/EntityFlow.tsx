@@ -43,12 +43,12 @@ export default function EntityFlow({ nodes, edges, loading }: {
   const entityNodes = nodes.filter(n => n.type === 'entity');
 
   const layerColors: Record<string, string> = {
-    ODS: '#6366F1',
-    DWD: '#0891B2',
-    DWS: '#059669',
-    ADS: '#D97706',
-    Mock: '#C44545',
-    External: '#7C3AED',
+    ODS: '#A98795',
+    DWD: '#8FA59A',
+    DWS: '#6E966E',
+    ADS: '#D8BE78',
+    Mock: LC.danger,
+    External: LC.info,
   };
 
   const sourceTypeLabels: Record<string, string> = {

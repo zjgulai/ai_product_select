@@ -15,12 +15,12 @@ const STAGE_LABELS: Record<string, string> = {
   develop: 'Develop', qualify: 'Qualify', launch: 'Launch',
 };
 const STAGE_COLORS: Record<string, string> = {
-  charter: LC.primary,      // #8B354A
-  concept: '#C47A5A',       // 品牌金色
-  plan: '#C8A265',          // 暖色过渡
-  develop: LC.teal,         // #2A9D8F
-  qualify: LC.success,      // #4CAF50
-  launch: LC.warning,       // #F4A261
+  charter: LC.primary,
+  concept: LC.gold,
+  plan: LC.warning,
+  develop: LC.teal,
+  qualify: LC.success,
+  launch: LC.info,
 };
 
 function StageProgress({ currentStage }: { currentStage: string }) {
@@ -103,22 +103,22 @@ export default function IpmsTracking() {
       <Breadcrumb items={["决策执行", "项目跟踪"]} />
 
       {/* Header */}
-      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
+      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primaryLight} 0%, #FDF8F6 100%)`, boxShadow: '0 12px 28px rgba(53,20,26,0.05)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: LC.primary }}>
               <Briefcase size={20} style={{ color: LC.textInverse }} />
             </div>
             <div>
-              <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>IPMS 项目跟踪</h2>
-              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>Charter → Concept → Plan → Develop → Qualify → Launch</p>
+              <h2 className="text-lg font-bold" style={{ color: LC.text }}>IPMS 项目跟踪</h2>
+              <p className="text-xs" style={{ color: LC.textSecondary }}>Charter → Concept → Plan → Develop → Qualify → Launch</p>
             </div>
           </div>
           <button
             onClick={handleCreate}
             disabled={createProject.isPending}
             className="flex items-center gap-1.5 text-xs px-4 h-8 rounded-md font-medium transition-all hover:brightness-110 disabled:opacity-50"
-            style={{ background: 'rgba(255,255,255,0.15)', color: LC.textInverse }}
+            style={{ background: LC.primary, color: LC.textInverse }}
           >
             <Plus size={12} /> {createProject.isPending ? '创建中...' : '新建项目'}
           </button>
@@ -133,7 +133,7 @@ export default function IpmsTracking() {
           { label: '已完成', value: stats.completed, icon: CheckCircle, color: LC.teal },
           { label: '即将上线', value: stats.upcoming, icon: Calendar, color: LC.warning },
         ].map(s => (
-          <div key={s.label} className="bg-white rounded-xl p-3 ring-1 ring-lc-border/60 shadow-lc">
+          <div key={s.label} className="bg-white rounded-xl p-3 ring-1 ring-lc-border/60 shadow-lc" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center gap-4 mb-1.5">
               <s.icon size={13} style={{ color: s.color }} />
               <span className="text-xs text-lc-text-muted">{s.label}</span>
@@ -144,7 +144,7 @@ export default function IpmsTracking() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center gap-2">
           {[
             { key: 'all', label: '全部' },
@@ -165,7 +165,7 @@ export default function IpmsTracking() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         {isLoading ? (
           <div className="p-4 space-y-3">
             {Array.from({ length: 4 }).map((_, i) => (

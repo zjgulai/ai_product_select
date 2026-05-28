@@ -53,10 +53,10 @@ async function parseSearchPage(page: Page): Promise<SearchResult[]> {
       if (!asin) continue;
 
       // 标题
-      const title = await item.locator("h2 a span, h2 span").first().textContent().catch(() => "");
+      const title = await item.locator("h2 a span, h2 span").first().textContent().catch(() => "") ?? "";
 
       // 图片
-      const imageUrl = await item.locator("img").first().getAttribute("src").catch(() => undefined);
+      const imageUrl = await item.locator("img").first().getAttribute("src").catch(() => undefined) ?? undefined;
 
       // 价格
       let price = "";
@@ -66,7 +66,7 @@ async function parseSearchPage(page: Page): Promise<SearchResult[]> {
         ".a-price-range",
       ];
       for (const sel of priceSelectors) {
-        price = await item.locator(sel).first().textContent().catch(() => "");
+        price = await item.locator(sel).first().textContent().catch(() => "") ?? "";
         if (price) break;
       }
 
@@ -106,7 +106,7 @@ async function parseSearchPage(page: Page): Promise<SearchResult[]> {
         isPrime: hasPrime,
         sponsored: isSponsored,
         monthlySales,
-        category: (opts as any).category || "search-results",
+        category: "search-results",
       });
     } catch {
       continue;

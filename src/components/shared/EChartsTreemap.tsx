@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactECharts from 'echarts-for-react';
 import { CATEGORY_TREE_DATA } from '@/data/categoryTreeData';
+import { LC } from '@/lib/lute-colors';
 
 function growthColor(growth: string, isParent: boolean = false): string {
   const val = parseFloat(growth);
   const alpha = isParent
     ? 0.25 + Math.min(Math.abs(val) / 35, 0.55)
     : 0.3 + Math.min(Math.abs(val) / 40, 0.5);
-  if (val > 0) return `rgba(22, 163, 74, ${alpha})`;
-  return `rgba(220, 38, 38, ${alpha})`;
+  if (val > 0) return `rgba(110, 150, 110, ${alpha})`;
+  return `rgba(184, 106, 114, ${alpha})`;
 }
 
 function growthTextColor(growth: string): string {
   const val = parseFloat(growth);
-  if (val > 0) return '#5B8C5A';
-  return '#C44545';
+  if (val > 0) return LC.success;
+  return LC.danger;
 }
 
 function transformData(nodes: typeof CATEGORY_TREE_DATA) {
@@ -27,7 +28,7 @@ function transformData(nodes: typeof CATEGORY_TREE_DATA) {
       show: true,
       formatter: (p: any) => `{name|${p.name}}\n{growth|${cat.growth}}`,
       rich: {
-        name: { fontSize: 11, fontWeight: 'bold', color: '#2D1F1F', lineHeight: 18 },
+        name: { fontSize: 11, fontWeight: 'bold', color: LC.text, lineHeight: 18 },
         growth: { fontSize: 10, fontWeight: 'bold', color: growthTextColor(cat.growth!), lineHeight: 16 },
       },
     },
@@ -41,7 +42,7 @@ function transformData(nodes: typeof CATEGORY_TREE_DATA) {
         formatter: (p: any) => `{name|${p.name}}\n{growth|${sub.growth}}`,
         fontSize: 9,
         rich: {
-          name: { fontSize: 9, color: '#44403C', lineHeight: 14 },
+          name: { fontSize: 9, color: LC.textSecondary, lineHeight: 14 },
           growth: { fontSize: 8, fontWeight: 'bold', color: growthTextColor(sub.growth!), lineHeight: 12 },
         },
       },
@@ -59,15 +60,15 @@ export default function EChartsTreemap({ height = 500 }: TreemapProps) {
   const option = {
     tooltip: {
       backgroundColor: 'rgba(255,255,255,0.98)',
-      borderColor: '#E5D5CD',
+      borderColor: LC.border,
       borderWidth: 1,
-      textStyle: { color: '#2D1F1F', fontSize: 12 },
+      textStyle: { color: LC.text, fontSize: 12 },
       formatter: (params: any) => {
         const g = params.data.growth;
         const isUp = parseFloat(g) > 0;
         return `<div style="font-weight:700;margin-bottom:4px;font-size:13px">${params.name}</div>
-                <div style="color:#7A6B6B;margin-bottom:4px">销售额: $${(params.value / 1000000).toFixed(1)}M</div>
-                <div style="color:${isUp ? '#5B8C5A' : '#C44545'};font-weight:700">${isUp ? '▲' : '▼'} ${g}</div>`;
+                <div style="color:${LC.textSecondary};margin-bottom:4px">销售额: $${(params.value / 1000000).toFixed(1)}M</div>
+                <div style="color:${isUp ? LC.success : LC.danger};font-weight:700">${isUp ? '▲' : '▼'} ${g}</div>`;
       },
     },
     series: [{

@@ -7,7 +7,8 @@ import { CATEGORIES } from '@/data/mockData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LC } from '@/lib/lute-colors';
 import { getProductImage } from '@/data/assets';
-import { Search, Download, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, Star, ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import EmptyState from '@/components/shared/EmptyState';
 import DataBadge from '@/components/shared/DataBadge';
 
 const TABS = ["视频热播榜", "视频热销榜"];

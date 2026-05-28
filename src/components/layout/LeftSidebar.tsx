@@ -3,10 +3,11 @@ import { useLocation, useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import {
   Home, Sparkles, BarChart3, ShoppingBag, Users, Store, Play, Video, Search,
-  Trophy, FileText, Heart, Settings, ChevronDown, ChevronRight, Crown,
+  Trophy, FileText, Heart, ChevronDown, ChevronRight, Crown,
   PersonStanding, Database, Radar, Briefcase, Zap, TrendingUp,
   Activity, Target, Flame, Compass
 } from 'lucide-react';
+import { LC } from '@/lib/lute-colors';
 
 interface MenuItem {
   icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>;
@@ -73,8 +74,8 @@ const MENU_GROUPS: MenuGroup[] = [
   },
 ];
 
-const neonBg = '#8B354A';
-const neonText = '#2D1F1F';
+const neonBg = LC.primary;
+const neonText = LC.text;
 
 interface LeftSidebarProps {
   mobileOpen?: boolean;
@@ -98,27 +99,36 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
 
   return (
     <aside className={`fixed left-0 top-12 bottom-0 w-[180px] z-[90] flex-col overflow-y-auto transition-transform duration-300 md:translate-x-0 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:flex`}
-      style={{ background: 'linear-gradient(180deg, #1A1212 0%, #1E1515 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #F8F1EE 0%, #FCF5F2 100%)', borderRight: `1px solid ${LC.border}`, boxShadow: '4px 0 18px rgba(53,20,26,0.04)' }}
       onClick={(e) => { if (e.target === e.currentTarget && onClose) onClose(); }}>
       {MENU_GROUPS.map((group, groupIdx) => (
         <div key={group.label}>
           {groupIdx > 0 && (
-            <div className="mx-3 my-2 h-px" style={{ background: 'rgba(255,255,255,0.10)' }} />
-          )}
+              <div className="mx-3 my-2 h-px" style={{ background: LC.border }} />
+            )}
           <div className="px-2 pt-2 pb-1">
             {/* Group Header */}
             <button
               onClick={() => toggleGroup(group.label)}
-              className="flex items-center gap-2 px-2 py-1.5 text-white/70 text-[12px] font-medium w-full hover:text-white/90 hover:bg-white/[0.05] rounded-md transition-colors"
-            >
-              <group.icon size={13} strokeWidth={1.5} />
-              <span>{group.label}</span>
-              {openGroups[group.label] ? (
-                <ChevronDown size={12} className="ml-auto text-white/45" />
-              ) : (
-                <ChevronRight size={12} className="ml-auto text-white/45" />
-              )}
-            </button>
+                className="flex items-center gap-2 px-2 py-1.5 text-[12px] font-medium w-full rounded-md transition-colors"
+                style={{ color: LC.textSecondary }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = LC.text;
+                  e.currentTarget.style.background = LC.card;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = LC.textSecondary;
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                <group.icon size={13} strokeWidth={1.5} />
+                <span>{group.label}</span>
+                {openGroups[group.label] ? (
+                  <ChevronDown size={12} className="ml-auto" style={{ color: LC.textMuted }} />
+                ) : (
+                  <ChevronRight size={12} className="ml-auto" style={{ color: LC.textMuted }} />
+                )}
+              </button>
 
             {/* Group Items */}
             {openGroups[group.label] && (
@@ -129,14 +139,14 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
                     onClick={() => navigate(item.path)}
                     className="flex items-center gap-2.5 w-full px-2 py-[7px] rounded-r-md text-[12px] transition-all duration-200"
                     style={isActive(item.path)
-                      ? { background: neonBg, color: '#FFFFFF', fontWeight: 600, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.14), 0 0 14px rgba(139,53,74,0.30)', borderLeft: '3px solid #C47A5A' }
-                      : { color: 'rgba(255,255,255,0.65)', background: 'transparent', borderLeft: '3px solid transparent' }}
-                    onMouseEnter={e => { if (!isActive(item.path)) { e.currentTarget.style.background = 'rgba(255,255,255,0.09)'; e.currentTarget.style.color = 'rgba(255,255,255,0.92)'; }}}
-                    onMouseLeave={e => { if (!isActive(item.path)) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.65)'; }}}>
+                      ? { background: '#F9D0D6', color: LC.text, fontWeight: 600, boxShadow: 'inset 0 0 0 1px rgba(215,92,112,0.12), 0 0 14px rgba(215,92,112,0.14)', borderLeft: `3px solid ${LC.warning}` }
+                      : { color: LC.textSecondary, background: 'transparent', borderLeft: '3px solid transparent' }}
+                    onMouseEnter={e => { if (!isActive(item.path)) { e.currentTarget.style.background = LC.card; e.currentTarget.style.color = LC.text; }}}
+                    onMouseLeave={e => { if (!isActive(item.path)) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = LC.textSecondary; }}}>
                     <item.icon size={15} strokeWidth={1.5} />
                     <span>{item.label}</span>
                     {item.badge && (
-                      <span className="text-[8px] font-bold ml-auto tracking-wider px-1 py-0.5 rounded-sm" style={{ color: '#FFFFFF', background: 'rgba(139,53,74,0.85)' }}>{item.badge}</span>
+                      <span className="text-[8px] font-bold ml-auto tracking-wider px-1 py-0.5 rounded-sm" style={{ color: LC.textInverse, background: 'rgba(215,92,112,0.85)' }}>{item.badge}</span>
                     )}
                   </button>
                 ))}
@@ -153,15 +163,15 @@ export default function LeftSidebar({ mobileOpen, onClose }: LeftSidebarProps) {
         <button
           onClick={() => toast.info('会员升级功能即将上线，敬请期待')}
           className="w-full rounded-md py-1.5 flex items-center justify-center gap-1.5 text-[11px] font-bold transition-all hover:brightness-110"
-          style={{ background: 'linear-gradient(90deg, #8B354A, #C47A5A)', color: '#2D1F1F' }}>
+          style={{ background: `linear-gradient(90deg, ${LC.primary}, ${LC.gold})`, color: LC.textInverse, boxShadow: '0 8px 18px rgba(215,92,112,0.16)' }}>
           <Crown size={13} strokeWidth={1.5} /> 升级会员
         </button>
-        <div className="rounded-md p-2.5 space-y-1" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="rounded-md p-2.5 space-y-1" style={{ background: LC.card, border: `1px solid ${LC.border}`, boxShadow: '0 1px 3px rgba(53,20,26,0.04)' }}>
           <div className="flex items-center gap-1.5">
-            <span className="text-white/75 text-xs font-medium">lute_user_001</span>
+            <span className="text-xs font-medium" style={{ color: LC.textSecondary }}>lute_user_001</span>
             <span className="text-[8px] px-1.5 py-0.5 rounded-sm font-bold tracking-wider" style={{ background: neonBg, color: neonText }}>高级版</span>
           </div>
-          <div className="text-white/50 text-[9px]">2027-12-31 套餐到期</div>
+          <div className="text-[9px]" style={{ color: LC.textMuted }}>2027-12-31 套餐到期</div>
         </div>
       </div>
     </aside>

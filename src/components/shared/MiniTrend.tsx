@@ -1,4 +1,5 @@
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { LC } from '@/lib/lute-colors';
 
 interface MiniTrendProps {
   data: number[];
@@ -7,7 +8,7 @@ interface MiniTrendProps {
   color?: string;
 }
 
-export default function MiniTrend({ data, width = 100, height = 32, color = "#8B354A" }: MiniTrendProps) {
+export default function MiniTrend({ data, width = 100, height = 32, color = LC.primary }: MiniTrendProps) {
   const chartData = data.map((v, i) => ({ i, v }));
   const gid = `mt-${Math.abs(color.split('').reduce((a, c) => a + c.charCodeAt(0), 0))}`;
 

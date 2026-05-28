@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { ChevronDown, Globe, Sparkles, Menu } from 'lucide-react';
 import { toast } from 'sonner';
+import { LC } from '@/lib/lute-colors';
 
 interface DropdownItem {
   label: string;
@@ -114,23 +115,23 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 h-12 z-[100] flex items-center px-4"
-      style={{ background: 'linear-gradient(90deg, #1A1212 0%, #2A1A1A 100%)', boxShadow: 'inset 0 -1px 0 rgba(255,255,255,0.06)' }}>
+      style={{ background: 'rgba(253,248,246,0.92)', boxShadow: '0 1px 0 rgba(231,217,211,0.9)', backdropFilter: 'blur(14px)' }}>
       {/* Mobile Menu Button */}
       {onMenuToggle && (
-        <button onClick={onMenuToggle} className="md:hidden mr-3 text-white/60 hover:text-white transition-colors">
+        <button onClick={onMenuToggle} className="md:hidden mr-3 transition-colors" style={{ color: LC.textSecondary }}>
           <Menu size={20} />
         </button>
       )}
 
       {/* Logo */}
       <div className="flex items-center gap-2 mr-6 shrink-0">
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: '#8B354A' }}>
+        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: LC.primary, boxShadow: '0 4px 12px rgba(215,92,112,0.18)' }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <path d="M3 3h7v7H3V3zm11 0h7v4h-7V3zM3 14h4v7H3v-4zm7-4h11v4H10v-4zm0 7h7v4h-7v-4z" fill="#1A1212"/>
+            <path d="M3 3h7v7H3V3zm11 0h7v4h-7V3zM3 14h4v7H3v-4zm7-4h11v4H10v-4zm0 7h7v4h-7v-4z" fill={LC.text}/>
           </svg>
         </div>
-        <span className="text-white font-bold text-sm tracking-wide">路特</span>
-        <span className="text-[8px] font-bold px-1 py-0.5 rounded-sm tracking-wider" style={{ background: '#8B354A', color: '#FFFFFF' }}>AI</span>
+        <span className="font-bold text-sm tracking-wide" style={{ color: LC.text }}>路特</span>
+        <span className="text-[8px] font-bold px-1 py-0.5 rounded-sm tracking-wider" style={{ background: LC.primary, color: LC.textInverse }}>AI</span>
       </div>
 
       {/* Nav Items */}
@@ -141,20 +142,24 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
               onClick={() => handleNavClick(item)}
               className={`relative px-3 h-12 flex items-center gap-1 text-[13px] tracking-wide transition-all duration-200 rounded-md ${
                 activeNav === item.label
-                  ? 'text-white font-semibold bg-white/[0.08]'
-                  : 'text-white/75 hover:text-white/95 hover:bg-white/[0.04]'
-              }`}
+                  ? 'font-semibold'
+                  : ''
+               }`}
+              style={activeNav === item.label
+                ? { color: LC.text, background: LC.bgWarm }
+                : { color: LC.textSecondary }}
             >
-              {item.isPrimary && <Sparkles size={12} style={{ color: '#8B354A' }} />}
+              {item.isPrimary && <Sparkles size={12} style={{ color: LC.primary }} />}
               {item.label}
               {item.dropdown && (
                 <ChevronDown
                   size={11}
-                  className={`text-white/50 transition-transform duration-200 ${openDropdown === item.label ? 'rotate-180' : ''}`}
+                  className={`transition-transform duration-200 ${openDropdown === item.label ? 'rotate-180' : ''}`}
+                  style={{ color: LC.textMuted }}
                 />
               )}
               {activeNav === item.label && (
-                <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-t" style={{ background: '#8B354A' }} />
+                <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-t" style={{ background: LC.primary }} />
               )}
             </button>
 
@@ -162,9 +167,10 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
             {item.dropdown && openDropdown === item.label && (
               <div className="absolute top-full left-0 mt-1 w-44 rounded-lg overflow-hidden border shadow-2xl"
                 style={{
-                  background: 'rgba(42,26,26,0.96)',
-                  borderColor: 'rgba(255,255,255,0.14)',
+                  background: 'rgba(255,255,255,0.96)',
+                  borderColor: LC.border,
                   backdropFilter: 'blur(12px)',
+                  boxShadow: '0 12px 32px rgba(53,20,26,0.10)',
                 }}>
                 {item.dropdown.map((d) => (
                   <button
@@ -173,11 +179,20 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
                       navigate(d.href);
                       setOpenDropdown(null);
                     }}
-                    className="flex items-center justify-between w-full px-3 py-2 text-[12px] text-white/80 hover:text-white hover:bg-white/[0.06] transition-colors"
+                    className="flex items-center justify-between w-full px-3 py-2 text-[12px] transition-colors"
+                    style={{ color: LC.textSecondary }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = LC.text;
+                      e.currentTarget.style.background = LC.bgWarm;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = LC.textSecondary;
+                      e.currentTarget.style.background = 'transparent';
+                    }}
                   >
                     <span>{d.label}</span>
                     {d.badge && (
-                      <span className="text-[9px] font-bold tracking-wider px-1 py-0.5 rounded-sm" style={{ color: '#FFFFFF', background: 'rgba(139,53,74,0.9)' }}>{d.badge}</span>
+                      <span className="text-[9px] font-bold tracking-wider px-1 py-0.5 rounded-sm" style={{ color: LC.textInverse, background: 'rgba(215,92,112,0.9)' }}>{d.badge}</span>
                     )}
                   </button>
                 ))}
@@ -192,19 +207,20 @@ export default function TopNavigation({ onMenuToggle }: TopNavigationProps) {
         <button
           onClick={() => navigate('/fusion/opportunities')}
           className="text-xs px-5 h-7 rounded-full font-bold transition-all duration-200 hover:brightness-110"
-          style={{ background: '#8B354A', color: '#2D1F1F' }}>
+          style={{ background: LC.primary, color: LC.textInverse, boxShadow: '0 6px 18px rgba(215,92,112,0.18)' }}>
           免费体验
         </button>
         <button
           onClick={() => toast.info('多语言支持即将上线')}
-          className="flex items-center gap-1 text-white/60 text-xs hover:text-white/90 transition-colors">
+          className="flex items-center gap-1 text-xs transition-colors"
+          style={{ color: LC.textSecondary }}>
           <Globe size={13} /><span>中文</span><ChevronDown size={11} />
         </button>
         <button
           onClick={() => navigate('/user/center')}
           className="w-7 h-7 rounded-full flex items-center justify-center transition-all hover:brightness-110"
-          style={{ background: '#8B354A' }}>
-          <span className="text-xs font-bold" style={{ color: '#2D1F1F' }}>U</span>
+          style={{ background: '#F9D0D6' }}>
+          <span className="text-xs font-bold" style={{ color: LC.text }}>U</span>
         </button>
       </div>
     </nav>

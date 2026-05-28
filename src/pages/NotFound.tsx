@@ -17,7 +17,7 @@ export default function NotFound() {
       <button
         onClick={() => navigate('/tiktok/home')}
         className="flex items-center gap-1.5 text-xs px-4 py-2 rounded-full font-medium transition-all hover:brightness-110"
-        style={{ background: LC.primary, color: LC.bgDark }}
+        style={{ background: LC.primary, color: LC.textInverse }}
       >
         <Home size={14} />
         返回首页

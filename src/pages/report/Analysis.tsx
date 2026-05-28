@@ -22,7 +22,7 @@ const BRAND_DATA = [
   { name: 'nanobebe', value: 4.2 }, { name: 'others', value: 32.2 },
 ];
 const PRICE_DATA = [{ name: '其他', value: 8.5 }, { name: '$0-$45', value: 34.3 }, { name: '>$45', value: 57.2 }];
-// Chart colors available: ['#8B354A', '#C47A5A', LC.teal, '#9A8B8B', '#5B8C5A', '#C4D4E0']
+// Chart colors available: [LC.primary, LC.gold, LC.teal, LC.textMuted, LC.success, LC.info]
 
 
 const SAMPLE_PRODUCTS = [
@@ -109,7 +109,7 @@ export default function ReportAnalysis() {
         <span className="text-xs text-lc-text-muted">实际数据需接入 Amazon SP-API / 评论爬虫</span>
       </div>
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-4 mb-2">
@@ -159,7 +159,7 @@ export default function ReportAnalysis() {
       {/* ===== TAB 0: 市场概况 ===== */}
       {activeTab === 0 && (
         <>
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">市场概况</h3>
             <div className="grid grid-cols-6 gap-3">
               {reportKpi.map(kpi => (
@@ -173,11 +173,11 @@ export default function ReportAnalysis() {
 
           {/* Monthly GMV */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
               <h3 className="text-sm font-semibold mb-3 text-lc-primary">月度GMV趋势</h3>
-              <EChartsLine data={MONTHLY_GMV.map(d => ({ x: d.month.slice(5), y: d.gmv }))} color={'#8B354A'} height={240} yAxisName="$B" />
+              <EChartsLine data={MONTHLY_GMV.map(d => ({ x: d.month.slice(5), y: d.gmv }))} color={LC.primary} height={240} yAxisName="$B" />
             </div>
-            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
               <h3 className="text-sm font-semibold mb-3 text-lc-primary">品类市场份额</h3>
               <EChartsPie data={CATEGORY_SHARE.slice(0, 6).map(c => ({ name: c.name, value: c.value }))} height={240} donut />
             </div>
@@ -188,7 +188,7 @@ export default function ReportAnalysis() {
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词词云</h3>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 min-h-[200px] px-6">
               {WORD_CLOUD.map((word, i) => {
-                const colors = ['#8B354A', '#C47A5A', LC.teal, '#9A8B8B', '#5B8C5A'];
+                const colors = [LC.primary, LC.gold, LC.teal, LC.textMuted, LC.success];
                 return (
                   <span key={i} className="cursor-pointer hover:opacity-60 transition-opacity font-medium"
                     style={{ fontSize: `${Math.max(12, word.size * 0.35)}px`, color: colors[i % colors.length], fontWeight: word.size > 35 ? 700 : word.size > 25 ? 600 : 400 }}>
@@ -200,7 +200,7 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Sample Products with Images */}
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">商品样本</h3>
             <div className="flex gap-4 overflow-x-auto pb-2">
               {SAMPLE_PRODUCTS.slice(0, 10).map((p, i) => (
@@ -216,7 +216,7 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Keywords with progress bars */}
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">关键词验证</h3>
             <table className="w-full min-w-[640px]">
               <thead>
@@ -247,7 +247,7 @@ export default function ReportAnalysis() {
           </div>
 
           {/* Parameters - Donut Charts */}
-          <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">参数解构</h3>
             <div className="grid grid-cols-3 gap-6">
               <EChartsPie data={BRAND_DATA} title="品牌" height={200} donut />
@@ -334,7 +334,7 @@ export default function ReportAnalysis() {
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">参数解构 - 详细分析</h3>
           <div className="mb-6">
             <h4 className="text-xs font-semibold mb-2 text-lc-text-secondary">价格带销量趋势</h4>
-            <EChartsLine data={priceTrendData.map(d => ({ x: d.month.slice(5), y: d['>$45'] + d['$0-$45'] }))} color={'#C47A5A'} height={260} yAxisName="销量(K)" />
+            <EChartsLine data={priceTrendData.map(d => ({ x: d.month.slice(5), y: d['>$45'] + d['$0-$45'] }))} color={LC.gold} height={260} yAxisName="销量(K)" />
           </div>
           <div className="mb-6">
             <h4 className="text-xs font-semibold mb-2 text-lc-text-secondary">新品占比趋势</h4>
@@ -351,7 +351,7 @@ export default function ReportAnalysis() {
       {activeTab === 4 && (
         <>
           {/* VOC情感概览 */}
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">评论情感分析</h3>
             {vocLoading ? (
               <div className="grid grid-cols-2 gap-4">
@@ -383,7 +383,7 @@ export default function ReportAnalysis() {
             ) : null}
           </div>
 
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+           <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <h3 className="text-sm font-semibold mb-4 text-lc-primary">好评点标签云</h3>
             <div className="flex flex-wrap items-center gap-2">
               {reviewAspects.map((aspect, i) => (
@@ -412,11 +412,11 @@ export default function ReportAnalysis() {
               <Skeleton className="h-[220px] w-full" />
             ) : vocStats?.aspects ? (
               <div className="mb-4">
-                <EChartsBar data={vocStats.aspects.slice(0, 10).map((a: any) => ({ label: a.aspect, value: a.total }))} color={'#8B354A'} height={220} horizontal />
+                 <EChartsBar data={vocStats.aspects.slice(0, 10).map((a: any) => ({ label: a.aspect, value: a.total }))} color={LC.primary} height={220} horizontal />
               </div>
             ) : (
               <div className="mb-4">
-                <EChartsBar data={reviewAspects.map(a => ({ label: a.aspect, value: a.count }))} color={'#8B354A'} height={220} horizontal />
+                 <EChartsBar data={reviewAspects.map(a => ({ label: a.aspect, value: a.count }))} color={LC.primary} height={220} horizontal />
               </div>
             )}
           </div>
@@ -460,7 +460,7 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 5: 评论洞察 ===== */}
       {activeTab === 5 && (
-        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+         <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">评论洞察</h3>
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -484,7 +484,7 @@ export default function ReportAnalysis() {
 
       {/* ===== TAB 6: 商品对比 ===== */}
       {activeTab === 6 && (
-        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+         <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <h3 className="text-sm font-semibold mb-4 text-lc-primary">商品对比</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {SAMPLE_PRODUCTS.slice(0, 4).map((item, idx) => (

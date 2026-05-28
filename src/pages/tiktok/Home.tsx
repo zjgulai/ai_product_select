@@ -121,14 +121,14 @@ export default function TikTokHome() {
       </div>
 
       {/* ── Top: Unified Search + Quick Entries ── */}
-      <div className="bg-white rounded-lg shadow-lc p-5 mb-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-lg shadow-lc p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <div className="max-w-2xl mx-auto">
           <div className="relative mb-4">
             <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-lc-text-muted" />
             <input
               type="text"
               placeholder="搜索商品、达人、视频、小店、直播..."
-              className="w-full h-11 pl-11 pr-4 rounded-full border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#8B354A]/20"
+              className="w-full h-11 pl-11 pr-4 rounded-full border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#D75C70]/20"
               style={{
                 borderColor: LC.border,
                 color: LC.text,
@@ -178,7 +178,7 @@ export default function TikTokHome() {
       </div>
 
       {/* ── Core: Today's Overview (3 columns) ── */}
-      <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-3 gap-4 mb-4">
         {/* 趋势变化 */}
         <div className="bg-white rounded-lg shadow-lc p-4 ring-1 ring-lc-border/60 hover:shadow-lc-hover transition-shadow duration-200">
           <div className="flex items-center gap-4 mb-3">
@@ -339,12 +339,12 @@ export default function TikTokHome() {
                           item.rank <= 3
                             ? item.rank === 1
                               ? LC.gold
-                              : item.rank === 2
-                                ? '#D6D3D0'
-                                : '#D4A080'
-                            : LC.border,
-                      }}
-                    >
+                             : item.rank === 2
+                                ? '#D8C6BE'
+                                : '#C58D7B'
+                             : LC.border,
+                       }}
+                     >
                       {item.rank}
                     </span>
                   </td>

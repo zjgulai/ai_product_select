@@ -4,9 +4,10 @@ import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import type { MarketItem } from '@/types/market';
 import DataTablePage from '@/components/shared/DataTablePage';
+import EChartsBar from '@/components/shared/EChartsBar';
 import MiniTrend from '@/components/shared/MiniTrend';
 
-import { Zap, TrendingUp, Target, Award, BarChart3 } from 'lucide-react';
+import { Zap, TrendingUp, Target, Award } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
 
 export default function PotMarket() {
@@ -35,7 +36,7 @@ export default function PotMarket() {
       ? (items.reduce((s, i) => s + parseFloat(i.salesG.replace('%', '')), 0) / items.length).toFixed(1)
       : '0.0';
     const avgCompetition = items.length > 0
-      ? Math.round(items.filter(i => i.competition === '极高' || i.competition === '高').length / items.length * 100)
+      ? Math.round(items.filter(i => (i as { competition?: string }).competition === '极高' || (i as { competition?: string }).competition === '高').length / items.length * 100)
       : 0;
     const opportunityScore = Math.min(100, Math.round(highPotential * 12 + parseFloat(avgGrowth) * 1.5));
     return { total: items.length, highPotential, avgGrowth, avgCompetition, opportunityScore };
@@ -92,7 +93,7 @@ export default function PotMarket() {
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center gap-4 mb-3">
               <Zap size={18} style={{ color: LC.primary, background: LC.textInverse, borderRadius: 4, padding: 2 }} />
               <div>
@@ -133,9 +134,9 @@ export default function PotMarket() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">潜力评分 Top 10</h3>
-        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ name: d.keyword, value: d.potentialScore ?? Math.floor(Math.random() * 40 + 60) }))} color={LC.success} height={240} />
+        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ label: d.keyword, value: d.potentialScore ?? Math.floor(Math.random() * 40 + 60) }))} color={LC.success} height={240} />
       </div>
     </>
   );

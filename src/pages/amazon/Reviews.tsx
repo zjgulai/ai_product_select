@@ -145,7 +145,7 @@ export default function ReviewsPage() {
       ) : (
         <>
           {/* Stats Header */}
-          <div className="bg-white rounded-xl p-5 mb-4 ring-1 ring-lc-border/60 shadow-lc">
+          <div className="bg-white rounded-xl p-5 mb-4 ring-1 ring-lc-border/60 shadow-lc" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${LC.primary}12` }}>
                 <MessageSquare size={18} className="text-lc-primary" />
@@ -171,7 +171,7 @@ export default function ReviewsPage() {
           </div>
 
           {/* Filters Bar */}
-          <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-3 mb-3 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center gap-4 flex-wrap">
               {/* Sentiment */}
               <div className="flex items-center gap-1.5">
@@ -247,7 +247,7 @@ export default function ReviewsPage() {
           </div>
 
           {/* Reviews List */}
-          <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center justify-between p-3 border-b border-lc-border">
               <h3 className="text-sm font-semibold text-lc-primary flex items-center gap-1.5">
                 <MessageSquare size={14} /> 评论列表
@@ -344,7 +344,7 @@ export default function ReviewsPage() {
 
           {/* Aspect Stats */}
           {statsData?.aspects && statsData.aspects.length > 0 && (
-            <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+            <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
               <h3 className="text-sm font-semibold text-lc-primary mb-3">方面维度分析</h3>
               <div className="space-y-2">
                 {statsData.aspects.slice(0, 10).map((a: any) => (

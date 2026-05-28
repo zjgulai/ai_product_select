@@ -4,9 +4,10 @@ import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
 import type { MarketItem } from '@/types/market';
 import DataTablePage from '@/components/shared/DataTablePage';
+import EChartsBar from '@/components/shared/EChartsBar';
 import MiniTrend from '@/components/shared/MiniTrend';
 
-import { Flame, TrendingUp, Star, Shield, BarChart3 } from 'lucide-react';
+import { Flame, TrendingUp, Star, Shield } from 'lucide-react';
 import { LC } from '@/lib/lute-colors';
 
 export default function HotMarket() {
@@ -88,7 +89,7 @@ export default function HotMarket() {
           </button>
         )}
         extraHeader={(
-          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60">
+          <div className="bg-white rounded-xl shadow-lc p-4 mb-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
             <div className="flex items-center gap-4 mb-3">
               <Flame size={18} className="text-lc-danger" />
               <div>
@@ -129,9 +130,9 @@ export default function HotMarket() {
           </div>
         )}
       />
-      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 mt-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         <h3 className="text-xs font-semibold text-lc-text-secondary mb-3">热门市场竞争度分布</h3>
-        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ name: d.keyword, value: d.competitionLevel === '高' ? 80 : d.competitionLevel === '中' ? 50 : 20 }))} color={LC.warning} height={240} />
+        <EChartsBar data={(data || []).slice(0, 10).map((d: any) => ({ label: d.keyword, value: d.competitionLevel === '高' ? 80 : d.competitionLevel === '中' ? 50 : 20 }))} color={LC.warning} height={240} />
       </div>
     </>
   );

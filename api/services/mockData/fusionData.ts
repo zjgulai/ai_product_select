@@ -100,7 +100,7 @@ export function getLatestMetrics(): ConceptMetric[] {
       latestByConcept.set(m.conceptId, m);
     }
   }
-  return Array.from(latestByConcept.values()).sort((a, b) => b.opportunityScore - a.opportunityScore);
+  return Array.from(latestByConcept.values()).sort((a, b) => Number(b.opportunityScore) - Number(a.opportunityScore));
 }
 
 export function getKeywordMappings(): KeywordMapping[] {

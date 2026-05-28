@@ -79,7 +79,7 @@ async function main() {
         try {
           const writeResult = await writeToODS({
             tableKey: "ods_amazon_products",
-            records: result.data,
+            records: result.data as unknown as Record<string, unknown>[],
             snapshotDate,
             sourceKey: `amazon_bestsellers_${marketplace}`,
           });
@@ -124,7 +124,7 @@ async function main() {
         try {
           const writeResult = await writeToODS({
             tableKey: "ods_amazon_products",
-            records: result.data,
+            records: result.data as unknown as Record<string, unknown>[],
             snapshotDate,
             sourceKey: `amazon_product_${marketplace}`,
           });
@@ -154,7 +154,7 @@ async function main() {
 
         const writeResult = await writeToODS({
           tableKey: "ods_amazon_reviews",
-          records: result.data,
+          records: result.data as unknown as Record<string, unknown>[],
           snapshotDate,
           sourceKey: `amazon_reviews_${marketplace}`,
         });

@@ -50,9 +50,22 @@ export interface AmazonKeywordResult {
 }
 
 export interface MarketItem {
-  id: number; category: string; productCount: number; avgPrice: number;
-  monthlySales: number; topBrand: string; topBrandShare: number;
-  newProductRatio: number; growthRate: string; supplyDemandRatio: number;
+  rank: number;
+  keyword: string;
+  trend: number[];
+  sales: number;
+  salesG: string;
+  revenue: number;
+  revG?: string;
+  price: number;
+  rating: number;
+  reviews?: number;
+  competition?: string;
+  top3?: string;
+  newP?: string;
+  attrs?: string;
+  brands?: string;
+  potential?: string;
 }
 
 function adaptProducts(raw: any[]): AmazonProduct[] {

@@ -55,7 +55,7 @@ export default function AmazonKeyword() {
       <Breadcrumb items={["Amazon趋势", "关键词趋势"]} />
 
       {/* Search Section */}
-      <div className="bg-white rounded-xl shadow-lc p-6 mb-4 ring-1 ring-lc-border/60 text-center">
+      <div className="bg-white rounded-xl shadow-lc p-6 mb-4 ring-1 ring-lc-border/60 text-center" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <h2 className="text-xl font-bold mb-1 text-lc-primary">产品创新加速器，亿级卖家都在用</h2>
         <p className="text-xs mb-5 text-lc-text-muted">自定义产品属性分析，细分市场趋势智能捕获，AI评价一键获取</p>
         <div className="flex items-center justify-center gap-0 max-w-[600px] mx-auto">
@@ -107,7 +107,7 @@ export default function AmazonKeyword() {
 
       {/* Example Reports */}
       {!hasSearched && (
-        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-lc-primary">查看示例报告</h3>
             <span className="text-xs text-lc-text-muted">以下为各类目示例报告</span>
@@ -130,7 +130,7 @@ export default function AmazonKeyword() {
 
       {/* Search Results */}
       {hasSearched && (
-        <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60">
+        <div className="bg-white rounded-xl shadow-lc overflow-hidden ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
           <div className="p-4 border-b border-lc-border">
             <h3 className="text-sm font-semibold text-lc-primary">搜索结果</h3>
             <p className="text-xs mt-0.5 text-lc-text-muted">

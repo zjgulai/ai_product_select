@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
@@ -20,23 +20,6 @@ const TABS = [
   { label: "直播", icon: Video },
 ];
 
-const DEFAULT_FOLLOWS = {
-  products: [
-    { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7', change: '+12%', trend: 'up' as const },
-    { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5', change: '+5%', trend: 'up' as const },
-    { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6', change: '-3%', trend: 'down' as const },
-  ],
-  creators: [
-    { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主', change: '+2.3K', trend: 'up' as const },
-    { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人', change: '+1.1K', trend: 'up' as const },
-  ],
-  shops: [
-    { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8', change: '+8%', trend: 'up' as const },
-    { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6', change: '+3%', trend: 'up' as const },
-  ],
-  concepts: [],
-};
-
 type FollowItem = { id: string; name: string; sub: string; change: string; trend: 'up' | 'down' };
 type ConceptFollow = { conceptId: string; name: string; nameEn: string; shiScore: string; cviScore: string };
 type FollowMap = { products: FollowItem[]; creators: FollowItem[]; shops: FollowItem[]; concepts: ConceptFollow[] };
@@ -44,6 +27,31 @@ type FollowMap = { products: FollowItem[]; creators: FollowItem[]; shops: Follow
 export default function TikTokAttention() {
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
+  const [follows, setFollows] = useState<FollowMap>({
+    products: [
+      { id: 'p1', name: '便携温奶器 Pro Max', sub: '母婴用品 · $42.99 · ⭐4.7', change: '+12%', trend: 'up' },
+      { id: 'p2', name: 'LED化妆镜 360°旋转', sub: '美妆工具 · $28.99 · ⭐4.5', change: '+5%', trend: 'up' },
+      { id: 'p3', name: '智能宠物喂食器 5L', sub: '宠物用品 · $69.99 · ⭐4.6', change: '-3%', trend: 'down' },
+    ],
+    creators: [
+      { id: 'c1', name: 'momlife_official', sub: '1.2M 粉丝 · 母婴博主', change: '+2.3K', trend: 'up' },
+      { id: 'c2', name: 'babycare_tips', sub: '890K 粉丝 · 育儿达人', change: '+1.1K', trend: 'up' },
+    ],
+    shops: [
+      { id: 's1', name: 'Momcozy Official Store', sub: '美国 · 综合评分 4.8', change: '+8%', trend: 'up' },
+      { id: 's2', name: 'BabyGear Pro', sub: '英国 · 综合评分 4.6', change: '+3%', trend: 'up' },
+    ],
+    concepts: [],
+  });
+
+  const toggleFollow = (type: keyof FollowMap, id: string) => {
+    setFollows(prev => ({
+      ...prev,
+      [type]: (prev[type] as Array<{ id: string } | { conceptId: string }>).filter(
+        (item) => ('id' in item ? item.id : item.conceptId) !== id
+      ),
+    }));
+  };
 
   const { data, isLoading, isError } = trpc.fusion.concepts.list.useQuery(
     { limit: 20 },

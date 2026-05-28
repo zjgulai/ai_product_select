@@ -43,7 +43,7 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 function LayerBadge({ layer }: { layer: string }) {
-  const colors: Record<string, string> = { ODS: '#6366F1', DWD: '#0891B2', DWS: '#059669', ADS: '#D97706' };
+  const colors: Record<string, string> = { ODS: '#A98795', DWD: '#8FA59A', DWS: '#6E966E', ADS: '#D8BE78' };
   const c = colors[layer] ?? LC.primary;
   return <span className="text-[9px] px-1.5 py-0.5 rounded font-bold tracking-wider" style={{ background: `${c}15`, color: c }}>{layer}</span>;
 }
@@ -108,7 +108,7 @@ export default function DataManager() {
       <Breadcrumb items={['数据管理中心']} />
 
 
-      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60 mb-4 p-4">
+      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60 mb-4 p-4" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {([
             ['已配置数据源', DATA_SOURCES.length, Database, LC.primary],
@@ -127,7 +127,7 @@ export default function DataManager() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc ring-1 ring-lc-border/60" style={{ boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <div className="flex gap-6 border-b border-lc-border px-4 pt-3">
           {TABS.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)}
@@ -152,7 +152,7 @@ export default function DataManager() {
                     return (
                       <button key={s.dataKey} onClick={() => setSrc(s)}
                         className="text-left rounded-xl p-3 border transition-all hover:shadow-lc-hover hover:-translate-y-0.5 ring-1"
-                        style={{ borderColor: LC.border, background: LC.bgWarm }}>
+                        style={{ borderColor: LC.border, background: '#FFFFFF', boxShadow: '0 8px 18px rgba(53,20,26,0.04)' }}>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-base inline-flex items-center"><s.icon size={14} /></span>
                           <LayerBadge layer={s.layer} />
@@ -186,8 +186,8 @@ export default function DataManager() {
                 </div>
 
                 {!parsed ? (
-                  <div className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:border-lc-primary"
-                    style={{ borderColor: LC.border }}
+                    <div className="border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-colors hover:border-lc-primary"
+                      style={{ borderColor: LC.border, background: 'linear-gradient(180deg, #FFFFFF 0%, #FCF5F2 100%)' }}
                     onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) parseFile(f); }}
                     onDragOver={e => e.preventDefault()}
                     onClick={() => fileRef.current?.click()}>
@@ -406,10 +406,10 @@ export default function DataManager() {
               </h4>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
                 {([
-                  ['ODS', '#6366F1', '原始数据层 — 直接落库，保留原始字段，含 snapshot_date'],
-                  ['DWD', '#0891B2', '标准化明细层 — 类型统一、字段规范、去重'],
-                  ['DWS', '#059669', '汇总层 — 按概念/品类聚合，SHI/CVI 计算数据源'],
-                  ['ADS', '#D97706', '应用层 — 直接服务前端 API，按场景预聚合'],
+                  ['ODS', '#A98795', '原始数据层 — 直接落库，保留原始字段，含 snapshot_date'],
+                  ['DWD', '#8FA59A', '标准化明细层 — 类型统一、字段规范、去重'],
+                  ['DWS', '#6E966E', '汇总层 — 按概念/品类聚合，SHI/CVI 计算数据源'],
+                  ['ADS', '#D8BE78', '应用层 — 直接服务前端 API，按场景预聚合'],
                 ] as const).map(([l, c, d]) => (
                   <div key={l} className="rounded p-2" style={{ background: `${c}08`, border: `1px solid ${c}20` }}>
                     <div className="font-bold mb-1" style={{ color: c }}>{l}</div>

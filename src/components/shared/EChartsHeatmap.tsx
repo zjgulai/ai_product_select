@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { LC } from '@/lib/lute-colors';
 
 interface HeatmapProps {
   xLabels: string[];
@@ -19,18 +20,18 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
       title: title ? {
         text: title,
         left: 'center',
-        textStyle: { fontSize: 14, fontWeight: 600, color: '#8B354A', fontFamily: 'Inter, sans-serif' },
+        textStyle: { fontSize: 14, fontWeight: 600, color: LC.primary, fontFamily: 'Inter, sans-serif' },
       } : undefined,
       tooltip: {
         position: 'top',
         backgroundColor: 'rgba(255,255,255,0.98)',
-        borderColor: '#E5D5CD',
+        borderColor: LC.border,
         borderWidth: 1,
-        textStyle: { color: '#2D1F1F', fontSize: 12 },
+        textStyle: { color: LC.text, fontSize: 12 },
         formatter: (params: any) => {
           return `<div style="font-weight:600;margin-bottom:4px">${yLabels[params.value[1]]}</div>
-                  <div style="color:#9A8B8B;font-size:11px">${xLabels[params.value[0]]}</div>
-                  <div style="font-size:16px;font-weight:700;color:#8B354A;margin-top:4px">
+                  <div style="color:${LC.textMuted};font-size:11px">${xLabels[params.value[0]]}</div>
+                  <div style="font-size:16px;font-weight:700;color:${LC.primary};margin-top:4px">
                     热度指数: ${params.value[2]}
                   </div>`;
         },
@@ -40,9 +41,9 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         type: 'category',
         data: xLabels,
         splitArea: { show: false },
-        axisLine: { lineStyle: { color: '#E5D5CD' } },
+        axisLine: { lineStyle: { color: LC.border } },
         axisTick: { show: false },
-        axisLabel: { color: '#7A6B6B', fontSize: 11, fontFamily: 'Inter, sans-serif' },
+        axisLabel: { color: LC.textSecondary, fontSize: 11, fontFamily: 'Inter, sans-serif' },
       },
       yAxis: {
         type: 'category',
@@ -50,7 +51,7 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         splitArea: { show: false },
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: '#7A6B6B', fontSize: 11, fontFamily: 'Inter, sans-serif' },
+        axisLabel: { color: LC.textSecondary, fontSize: 11, fontFamily: 'Inter, sans-serif' },
       },
       visualMap: {
         min: minVal,
@@ -61,11 +62,11 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         bottom: 0,
         itemWidth: 12,
         itemHeight: 120,
-        textStyle: { color: '#9A8B8B', fontSize: 10 },
+        textStyle: { color: LC.textMuted, fontSize: 10 },
         inRange: {
           color: [
-            '#FFF5F2', '#FDDDD4', '#FBC4B6', '#F8AB98',
-            '#F4927A', '#8B354A', '#6B2A3A', '#C04020',
+            '#FDF8F6', '#F9E6E8', '#F6D4D9', '#F1BFC8',
+            '#EAA7B3', '#D75C70', '#C44A5E', '#A98795',
           ],
         },
       },
@@ -75,17 +76,17 @@ export default function EChartsHeatmap({ xLabels, yLabels, data, title, height =
         label: {
           show: true,
           fontSize: 10,
-          color: '#fff',
+          color: LC.text,
           fontWeight: 600,
           formatter: (p: any) => {
             const v = p.value[2];
-            return v > 50 ? v : '';
+            return v > 60 ? v : '';
           },
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 12,
-            shadowColor: 'rgba(232,120,90,0.25)',
+            shadowColor: 'rgba(215,92,112,0.20)',
             borderColor: '#fff',
             borderWidth: 2,
           },

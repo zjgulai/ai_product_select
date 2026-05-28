@@ -32,3 +32,19 @@ Thumbs.db
 # Uploads (runtime)
 uploads/
 scripts/data-generation/generate_mock_data_ts.py
+
+# 私钥 / 证书文件
+*.pem
+*.key
+*.p12
+*.pfx
+
+# 本地截图（调试产物）
+morandi-*.png
+*.screenshot.png
+
+# Playwright MCP 日志（本地调试产物）
+.playwright-mcp/
+
+# Sisyphus 运行状态（本地 agent 状态）
+.sisyphus/

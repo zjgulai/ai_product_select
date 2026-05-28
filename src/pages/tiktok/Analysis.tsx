@@ -38,10 +38,33 @@ export default function TikTokAnalysis() {
   const filteredHeatmapData = useMemo(() => {
     if (!heatmapData) return [];
     const monthOffset = timeRange === 0 ? 3 : 0;
-    return heatmapData.data
+    const scoped = heatmapData.data
       .filter(d => d[1] >= monthOffset)
       .map(d => [d[0], d[1] - monthOffset, d[2]] as [number, number, number]);
-  }, [timeRange, heatmapData]);
+
+    if (heatmapMetric === 'sales') {
+      return scoped;
+    }
+
+    const byCategory = new Map<number, [number, number, number][]>();
+    for (const point of scoped) {
+      const list = byCategory.get(point[0]) ?? [];
+      list.push(point);
+      byCategory.set(point[0], list);
+    }
+
+    return Array.from(byCategory.values()).flatMap(points => {
+      const sorted = points.slice().sort((a, b) => a[1] - b[1]);
+      return sorted.map((point, index) => {
+        if (index === 0) {
+          return [point[0], point[1], 50] as [number, number, number];
+        }
+        const prev = sorted[index - 1][2];
+        const growth = prev === 0 ? 50 : Math.max(0, Math.min(100, Math.round(((point[2] - prev) / prev) * 100 + 50)));
+        return [point[0], point[1], growth] as [number, number, number];
+      });
+    });
+  }, [timeRange, heatmapData, heatmapMetric]);
 
   const gmvChartData = useMemo(() => {
     if (!gmvData) return [];
@@ -60,7 +83,7 @@ export default function TikTokAnalysis() {
       </div>
 
       {/* KPI Cards */}
-      <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-xl shadow-lc p-4 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)', boxShadow: '0 12px 28px rgba(53,20,26,0.04)' }}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-lc-primary">数据大盘</h3>
           <div className="flex items-center gap-2">
@@ -71,7 +94,7 @@ export default function TikTokAnalysis() {
                   style={timeRange === i ? { background: LC.primary, color: LC.textInverse } : { color: LC.textMuted }}>{t}</button>
               ))}
             </div>
-            <button className="flex items-center gap-1 text-xs font-medium px-2 h-7 rounded border transition-colors" style={{ color: LC.textMuted, borderColor: LC.border }}>
+            <button className="flex items-center gap-1 text-xs font-medium px-2 h-7 rounded border transition-colors" style={{ color: LC.textMuted, borderColor: LC.border, background: LC.bgWarm }}>
               <Download size={11} /> 导出
             </button>
           </div>
@@ -114,7 +137,11 @@ export default function TikTokAnalysis() {
         <div className="flex items-center justify-between mb-1">
           <div>
             <h3 className="text-sm font-semibold text-lc-primary">品类热力图</h3>
-            <p className="text-[11px] mt-0.5 text-lc-text-muted">各品类月度销售热度指数（0-100），颜色越深表示销售额越高</p>
+            <p className="text-[11px] mt-0.5 text-lc-text-muted">
+              {heatmapMetric === 'sales'
+                ? '各品类月度销售热度指数（0-100），颜色越深表示销售额越高'
+                : '各品类月度增长动量指数（0-100），50 为持平，越高表示增长越强'}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex gap-0.5 p-0.5 rounded bg-lc-bg-warm">
@@ -161,7 +188,7 @@ export default function TikTokAnalysis() {
             </div>
           </div>
           {gmvChartData.length > 0 ? (
-            <EChartsLine data={gmvChartData} color={'#8B354A'} height={260} yAxisName="GMV($B)" />
+            <EChartsLine data={gmvChartData} color={LC.primary} height={260} yAxisName="GMV($B)" />
           ) : (
             <Skeleton className="w-full h-[260px]" />
           )}
@@ -186,8 +213,8 @@ export default function TikTokAnalysis() {
         <h3 className="text-sm font-semibold mb-4 text-lc-primary">价格带分布</h3>
         {priceDist ? (
           <div className="grid grid-cols-3 gap-4">
-            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.products }))} title="商品数量" color={'#8B354A'} height={220} />
-            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesVolume }))} title="销量" color={'#8B354A'} height={220} />
+            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.products }))} title="商品数量" color={LC.primary} height={220} />
+            <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesVolume }))} title="销量" color={LC.gold} height={220} />
             <EChartsBar data={priceDist.map(d => ({ label: d.range, value: d.salesRevenue }))} title="销售额($M)" color={LC.teal} height={220} />
           </div>
         ) : (

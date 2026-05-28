@@ -15,7 +15,7 @@ export function createRateLimiter(opts: RateLimitOptions = {}) {
 
   const minIntervalMs = 1000 / requestsPerSecond;
   let lastRequestTime = 0;
-  let pendingPromise: Promise<void> = Promise.resolve();
+  let pendingPromise: Promise<unknown> = Promise.resolve();
 
   function randomDelay(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;

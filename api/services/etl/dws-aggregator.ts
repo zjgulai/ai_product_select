@@ -8,7 +8,7 @@
  * 4. 写入 DWS 概念日/周表
  */
 
-import { eq, and, gte, lte, sql, desc, like, or, inArray } from "drizzle-orm";
+import { eq, and, gte, lte, like, or } from "drizzle-orm";
 import { getDb } from "../../queries/connection.ts";
 import {
   productConcepts,
@@ -58,7 +58,7 @@ export async function aggregateTiktokConceptDaily(
     .from(dwdTiktokProductDaily)
     .where(
       and(
-        eq(dwdTiktokProductDaily.statDate, statDate),
+        eq(dwdTiktokProductDaily.statDate, new Date(statDate)),
         conditions.length > 1 ? or(...conditions) : conditions[0]
       )
     );
@@ -89,7 +89,7 @@ export async function aggregateTiktokConceptDaily(
     .where(
       and(
         eq(dwsTiktokConceptDaily.conceptId, conceptId),
-        eq(dwsTiktokConceptDaily.statDate, prevDate)
+        eq(dwsTiktokConceptDaily.statDate, new Date(prevDate))
       )
     )
     .limit(1);
@@ -106,28 +106,28 @@ export async function aggregateTiktokConceptDaily(
     .where(
       and(
         eq(dwsTiktokConceptDaily.conceptId, conceptId),
-        eq(dwsTiktokConceptDaily.statDate, statDate)
+        eq(dwsTiktokConceptDaily.statDate, new Date(statDate))
       )
     );
 
   await db.insert(dwsTiktokConceptDaily).values({
-    statDate,
+    statDate: new Date(statDate),
     conceptId,
     conceptName: concept.name,
-    videoCount: BigInt(videoCount),
-    videoCountPrev7d: BigInt(videoCountPrev7d),
+    videoCount: videoCount,
+    videoCountPrev7d: videoCountPrev7d,
     videoGrowthRate: String(videoGrowthRate.toFixed(2)),
-    totalViews: BigInt(totalViews),
+    totalViews: totalViews,
     engagementRate: engagementRate ? String(engagementRate.toFixed(2)) : null,
     carryingRatio: carryingRatio ? String(carryingRatio.toFixed(2)) : null,
     hashtags: hashtags.map((tag) => ({ tag, heat: 0 })),
-    hashtagHeatTotal: BigInt(0),
+    hashtag_heat_total: 0,
     influencerCount,
   });
 
   return {
     conceptId,
-    statDate,
+    statDate: new Date(statDate),
     matchedRows: matchedProducts.length,
     output: { videoCount, totalViews, videoGrowthRate },
   };
@@ -180,8 +180,8 @@ export async function aggregateAmazonConceptWeekly(
     .from(dwdAmazonProductDaily)
     .where(
       and(
-        gte(dwdAmazonProductDaily.statDate, weekStartDate),
-        lte(dwdAmazonProductDaily.statDate, weekEnd),
+        gte(dwdAmazonProductDaily.statDate, new Date(weekStartDate)),
+        lte(dwdAmazonProductDaily.statDate, new Date(weekEnd)),
         allConditions.length > 1 ? or(...allConditions) : allConditions[0]
       )
     );
@@ -225,15 +225,15 @@ export async function aggregateAmazonConceptWeekly(
     .where(
       and(
         eq(dwsAmazonConceptWeekly.conceptId, conceptId),
-        eq(dwsAmazonConceptWeekly.weekStartDate, weekStartDate)
+        eq(dwsAmazonConceptWeekly.weekStartDate, new Date(weekStartDate))
       )
     );
 
   await db.insert(dwsAmazonConceptWeekly).values({
-    weekStartDate,
+    weekStartDate: new Date(weekStartDate),
     conceptId,
     conceptName: concept.name,
-    totalMonthlySales: BigInt(totalMonthlySales),
+    totalMonthlySales: totalMonthlySales,
     totalRevenue: String(totalRevenue.toFixed(2)),
     effectiveSkuCount,
     totalSkuCount,
@@ -247,7 +247,7 @@ export async function aggregateAmazonConceptWeekly(
 
   return {
     conceptId,
-    weekStartDate,
+    weekStartDate: new Date(weekStartDate),
     matchedRows: matchedProducts.length,
     output: { totalMonthlySales, effectiveSkuCount, newProductRatio },
   };

@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 10 18% 15%;
+    --background: 20 45% 98%;
+    --foreground: 350 43% 14%;
     --card: 0 0% 100%;
-    --card-foreground: 10 18% 15%;
+    --card-foreground: 350 43% 14%;
     --popover: 0 0% 100%;
-    --popover-foreground: 10 18% 15%;
-    --primary: 345 44% 37%;
+    --popover-foreground: 350 43% 14%;
+    --primary: 349 60% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 20 30% 95%;
-    --secondary-foreground: 10 18% 15%;
+    --secondary: 20 35% 95%;
+    --secondary-foreground: 350 16% 28%;
     --muted: 20 30% 95%;
-    --muted-foreground: 0 6% 51%;
-    --accent: 345 44% 42%;
+    --muted-foreground: 20 5% 60%;
+    --accent: 349 60% 60%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 50% 52%;
+    --destructive: 352 32% 57%;
     --destructive-foreground: 0 0% 100%;
-    --border: 20 20% 85%;
-    --input: 20 20% 85%;
-    --ring: 345 44% 37%;
+    --border: 18 32% 87%;
+    --input: 18 32% 87%;
+    --ring: 349 60% 60%;
     --radius: 0.75rem;
-    --sidebar-background: 0 15% 9%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 345 44% 37%;
+    --sidebar-background: 20 38% 96%;
+    --sidebar-foreground: 350 43% 14%;
+    --sidebar-primary: 349 60% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 15% 14%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 10% 18%;
-    --sidebar-ring: 345 44% 37%;
+    --sidebar-accent: 20 30% 93%;
+    --sidebar-accent-foreground: 350 20% 24%;
+    --sidebar-border: 18 28% 84%;
+    --sidebar-ring: 349 60% 60%;
   }
 }
 
@@ -39,49 +39,56 @@
   * { @apply border-border; }
   body {
     @apply antialiased;
-    background-color: #FFFFFF;
-    color: #2D1F1F;
+    background-color: #FDF8F6;
+    color: #35141A;
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 }
 
 @layer utilities {
   /* Text colors - Momcozy Deep Rose Theme */
-  .text-lc-primary { color: #8B354A; }
-  .text-lc-accent { color: #A33D52; }
-  .text-lc-gold { color: #C47A5A; }
-  .text-lc-text { color: #2D1F1F; }
-  .text-lc-secondary { color: #7A6B6B; }
-  .text-lc-muted { color: #9A8B8B; }
-  .text-lc-success { color: #5B8C5A; }
-  .text-lc-danger { color: #C44545; }
-  .text-lc-warning { color: #C47A3A; }
-  .text-lc-info { color: #5A7A9C; }
+  .text-lc-primary { color: #D75C70; }
+  .text-lc-primary-dark { color: #C44A5E; }
+  .text-lc-accent { color: #C44A5E; }
+  .text-lc-gold { color: #D8BE78; }
+  .text-lc-text { color: #35141A; }
+  .text-lc-text-primary { color: #35141A; }
+  .text-lc-secondary { color: #59585E; }
+  .text-lc-text-secondary { color: #59585E; }
+  .text-lc-muted { color: #9B9795; }
+  .text-lc-text-muted { color: #9B9795; }
+  .text-lc-success { color: #6E966E; }
+  .text-lc-danger { color: #B86A72; }
+  .text-lc-warning { color: #C6A56B; }
+  .text-lc-info { color: #7E92A8; }
 
   /* Background colors */
-  .bg-lc-primary { background-color: #8B354A; }
-  .bg-lc-accent { background-color: #A33D52; }
-  .bg-lc-gold { background-color: #C47A5A; }
-  .bg-lc-bg { background-color: #FFFFFF; }
-  .bg-lc-warm { background-color: #F5EDE8; }
-  .bg-lc-coral { background-color: #FAF0ED; }
-  .bg-lc-gold-light { background-color: #F5EDE8; }
-  .bg-lc-success-light { background-color: #E8F0E8; }
-  .bg-lc-danger-light { background-color: #F5E5E5; }
+  .bg-lc-primary { background-color: #D75C70; }
+  .bg-lc-accent { background-color: #C44A5E; }
+  .bg-lc-gold { background-color: #D8BE78; }
+  .bg-lc-bg { background-color: #FDF8F6; }
+  .bg-lc-bg-warm { background-color: #FCF5F2; }
+  .bg-lc-warm { background-color: #FCF5F2; }
+  .bg-lc-coral { background-color: #FAF1F0; }
+  .bg-lc-gold-light { background-color: #F6EEE0; }
+  .bg-lc-success-light { background-color: #EAF2EA; }
+  .bg-lc-danger-light { background-color: #F6EAEA; }
   .bg-lc-card { background-color: #FFFFFF; }
 
   /* Border */
-  .border-lc { border-color: #E5D5CD; }
+  .border-lc { border-color: #E7D9D3; }
+  .border-lc-border { border-color: #E7D9D3; }
+  .border-lc-border-light { border-color: #F0E7E3; }
 
   /* Gradients */
-  .gradient-lc-primary { background: linear-gradient(135deg, #8B354A 0%, #6B2A3A 100%); }
-  .gradient-lc-accent { background: linear-gradient(135deg, #A33D52 0%, #8B354A 100%); }
-  .gradient-lc-gold { background: linear-gradient(90deg, #C47A5A 0%, #B06A4A 100%); }
+  .gradient-lc-primary { background: linear-gradient(135deg, #D75C70 0%, #C44A5E 100%); }
+  .gradient-lc-accent { background: linear-gradient(135deg, #C44A5E 0%, #D75C70 100%); }
+  .gradient-lc-gold { background: linear-gradient(90deg, #D8BE78 0%, #C6A56B 100%); }
 
   /* Shadows */
-  .shadow-lc { box-shadow: 0 1px 3px rgba(45,31,31,0.06); }
-  .shadow-lc-hover { box-shadow: 0 8px 24px rgba(45,31,31,0.10); }
-  .shadow-lc-card { box-shadow: 0 1px 3px rgba(45,31,31,0.06); }
+  .shadow-lc { box-shadow: 0 1px 3px rgba(53,20,26,0.05); }
+  .shadow-lc-hover { box-shadow: 0 8px 24px rgba(53,20,26,0.08); }
+  .shadow-lc-card { box-shadow: 0 1px 3px rgba(53,20,26,0.05); }
 
   /* Font utilities */
   .font-mono-num {
@@ -93,11 +100,11 @@
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #D5C5BD; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #9A8B8B; }
+::-webkit-scrollbar-thumb { background: #E7D9D3; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9B9795; }
 
 /* Selection */
-::selection { background: rgba(139,53,74,0.15); color: #2D1F1F; }
+::selection { background: rgba(215,92,112,0.15); color: #35141A; }
 
 /* Animations */
 @keyframes fadeIn {
@@ -109,8 +116,8 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 4px rgba(139,53,74,0.2); }
-  50% { box-shadow: 0 0 12px rgba(139,53,74,0.4); }
+  0%, 100% { box-shadow: 0 0 4px rgba(215,92,112,0.2); }
+  50% { box-shadow: 0 0 12px rgba(215,92,112,0.4); }
 }
 .animate-fadeIn { animation: fadeIn 250ms ease-out; }
 .animate-slideUp { animation: slideUp 300ms cubic-bezier(0.16, 1, 0.3, 1); }

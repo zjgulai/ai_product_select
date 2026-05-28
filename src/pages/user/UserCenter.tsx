@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import ErrorState from '@/components/shared/ErrorState';
 import { trpc } from '@/providers/trpc';
@@ -51,32 +51,33 @@ export default function UserCenter() {
 
   const reports = reportsData?.items || [];
   const concepts = conceptsData?.items || [];
+  const followStats = { products: 3, creators: 2 };
 
   return (
     <div className="animate-fadeIn">
       <Breadcrumb items={["用户中心"]} />
 
       {/* User Header */}
-      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primary} 0%, ${LC.primaryDark} 100%)` }}>
+      <div className="rounded-xl p-5 mb-4 ring-1 ring-lc-border/60" style={{ background: `linear-gradient(135deg, ${LC.primaryLight} 0%, #FDF8F6 100%)`, boxShadow: '0 12px 28px rgba(53,20,26,0.05)' }}>
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-full flex items-center justify-center bg-lc-primary">
-            <User size={24} className="text-lc-text-primary" />
+            <User size={24} className="text-white" />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-1">
-              <h2 className="text-lg font-bold" style={{ color: LC.textInverse }}>lute_user_001</h2>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: LC.primary, color: LC.text }}>高级版</span>
+              <h2 className="text-lg font-bold" style={{ color: LC.text }}>lute_user_001</h2>
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: LC.primary, color: LC.textInverse }}>高级版</span>
             </div>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>套餐到期: 2027-12-31 | 剩余 580 天</p>
+            <p className="text-xs" style={{ color: LC.textSecondary }}>套餐到期: 2027-12-31 | 剩余 580 天</p>
           </div>
-          <button onClick={() => { import('sonner').then(({ toast }) => toast.info('演示环境不支持支付')); }} className="px-4 h-8 rounded-full text-xs font-bold transition-all hover:brightness-110" style={{ background: LC.primary, color: LC.text }}>
+          <button onClick={() => { import('sonner').then(({ toast }) => toast.info('演示环境不支持支付')); }} className="px-4 h-8 rounded-full text-xs font-bold transition-all hover:brightness-110" style={{ background: LC.primary, color: LC.textInverse, boxShadow: '0 8px 18px rgba(215,92,112,0.16)' }}>
             <Crown size={12} className="inline mr-1" />续费会员
           </button>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-t-lg shadow-lc border-b px-4 pt-3 ring-1 ring-lc-border/60" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FDF8F6 100%)' }}>
         <div className="flex gap-5">
           {TABS.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)}
@@ -89,7 +90,7 @@ export default function UserCenter() {
       </div>
 
       {/* Content */}
-      <div className="bg-white rounded-b-lg shadow-lc p-5 ring-1 ring-lc-border/60">
+      <div className="bg-white rounded-b-lg shadow-lc p-5 ring-1 ring-lc-border/60" style={{ boxShadow: '0 10px 24px rgba(53,20,26,0.04)' }}>
         {/* ========== 工作台 ========== */}
         {tab === 'workspace' && (
           <div className="space-y-5">

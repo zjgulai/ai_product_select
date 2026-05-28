@@ -12,7 +12,6 @@ import { eq } from "drizzle-orm";
 import { cleanTiktokProducts, cleanAmazonProducts } from "./dwd-cleaner.ts";
 import {
   aggregateTiktokConceptDaily,
-  aggregateAmazonConceptWeekly,
 } from "./dws-aggregator.ts";
 
 export interface ETLResult {
